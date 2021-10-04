@@ -15,7 +15,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="/">AstroChrcha</a>
+          Welcome to <a href="/private">AstroChrcha</a>
         </h1>
 
         <p className={styles.description}>
