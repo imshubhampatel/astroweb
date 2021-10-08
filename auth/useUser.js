@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import firebase from 'firebase/app';
+import firebase from '../config';
 import 'firebase/auth';
 
 import initFirebase from '../config';
@@ -10,7 +10,6 @@ import {
   getUserFromCookie
 } from './userCookie';
 
-initFirebase();
 
 export const mapUserData = async user => {
   const { uid, email } = user;

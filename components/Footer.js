@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 
-export default class Footer extends Component {
-    render() {
+function Footer() {
         return (
           <>
            <footer class="page-footer font-small blue">
 
                     <div class="footer-copyright text-center py-3">© 2021 Copyright
                                  <br/>
-                <a href="https://mdbootstrap.com/">AstoChrcha.com</a>
+                <a href="#">AstoChrcha.com</a>
             </div>
 
             </footer>
           </>
-        );
-    }
+        );   
 }
+export default Footer;
+
