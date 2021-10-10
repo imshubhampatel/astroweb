@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import router from "next/router";
-import "firebase/auth";
-import firebase from "../config";
-
-const auth = firebase.auth();
+import { onAuthStateChanged } from "firebase/auth";
+import {  auth } from "../config";
 
 const withAuth = (Component) => (props) => {
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
+    onAuthStateChanged(auth,(authUser) => {
       if (!authUser) {
         router.push("/signin");
       }

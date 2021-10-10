@@ -1,15 +1,25 @@
 import React, { Component } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect } from 'react'
-import firebase from '../config'
+import { useEffect, useState } from "react";
+import {firebase} from '../config'
+import {  signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const auth = getAuth(firebase)
 const logout = () => {
-  firebase.auth().signOut();
+  signOut(auth).then(console.log("logiout"));
 };
 function Navbar() {
-  const [user, loading, error] = useAuthState(firebase.auth());
-  
+
+  const [user, setUser] = useState();
+  useEffect(() => {
+    onAuthStateChanged(auth, Authuser => {
+     setUser(Authuser);
+    },[user])
+    
+  },[user])
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">

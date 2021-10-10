@@ -3,6 +3,7 @@ import styles from "../styles/Home.module.css";
 import Link from "next/link";
 
 function RegistrationForm(props) {
+    const Expertise = ['vedicAstrology',"tarotCardReading","numerlogy","matchMaking"]
     const user = props.user;
     return (
       <div>
@@ -22,7 +23,7 @@ function RegistrationForm(props) {
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
                     value={user?.email}
-                    readOnly={true}
+                    required
                   />
                   <small id="emailHelp" class="form-text text-muted">
                     We'll never share your email with anyone else.
@@ -30,97 +31,84 @@ function RegistrationForm(props) {
                 </div>
                 <div className="row">
                   <div class="form-group col">
-                    <label for="First Name">First Name</label>
+                    <label for="firstName">First Name</label>
                     <input
                       type="text"
                       class="form-control"
                       id="firstName"
                       placeholder="First Name"
+                      required
                     />
                   </div>
                   <div class="form-group col">
-                    <label for="Second Name">Second Name</label>
+                    <label for="secondName">Second Name</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="SecondName"
+                      id="secondName"
                       placeholder="Second Name"
+                      required
                     />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="Address"> Complete Address</label>
+                  <label for="address"> Complete Address</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="Address"
+                    id="address"
                     placeholder="Address"
+                    required
                   />
                 </div>
                 <div class="form-group">
-                  <label for="PhoneNumber"> Phone Number </label>
+                  <label for="phoneNumber"> Phone Number </label>
                   <input
                     type="tel"
-                    pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
+                    // pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
                     class="form-control"
-                    id="PhoneNumber"
-                    placeholder="PhoneNumber"
+                    name="phoneNumber"
+                    placeholder="phoneNumber"
+                    required
                   />
                 </div>
                 <div class="form-group">
-                  <label for="Gender">Gender</label>
-                  <select class="form-control" id="Gender">
-                    <option>Male</option>
-                    <option>Female </option>
-                    <option>Others</option>
+                  <label for="gender">Gender</label>
+                  <select class="form-control" id="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female </option>
+                    <option value="other">Other</option>
                   </select>
                 </div>
                 <label>Expertise</label>
                 <br />
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="inlineCheckbox1"
-                    value="Vedic"
-                  />
-                  <label class="form-check-label" for="inlineCheckbox1">
-                    Vedic
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="inlineCheckbox2"
-                    value="Carot"
-                  />
-                  <label class="form-check-label" for="inlineCheckbox2">
-                    Carot
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="inlineCheckbox3"
-                    value="option3"
-                    disabled
-                  />
-                  <label class="form-check-label" for="inlineCheckbox3">
-                    Match Making
-                  </label>
-                </div>
-                <div class="input-group mb-3">
-                  <label for="inputGroupFile02">
-                    {" "}
-                    Upload ID verification documents
-                  </label>
+                {Expertise.map((item) => {
+                  return (
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id={item}
+                        name={item}
+                      />
+                      <label class="form-check-label" for="inlineCheckbox1">
+                        {item}
+                      </label>
+                    </div>
+                  );
+                })}
+                <br />
 
+                <label for="inputGroupFile02">
+                  {" "}
+                  Upload ID verification documents
+                </label>
+                <div class="input-group mb-3">
                   <input
                     type="file"
                     class="form-control"
-                    id="inputGroupFile02"
+                    name="profilePicture"
+                    id="profilePicture"
                   />
                 </div>
                 <div>
@@ -130,16 +118,17 @@ function RegistrationForm(props) {
                     <a> Terms & Conditions</a>
                   </Link>
                 </div>
+                  <div class="col-12">
                 <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label class="form-check-label" for="exampleCheck1">
-                    Check me out
+                  <input class="form-check-input" type="checkbox" value="" id="tnc" aria-describedby="tncFeedback" required/>
+                  <label class="form-check-label" for="tnc">
+                    Agree to terms and conditions
                   </label>
+                  <div id="tncFeedback" class="invalid-feedback">
+                    You must agree before submitting.
+                  </div>
                 </div>
+              </div>
                 <button type="submit" class="btn btn-primary">
                   Submit
                 </button>

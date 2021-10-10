@@ -1,6 +1,6 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore"
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBlMMLmKqd876nQj8wWFWifA0U2huqCfmo",
@@ -12,9 +12,8 @@ const firebaseConfig = {
   measurementId: "G-NPJ61GHS5N",
 };
 
-if (!firebase.apps.length) {
-firebase.initializeApp(firebaseConfig);
-}
-const db = firebase.firestore();
+const firebase = initializeApp(firebaseConfig);
+const db = getFirestore(firebase);
+const auth = getAuth(firebase);
 
-export default firebase;
+export { firebase,db,auth };
