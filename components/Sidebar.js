@@ -1,56 +1,60 @@
+import { Router } from 'next/router';
 import React from 'react'
-
 function Sidebar() {
+
     return (
       <div>
         <h2>Side Bar</h2>
         <div>
-          <button className="btn btn-primary col-11 mb-2 mt-2 ml-2">
+          <a className="btn btn-primary col-11 mb-2 mt-2 ml-2">
             {" "}
             Home
-          </button>
+          </a>
         </div>
         <div>
-          <button className="btn btn-primary col-11 mb-2 mt-2 ml-2">
+          <a className="btn btn-primary col-11 mb-2 mt-2 ml-2">
             {" "}
             User Management{" "}
-          </button>
+          </a>
         </div>
         <div>
-          <button className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
+          <a
+            className="btn btn-primary  col-11 mb-2 mt-2 ml-2"
+            href="admin/astrologermanagement"
+          >
             {" "}
             Astrologer Management{" "}
-          </button>
+          </a>
         </div>{" "}
         <div>
-          <button className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
+          <a className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
             {" "}
             Wallet Management{" "}
-          </button>
+          </a>
         </div>{" "}
         <div>
-          <button className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
+          <a className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
             {" "}
             Store Management{" "}
-          </button>
+          </a>
         </div>
         <div>
-          <button className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
+          <a className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
             {" "}
             Manage Broadcast & Blogs{" "}
-          </button>
+          </a>
         </div>
         <div>
-          <button className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
+          <a className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
             {" "}
             Notification & Ads{" "}
-          </button>
+          </a>
         </div>
         <div>
-          <button className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
+          <a className="btn btn-primary  col-11 mb-2 mt-2 ml-2">
             {" "}
             Employee Management{" "}
-          </button>
+          </a>
         </div>
       </div>
     );
