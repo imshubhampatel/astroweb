@@ -1,9 +1,10 @@
 import { Router } from 'next/router';
 import React from 'react'
+
 function Sidebar() {
 
     return (
-      <div>
+      <div className="vh-100">
         <h2>Side Bar</h2>
         <div>
           <a className="btn btn-primary col-11 mb-2 mt-2 ml-2">

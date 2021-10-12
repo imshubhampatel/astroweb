@@ -1,41 +1,90 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
 import ReactPaginate from "react-paginate";
+import AdminPanelLayout from '../../components/AdminPanelLayout'
+import { collection, query, where, getDocs,getFirestore } from "firebase/firestore";
+import {firebase} from '../../config'
+import { set } from 'js-cookie';
+import Link from 'next/link'
+
+const db = getFirestore(firebase);
 
 function astrologermanagement() {
-    const [astrologersList, setastrologersList] = useState([
-      "gek",
-      "ek",
-      "sek",
-    ]);
-    const [currentPageNum,setCurrentPageNum] = useState()
-    const [totalNumberOfPages, settotalNumberOfPages] = useState(0);
-    const [initialPageItemNum, setinitialPageItemNum] = useState(1);
-    const [lastPageItemNum, setlastPageItemNum] = useState(2);
+  const [astrologersList, setastrologersList] = useState([]);
+
+  const [totalAstrologers, settotalAstrologers] = useState(0);
+  const ItemsPerPage = 10;
+
+  const [currentPageNum, setCurrentPageNum] = useState();
+  const [totalPages, settotalPages] = useState(10);
+  const [firstItemNum, setfirstItemNum] = useState(0);
+  const [lastItemNum, setlastItemNum] = useState(3);
+  
+  useEffect(() => {
+    setfirstItemNum(0)
+    setlastItemNum(2)
+  },[])
 
     // setastrologersList(["gek","ek","sek"]);
+  
+  async function getAllAstrologers() {
+    const astros = query(collection(db, "testing"));
 
-    useEffect(() => {
-        
-    })
-    function handlePageChange(selected) {
-        console.log(selected)
+    const querySnapshot = await getDocs(astros);
+    let temp = querySnapshot.docs.map(doc => doc.data())
 
-    }
+    setastrologersList(temp);
+    settotalAstrologers(querySnapshot.size);
+    settotalPages(querySnapshot.size / ItemsPerPage);
+    // querySnapshot.forEach((doc) => {
+    //   console.log(doc.id, " => ", doc.data());
+    // });
+  };
+  
+  function handlePageChange(selected) {
+      let last = selected * ItemsPerPage;
+      let first = last - ItemsPerPage;
+      setfirstItemNum(first)
+      setlastItemNum(last)
+  };
+  
     return (
-      <div className="container">
+      <AdminPanelLayout>
+        <div className="row">
+          <div className="col-12">Total Astrologers : {totalAstrologers}</div>
+        </div>
         <div className="row">
           <div className="col">
-            <button className="btn btn-primary">Get all Astrologers</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => getAllAstrologers()}
+            >
+              Get all Astrologers
+            </button>
           </div>
+          <Link href="/admin/astrologer/lol">
+            <a target="_blank">click me</a>
+          </Link>
         </div>
         <div className="row">
           <div className="col-8">
-            {astrologersList
-              .slice(initialPageItemNum, lastPageItemNum)
-              .map((e) => (
-                <h4>{e}</h4>
-              ))}
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+                {astrologersList.slice(firstItemNum, lastItemNum).map((e) => (
+                  <tr>
+                    <td>{e.firstName}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
         <div>
@@ -44,9 +93,9 @@ function astrologermanagement() {
             previousLabel={"← Previous"}
             nextLabel={"Next →"}
             breakLabel={"..."}
-            pageCount={10}
+            pageCount={totalPages}
             marginPagesDisplayed={2}
-                    onPageChange={handlePageChange}
+            onPageChange={() => handlePageChange()}
             containerClassName={"pagination"}
             previousLinkClassName={"page-link"}
             pageClassName={"page-link"}
@@ -56,7 +105,7 @@ function astrologermanagement() {
             activeClassName={"page-link active"}
           />
         </div>
-      </div>
+      </AdminPanelLayout>
     );
 }
 
