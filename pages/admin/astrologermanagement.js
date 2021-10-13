@@ -1,6 +1,8 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
 import ReactPaginate from "react-paginate";
+import AdminLayout from '../../components/adminPanel/layout'
+
 
 function astrologermanagement() {
     const [astrologersList, setastrologersList] = useState([
@@ -59,5 +61,15 @@ function astrologermanagement() {
       </div>
     );
 }
+
+
+astrologermanagement.getLayout = function getLayout(page) {
+  return (
+    <AdminLayout active_page = "2">
+      {page}
+    </AdminLayout>
+  )
+}
+
 
 export default astrologermanagement

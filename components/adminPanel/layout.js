@@ -2,7 +2,9 @@
 import Sidebar from "./sidebar";
 import Head from 'next/head'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, ...props }) => {
+
+
     return (
 
         <>
@@ -19,12 +21,12 @@ const Layout = ({ children }) => {
                 <div className="d-flex justify-content-start vh-100 "  >
 
                     <div className="" >
-                    <Sidebar />
+                    <Sidebar {...props} />
 
                     </div>
                     
 
-                    <div className="flex-fill" >
+                    <div className="flex-fill overflow-auto">
 
                     {children}
                     </div>
