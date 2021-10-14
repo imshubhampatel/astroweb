@@ -3,13 +3,13 @@ import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBlMMLmKqd876nQj8wWFWifA0U2huqCfmo",
-  authDomain: "astrochrchafirebase.firebaseapp.com",
-  projectId: "astrochrchafirebase",
-  storageBucket: "astrochrchafirebase.appspot.com",
-  messagingSenderId: "47393820453",
-  appId: "1:47393820453:web:3b607c10d409c7af24d4cc",
-  measurementId: "G-NPJ61GHS5N",
+  apiKey: "AIzaSyAhEzIc4Y5DTJUOj-sNdd3YF0pGnGCFc-8",
+  authDomain: "testastrochrcha.firebaseapp.com",
+  projectId: "testastrochrcha",
+  storageBucket: "testastrochrcha.appspot.com",
+  messagingSenderId: "1011386431348",
+  appId: "1:1011386431348:web:a70f05b4ece797fb61de21",
+  measurementId: "G-MF096BCRNH",
 };
 
 const firebase = initializeApp(firebaseConfig);

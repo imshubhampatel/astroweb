@@ -36,11 +36,9 @@ class Astrohome extends Component {
     console.log(storageRef.fullPath,"hey")
     uploadBytes(storageRef, file).then((snapshot) => {
     console.log('Uploaded a blob or file!',snapshot);
+  });
   }
-  );
 
-
-  }
   async getRegisterInfo(user) {
     const docRef = doc(db, "astrologer", user?.uid);
     const docSnap =  await getDoc(docRef);
@@ -54,6 +52,7 @@ class Astrohome extends Component {
       console.log("No such document!");
     }
   }
+
   componentDidMount() {
     onAuthStateChanged(auth,(authUser) => {
       if (!authUser) {

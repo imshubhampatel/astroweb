@@ -3,7 +3,8 @@ import Image from "next/image";
 import styles from "../../styles/Home.module.css";
 import Link from "next/link";
 import AdminPanelLayout from '../../components/AdminPanelLayout'
-export default function Home() {
+import useAdminAuth from '../../auth/useAdminAuth' 
+function Home() {
   return (
     <>
       <AdminPanelLayout>
@@ -22,3 +23,4 @@ export default function Home() {
     </>
   );
 }
+export default useAdminAuth(Home);
