@@ -13,7 +13,9 @@ import {
   doc
 } from "firebase/firestore";
 import { getStorage, ref ,uploadBytes} from "firebase/storage";
-import {astrologerConverter,Astrologer} from '../dbObjects/Astrologer'
+import { astrologerConverter, Astrologer } from '../dbObjects/Astrologer'
+import {astrologerPrivateDataConverter,AstrologerPrivateData } from '../dbObjects/AstrologerPrivateInfo'
+
 const storage = getStorage(
   firebase,
   "gs://astrochrchafirebase.appspot.com"
@@ -33,9 +35,7 @@ class Astrohome extends Component {
     }
   uploadDocToStorage({path,file}) {
     const storageRef = ref(storage, path);
-    console.log(storageRef.fullPath,"hey")
     uploadBytes(storageRef, file).then((snapshot) => {
-    console.log('Uploaded a blob or file!',snapshot);
   });
   }
 
@@ -68,45 +68,54 @@ class Astrohome extends Component {
 
   async registerformhandler(e) {
     e.preventDefault();
-    console.log(e.target.phoneNumber.value)
-    console.log(e.target.firstName.value)
-    console.log(e.target.secondName.value);
-    console.log(e.target.address.value)
-    console.log(e.target.gender.value);
-    console.log(e.target.vedicAstrology.checked);
-    console.log(e.target.tarotCardReading.checked);
-    console.log(e.target.numerlogy.checked);
-    console.log(e.target.matchMaking.checked);
-    console.log(e.target.tnc.checked);
-
-    let data = {
+    let profileData = {
       id: this.state.user.uid,
       firstName: e.target.firstName.value,
+      secondName: e.target.secondName.value,
       email: e.target.email.value,
+      gender : e.target.gender.value,
+      dob: e.target.dob.value,
+      address: e.target.address.value,
+      profilePic: "testing/profile_" + this.state.user.uid + ".png",
+      tnc : e.target.tnc.value,
+      
+    };
+    let privateInfo = {
+      id: this.state.user.uid,
+      verificationId: "testing/aadhar_" + profileData.id + ".png",
+      pancardLink: "testing/pancard_" + profileData.id + ".png",
+      pancardNumber: e.target.pancardNumber.value,
       phoneNumber: e.target.phoneNumber.value,
     };
     
-    console.log(data);
-    let file = e.target.profilePicture.files[0]
-    // this.uploadDocToStorage({ path: 'testing/arpit.png', file:file });
-    //  setDoc(doc(db, "astrologer",user?.uid), data);
-    // }
-    const ref = doc(db, "testing", "","subcollection","lol").withConverter(astrologerConverter);
-   await setDoc(ref, new Astrologer(data));
+    console.log(profileData);
+    let profilePic = e.target.profilePicture.files[0]
+    let verificationIdPic = e.target.verificationId.files[0];
+    let pancardPic = e.target.pancard.files[0];
+    this.uploadDocToStorage({ path: profileData.profilePic, file:profilePic });
+    this.uploadDocToStorage({ path: privateInfo.pancardLink, file: pancardPic });
+    this.uploadDocToStorage({ path: privateInfo.verificationId, file: verificationIdPic });
+    const ref = doc(db, "astrologer", String(profileData.id)).withConverter(astrologerConverter);
+    await setDoc(ref, new Astrologer(profileData));
+    const privateRef = doc(db, "astrologer", String(profileData.id),"privateInfo",profileData.id).withConverter(
+       astrologerPrivateDataConverter
+     );
+    await setDoc(privateRef, new AstrologerPrivateData(privateInfo));
   }
 
-    componentDidUpdate() {
-    }
+
   render() {
-  
-    return (
-      <div>
-        {this.state.registerStatus ? (
-          <RegistrationForm registerFormHandler={this.registerformhandler} user={this.state.user} />
-        ) : null}
+    if (this.state.user)
+      return (
+        <div>
+          {this.state.registerStatus ? (
+            <RegistrationForm registerFormHandler={this.registerformhandler} user={this.state.user} />
+          ) : null}
         
-      </div>
-    );
+        </div>
+      );
+    else
+      return <div>Loading</div>;
     
  
 

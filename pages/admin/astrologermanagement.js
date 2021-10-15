@@ -1,14 +1,16 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
 import ReactPaginate from "react-paginate";
-import AdminPanelLayout from '../../components/AdminPanelLayout'
 import { collection, query, where, getDocs,getFirestore } from "firebase/firestore";
 import {firebase} from '../../config'
 import Link from 'next/link'
+import AdminLayout from '../../components/adminPanel/layout'
+import useAdminAuth from "../../auth/useAdminAuth";
+
 
 const db = getFirestore(firebase);
 
-function astrologermanagement() {
+const astrologermanagement = useAdminAuth(() => {
   const [astrologersList, setastrologersList] = useState([]);
   const [paginationData, setpaginationData] = useState([]);
 
@@ -58,7 +60,7 @@ function astrologermanagement() {
   };
 
     return (
-      <AdminPanelLayout>
+      <div className="container">
         <div className="row">
           <div className="col-12">Total Astrologers : {totalAstrologers}</div>
         </div>
@@ -135,8 +137,18 @@ function astrologermanagement() {
             activeClassName={"page-link active"}
           />
         </div>
-      </AdminPanelLayout>
+      </div>
     );
+})
+
+
+astrologermanagement.getLayout = function getLayout(page) {
+  return (
+    <AdminLayout active_page = "2">
+      {page}
+    </AdminLayout>
+  )
 }
+
 
 export default astrologermanagement

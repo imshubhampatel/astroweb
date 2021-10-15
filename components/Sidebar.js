@@ -1,11 +1,12 @@
 import { Router } from 'next/router';
 import React from 'react'
+import Link from 'next/link'
 
 function Sidebar() {
 
     return (
-      <div className="vh-100">
-        <h2>Side Bar</h2>
+      <div className="py-5  "  >
+        {/* <h2>Side Bar</h2> */}
         <div>
           <a className="btn btn-primary col-11 mb-2 mt-2 ml-2">
             {" "}
@@ -21,7 +22,7 @@ function Sidebar() {
         <div>
           <a
             className="btn btn-primary  col-11 mb-2 mt-2 ml-2"
-            href="admin/astrologermanagement"
+            href="/admin/astrologermanagement"
           >
             {" "}
             Astrologer Management{" "}

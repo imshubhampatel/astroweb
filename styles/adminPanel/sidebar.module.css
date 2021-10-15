@@ -1,0 +1,62 @@
+.sidebar_base{
+    background-color: #25262D;
+    color: white;
+    height: 100%;
+    padding: .75rem;
+    width: 19.938rem;
+    
+}
+
+.logoHolder{
+    height: 3rem;
+    width: 3rem;
+    margin-right: .25rem;
+
+}
+
+.mainText{
+    margin-left: .25rem;
+    line-height: 3rem;
+    height: 3rem;
+}
+
+.center_div{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.button_wrapper{
+    /* border: solid green; */
+    padding-left: 8px;
+    padding-right: 4px;
+    margin-top: 24px;
+
+    
+}
+
+.button{
+    /* border: solid red; */
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 3.063rem;
+    border-radius: 4px;
+    color: #B9C1CE;
+
+}
+
+.button:hover{
+    background-color: #393A42;
+}
+
+.buttonText{
+    padding-left: 5px;
+    margin-left: 2px;
+    line-height: .983rem;
+}
+
+.buttonActive{
+    background-color: #393A42;
+    color: white;
+}
+

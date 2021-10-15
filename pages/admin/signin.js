@@ -27,7 +27,6 @@ function signin() {
           .then((userCredential) => {
             const user = userCredential.user;
             router.push("/admin");
-            alert("code sent");
           })
           .catch((err) => {
             alert(err);
