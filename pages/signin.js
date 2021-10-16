@@ -10,6 +10,7 @@ import {
 import router from "next/router";
 
 const FirebaseAuth = () => {
+  const [countryCode, setcountryCode] = useState("+91")
   const [mynumber, setnumber] = useState("");
   const [otp, setotp] = useState("");
   const [show, setshow] = useState(false);
@@ -17,7 +18,7 @@ const FirebaseAuth = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (Authuser) => {
-      if (Authuser) router.push("/astrohome");
+      if (Authuser) router.push("/astrologer");
     });
   }, []);
 
@@ -40,8 +41,9 @@ const FirebaseAuth = () => {
       },
       auth
     );
+    const number = countryCode + mynumber
 
-    signInWithPhoneNumber(auth, mynumber, verify)
+    signInWithPhoneNumber(auth, number, verify)
       .then((result) => {
         setfinal(result);
         alert("code sent");
@@ -60,7 +62,7 @@ const FirebaseAuth = () => {
       .confirm(otp)
       .then((result) => {
         // success
-        router.push("/astrohome");
+        router.push("/astrologer");
       })
       .catch((err) => {
         alert("Wrong code");
@@ -76,11 +78,17 @@ const FirebaseAuth = () => {
             className="form-group"
           >
             <label for="phoneNumber">Please Enter your Phone Number</label>
+            {countryCode}
             <div className="row">
               <div className="col-3">
-                <select className="form-control">
-                  <option value="+91">+91</option>
-                  <option value="+92">+61</option>
+                <select
+                  className="form-control"
+                  onChange={(e) => setcountryCode(e.target.value)}
+                >
+                  <option selected="selected" value="+91">
+                    +91
+                  </option>
+                  <option value="+61">+61</option>
                 </select>
               </div>
               <div className="col-9">

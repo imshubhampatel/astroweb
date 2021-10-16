@@ -11,9 +11,9 @@ import useAdminAuth from "../../auth/useAdminAuth";
 const db = getFirestore(firebase);
 
 const astrologermanagement = useAdminAuth(() => {
+  
   const [astrologersList, setastrologersList] = useState([]);
   const [paginationData, setpaginationData] = useState([]);
-
   const [totalAstrologers, settotalAstrologers] = useState(0);
   const ItemsPerPage = 3;
   const [isVerfiedFilter, setIsVerfiedFilter] = useState(false);
@@ -68,7 +68,7 @@ const astrologermanagement = useAdminAuth(() => {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-12">Total Astrologers : {totalAstrologers}</div>
+        <div className="col-12">Total Astrologers : {totalAstrologers}</div>
         </div>
         <div className="row">
           <div className="col">

@@ -24,7 +24,7 @@ const astrologer = useAdminAuth(() => {
     const [astro, setastro] = useState({});
     var [enabled, setenabled] = useState(true);
     
-    async function getAllAstrologerInfo(pid) {
+    async function getAstrologerInfo(pid) {
         const astros = collection(db, "astrologer");
         const querySnapshot = await getDoc(doc(astros,String(pid)).withConverter(astrologerConverter));
         if (querySnapshot.exists())
@@ -65,7 +65,7 @@ const astrologer = useAdminAuth(() => {
          }
      }
     useEffect(() => {
-        getAllAstrologerInfo(pid);
+        getAstrologerInfo(pid);
         if(pid)
         isAstrologer(pid).then((e) => {
             if (e)
