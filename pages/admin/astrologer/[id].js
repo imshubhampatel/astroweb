@@ -6,6 +6,7 @@ import {
     where,
     doc,
     getDoc,
+    updateDoc,
   setDoc,
   getFirestore,
 } from "firebase/firestore";
@@ -31,30 +32,37 @@ const astrologer = useAdminAuth(() => {
             setastro(querySnapshot.data())
         }
         else {
-            console.log("no")
+            // console.log("no")
         }
     }
     async function toggleEnable(uid) {
         var response;
         if (!enabled)
         {
-             response = await setAstrologerPerm(uid);
+           response = await setAstrologerPerm(uid);
         }
         else {
            response = await removeAstrologerPerm(uid);
         }
-        console.log(response);
+        // console.log(response);
         setenabled(!enabled);
     }
-     async function toggleVerify(uid) {
+    async function toggleVerify(uid) {
+        const ref = doc(
+              db,
+              "astrologer",
+              String(uid)
+            ).withConverter(astrologerConverter);
+
          if (!astro.verified) {
-             setastro({...astro, verified: true});
-        //  response = await setAstrologerPerm(uid);
+             setastro({ ...astro, verified: true });   
+            await updateDoc(ref, { ...astro, verified: true });
+  
          } else {
-        setastro({ ...astro, verified: false });
-        //  response = await removeAstrologerPerm(uid);
+           setastro({ ...astro, verified: false });
+            await updateDoc(ref, { ...astro, verified: false });
+
          }
-         console.log(astro.verified)
      }
     useEffect(() => {
         getAllAstrologerInfo(pid);

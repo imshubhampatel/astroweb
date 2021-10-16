@@ -44,12 +44,10 @@ class Astrohome extends Component {
     const docSnap =  await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
       this.setState({registerStatus: false})
 
     } else {
       this.setState({ registerStatus: true });
-      console.log("No such document!");
     }
   }
 
@@ -59,7 +57,7 @@ class Astrohome extends Component {
         router.push("/signin");
       }
       else {
-        console.log(authUser.phoneNumber)
+        // console.log(authUser.phoneNumber)
         this.getRegisterInfo(authUser);
         this.setState({ user: authUser });
       }
@@ -88,7 +86,6 @@ class Astrohome extends Component {
       phoneNumber: e.target.phoneNumber.value,
     };
     
-    console.log(profileData);
     let profilePic = e.target.profilePicture.files[0]
     let verificationIdPic = e.target.verificationId.files[0];
     let pancardPic = e.target.pancard.files[0];
@@ -101,6 +98,7 @@ class Astrohome extends Component {
        astrologerPrivateDataConverter
      );
     await setDoc(privateRef, new AstrologerPrivateData(privateInfo));
+    this.setState({registerStatus:true})
   }
 
 

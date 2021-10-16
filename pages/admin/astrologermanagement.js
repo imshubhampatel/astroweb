@@ -15,11 +15,12 @@ const astrologermanagement = useAdminAuth(() => {
   const [paginationData, setpaginationData] = useState([]);
 
   const [totalAstrologers, settotalAstrologers] = useState(0);
-  const ItemsPerPage = 10;
+  const ItemsPerPage = 3;
   const [isVerfiedFilter, setIsVerfiedFilter] = useState(false);
-  const [totalPages, settotalPages] = useState(10);
+  const [totalPages, settotalPages] = useState(2);
   const [firstItemNum, setfirstItemNum] = useState(0);
   const [lastItemNum, setlastItemNum] = useState(3);
+  const [search, setSearch] = useState("");
   
   useEffect(() => {
     initializePaginationData(astrologersList.filter(myFilter));
@@ -27,10 +28,9 @@ const astrologermanagement = useAdminAuth(() => {
 
   function initializePaginationData(data)
   {
-  console.log(data.length,data)
   setpaginationData(data);
   settotalAstrologers(data.length);
-  settotalPages(data.size / ItemsPerPage);
+  settotalPages(data.length / ItemsPerPage);
   setfirstItemNum(0);
   setlastItemNum(ItemsPerPage);
   };
@@ -58,6 +58,12 @@ const astrologermanagement = useAdminAuth(() => {
     }
     return true;
   };
+  function searchHandler(event) {
+    initializePaginationData(astrologersList.filter((e) => {
+      if (e.firstName.includes(event.target.value) || e.secondName.includes(event.target.value) || e.email.includes(event.target.value))
+        return true;
+    }));
+  }
 
     return (
       <div className="container">
@@ -79,6 +85,8 @@ const astrologermanagement = useAdminAuth(() => {
             >
               Filter Unverified
             </button>
+
+            <input type="text" placeholder="search by email or name" onChange={searchHandler}></input>
           </div>
         </div>
         <div className="row">
