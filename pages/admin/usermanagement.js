@@ -140,7 +140,7 @@ const userManagement = useAdminAuth(() => {
 });
 
 userManagement.getLayout = function getLayout(page) {
-  return <AdminLayout active_page="2">{page}</AdminLayout>;
+  return <AdminLayout active_page="0">{page}</AdminLayout>;
 };
 
 export default userManagement;
