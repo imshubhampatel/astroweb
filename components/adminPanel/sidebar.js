@@ -1,4 +1,4 @@
-import styles from "../../styles/adminPanel/sidebar.module.css";
+import styles from "../../styles/components/adminPanel/sidebar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { firebase } from "../../config";
