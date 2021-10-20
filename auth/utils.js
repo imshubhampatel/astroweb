@@ -63,4 +63,18 @@ async function removeAstrologerPerm(uid) {
     const response = await deleteDoc(doc(db, "security_groups/astrologer/astrologer/", uid));
     return response;
 }
-export { isAdmin, isSubAdmin, isAstrologer, setAstrologerPerm,setSubadminPerm,removeAstrologerPerm };
+async function removeSubadminPerm(uid) {
+  const response = await deleteDoc(
+    doc(db, "security_groups/subadmin/subadmin/", uid)
+  );
+  return response;
+}
+export {
+  isAdmin,
+  isSubAdmin,
+  isAstrologer,
+  setAstrologerPerm,
+  setSubadminPerm,
+  removeAstrologerPerm,
+  removeSubadminPerm,
+};
