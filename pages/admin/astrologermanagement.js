@@ -93,15 +93,6 @@ const astrologermanagement = useAdminAuth(() => {
             </div>
           </div>
 
-          {/* <table className={`${styles.mainTable}`} > 
-            <tr className={`${styles.tableHeading}`}>
-              <td>Name</td>
-              <td>Number Id</td>
-              <td>Enable Astrologer</td>
-              <td>Verify</td>
-              <td>Query</td>
-            </tr>
-          </table> */}
 
           <div className={`${styles.tableContainer}`}>
             <table className={`${styles.mainTable} table table-borderless`}>
@@ -109,19 +100,19 @@ const astrologermanagement = useAdminAuth(() => {
                 <tr className={`${styles.tableHeading}`}>
                   <td>Name</td>
                   <td>Phone Number</td>
-                  <td>Enable Astrologer</td>
+                  <td>Rating</td>
                   <td>Verify</td>
                   <td>Query</td>
                 </tr>
               </thead>
               <tbody>
                 {paginationData.slice(firstItemNum, lastItemNum).map((e) => (
-                  <tr key={e.id} style={{ border: "solid red" }}>
+                  <tr key={e.id} >
                     <td className={`${styles.tableData}`}>
                       {e.firstName + e.secondName}
                     </td>
                     <td className={`${styles.tableData}`}>{e.phoneNumber}</td>
-                    <td className={`${styles.tableData}`}>{e.email}</td>
+                    <td className={`${styles.tableData}`}>{e.rating == "0" ? "Not rated" : e.rating}</td>
                     <td className={`${styles.tableData}`}>
                       {" "}
                       {e.verified ? "Verified" : "Not Verfied"}{" "}
@@ -143,7 +134,7 @@ const astrologermanagement = useAdminAuth(() => {
             </table>
           </div>
 
-          <div>
+          <div style={{}}>
             <ReactPaginate
               previousLabel={"← Previous"}
               nextLabel={"Next →"}
@@ -160,9 +151,6 @@ const astrologermanagement = useAdminAuth(() => {
               activeClassName={"page-link active"}
             />
           </div>
-
-
-          
         </div>
       </div>
     </>
