@@ -20,23 +20,22 @@ const db = getFirestore(firebase);
 const astrologermanagement = useAdminAuth(() => {
   const [astrologersList, setastrologersList] = useState([]);
   const [paginationData, setpaginationData] = useState([]);
-
   const [totalAstrologers, settotalAstrologers] = useState(0);
-  const ItemsPerPage = 10;
+  const ItemsPerPage = 3;
   const [isVerfiedFilter, setIsVerfiedFilter] = useState(false);
-  const [totalPages, settotalPages] = useState(10);
+  const [totalPages, settotalPages] = useState(2);
   const [firstItemNum, setfirstItemNum] = useState(0);
   const [lastItemNum, setlastItemNum] = useState(3);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     initializePaginationData(astrologersList.filter(myFilter));
   }, [isVerfiedFilter]);
 
   function initializePaginationData(data) {
-    console.log(data.length, data);
     setpaginationData(data);
     settotalAstrologers(data.length);
-    settotalPages(data.size / ItemsPerPage);
+    settotalPages(data.length / ItemsPerPage);
     setfirstItemNum(0);
     setlastItemNum(ItemsPerPage);
   }
@@ -47,7 +46,6 @@ const astrologermanagement = useAdminAuth(() => {
     let data = querySnapshot.docs.map((doc) => doc.data());
     setastrologersList(data);
     initializePaginationData(data);
-    console.log(astrologersList);
   }
 
   function handlePageChange({ selected }) {
@@ -64,6 +62,18 @@ const astrologermanagement = useAdminAuth(() => {
     }
     return true;
   }
+  function searchHandler(event) {
+    initializePaginationData(
+      astrologersList.filter((e) => {
+        if (
+          e.firstName.includes(event.target.value) ||
+          e.secondName.includes(event.target.value) ||
+          e.email.includes(event.target.value)
+        )
+          return true;
+      })
+    );
+  }
 
   return (
     <>
@@ -78,12 +88,16 @@ const astrologermanagement = useAdminAuth(() => {
               className={`${styles.searchBox}`}
               type="text"
               placeholder="Search by name/email/phone"
+              onChange={searchHandler}
             />
 
             <div className={`${styles.buttonContainer}`}>
-              <div className={`${styles.filterButton} ${styles.button} `}>
+              <button
+                className={`${styles.filterButton} ${styles.button} `}
+                onClick={() => setIsVerfiedFilter(!isVerfiedFilter)}
+              >
                 Filters
-              </div>
+              </button>
               <button
                 className={`${styles.getButton} ${styles.button}`}
                 onClick={() => getAllAstrologers()}
@@ -92,7 +106,6 @@ const astrologermanagement = useAdminAuth(() => {
               </button>
             </div>
           </div>
-
 
           <div className={`${styles.tableContainer}`}>
             <table className={`${styles.mainTable} table table-borderless`}>
@@ -107,18 +120,18 @@ const astrologermanagement = useAdminAuth(() => {
               </thead>
               <tbody>
                 {paginationData.slice(firstItemNum, lastItemNum).map((e) => (
-                  <tr key={e.id} >
-                    <td className={`${styles.tableData}`}>
+                  <tr key={e.id} style={{}}>
+                    <td className={`${styles.tableData}  `}>
                       {e.firstName + e.secondName}
                     </td>
-                    <td className={`${styles.tableData}`}>{e.phoneNumber}</td>
-                    <td className={`${styles.tableData}`}>{e.rating == "0" ? "Not rated" : e.rating}</td>
+                    <td className={`${styles.tableData} `}>{e.phoneNumber}</td>
                     <td className={`${styles.tableData}`}>
-                      {" "}
-                      {e.verified ? "Verified" : "Not Verfied"}{" "}
+                      {e.rating == "0" ? "Not rated" : e.rating}
                     </td>
                     <td className={`${styles.tableData}`}>
-                      {" "}
+                      {e.verified ? "Verified" : "Not Verfied"}
+                    </td>
+                    <td className={`${styles.tableData}`}>
                       <Link
                         href={{
                           pathname: `/admin/astrologer/${e.id}`,
@@ -142,7 +155,7 @@ const astrologermanagement = useAdminAuth(() => {
               pageCount={totalPages}
               marginPagesDisplayed={2}
               onPageChange={(e) => handlePageChange(e)}
-              containerClassName={"pagination"}
+              containerClassName={`pagination ${styles.paginationContainer} ${styles.centerDivFlex}`}
               previousLinkClassName={"page-link"}
               pageClassName={"page-link"}
               breakLinkClassName={"page-link"}

@@ -51,11 +51,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
+
 }
 
 .filterButton{
   border: 1.6px solid #4175DF;
   color: #4175DF;
+  
   border-radius: 8px;
 
 }
@@ -63,7 +66,7 @@
 .getButton{
   border: 1.6px solid #52B680;
   color: #52B680;
-  background-color: white;
+  
   border-radius: 8px;
 }
 
@@ -86,4 +89,21 @@
 .tableData{
   min-height: 48px;
   text-align: center;
+  /* border: dotted green; */
+}
+
+
+.paginationContainer {
+  /* border: dotted green ; */
+  padding-left: 16px;
+  padding-right: 16px;
+  /* margin-top: auto; */
+}
+
+
+.centerDivFlex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
