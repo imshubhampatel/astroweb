@@ -7,15 +7,13 @@ class Employee {
     this.dob = data.dob;
     this.address = data.address;
     this.gender = data.gender;
-    this.profilePic = data.profilePic;   
-      
+    this.profilePic = data.profilePic;  
+    this.permissions = data.permissions ? data.permissions : {}
+    
     this.phoneNumber = data.phoneNumber;
     this.verificationId = data.verificationId;
     this.pancardNumber = data.pancardNumber;
     this.pancardLink = data.pancardLink;
-    this.accountInfo = data.accountInfo
-        ? data.accountInfo
-        : { accountNo: "", bank: "", branch: "", ISFC: "", holderName: "" };
 
     // Enabled / Disabled
       this.verified = data.verified ? data.verified : false;
@@ -38,17 +36,16 @@ const employeeConverter = {
       dob: data.dob,
       address: data.address,
       gender: data.gender,
-      experience: data.experience,
       profilePic: data.profilePic,
 
       // verification
       verified: data.verified,
+      permissions : data.permissions,
 
       pancardLink: data.pancardLink,
       phoneNumber: data.phoneNumber,
       verificationId: data.verificationId,
       pancardNumber: data.pancardNumber,
-      accountInfo: data.accountInfo,
     };
   },
   fromFirestore: (snapshot, options) => {
