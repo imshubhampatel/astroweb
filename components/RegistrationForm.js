@@ -10,7 +10,6 @@ function RegistrationForm(props) {
         <div className="container">
           <div>
             <hr />
-            <h4>Your Registered Phone Number : {user.phoneNumber}</h4>
 
             <h2>Complete Your Registration </h2>
             <div>
@@ -81,7 +80,7 @@ function RegistrationForm(props) {
                     // pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
                     className="form-control"
                     name="phoneNumber"
-                    placeholder={user.phoneNumber}
+                    placeholder={user?user.phoneNumber:""}
                     required
                   />
                 </div>

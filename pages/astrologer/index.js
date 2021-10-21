@@ -109,7 +109,7 @@ class Astrohome extends Component {
       profileData.id
     ).withConverter(astrologerPrivateDataConverter);
     await setDoc(privateRef, new AstrologerPrivateData(privateInfo));
-    this.setState({ registerStatus: true });
+    this.setState({ registerStatus: false });
   }
     async getAstrologerInfo(pid) {
         const astros = collection(db, "astrologer");
