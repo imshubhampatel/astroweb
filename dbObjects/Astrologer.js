@@ -9,6 +9,7 @@ class Astrologer {
     this.gender = data.gender
     this.experience = data.experience ? data.experience : 0;
     this.profilePic = data.profilePic
+    this.about = data.about ? data.about : "Please add some line about you" 
     
     this.profileComplete = data.profileComplete ? data.profileComplete : false;
     // // Meeting Pricing
@@ -22,11 +23,20 @@ class Astrologer {
     this.voiceSeconds = data.voiceSeconds  ?data.voiceSeconds : 0
     
     // // Expertise 
-     this.vedicAstrology = data.vedicAstrology ? data.vedicAstrology : false;
-     this.tarotCardReading = data.tarotCardReading ? data.tarotCardReading:false;
-     this.numerlogy = data.numerlogy ? data.numerlogy: false;
-     this.matchMaking = data.matchMaking ? data.matchMaking: false
-     this.tnc = data.tnc 
+    this.expertise = {
+     vedicAstrology : data.vedicAstrology ? data.vedicAstrology : false,
+     tarotCardReading : data.tarotCardReading ? data.tarotCardReading:false,
+     numerlogy : data.numerlogy ? data.numerlogy: false,
+     matchMaking : data.matchMaking ? data.matchMaking: false
+    }
+    this.reviews = data.reviews ?{
+      ...data.reviews
+    } : {}
+    
+    this.languages = data.languages ? {
+      ...data.languages
+    } : {}
+    this.tnc = data.tnc 
     
     // //Rating & Reviews
     this.rating = data.rating ? data.rating : 0
@@ -54,6 +64,7 @@ const astrologerConverter = {
       gender: data.gender,
       experience: data.experience,
       profilePic: data.profilePic,
+      about : data.about,
 
       profileComplete: data.profileComplete,
       // Meeting Pricing
@@ -67,11 +78,7 @@ const astrologerConverter = {
       voiceSeconds: data.voiceSeconds,
 
       // Expertise
-      vedicAstrology: data.vedicAstrology,
-      tarotCardReading: data.tarotCardReading,
-      numerlogy: data.numerlogy,
-      matchMaking: data.matchMaking,
-      tnc: data.tnc,
+      expertise: data.expertise,
 
       //Rating & Reviews
       rating: data.rating,
@@ -79,6 +86,10 @@ const astrologerConverter = {
 
       // verification
       verified: data.verified,
+
+      // Reviews 
+      reviews: data.reviews,
+      languages: data.languages,    
     };
   },
   fromFirestore: (snapshot, options) => {

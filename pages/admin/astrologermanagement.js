@@ -18,6 +18,7 @@ import useAdminAuth from "../../auth/useAdminAuth";
 const db = getFirestore(firebase);
 
 const astrologermanagement = useAdminAuth(() => {
+  
   const [astrologersList, setastrologersList] = useState([]);
   const [paginationData, setpaginationData] = useState([]);
   const [totalAstrologers, settotalAstrologers] = useState(0);

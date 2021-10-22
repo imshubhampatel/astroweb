@@ -59,21 +59,27 @@ export default function Sidebar(props) {
       */}
       <div className={`${styles.button_wrapper}`}>
         {/* User Management Button  */}
-        <div
-          className={` ${styles.button}  ${
-            props.active_page === "0" ? styles.buttonActive : ""
-          }   ${styles.center_div}`}
-        >
-          <span>
-            <FaRegUser />
-          </span>
+        <Link href="/admin/usermanagement">
+          <a>
+            <div
+              className={` ${styles.button}  ${
+                props.active_page === "0" ? styles.buttonActive : ""
+              }   ${styles.center_div}`}
+            >
+              <span>
+                <FaRegUser />
+              </span>
 
-          <span className={`${styles.buttonText}`}>User Management System</span>
+              <span className={`${styles.buttonText}`}>
+                User Management System
+              </span>
 
-          <span className="ms-auto">
-            <IoIosArrowForward />
-          </span>
-        </div>
+              <span className="ms-auto">
+                <IoIosArrowForward />
+              </span>
+            </div>
+          </a>
+        </Link>
 
         {/* Broadcast Management Button  */}
         <div
@@ -118,23 +124,27 @@ export default function Sidebar(props) {
         </Link>
 
         {/* Employee Management Button  */}
-        <div
-          className={`${styles.button} ${
-            props.active_page === "3" ? styles.buttonActive : ""
-          }   ${styles.center_div} my-2`}
-        >
-          <span>
-            <GiNetworkBars />
-          </span>
+        <Link href="/admin/employeemanagement">
+          <a>
+            <div
+              className={`${styles.button} ${
+                props.active_page === "3" ? styles.buttonActive : ""
+              }   ${styles.center_div} my-2`}
+            >
+              <span>
+                <GiNetworkBars />
+              </span>
 
-          <span className={`${styles.buttonText}`}>
-            Employee Management System
-          </span>
+              <span className={`${styles.buttonText}`}>
+                Employee Management System
+              </span>
 
-          <span className="ms-auto">
-            <IoIosArrowForward />
-          </span>
-        </div>
+              <span className="ms-auto">
+                <IoIosArrowForward />
+              </span>
+            </div>
+          </a>
+        </Link>
 
         {/* Store Management Button  */}
         <div
