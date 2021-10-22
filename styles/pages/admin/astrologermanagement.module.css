@@ -107,3 +107,8 @@
   align-items: center;
   gap: 5px;
 }
+
+.paginationActive{
+  border: solid red;
+
+}

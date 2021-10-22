@@ -22,7 +22,7 @@ const astrologermanagement = useAdminAuth(() => {
   const [astrologersList, setastrologersList] = useState([]);
   const [paginationData, setpaginationData] = useState([]);
   const [totalAstrologers, settotalAstrologers] = useState(0);
-  const ItemsPerPage = 3;
+  const ItemsPerPage = 10;
   const [isVerfiedFilter, setIsVerfiedFilter] = useState(false);
   const [totalPages, settotalPages] = useState(2);
   const [firstItemNum, setfirstItemNum] = useState(0);
@@ -162,7 +162,7 @@ const astrologermanagement = useAdminAuth(() => {
               breakLinkClassName={"page-link"}
               nextLinkClassName={"page-link"}
               disabledClassName={"page-item disabled"}
-              activeClassName={"page-link active"}
+              activeClassName={` page-link active`}
             />
           </div>
         </div>
