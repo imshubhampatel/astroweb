@@ -148,7 +148,7 @@ const employeemanagement = useAdminAuth(() => {
 });
 
 employeemanagement.getLayout = function getLayout(page) {
-  return <AdminLayout active_page="2">{page}</AdminLayout>;
+  return <AdminLayout active_page="3">{page}</AdminLayout>;
 };
 
 export default employeemanagement;

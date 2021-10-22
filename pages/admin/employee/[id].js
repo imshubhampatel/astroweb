@@ -28,6 +28,7 @@ const employee = useAdminAuth(() => {
   const { pid } = router.query;
   const [astro, setastro] = useState({});
   var [enabled, setenabled] = useState(true);
+  const [edit, setedit] = useState(false);
 
   async function getemployeeInfo(pid) {
     const astros = collection(db, "employee");
@@ -60,6 +61,28 @@ const employee = useAdminAuth(() => {
       });
   }, [pid]);
 
+  async function permissionChangeHandler(e) {
+    e.preventDefault();
+    const emp = {
+      ...astro,
+      permissions: {
+        astro_management: e.target.astro_management?e.target.astro_management.value:false,
+        emp_management:e.target.emp_management? e.target.emp_management.value:false,
+        wallet_management: e.target.wallet_management?e.target.wallet_management.value:false,
+        user_management:e.target.user_management? e.target.user_management.value:false,
+        broadcast_management: e.target.broadcast_management?e.target.broadcast_management.value:false,
+        store:e.target.store? e.target.store.value:false,
+      },
+    };
+    setastro(emp);
+     console.log(emp);
+
+    const ref = doc(db, "employee", String(pid)).withConverter(
+       employeeConverter
+     );
+    await setDoc(ref, new Employee(emp));
+  };
+
   return (
     <div>
       {astro ? (
@@ -84,8 +107,49 @@ const employee = useAdminAuth(() => {
               >
                 Enabled : {enabled ? "   On  " : "  off   "}
               </button>
+              <button
+                onClick={() => {
+                  setedit(!edit);
+                }}
+                className={"btn btn-primary"}
+              >
+                Edit Profile
+              </button>
+            </div>
+            <div>
+              <h4>Permissions</h4>
 
-             
+              <div>
+                <form onSubmit={permissionChangeHandler}>
+                  {astro.permissions
+                    ? Object.keys(astro.permissions).map((key) => (
+                        <div class="form-check">
+                          <label class="form-check-label" for={key}>
+                            {key}
+                          </label>
+                          <input
+                            class="form-check-input"
+                            name={key}
+                                                        id={key}
+
+                            type="checkbox"
+                            defaultChecked={astro.permissions[key]}
+                            disabled={!edit}
+                          ></input>
+                        </div>
+                      ))
+                    : ""}
+                  {edit ? (
+                    <button
+                      type="submit"
+                      className={"btn btn-primary"}
+                    >
+                      {" "}
+                      Save
+                    </button>
+                  ) : null}
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -97,6 +161,6 @@ const employee = useAdminAuth(() => {
 });
 
 employee.getLayout = function getLayout(page) {
-  return <AdminLayout active_page="2">{page}</AdminLayout>;
+  return <AdminLayout active_page="3">{page}</AdminLayout>;
 };
 export default employee;

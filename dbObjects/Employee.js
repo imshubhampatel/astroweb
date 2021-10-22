@@ -8,7 +8,16 @@ class Employee {
     this.address = data.address;
     this.gender = data.gender;
     this.profilePic = data.profilePic;  
-    this.permissions = data.permissions ? data.permissions : {}
+    this.permissions = data.permissions
+      ? data.permissions
+      : {
+          "astro_management": false,
+          "emp_management": false,
+          "wallet_management": false,
+          "user_management": false,
+          "broadcast_management": false,
+          "store" : false,
+        };
     
     this.phoneNumber = data.phoneNumber;
     this.verificationId = data.verificationId;

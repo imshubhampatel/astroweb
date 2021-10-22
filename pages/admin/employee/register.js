@@ -12,14 +12,10 @@ import {
 import EmployeeRegistrationForm from "../../../components/EmployeeRegistrationForm";
 import {
   getFirestore,
-  collection,
-  query,
-  where,
-  getDoc,
   setDoc,
   doc,
 } from "firebase/firestore";
-
+import {setSubadminPerm} from "../../../auth/utils";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Employee, employeeConverter } from "../../../dbObjects/Employee";
 
@@ -29,8 +25,9 @@ const auth = getAuth(adminfirebase);
 
 
 const register = useAdminAuth(() => {
+  const [message,setmessage] = useState("")
     
-    async function uploadDocToStorage({ path, file }) {
+  async function uploadDocToStorage({ path, file }) {
         const storageRef = ref(storage, path);
         uploadBytes(storageRef, file).then((snapshot) => { });
     }
@@ -41,7 +38,7 @@ const register = useAdminAuth(() => {
        secondName: e.target.secondName.value,
        email: e.target.email.value,
        gender: e.target.gender.value,
-       dob: e.target.dob.value,
+       dob: Date(e.target.dob.value),
        address: e.target.address.value,
        profilePic: "testing/profile_" + uid + ".png",
        verificationId: "testing/aadhar_" + uid + ".png",
@@ -53,16 +50,16 @@ const register = useAdminAuth(() => {
      let profilePic = e.target.profilePicture.files[0];
      let verificationIdPic = e.target.verificationId.files[0];
      let pancardPic = e.target.pancard.files[0];
-     uploadDocToStorage({
+     await uploadDocToStorage({
        path: profileData.profilePic,
        file: profilePic,
      });
-     uploadDocToStorage({
+     await uploadDocToStorage({
        path: profileData.pancardLink,
        file: pancardPic,
      });
 
-     uploadDocToStorage({
+     await uploadDocToStorage({
        path: profileData.verificationId,
        file: verificationIdPic,
      });
@@ -70,22 +67,19 @@ const register = useAdminAuth(() => {
        employeeConverter
      );
     await setDoc(ref, new Employee(profileData));
-    console.log("Done ");
-
+    setSubadminPerm(uid);
+    alert("Employee Created");
   }
 
 
     async function registerformhandler(e) {
       e.preventDefault();
       createUserWithEmailAndPassword(auth, e.target.email.value, "Windows8").then((user) => {
-        console.log(user.user.uid);
         createEmployee(user.user.uid, e);
-        signOut(auth);
-        
-      }
-      );
-       
-       
+        signOut(auth);    
+      }).catch((error) => {
+        alert(error.message)
+      });    
     }
  
      
