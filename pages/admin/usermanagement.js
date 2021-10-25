@@ -22,7 +22,7 @@ const db = getFirestore(firebase);
 const userManagement = useAdminAuth(() => {
   const [usersList, setusersList] = useState([]);
   const [totalusers, settotalusers] = useState(0);
-  const ItemsPerPage = 3;
+  const ItemsPerPage = 2;
   const [totalPages, settotalPages] = useState(2);
   const [firstItemNum, setfirstItemNum] = useState(0);
   const [lastItemNum, setlastItemNum] = useState(3);
@@ -30,7 +30,7 @@ const userManagement = useAdminAuth(() => {
 
     useEffect(() => {
         initializePaginationData(90);
-        getAllusers(-1, 2);
+        getAllusers(0, ItemsPerPage);
   }, []);
 
   function initializePaginationData(dataSize) {
@@ -40,10 +40,11 @@ const userManagement = useAdminAuth(() => {
     setlastItemNum(ItemsPerPage);
   }
 
-  async function getAllusers(first,last) {
-    const astros = collection(db, "astrologer");
-      const querySnapshot = await getDocs(query(astros, orderBy("email"), startAt(0), limit(2)));
-      console.log("rf",querySnapshot.docs)
+  async function getAllusers(first, numItems) {
+    const astros = collection(db, "user");
+    const querySnapshot = await getDocs(
+      query(astros, orderBy("counter"), startAt(first), limit(numItems))
+    );
     let data = querySnapshot.docs.map((doc) => doc.data());
     setusersList(data);
   }
@@ -51,16 +52,16 @@ const userManagement = useAdminAuth(() => {
   function handlePageChange({ selected }) {
     let last = (selected + 1) * ItemsPerPage;
     let first = last - ItemsPerPage;
-    getAllusers(first, last);
-    setfirstItemNum(first);
-    setlastItemNum(last);
+
+    getAllusers(first, ItemsPerPage);
   }
  
   function searchHandler() {
     if (search != "")
-    {
-    
-      }
+    { 
+                                          
+                                          
+    }
   }
 
   return (
