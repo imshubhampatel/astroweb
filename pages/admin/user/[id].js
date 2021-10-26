@@ -56,7 +56,6 @@ const user = useAdminAuth(() => {
     );
     let data = querySnapshot.docs.map((doc) => doc.data());
     //    console.log(data);
-
        setOrders(data);
       
     };
