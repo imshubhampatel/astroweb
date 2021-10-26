@@ -66,16 +66,16 @@ const employee = useAdminAuth(() => {
     const emp = {
       ...astro,
       permissions: {
-        astro_management: e.target.astro_management?e.target.astro_management.value:false,
-        emp_management:e.target.emp_management? e.target.emp_management.value:false,
-        wallet_management: e.target.wallet_management?e.target.wallet_management.value:false,
-        user_management:e.target.user_management? e.target.user_management.value:false,
-        broadcast_management: e.target.broadcast_management?e.target.broadcast_management.value:false,
-        store:e.target.store? e.target.store.value:false,
+        astro_management: e.target.astro_management?e.target.astro_management.checked:false,
+        emp_management:e.target.emp_management? e.target.emp_management.checked:false,
+        wallet_management: e.target.wallet_management?e.target.wallet_management.checked:false,
+        user_management:e.target.user_management? e.target.user_management.checked:false,
+        broadcast_management: e.target.broadcast_management?e.target.broadcast_management.checked:false,
+        store:e.target.store? e.target.store.checked:false,
       },
     };
+
     setastro(emp);
-     console.log(emp);
 
     const ref = doc(db, "employee", String(pid)).withConverter(
        employeeConverter
@@ -130,7 +130,7 @@ const employee = useAdminAuth(() => {
                           <input
                             class="form-check-input"
                             name={key}
-                                                        id={key}
+                            id={key}
 
                             type="checkbox"
                             defaultChecked={astro.permissions[key]}
