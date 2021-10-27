@@ -1,8 +1,8 @@
 
 function MeetingCard({props}) {
     return (
-      <div class="card">
-            <div class="card-body">{props.duration}{" Amount : "} {props.amount + "rate :"+ props.rate}</div>
+      <div className="card">
+            <div className="card-body">{props.duration}{" Amount : "} {props.amount + "rate :"+ props.rate}</div>
       </div>
     );
 }
