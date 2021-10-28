@@ -164,6 +164,8 @@ export default function Sidebar(props) {
         </div>
 
         {/* Wallet Management Button  */}
+           <Link href="/admin/walletmanagement">
+          <a>
         <div
           className={`${styles.button} ${
             props.active_page === "4" ? styles.buttonActive : ""
@@ -179,7 +181,7 @@ export default function Sidebar(props) {
             <IoIosArrowForward />
           </span>
         </div>
-
+        </a></Link>
         {/* History Button  */}
         <div
           className={`${styles.button}  ${
