@@ -161,4 +161,5 @@ class Astrohome extends Component {
   }
 }
 
+
 export default withAuth(Astrohome);
