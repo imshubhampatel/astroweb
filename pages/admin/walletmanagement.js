@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from "react";
-import ReactPaginate from "react-paginate";
 import {
   collection,
   query,
@@ -13,23 +12,26 @@ import {
 import { firebase } from "../../config";
 import AdminLayout from "../../components/adminPanel/layout";
 import useAdminAuth from "../../auth/useAdminAuth";
-import WalletInfoCard from "../../components/adminPanel/WalletInfoCard";
 import {
   walletWithdrawalConverter,
   WalletWithdrawal,
   WalletWithdrawalStatus,
 } from "../../dbObjects/WalletWithdrawal";
+import PendingRequestWallet from '../../components/adminPanel/pendingRequestWallet'
+import WalletHistory from '../../components/adminPanel/walletHistory'
 
 const db = getFirestore(firebase);
 
 
 const walletManagment = useAdminAuth(() => {
-    const [history, setHistory] = useState([]);
-    const [pendingRequests, setPendingRequests] = useState([]);
+ 
+  const [history, setHistory] = useState([]);
+  const [pendingRequests, setPendingRequests] = useState([]);
+  const [itemsPerPage, setItemsPerPage] = useState(2);
 
-    useEffect(() => {
-        getWalletInformation();
-    }, [])
+  useEffect(() => {
+    getWalletInformation();
+  }, []);
     
   async function getWalletInformation() {
     const PRs = query(
@@ -50,12 +52,13 @@ const walletManagment = useAdminAuth(() => {
     });
     setHistory(data);
                            
-  }
+  };
+
   function removeFromPR(data) {
     let pr = pendingRequests;
     pr.splice(pendingRequests.indexOf(data),1);
     setPendingRequests(pr);
-  }
+  };
 
   async function approvePendingRequest(data) {
     removeFromPR(data);
@@ -64,39 +67,37 @@ const walletManagment = useAdminAuth(() => {
             walletWithdrawalConverter
     );
     await setDoc(ref, data);
-  }
+  };
   
   async function rejectPendingRequest(data) {
     removeFromPR(data);
     data.status = WalletWithdrawalStatus.REJECTED;
     const ref = doc(db, "wallet_withdrawal", data.id).withConverter(
     walletWithdrawalConverter
-  );
-  await setDoc(ref, data);
+    );
+    await setDoc(ref, data);
 
-    }
-    return (
+  };
+
+  return (
       <div className="container">
         <div className="row">
           <h3>Wallet Management</h3>
         </div>
         <div className="row">
           <div className="col">
-            <h4>Pending Requests </h4>
-
-            {pendingRequests.map((e) => (
-              <WalletInfoCard
-                data={e}
-                reject={rejectPendingRequest}
-                approve={approvePendingRequest}
-              ></WalletInfoCard>
-            ))}
+            <PendingRequestWallet
+              data={pendingRequests}
+              ItemsPerPage={itemsPerPage}
+              approvePendingRequest={approvePendingRequest}
+              rejectPendingRequest={rejectPendingRequest}
+            ></PendingRequestWallet>
           </div>
           <div className="col">
-            <h4>History </h4>
-            {history.map((e) => (
-              <WalletInfoCard data={e}></WalletInfoCard>
-            ))}
+            <WalletHistory
+              data={history}
+              ItemsPerPage={itemsPerPage}
+            ></WalletHistory>
           </div>
         </div>
       </div>
