@@ -17,14 +17,13 @@ import {
   WalletWithdrawal,
   WalletWithdrawalStatus,
 } from "../../dbObjects/WalletWithdrawal";
-import PendingRequestWallet from '../../components/adminPanel/pendingRequestWallet'
+import PendingRequestWallet from '../../components/adminPanel/pendingRequestsWallet'
 import WalletHistory from '../../components/adminPanel/walletHistory'
 
 const db = getFirestore(firebase);
 
 
 const walletManagment = useAdminAuth(() => {
- 
   const [history, setHistory] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(2);
@@ -67,6 +66,7 @@ const walletManagment = useAdminAuth(() => {
             walletWithdrawalConverter
     );
     await setDoc(ref, data);
+    setHistory([...history, data]);
   };
   
   async function rejectPendingRequest(data) {
@@ -76,6 +76,8 @@ const walletManagment = useAdminAuth(() => {
     walletWithdrawalConverter
     );
     await setDoc(ref, data);
+        setHistory([...history, data]);
+
 
   };
 
