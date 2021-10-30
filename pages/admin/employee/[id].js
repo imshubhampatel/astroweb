@@ -81,6 +81,7 @@ const employee = withAdminAuth(() => {
        employeeConverter
      );
     await setDoc(ref, new Employee(emp));
+    
   };
 
   return (
@@ -124,7 +125,7 @@ const employee = withAdminAuth(() => {
                   {astro.permissions
                     ? Object.keys(astro.permissions).map((key) => (
                         <div class="form-check">
-                          <label class="form-check-label" for={key}>
+                          <label class="form-check-label" htmlFor={key}>
                             {key}
                           </label>
                           <input
