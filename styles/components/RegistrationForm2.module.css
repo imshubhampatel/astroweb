@@ -9,7 +9,7 @@
 @media (min-width: 576px) { 
 
     .baseContainer{
-        background: #E5E5E5;
+        /* background: #E5E5E5; */
         min-height: 100vh;
         
         display: flex;
@@ -34,7 +34,8 @@
 
 @media (min-width: 576px) {
     .imageContainer{
-        height: 750px;
+        min-height: 90vh;
+        height: 100%;
         /* border: 1px solid red; */
         background-image: url("/images/tarrot-large.jpg");
         background-position: center;

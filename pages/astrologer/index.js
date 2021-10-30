@@ -2,6 +2,9 @@ import withAuth from "../../auth/withAuth";
 import { firebase, auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
 import RegistrationForm from "../../components/RegistrationForm";
+import router from "next/router";
+import RegistrationForm2 from "../../components/RegistrationForm2";
+
 import React, { Component } from "react";
 import {
   getFirestore,
@@ -131,7 +134,7 @@ class Astrohome extends Component {
           if (this.state.registerStatus)
               return (
                   <div>
-                      <RegistrationForm
+                      <RegistrationForm2
                           registerFormHandler={this.registerformhandler}
                           user={this.state.user} />
                   </div>
