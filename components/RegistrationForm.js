@@ -3,19 +3,13 @@ import styles from "../styles/Home.module.css";
 import Link from "next/link";
 
 function RegistrationForm(props) {
-  const Expertise = [
-    "vedicAstrology",
-    "tarotCardReading",
-    "numerlogy",
-    "matchMaking",
-  ];
-  const user = props.user;
-  return (
-    <div>
-      <div className="container">
-        <div>
-          <hr />
-          <h4>Your Registered Phone Number : {user.phoneNumber}</h4>
+    const Expertise = ['vedicAstrology',"tarotCardReading","numerlogy","matchMaking"]
+    const user = props.user;
+    return (
+      <div>
+        <div className="container">
+          <div>
+            <hr />
 
           <h2>Complete Your Registration </h2>
           <div>
@@ -52,8 +46,8 @@ function RegistrationForm(props) {
                   <input
                     type="text"
                     className="form-control"
-                    id="secondName"
-                    placeholder="Second Name"
+                    name="phoneNumber"
+                    placeholder={user?user.phoneNumber:""}
                     required
                   />
                 </div>
