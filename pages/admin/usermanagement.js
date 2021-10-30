@@ -15,12 +15,12 @@ import {
 import { firebase } from "../../config";
 import Link from "next/link";
 import AdminLayout from "../../components/adminPanel/layout";
-import useAdminAuth from "../../auth/useAdminAuth";
+import withAdminAuth from "../../auth/withAdminAuth";
 import SearchPagination from '../../components/adminPanel/SearchPagination'
 
 const db = getFirestore(firebase);
 
-const userManagement = useAdminAuth(() => {
+const userManagement = withAdminAuth(() => {
   const [usersList, setusersList] = useState([]);
   const [totalusers, settotalusers] = useState(0);
   const ItemsPerPage = 2;

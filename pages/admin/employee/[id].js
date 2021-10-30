@@ -52,6 +52,7 @@ const employee = withAdminAuth(() => {
   }
 
   useEffect(() => {
+    console.log(pid)
     getemployeeInfo(pid);
     if (pid)
       isSubAdmin(pid).then((e) => {

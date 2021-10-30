@@ -17,31 +17,27 @@ import MeetingCard from "../../../components/adminPanel/meetingCard";
 import TransactionCard from "../../../components/adminPanel/transactionCard";
 import OrderCard from "../../../components/adminPanel/orderCard";
 
-import {
-  isUser,
-  setUserPerm,
-  removeUserPerm,
-} from "../../../auth/utils";
-import useAdminAuth from "../../../auth/useAdminAuth";
+import { isUser, setUserPerm, removeUserPerm } from "../../../auth/utils";
+import withAdminAuth from "../../../auth/withAdminAuth";
 import { UserConverter, User } from "../../../dbObjects/User";
 
 const db = getFirestore(firebase);
 
-const user = useAdminAuth(() => {
+const user = withAdminAuth(() => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
   var [enabled, setenabled] = useState(true);
   const [meetings, setMeetings] = useState([]);
   const [walletTransactions, setWalletTransactions] = useState([]);
-    const [activeState, setActiveState] = useState(0);
-    const [orders, setOrders] = useState([]);
+  const [activeState, setActiveState] = useState(0);
+  const [orders, setOrders] = useState([]);
 
   async function getUserInfo(pid) {
     const astros = collection(db, "user");
     const querySnapshot = await getDoc(
-        doc(astros, String(pid))
-            // .withConverter(UserConverter)
+      doc(astros, String(pid))
+      // .withConverter(UserConverter)
     );
     if (querySnapshot.exists()) {
       setastro(querySnapshot.data());
@@ -49,16 +45,15 @@ const user = useAdminAuth(() => {
       // console.log("no")
     }
   }
-   async function getAllOrders(uuid) {
+  async function getAllOrders(uuid) {
     const astros = collection(db, "order");
     const querySnapshot = await getDocs(
-    query(astros, where("user", "==", String(uuid)))
+      query(astros, where("user", "==", String(uuid)))
     );
     let data = querySnapshot.docs.map((doc) => doc.data());
     //    console.log(data);
-       setOrders(data);
-      
-    };
+    setOrders(data);
+  }
   async function getAllMeeting(uuid) {
     const astros = collection(db, "meetings");
     const querySnapshot = await getDocs(
@@ -68,9 +63,7 @@ const user = useAdminAuth(() => {
     setMeetings(data);
   }
   async function getAllWalletTransactions(uuid) {
-    const astros = query(
-      collection(db, "user", uuid, "wallet_transaction")
-    );
+    const astros = query(collection(db, "user", uuid, "wallet_transaction"));
     const querySnapshot = await getDocs(astros);
     let data = querySnapshot.docs.map((doc) => doc.data());
     setWalletTransactions(data);
@@ -87,7 +80,7 @@ const user = useAdminAuth(() => {
     // console.log(response);
     setenabled(!enabled);
   }
-  
+
   useEffect(() => {
     getUserInfo(pid);
     if (pid)
