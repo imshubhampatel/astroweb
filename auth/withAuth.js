@@ -7,7 +7,7 @@ const withAuth = (Component) => (props) => {
   useEffect(() => {
     onAuthStateChanged(auth,(authUser) => {
       if (!authUser) {
-        router.push("/signin");
+        router.replace("/signin");
       }
     });
   }, []);

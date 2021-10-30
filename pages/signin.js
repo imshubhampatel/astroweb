@@ -18,7 +18,7 @@ const FirebaseAuth = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (Authuser) => {
-      if (Authuser) router.push("/astrologer");
+      if (Authuser) router.replace("/astrologer");
     });
   }, []);
 
@@ -77,7 +77,7 @@ const FirebaseAuth = () => {
             style={{ display: !show ? "block" : "none" }}
             className="form-group"
           >
-            <label for="phoneNumber">Please Enter your Phone Number</label>
+            <label htmlFor="phoneNumber">Please Enter your Phone Number</label>
             {countryCode}
             <div className="row">
               <div className="col-3">

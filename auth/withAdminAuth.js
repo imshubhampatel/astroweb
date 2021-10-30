@@ -10,7 +10,7 @@ const withAdminAuth = (Component) => (props) => {
     onAuthStateChanged(auth, (authUser) => {
       setLoading(true)
       if (!authUser) {
-        router.push("/admin/signin");
+        router.replace("/admin/signin");
       } else {
         isAdmin(authUser.uid).then((e) => {
           if (e)
@@ -27,7 +27,7 @@ const withAdminAuth = (Component) => (props) => {
               }
               else {
                 alert("Access Not allowed");
-                router.push("/");
+                router.replace("/");
               }
             })
           }

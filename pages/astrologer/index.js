@@ -30,8 +30,8 @@ class Astrohome extends Component {
     super();
     this.state = {
       user: null,
-        registerStatus: false,
-        astrologerProfileInfo:null,
+      registerStatus: false,
+      astrologerProfileInfo: null,
     };
     this.registerformhandler = this.registerformhandler.bind(this);
     this.uploadDocToStorage = this.uploadDocToStorage.bind(this);
@@ -60,9 +60,8 @@ class Astrohome extends Component {
       } else {
         // console.log(authUser.phoneNumber)
         this.getRegisterInfo(authUser);
-        this.setState({ user: authUser });  
+        this.setState({ user: authUser });
         this.getAstrologerInfo(authUser.uid);
-
       }
     });
   }
@@ -112,55 +111,51 @@ class Astrohome extends Component {
       profileData.id
     ).withConverter(astrologerPrivateDataConverter);
     await setDoc(privateRef, new AstrologerPrivateData(privateInfo));
-    this.setState({ registerStatus: true });
+    this.setState({ registerStatus: false });
   }
-    async getAstrologerInfo(pid) {
-        const astros = collection(db, "astrologer");
+  async getAstrologerInfo(pid) {
+    const astros = collection(db, "astrologer");
 
-        const querySnapshot = await getDoc(doc(astros,String(pid)).withConverter(astrologerConverter));
-        if (querySnapshot.exists())
-        {
-            this.setState({ astrologerProfileInfo: querySnapshot.data()})
-        }
-        else {
-            console.log("no")
-        }
+    const querySnapshot = await getDoc(
+      doc(astros, String(pid)).withConverter(astrologerConverter)
+    );
+    if (querySnapshot.exists()) {
+      this.setState({ astrologerProfileInfo: querySnapshot.data() });
+    } else {
+      console.log("no");
+    }
   }
-
 
   render() {
-      if (this.state.user)
-      {
-          if (this.state.registerStatus)
-              return (
-                  <div>
-                      <RegistrationForm2
-                          registerFormHandler={this.registerformhandler}
-                          user={this.state.user} />
-                  </div>
-              );
-          else if(this.state.astrologerProfileInfo){
-              return (
-                  <div>
-                      For more Information Login to our APP
-                       <br/>
-                      <div>
-                        Name : {this.state.astrologerProfileInfo.firstName}{" "}
-                        <br/>
-                        Email : {this.state.astrologerProfileInfo.email}
-                      </div>
-                      <div>
-                          <form>
-                              <input></input>
-                              <input></input>
-                          </form>
-                      </div>
-                  </div>
-              );
-          }
-          else return <div></div>
-      }
-    else return <div>Loading</div>;
+    if (this.state.user) {
+      if (this.state.registerStatus)
+        return (
+          <div>
+            <RegistrationForm
+              registerFormHandler={this.registerformhandler}
+              user={this.state.user}
+            />
+          </div>
+        );
+      else if (this.state.astrologerProfileInfo) {
+        return (
+          <div>
+            htmlFor more Information Login to our APP
+            <br />
+            <div>
+              Name : {this.state.astrologerProfileInfo.firstName} <br />
+              Email : {this.state.astrologerProfileInfo.email}
+            </div>
+            <div>
+              <form>
+                <input></input>
+                <input></input>
+              </form>
+            </div>
+          </div>
+        );
+      } else return <div></div>;
+    } else return <div>Loading</div>;
   }
 }
 

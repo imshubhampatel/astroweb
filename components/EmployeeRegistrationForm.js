@@ -13,7 +13,7 @@ function EmployeeRegistrationForm(props) {
           <div>
             <form onSubmit={props.registerFormHandler}>
               <div className="form-group">
-                <label for="exampleInputEmail1">Email address</label>
+                <label htmlFor="exampleInputEmail1">Email address</label>
                 <input
                   type="email"
                   name="email"
@@ -26,7 +26,7 @@ function EmployeeRegistrationForm(props) {
               </div>
               <div className="row">
                 <div className="form-group col">
-                  <label for="firstName">First Name</label>
+                  <label htmlFor="firstName">First Name</label>
                   <input
                     type="text"
                     className="form-control"
@@ -36,7 +36,7 @@ function EmployeeRegistrationForm(props) {
                   />
                 </div>
                 <div className="form-group col">
-                  <label for="secondName">Second Name</label>
+                  <label htmlFor="secondName">Second Name</label>
                   <input
                     type="text"
                     className="form-control"
@@ -47,7 +47,7 @@ function EmployeeRegistrationForm(props) {
                 </div>
               </div>
               <div className="form-group">
-                <label for="dob"> Date of Birth</label>
+                <label htmlFor="dob"> Date of Birth</label>
                 <input
                   type="date"
                   className="form-control"
@@ -58,7 +58,7 @@ function EmployeeRegistrationForm(props) {
                 />
               </div>
               <div className="form-group">
-                <label for="address"> Complete Address</label>
+                <label htmlFor="address"> Complete Address</label>
                 <input
                   type="text"
                   className="form-control"
@@ -68,7 +68,7 @@ function EmployeeRegistrationForm(props) {
                 />
               </div>
               <div className="form-group">
-                <label for="phoneNumber">Phone Number </label>
+                <label htmlFor="phoneNumber">Phone Number </label>
                 <input
                   type="text"
                   // pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
@@ -79,7 +79,7 @@ function EmployeeRegistrationForm(props) {
                 />
               </div>
               <div className="form-group">
-                <label for="gender">Gender</label>
+                <label htmlFor="gender">Gender</label>
                 <select
                   className="form-control"
                   id="gender"
@@ -92,7 +92,7 @@ function EmployeeRegistrationForm(props) {
                 </select>
               </div>
 
-              <label for="verificationId">
+              <label htmlFor="verificationId">
                 {" "}
                 Upload ID verification documents - Aadhaar / DL
               </label>
@@ -106,7 +106,7 @@ function EmployeeRegistrationForm(props) {
                 />
               </div>
 
-              <label for="profilePicture"> Profile Picture</label>
+              <label htmlFor="profilePicture"> Profile Picture</label>
               <div className="input-group mb-3">
                 <input
                   type="file"
@@ -116,7 +116,7 @@ function EmployeeRegistrationForm(props) {
                   required
                 />
               </div>
-              <label for="profilePicture"> Pan Card</label>
+              <label htmlFor="profilePicture"> Pan Card</label>
               <div className="input-group mb-3">
                 <input
                   type="file"
