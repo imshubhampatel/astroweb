@@ -17,12 +17,12 @@ import {
   setSubadminPerm,
   removeSubadminPerm,
 } from "../../../auth/utils";
-import useAdminAuth from "../../../auth/useAdminAuth";
+import withAdminAuth from "../../../auth/withAdminAuth";
 import { employeeConverter, Employee } from "../../../dbObjects/Employee";
 
 const db = getFirestore(firebase);
 
-const employee = useAdminAuth(() => {
+const employee = withAdminAuth(() => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
