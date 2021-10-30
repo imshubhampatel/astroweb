@@ -1,15 +1,11 @@
 import React, { useEffect } from "react";
 import router from "next/router";
-import firebase from "firebase/app";
-import "firebase/auth";
-import initFirebase from "../config";
-
-initFirebase();
-const auth = firebase.auth();
+import { onAuthStateChanged } from "firebase/auth";
+import {  auth } from "../config";
 
 const withAuth = (Component) => (props) => {
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
+    onAuthStateChanged(auth,(authUser) => {
       if (!authUser) {
         router.push("/signin");
       }
@@ -18,7 +14,7 @@ const withAuth = (Component) => (props) => {
 
   return (
     <div>
-      <Component {...props} />
+      <Component {...props}></Component>
     </div>
   );
 };

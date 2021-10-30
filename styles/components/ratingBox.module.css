@@ -1,0 +1,20 @@
+.mainContainer{
+    width: 66px;
+    height: 27.63px;
+    
+    border-radius: 4px;
+    padding: 4.91px;
+    color: white;
+    margin-left: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.bgGreen{
+    background: rgba(89, 195, 106, 1);
+}
+
+.bgYellow{
+    background: rgba(253, 208, 54, 1);
+}
