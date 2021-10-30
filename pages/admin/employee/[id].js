@@ -17,12 +17,12 @@ import {
   setSubadminPerm,
   removeSubadminPerm,
 } from "../../../auth/utils";
-import withAdminAuth from "../../../auth/withAdminAuth";
+import useAdminAuth from "../../../auth/useAdminAuth";
 import { employeeConverter, Employee } from "../../../dbObjects/Employee";
 
 const db = getFirestore(firebase);
 
-const employee = withAdminAuth(() => {
+const employee = useAdminAuth(() => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
@@ -52,7 +52,6 @@ const employee = withAdminAuth(() => {
   }
 
   useEffect(() => {
-    console.log(pid)
     getemployeeInfo(pid);
     if (pid)
       isSubAdmin(pid).then((e) => {
@@ -66,23 +65,32 @@ const employee = withAdminAuth(() => {
     const emp = {
       ...astro,
       permissions: {
-        astro_management: e.target.astro_management?e.target.astro_management.checked:false,
-        emp_management:e.target.emp_management? e.target.emp_management.checked:false,
-        wallet_management: e.target.wallet_management?e.target.wallet_management.checked:false,
-        user_management:e.target.user_management? e.target.user_management.checked:false,
-        broadcast_management: e.target.broadcast_management?e.target.broadcast_management.checked:false,
-        store:e.target.store? e.target.store.checked:false,
+        astro_management: e.target.astro_management
+          ? e.target.astro_management.checked
+          : false,
+        emp_management: e.target.emp_management
+          ? e.target.emp_management.checked
+          : false,
+        wallet_management: e.target.wallet_management
+          ? e.target.wallet_management.checked
+          : false,
+        user_management: e.target.user_management
+          ? e.target.user_management.checked
+          : false,
+        broadcast_management: e.target.broadcast_management
+          ? e.target.broadcast_management.checked
+          : false,
+        store: e.target.store ? e.target.store.checked : false,
       },
     };
 
     setastro(emp);
 
     const ref = doc(db, "employee", String(pid)).withConverter(
-       employeeConverter
-     );
+      employeeConverter
+    );
     await setDoc(ref, new Employee(emp));
-    
-  };
+  }
 
   return (
     <div>
@@ -132,7 +140,6 @@ const employee = withAdminAuth(() => {
                             class="form-check-input"
                             name={key}
                             id={key}
-
                             type="checkbox"
                             defaultChecked={astro.permissions[key]}
                             disabled={!edit}
@@ -141,10 +148,7 @@ const employee = withAdminAuth(() => {
                       ))
                     : ""}
                   {edit ? (
-                    <button
-                      type="submit"
-                      className={"btn btn-primary"}
-                    >
+                    <button type="submit" className={"btn btn-primary"}>
                       {" "}
                       Save
                     </button>
