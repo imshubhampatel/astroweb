@@ -47,6 +47,16 @@ async function isAstrologer(uid) {
     return false;
   }
 }
+async function isUser(uid) {
+  const docRef = doc(db, "security_groups/user/user/", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 async function setAstrologerPerm(uid) {
     const docRef = doc(db, "security_groups/astrologer/astrologer/", uid);
@@ -58,6 +68,17 @@ async function setSubadminPerm(uid) {
   const docRef = doc(db, "security_groups/subadmin/subadmin/", uid);
   const docSnap = await setDoc(docRef, { role: "subadmin" });
   return docSnap;
+}
+async function setUserPerm(uid) {
+  const docRef = doc(db, "security_groups/user/user/", uid);
+  const docSnap = await setDoc(docRef, { role: "user" });
+  return docSnap;
+}
+async function  removeUserPerm(uid) {
+   const response = await deleteDoc(
+     doc(db, "security_groups/user/user/", uid)
+   );
+   return response;
 }
 async function removeAstrologerPerm(uid) {
     const response = await deleteDoc(doc(db, "security_groups/astrologer/astrologer/", uid));
@@ -77,4 +98,7 @@ export {
   setSubadminPerm,
   removeAstrologerPerm,
   removeSubadminPerm,
+  isUser,
+  setUserPerm,
+  removeUserPerm,
 };

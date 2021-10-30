@@ -11,22 +11,24 @@ import {
 import { firebase } from "../../config";
 import Link from "next/link";
 import AdminLayout from "../../components/adminPanel/layout";
-import useAdminAuth from "../../auth/useAdminAuth";
+import withAdminAuth from "../../auth/withAdminAuth";
 
 const db = getFirestore(firebase);
 
-const employeemanagement = useAdminAuth(() => {
+const employeemanagement = withAdminAuth(() => {
   const [employeesList, setemployeesList] = useState([]);
   const [paginationData, setpaginationData] = useState([]);
   const [totalemployees, settotalemployees] = useState(0);
   const ItemsPerPage = 3;
+  const [isVerfiedFilter, setIsVerfiedFilter] = useState(false);
   const [totalPages, settotalPages] = useState(2);
   const [firstItemNum, setfirstItemNum] = useState(0);
   const [lastItemNum, setlastItemNum] = useState(3);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-  }, []);
+    initializePaginationData(employeesList.filter(myFilter));
+  }, [isVerfiedFilter]);
 
   function initializePaginationData(data) {
     setpaginationData(data);
@@ -37,7 +39,7 @@ const employeemanagement = useAdminAuth(() => {
   }
 
   async function getAllemployees() {
-    const astros = query(collection(db, "employee"));
+    const astros = query(collection(db, "astrologer"));
     const querySnapshot = await getDocs(astros);
     let data = querySnapshot.docs.map((doc) => doc.data());
     setemployeesList(data);
@@ -51,7 +53,13 @@ const employeemanagement = useAdminAuth(() => {
     setlastItemNum(last);
   }
 
-  
+  function myFilter(item) {
+    if (isVerfiedFilter) {
+      if (item.verified) return false;
+      else return true;
+    }
+    return true;
+  }
   function searchHandler(event) {
     initializePaginationData(
       employeesList.filter((e) => {
@@ -72,13 +80,19 @@ const employeemanagement = useAdminAuth(() => {
       </div>
       <div className="row">
         <div className="col">
-          <button className="btn btn-primary" onClick={() => getAllemployees()}>
+          <button
+            className="btn btn-primary"
+            onClick={() => getAllemployees()}
+          >
             Get all employees
           </button>
 
-          <Link  href="/admin/employee/register">
-            <a className="btn btn-primary" target="_blank">Add Employee</a>
-          </Link>
+          <button
+            className="btn btn-primary"
+            onClick={() => setIsVerfiedFilter(!isVerfiedFilter)}
+          >
+            Filter Unverified
+          </button>
 
           <input
             type="text"
@@ -148,7 +162,7 @@ const employeemanagement = useAdminAuth(() => {
 });
 
 employeemanagement.getLayout = function getLayout(page) {
-  return <AdminLayout active_page="3">{page}</AdminLayout>;
+  return <AdminLayout active_page="2">{page}</AdminLayout>;
 };
 
 export default employeemanagement;

@@ -1,10 +1,12 @@
+import React from "react";
 
-function MeetingCard({props}) {
-    return (
-      <div className="card">
-            <div className="card-body">{props.duration}{" Amount : "} {props.amount + "rate :"+ props.rate}</div>
+export default function MeetingCard({ props }) {
+  return (
+    <div className="card bg-light mb-3">
+      <div className="card-header"> {props.astrologer}</div>
+      <div className="card-body">
+        <p className="card-text">{props.duration}</p>
       </div>
-    );
+    </div>
+  );
 }
-
-export default MeetingCard;

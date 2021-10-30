@@ -18,7 +18,7 @@ const FirebaseAuth = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (Authuser) => {
-      if (Authuser) router.push("/astrologer");
+      if (Authuser) router.replace("/astrologer");
     });
   }, []);
 
