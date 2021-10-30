@@ -17,26 +17,14 @@ import {
   setSubadminPerm,
   removeSubadminPerm,
 } from "../../../auth/utils";
-import useAdminAuth from "../../../auth/useAdminAuth";
+import withAdminAuth from "../../../auth/withAdminAuth";
 import { employeeConverter, Employee } from "../../../dbObjects/Employee";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-const auth = getAuth();
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-
+const auth = getAuth(firebase);
 const db = getFirestore(firebase);
 
-const employee = useAdminAuth(() => {
+const employee = withAdminAuth(() => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
@@ -97,8 +85,6 @@ const employee = useAdminAuth(() => {
               >
                 Enabled : {enabled ? "   On  " : "  off   "}
               </button>
-
-             
             </div>
           </div>
         </div>

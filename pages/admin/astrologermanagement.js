@@ -13,11 +13,11 @@ import {
 import { firebase } from "../../config";
 import Link from "next/link";
 import AdminLayout from "../../components/adminPanel/layout";
-import useAdminAuth from "../../auth/useAdminAuth";
+import withAdminAuth from "../../auth/withAdminAuth";
 
 const db = getFirestore(firebase);
 
-const astrologermanagement = useAdminAuth(() => {
+const astrologermanagement = withAdminAuth(() => {
   
   const [astrologersList, setastrologersList] = useState([]);
   const [paginationData, setpaginationData] = useState([]);

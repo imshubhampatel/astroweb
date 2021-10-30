@@ -25,12 +25,12 @@ import {
   setAstrologerPerm,
   removeAstrologerPerm,
 } from "../../../auth/utils";
-import useAdminAuth from "../../../auth/useAdminAuth";
+import withAdminAuth from "../../../auth/withAdminAuth";
 import { astrologerConverter, Astrologer } from "../../../dbObjects/Astrologer";
 
 const db = getFirestore(firebase);
 
-const astrologer = useAdminAuth(() => {
+const astrologer = withAdminAuth(() => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
