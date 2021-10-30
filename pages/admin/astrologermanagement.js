@@ -62,7 +62,8 @@ const astrologermanagement = withAdminAuth(() => {
       else return true;
     }
     return true;
-  }
+  };
+  
   function searchHandler(event) {
     initializePaginationData(
       astrologersList.filter((e) => {
