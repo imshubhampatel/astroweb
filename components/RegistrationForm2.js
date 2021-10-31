@@ -3,18 +3,32 @@ import styles from "../styles/components/RegistrationForm2.module.css";
 import Link from "next/link";
 
 function RegistrationForm(props) {
-  const Expertise = [
-    "vedicAstrology",
-    "tarotCardReading",
-    "numerlogy",
-    "matchMaking",
-  ];
+ 
   const user = props.user;
+  const [date, setDate] = useState(getDate());
 
   const [formPage, setFormPage] = useState(1);
   const toggleFormPage = () => {
     setFormPage(formPage === 1 ? 2 : 1);
   };
+
+  function getDate()
+  {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+
+    today = yyyy + "-" + mm + "-" + dd;
+    console.log(today)
+    return today;
+  }
 
   return (
     <div className={`${styles.baseContainer}`}>
@@ -31,19 +45,19 @@ function RegistrationForm(props) {
                 Astrologer Registration Form
               </h3>
 
-              <form className={`row g-3`}>
+              <form className={`row g-3`} onSubmit={props.registerFormHandler}>
                 {/* Form Part one  */}
                 <div
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-xs-12 col-md-6`}
                 >
-                  <label htmlFor="firstNameInput" className="form-label">
+                  <label htmlFor="firstName" className="form-label">
                     First Name
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="firstNameInput"
+                    id="firstName"
                     name="firstName"
                     required
                   />
@@ -53,14 +67,14 @@ function RegistrationForm(props) {
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-xs-12 col-md-6`}
                 >
-                  <label htmlFor="lastNameInput" className="form-label">
+                  <label htmlFor="lastName" className="form-label">
                     Last Name
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="lastNameInput"
-                    name="lastName"
+                    id="lastName"
+                    name="secondName"
                     required
                   />
                 </div>
@@ -69,13 +83,13 @@ function RegistrationForm(props) {
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-12 `}
                 >
-                  <label htmlFor="emailInput" className="form-label">
+                  <label htmlFor="email" className="form-label">
                     Email
                   </label>
                   <input
                     type="email"
                     className="form-control"
-                    id="emailInput"
+                    id="email"
                     nam="email"
                     required
                   />
@@ -93,6 +107,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="date"
                     name="dob"
+                    max={date}
                     required
                   />
                 </div>
@@ -124,7 +139,8 @@ function RegistrationForm(props) {
                     type="tel"
                     className="form-control"
                     id="phone"
-                    name="phone"
+                    name="phoneNumber"
+                    value={user.phoneNumber}
                     required
                   />
                 </div>
@@ -133,14 +149,17 @@ function RegistrationForm(props) {
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-12 col-md-6`}
                 >
-                  <label htmlFor="lastNameInput" className="form-label">
+                  <label
+                    htmlFor="alternativePhoneNumber"
+                    className="form-label"
+                  >
                     Alternate Phone Number
                   </label>
                   <input
                     type="tel"
                     className="form-control"
-                    id="lastNameInput"
-                    name="lastName"
+                    id="alternativePhoneNumber"
+                    name="alternativePhoneNumber"
                     required
                   />
                 </div>
@@ -159,6 +178,7 @@ function RegistrationForm(props) {
                       type="radio"
                       className="btn-check"
                       name="gender"
+                      value="male"
                       id="maleOption"
                       autoComplete="off"
                     />
@@ -173,6 +193,7 @@ function RegistrationForm(props) {
                       type="radio"
                       className="btn-check"
                       name="gender"
+                      value="female"
                       id="femaleOption"
                       autoComplete="off"
                     />
@@ -187,7 +208,8 @@ function RegistrationForm(props) {
                       type="radio"
                       className="btn-check"
                       name="gender"
-                      id="opther"
+                      value="other"
+                      id="other"
                       autoComplete="off"
                     />
                     <label
@@ -205,14 +227,14 @@ function RegistrationForm(props) {
                   style={formPage === 1 ? { display: "none" } : {}}
                   className={`col-12 col-md-6 `}
                 >
-                  <label htmlFor="id-document-front" className="form-label">
+                  <label htmlFor="verificationIdFront" className="form-label">
                     (Aadhar/DL) Front
                   </label>
                   <input
                     type="file"
                     className="form-control"
-                    id="id-document-front"
-                    name="id-document-front"
+                    id="verificationIdFront"
+                    name="verificationIdFront"
                     required
                   />
                 </div>
@@ -221,14 +243,14 @@ function RegistrationForm(props) {
                   style={formPage === 1 ? { display: "none" } : {}}
                   className={`col-12 col-md-6 `}
                 >
-                  <label htmlFor="id-document-back" className="form-label">
+                  <label htmlFor="verificationIdBack" className="form-label">
                     (Aadhar/DL) Back
                   </label>
                   <input
                     type="file"
                     className="form-control"
-                    id="id-document-back"
-                    name="id-document-back"
+                    id="verificationIdBack"
+                    name="verificationIdBack"
                     required
                   />
                 </div>
@@ -237,14 +259,14 @@ function RegistrationForm(props) {
                   style={formPage === 1 ? { display: "none" } : {}}
                   className={`col-12 `}
                 >
-                  <label htmlFor="profile-pic" className="form-label">
+                  <label htmlFor="profilePicture" className="form-label">
                     Recent Profile Picture
                   </label>
                   <input
                     type="file"
                     className="form-control"
-                    id="profile-pic"
-                    name="profile-pic"
+                    id="profilePicture"
+                    name="profilePicture"
                     required
                   />
                 </div>
@@ -253,14 +275,14 @@ function RegistrationForm(props) {
                   style={formPage === 1 ? { display: "none" } : {}}
                   className={`col-12 col-md-6`}
                 >
-                  <label htmlFor="pancard-pic" className="form-label">
+                  <label htmlFor="pancard" className="form-label">
                     PAN Card
                   </label>
                   <input
                     type="file"
                     className="form-control"
-                    id="pancard-pic"
-                    name="pancard-pic"
+                    id="pancard"
+                    name="pancard"
                     required
                   />
                 </div>
@@ -269,16 +291,37 @@ function RegistrationForm(props) {
                   style={formPage === 1 ? { display: "none" } : {}}
                   className={`col-12 col-md-6`}
                 >
-                  <label htmlFor="pancard-number" className="form-label">
+                  <label htmlFor="pancardNumber" className="form-label">
                     PAN Card Number
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="pancard-number"
-                    name="pancard-number"
+                    id="pancardNumber"
+                    name="pancardNumber"
                     required
                   />
+                </div>
+                <div
+                  style={formPage === 1 ? { display: "none" } : {}}
+                  className={`col-12 col-md-6`}
+                >
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="tnc"
+                      aria-describedby="tncFeedback"
+                      required
+                    />
+                    <label className="form-check-label" htmlFor="tnc">
+                      Agree to terms and conditions
+                    </label>
+                    <div id="tncFeedback" className="invalid-feedback">
+                      You must agree before submitting.
+                    </div>
+                  </div>
                 </div>
 
                 <div

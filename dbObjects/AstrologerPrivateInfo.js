@@ -2,7 +2,8 @@ class AstrologerPrivateData {
   constructor(data) {
     this.id = data.id;
     this.phoneNumber = data.phoneNumber;
-    this.verificationId = data.verificationId;
+    this.verificationIdFront = data.verificationIdFront;
+    this.verificationIdBack = data.verificationIdBack;
     this.pancardNumber = data.pancardNumber;
     this.pancardLink = data.pancardLink;
     this.accountInfo = data.accountInfo ? data.accountInfo : {accountNo : "",bank:"",branch:"",ISFC :"",holderName:""};
@@ -21,7 +22,8 @@ const astrologerPrivateDataConverter = {
       id: data.id,
       pancardLink: data.pancardLink,
       phoneNumber: data.phoneNumber,
-      verificationId: data.verificationId,
+      verificationIdFront: data.verificationIdFront,
+      verificationIdBack: data.verificationIdBack,
       pancardNumber: data.pancardNumber,
       accountInfo: data.accountInfo,
     };

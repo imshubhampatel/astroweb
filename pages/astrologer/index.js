@@ -1,9 +1,9 @@
 import withAuth from "../../auth/withAuth";
 import { firebase, auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
-import RegistrationForm from "../../components/RegistrationForm";
+// import RegistrationForm from "../../components/RegistrationForm";
 import router from "next/router";
-import RegistrationForm2 from "../../components/RegistrationForm2";
+import RegistrationForm from "../../components/RegistrationForm2";
 
 import React, { Component } from "react";
 import {
@@ -74,21 +74,23 @@ class Astrohome extends Component {
       secondName: e.target.secondName.value,
       email: e.target.email.value,
       gender: e.target.gender.value,
-      dob: e.target.dob.value,
+      dob:  e.target.dob.value,
       address: e.target.address.value,
       profilePic: "testing/profile_" + this.state.user.uid + ".png",
-      tnc: e.target.tnc.value,
+      tnc: e.target.tnc.checked,
     };
     let privateInfo = {
       id: this.state.user.uid,
-      verificationId: "testing/aadhar_" + profileData.id + ".png",
+      verificationIdFront: "testing/ID_front" + profileData.id + ".png",
+      verificationIdBack: "testing/ID_back" + profileData.id + ".png",
       pancardLink: "testing/pancard_" + profileData.id + ".png",
       pancardNumber: e.target.pancardNumber.value,
       phoneNumber: e.target.phoneNumber.value,
     };
 
     let profilePic = e.target.profilePicture.files[0];
-    let verificationIdPic = e.target.verificationId.files[0];
+    let verificationIdFront = e.target.verificationIdFront.files[0];
+    let verificationIdBack = e.target.verificationIdBack.files[0];
     let pancardPic = e.target.pancard.files[0];
     this.uploadDocToStorage({ path: profileData.profilePic, file: profilePic });
     this.uploadDocToStorage({
@@ -96,9 +98,13 @@ class Astrohome extends Component {
       file: pancardPic,
     });
     this.uploadDocToStorage({
-      path: privateInfo.verificationId,
-      file: verificationIdPic,
+      path: privateInfo.verificationIdFront,
+      file: verificationIdFront,
     });
+     this.uploadDocToStorage({
+       path: privateInfo.verificationIdBack,
+       file: verificationIdBack,
+     });
     const ref = doc(db, "astrologer", String(profileData.id)).withConverter(
       astrologerConverter
     );
@@ -111,7 +117,10 @@ class Astrohome extends Component {
       profileData.id
     ).withConverter(astrologerPrivateDataConverter);
     await setDoc(privateRef, new AstrologerPrivateData(privateInfo));
-    this.setState({ registerStatus: false });
+    this.setState({
+      registerStatus: false,
+      astrologerProfileInfo: profileData,
+    });
   }
   async getAstrologerInfo(pid) {
     const astros = collection(db, "astrologer");
@@ -122,7 +131,6 @@ class Astrohome extends Component {
     if (querySnapshot.exists()) {
       this.setState({ astrologerProfileInfo: querySnapshot.data() });
     } else {
-      console.log("no");
     }
   }
 
@@ -140,18 +148,9 @@ class Astrohome extends Component {
       else if (this.state.astrologerProfileInfo) {
         return (
           <div>
-            htmlFor more Information Login to our APP
-            <br />
-            <div>
-              Name : {this.state.astrologerProfileInfo.firstName} <br />
-              Email : {this.state.astrologerProfileInfo.email}
-            </div>
-            <div>
-              <form>
-                <input></input>
-                <input></input>
-              </form>
-            </div>
+            We have sent your request for verification , process may take some days.
+            <br></br>
+  
           </div>
         );
       } else return <div></div>;
