@@ -1,6 +1,9 @@
 import styles from "../../../styles/pages/admin/astrologer/[id].module.css";
 import RatingBox from "../../../components/ratingBox";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
@@ -29,6 +32,7 @@ import withAdminAuth from "../../../auth/withAdminAuth";
 import { astrologerConverter, Astrologer } from "../../../dbObjects/Astrologer";
 
 const db = getFirestore(firebase);
+const MySwal = withReactContent(Swal);
 
 const astrologer = withAdminAuth(() => {
   const router = useRouter();
@@ -56,7 +60,9 @@ const astrologer = withAdminAuth(() => {
       collection(db, "astrologer", uuid, "astrologer_reviews")
     );
     const querySnapshot = await getDocs(astros);
-    let data = querySnapshot.docs.map((doc) => { return {id:doc.id, data: doc.data()}  });
+    let data = querySnapshot.docs.map((doc) => {
+      return { id: doc.id, data: doc.data() };
+    });
     setReviews(data);
     return data;
   }
@@ -65,7 +71,9 @@ const astrologer = withAdminAuth(() => {
     const querySnapshot = await getDocs(
       query(astros, where("astrologer", "==", uuid))
     );
-    let data = querySnapshot.docs.map((doc) => { return {id:doc.id, data: doc.data()}  });
+    let data = querySnapshot.docs.map((doc) => {
+      return { id: doc.id, data: doc.data() };
+    });
     setMeetings(data);
   }
   async function getAllWalletTransactions(uuid) {
@@ -73,7 +81,9 @@ const astrologer = withAdminAuth(() => {
       collection(db, "astrologer", uuid, "astrologer_wallet_transactions")
     );
     const querySnapshot = await getDocs(astros);
-    let data = querySnapshot.docs.map((doc) => { return {id:doc.id, data: doc.data()}  });
+    let data = querySnapshot.docs.map((doc) => {
+      return { id: doc.id, data: doc.data() };
+    });
     setWalletTransactions(data);
     return data;
   }
@@ -117,12 +127,12 @@ const astrologer = withAdminAuth(() => {
           getAllReviews(pid);
         }
         return (
-          <div className={`${styles.reviewContainer}`}>
-            {" "}
-            {reviews.map((e) => {
+          
+            
+            reviews.map((e) => {
               return <Review key={e.id} props={e.data}></Review>;
-            })}
-          </div>
+            })
+          
         );
       }
       case 2: {
@@ -144,7 +154,9 @@ const astrologer = withAdminAuth(() => {
         return (
           <ul>
             {walletTransactions.map((e) => {
-              return <TransactionCard key={e.id}  props={e.data}></TransactionCard>;
+              return (
+                <TransactionCard key={e.id} props={e.data}></TransactionCard>
+              );
             })}
           </ul>
         );
@@ -165,19 +177,12 @@ const astrologer = withAdminAuth(() => {
           <div className={`${styles.astroInfo}`}>
             <h4>Astrologer Mahesh</h4>
 
-            <div className={`d-flex `} >
-              <div className={`me-2`}>
-              15th January 1991 
-              </div>
+            <div className={`d-flex `}>
+              <div className={`me-2`}>15th January 1991</div>
 
-              <div className={`mx-2`}>
-                mahesh112@gmail.com
-              </div>
+              <div className={`mx-2`}>mahesh112@gmail.com</div>
 
-              <div className={`ms-2`}>
-                +91 1234567869
-              </div>
-
+              <div className={`ms-2`}>+91 1234567869</div>
             </div>
 
             <i>Vedic, Tarot</i>
@@ -196,25 +201,32 @@ const astrologer = withAdminAuth(() => {
               {" "}
               <RatingBox rating="4.3" />{" "}
             </div> */}
-            <button className={`${styles.astroVerifyButton} ${styles.astroButton}`}>
+            <button
+              className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+            >
               {" "}
               Verify Astrologer
             </button>
-            <button className={`${styles.astroDiscardButton}  ${styles.astroButton}`}>
+            <button
+              className={`${styles.astroDiscardButton}  ${styles.astroButton}`}
+            >
               {" "}
               Discard Request
             </button>
           </div>
         </div>
 
-        <div>
+        <div className={`mt-3`}>
+          <div className={`d-flex`}>
+            <h5 className={`me-2`}>About Mahesh </h5>
+            <RatingBox rating="4.3" />
 
-          <div className={`d-flex`} >
-          <h5 className={`me-2`} >About Mahesh </h5>
-          <RatingBox rating="4.3" />
-          
-          
-
+            <div
+              className={`ms-auto ${styles.textButton}`}
+              onClick={() => MySwal.fire("TODO")}
+            >
+              More Details
+            </div>
           </div>
 
           <p>
@@ -257,10 +269,7 @@ const astrologer = withAdminAuth(() => {
           </button>
         </div>
 
-
-        <div className="row my-3">{getDataForAstroLists()}</div>
-
-
+        <div className="my-3">{getDataForAstroLists()}</div>
       </div>
     </div>
   );
