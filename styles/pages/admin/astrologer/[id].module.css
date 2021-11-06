@@ -39,6 +39,8 @@
 
 .astroInfo {
   /* border: dotted green; */
+  flex-grow: 2;
+  
 }
 
 .subContainer {
@@ -48,25 +50,32 @@
   flex-direction: column;
 }
 
-.astroRating {
-  /* border: dotted green; */
-  display: flex;
-}
 
-.astroVerifyButton {
-  border: dotted green;
-  background: white;
-  color: #4175df;
-  border: 1px solid #4175df;
+.astroButton{
   box-sizing: border-box;
   border-radius: 4px;
   width: 160px;
   height: 40px;
 }
 
-.astroVerifyButton:hover {
-  background: #4175df;
+.astroVerifyButton {
+  /* border: dotted green; */
+  color: #7C6106;;
+  border: 1px solid #FDD036;
+  background: #FDD036;
+
+}
+
+.astroDiscardButton{
+  color: #4175DF;
+  border: 1px solid #4175DF;;
+  background: white;
+}
+
+.astroDiscardButton:hover{
   color: white;
+  border: 1px solid #4175DF;
+  background: #4175DF;
 }
 
 .buttonContainer {

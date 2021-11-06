@@ -1,12 +1,12 @@
 .mainContainer{
-    width: 66px;
-    height: 27.63px;
+    width: 47px;
+    height: 23px;
     
     border-radius: 4px;
     padding: 4.91px;
     color: white;
-    margin-left: auto;
-    display: flex;
+    /* margin-left: auto; */
+    display: inline-flex;
     justify-content: space-around;
     align-items: center;
 }
