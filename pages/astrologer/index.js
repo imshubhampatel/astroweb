@@ -2,7 +2,8 @@ import withAuth from "../../auth/withAuth";
 import { firebase, auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
 import RegistrationForm from "../../components/RegistrationForm";
-import React, { Component } from "react";
+import { Component } from "react";
+import router from 'next/router'
 import {
   getFirestore,
   collection,
@@ -53,7 +54,7 @@ class Astrohome extends Component {
   componentDidMount() {
     onAuthStateChanged(auth, (authUser) => {
       if (!authUser) {
-        router.push("/signin");
+        router.replace("/signin");
       } else {
         // console.log(authUser.phoneNumber)
         this.getRegisterInfo(authUser);

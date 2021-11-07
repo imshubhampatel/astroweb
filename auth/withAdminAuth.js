@@ -15,6 +15,7 @@ const withAdminAuth = (Component) => (props) => {
         isAdmin(authUser.uid).then((e) => {
           if (e)
           {
+            
             console.log("You are admin")
             setLoading(false);
           }

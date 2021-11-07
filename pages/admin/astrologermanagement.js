@@ -1,6 +1,5 @@
 import styles from "../../styles/pages/admin/astrologermanagement.module.css";
 
-import React from "react";
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import {
