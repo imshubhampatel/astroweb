@@ -82,6 +82,8 @@ export default function Sidebar(props) {
         </Link>
 
         {/* Broadcast Management Button  */}
+          <Link href="/admin/blogbroadcast">
+          <a>
         <div
           className={`${styles.button}  ${
             props.active_page === "1" ? styles.buttonActive : ""
@@ -98,7 +100,9 @@ export default function Sidebar(props) {
           <span className="ms-auto">
             <IoIosArrowForward />
           </span>
-        </div>
+            </div>
+          </a>
+          </Link>
 
         {/* Astrologer Management Button  */}
         <Link href="/admin/astrologermanagement">

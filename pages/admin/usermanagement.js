@@ -40,9 +40,8 @@ const userManagement = withAdminAuth(() => {
   }
   async function refresh()
   {
-  initializePaginationData(90);
-  getAllusers(0, ItemsPerPage);
-
+    initializePaginationData(90);
+    getAllusers(0, ItemsPerPage);
   }
 
   async function getAllusers(first, numItems) {

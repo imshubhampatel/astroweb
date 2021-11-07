@@ -6,6 +6,9 @@ import router from "next/router";
 import RegistrationForm from "../../components/RegistrationForm2";
 
 import React, { Component } from "react";
+// import RegistrationForm from "../../components/RegistrationForm";
+
+
 import {
   getFirestore,
   collection,
@@ -56,7 +59,7 @@ class Astrohome extends Component {
   componentDidMount() {
     onAuthStateChanged(auth, (authUser) => {
       if (!authUser) {
-        router.push("/signin");
+        router.replace("/signin");
       } else {
         // console.log(authUser.phoneNumber)
         this.getRegisterInfo(authUser);
