@@ -26,7 +26,7 @@ const Layout = ({ children, ...props }) => {
                     </div>
                     
 
-                    <div className="flex-fill overflow-auto">
+                    <div className="flex-fill " style={{overflow: "auto"}} >
 
                     {children}
                     </div>

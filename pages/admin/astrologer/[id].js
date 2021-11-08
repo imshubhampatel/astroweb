@@ -165,6 +165,21 @@ const astrologer = withAdminAuth(() => {
           <div className={`${styles.astroInfo}`}>
             <h4>Astrologer Mahesh</h4>
 
+            <div className={`d-flex `} >
+              <div className={`me-2`}>
+              15th January 1991 
+              </div>
+
+              <div className={`mx-2`}>
+                mahesh112@gmail.com
+              </div>
+
+              <div className={`ms-2`}>
+                +91 1234567869
+              </div>
+
+            </div>
+
             <i>Vedic, Tarot</i>
 
             <br />
@@ -177,19 +192,31 @@ const astrologer = withAdminAuth(() => {
           </div>
 
           <div className={`${styles.subContainer}`}>
-            <div className={`${styles.astroRating}`}>
+            {/* <div className={`${styles.astroRating}`}>
               {" "}
               <RatingBox rating="4.3" />{" "}
-            </div>
-            <button className={`${styles.astroVerifyButton}`}>
+            </div> */}
+            <button className={`${styles.astroVerifyButton} ${styles.astroButton}`}>
               {" "}
               Verify Astrologer
+            </button>
+            <button className={`${styles.astroDiscardButton}  ${styles.astroButton}`}>
+              {" "}
+              Discard Request
             </button>
           </div>
         </div>
 
         <div>
-          <h5>About Mahesh</h5>
+
+          <div className={`d-flex`} >
+          <h5 className={`me-2`} >About Mahesh </h5>
+          <RatingBox rating="4.3" />
+          
+          
+
+          </div>
+
           <p>
             Id deserunt ad cupidatat sit nulla pariatur deserunt aliquip. Quis
             dolore voluptate ad incididunt nisi. Veniam minim fugiat magna amet
