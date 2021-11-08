@@ -74,7 +74,7 @@ class Astrohome extends Component {
       secondName: e.target.secondName.value,
       email: e.target.email.value,
       gender: e.target.gender.value,
-      dob:  e.target.dob.value,
+      dob: e.target.dob.value,
       address: e.target.address.value,
       profilePic: "testing/profile_" + this.state.user.uid + ".png",
       tnc: e.target.tnc.checked,
@@ -101,10 +101,10 @@ class Astrohome extends Component {
       path: privateInfo.verificationIdFront,
       file: verificationIdFront,
     });
-     this.uploadDocToStorage({
-       path: privateInfo.verificationIdBack,
-       file: verificationIdBack,
-     });
+    this.uploadDocToStorage({
+      path: privateInfo.verificationIdBack,
+      file: verificationIdBack,
+    });
     const ref = doc(db, "astrologer", String(profileData.id)).withConverter(
       astrologerConverter
     );
@@ -146,17 +146,10 @@ class Astrohome extends Component {
           </div>
         );
       else if (this.state.astrologerProfileInfo) {
-        return (
-          <div>
-            We have sent your request for verification , process may take some days.
-            <br></br>
-  
-          </div>
-        );
+        return <RegistrationForm completed="true" />;
       } else return <div></div>;
     } else return <div>Loading</div>;
   }
 }
-
 
 export default withAuth(Astrohome);

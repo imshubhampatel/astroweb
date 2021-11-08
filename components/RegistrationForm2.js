@@ -3,7 +3,35 @@ import styles from "../styles/components/RegistrationForm2.module.css";
 import Link from "next/link";
 
 function RegistrationForm(props) {
- 
+  
+  // Return Form Completion Page 
+  if (props.completed === "true") {
+    return (
+      <div className={`${styles.baseContainer}`}>
+        <div className="container-fluid bg-white">
+          <div className={`row`}>
+            <div className="col-sm">
+              <div className={`${styles.imageContainer}`} />
+            </div>
+
+            <div className="col-sm-8 my-4  ">
+              <p className="mx-sm-auto text-sm-center">
+                Thanks for fiilling out your details. We will verify your
+                details in the next 24 hours and will get back to you!
+              </p>
+
+              <div
+                className={`${styles.endingBlueText} mx-auto text-center my-5 `}
+              >
+                Hope to see you onboard!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const user = props.user;
   const [date, setDate] = useState(getDate());
 
@@ -12,8 +40,7 @@ function RegistrationForm(props) {
     setFormPage(formPage === 1 ? 2 : 1);
   };
 
-  function getDate()
-  {
+  function getDate() {
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
@@ -26,7 +53,7 @@ function RegistrationForm(props) {
     }
 
     today = yyyy + "-" + mm + "-" + dd;
-    console.log(today)
+    console.log(today);
     return today;
   }
 
@@ -140,7 +167,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="phone"
                     name="phoneNumber"
-                    value={user.phoneNumber}
+                    // value={user.phoneNumber}
                     required
                   />
                 </div>
