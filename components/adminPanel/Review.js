@@ -80,7 +80,7 @@ const Review = ({ props }) => {
         style={visibile ? {} : {display: "none"}}
     >
       {/* TOP PART */}
-      <div className={`d-flex `}>
+      <div className={`d-flex gap-1`}>
         {/* Photo */}
         <div className={`${styles.photoContainer}`}></div>
 

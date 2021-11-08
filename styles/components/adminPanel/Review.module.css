@@ -9,5 +9,7 @@
 .photoContainer{
     height: 56px;
     width: 56px;
+    border-radius: 100%;
+    background: #e7e7e7;
     /* border: dotted green; */
 }

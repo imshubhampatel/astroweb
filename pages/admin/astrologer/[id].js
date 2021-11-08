@@ -1,6 +1,10 @@
 import styles from "../../../styles/pages/admin/astrologer/[id].module.css";
 import RatingBox from "../../../components/ratingBox";
 
+import { MdOutlineMessage } from "react-icons/md";
+import { FiPhoneCall, FiEdit } from "react-icons/fi";
+import { BiVideoPlus } from "react-icons/bi";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -126,25 +130,20 @@ const astrologer = withAdminAuth(() => {
         if (reviews.length == 0) {
           getAllReviews(pid);
         }
-        return (
-          
-            
-            reviews.map((e) => {
-              return <Review key={e.id} props={e.data}></Review>;
-            })
-          
-        );
+        return reviews.map((e) => {
+          return <Review key={e.id} props={e.data}></Review>;
+        });
       }
       case 2: {
         if (meetings.length == 0) {
           getAllMeeting(pid);
         }
         return (
-          <ul>
-            {meetings.map((e) => {
+          
+            meetings.map((e) => {
               return <MeetingCard key={e.id} props={e.data}></MeetingCard>;
-            })}
-          </ul>
+            })
+          
         );
       }
       case 3: {
@@ -172,7 +171,7 @@ const astrologer = withAdminAuth(() => {
         </h2>
 
         <div className={`${styles.mainInfoContainer}`}>
-          <div className={`${styles.astroPhoto}`}>photo</div>
+          <div className={`${styles.astroPhoto}`}></div>
 
           <div className={`${styles.astroInfo}`}>
             <h4>Astrologer Mahesh</h4>
@@ -197,10 +196,6 @@ const astrologer = withAdminAuth(() => {
           </div>
 
           <div className={`${styles.subContainer}`}>
-            {/* <div className={`${styles.astroRating}`}>
-              {" "}
-              <RatingBox rating="4.3" />{" "}
-            </div> */}
             <button
               className={`${styles.astroVerifyButton} ${styles.astroButton}`}
             >
@@ -216,14 +211,15 @@ const astrologer = withAdminAuth(() => {
           </div>
         </div>
 
+        {/* About Container  */}
         <div className={`mt-3`}>
           <div className={`d-flex`}>
             <h5 className={`me-2`}>About Mahesh </h5>
             <RatingBox rating="4.3" />
 
             <div
-              className={`ms-auto ${styles.textButton}`}
-              onClick={() => MySwal.fire("TODO")}
+              className={`ms-auto  ${styles.textButton}`}
+              onClick={() => MySwal.fire("More Details ")}
             >
               More Details
             </div>
@@ -237,6 +233,54 @@ const astrologer = withAdminAuth(() => {
             id commodo ea. Do fugiat cillum cupidatat labore et mollit nostrud
             non. Mollit irure do magna esse consequat.
           </p>
+        </div>
+
+        {/* Accomplishments Container  */}
+        <div className={`row  justify-content-center`}>
+          <div className="col-2  ">
+            <h5> Accomplishments </h5>
+          </div>
+
+          <div className="col-2 border-end  text-center">
+            <MdOutlineMessage /> 10k mins
+          </div>
+
+          <div className="col-2   text-center">
+            <FiPhoneCall /> 10k mins
+          </div>
+
+          <div className="col-2 border-start  text-center">
+            <BiVideoPlus /> 10k mins
+          </div>
+
+          <div className="col  "></div>
+        </div>
+
+        {/* Pricing Container  */}
+        <div className={`row  justify-content-center my-3`}>
+          <div className="col-2  ">
+            <h5> Price/minute </h5>
+          </div>
+
+          <div className="col-2  border-end text-center">
+            <MdOutlineMessage /> 10k mins
+          </div>
+
+          <div className="col-2  text-center">
+            <FiPhoneCall /> 10k mins
+          </div>
+
+          <div className="col-2 border-start text-center">
+            <BiVideoPlus /> 10k mins
+          </div>
+
+          <div
+            className={`col   text-end ${styles.textButton} `}
+            onClick={() => {}}
+          >
+            <FiEdit />
+            Edit Price
+          </div>
         </div>
 
         <div className={`${styles.buttonContainer}`}>
@@ -273,7 +317,9 @@ const astrologer = withAdminAuth(() => {
       </div>
     </div>
   );
-});
+}
+
+);
 
 astrologer.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;
