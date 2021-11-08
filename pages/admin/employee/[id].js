@@ -84,12 +84,16 @@ const employee = withAdminAuth(() => {
       },
     };
 
-    setastro(emp);
 
     const ref = doc(db, "employee", String(pid)).withConverter(
       employeeConverter
     );
-    await setDoc(ref, new Employee(emp));
+    setDoc(ref, new Employee(emp)).then(()=>
+    {
+      alert("Permissions Updated");
+    });
+    setastro(emp);
+
   }
 
   return (
@@ -132,12 +136,12 @@ const employee = withAdminAuth(() => {
                 <form onSubmit={permissionChangeHandler}>
                   {astro.permissions
                     ? Object.keys(astro.permissions).map((key) => (
-                        <div class="form-check">
-                          <label class="form-check-label" htmlFor={key}>
+                        <div className="form-check">
+                          <label className="form-check-label" htmlFor={key}>
                             {key}
                           </label>
                           <input
-                            class="form-check-input"
+                            className="form-check-input"
                             name={key}
                             id={key}
                             type="checkbox"

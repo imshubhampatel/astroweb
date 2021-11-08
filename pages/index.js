@@ -18,7 +18,7 @@ export default function Home() {
           </h1>
 
           <p className={styles.description}>
-            One stop solution htmlFor all your queries related to astro{" "}
+            One stop solution For all your queries related to astro{" "}
           </p>
         </main>
       </div>
