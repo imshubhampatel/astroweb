@@ -21,11 +21,11 @@ const astrologermanagement = withAdminAuth(() => {
   const [astrologersList, setastrologersList] = useState([]);
   const [paginationData, setpaginationData] = useState([]);
   const [totalAstrologers, settotalAstrologers] = useState(0);
-  const ItemsPerPage = 10;
+  const ItemsPerPage = 4;
   const [isVerfiedFilter, setIsVerfiedFilter] = useState(false);
   const [totalPages, settotalPages] = useState(2);
   const [firstItemNum, setfirstItemNum] = useState(0);
-  const [lastItemNum, setlastItemNum] = useState(3);
+  const [lastItemNum, setlastItemNum] = useState(ItemsPerPage);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -72,6 +72,7 @@ const astrologermanagement = withAdminAuth(() => {
           e.email.includes(event.target.value)
         )
           return true;
+        else return false;
       })
     );
   }

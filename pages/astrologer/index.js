@@ -111,6 +111,7 @@ class Astrohome extends Component {
     const ref = doc(db, "astrologer", String(profileData.id)).withConverter(
       astrologerConverter
     );
+    
     await setDoc(ref, new Astrologer(profileData));
     const privateRef = doc(
       db,
