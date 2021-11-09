@@ -194,10 +194,12 @@ const astrologer = withAdminAuth(() => {
 
             <i>Hindi English, Sanskrit </i>
           </div>
-
           <div className={`${styles.subContainer}`}>
+          {astro.verified ==false ? 
+          <>
             <button
               className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+              onClick={() => toggleVerify(pid)}
             >
               {" "}
               Verify Astrologer
@@ -208,7 +210,15 @@ const astrologer = withAdminAuth(() => {
               {" "}
               Discard Request
             </button>
-          </div>
+            </>
+          :           
+          <button
+            className={"btn btn-primary"}
+            onClick={() => toggleEnable(pid)}
+          >
+            Enabled : {enabled ? "   On  " : "  off   "}
+          </button>}</div> 
+          
         </div>
 
         {/* About Container  */}
