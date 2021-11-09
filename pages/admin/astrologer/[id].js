@@ -38,7 +38,9 @@ import { astrologerConverter, Astrologer } from "../../../dbObjects/Astrologer";
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
 
-const astrologer = withAdminAuth(() => {
+// const astrologer = withAdminAuth(() => {
+
+const astrologer = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
@@ -47,6 +49,14 @@ const astrologer = withAdminAuth(() => {
   const [meetings, setMeetings] = useState([]);
   const [walletTransactions, setWalletTransactions] = useState([]);
   const [activeState, setActiveState] = useState(0);
+
+
+
+  // #################
+
+  // Firebase handlers 
+
+  // ################
 
   async function getAstrologerInfo(pid) {
     const astros = collection(db, "astrologer");
@@ -115,15 +125,7 @@ const astrologer = withAdminAuth(() => {
       await updateDoc(ref, { ...astro, verified: false });
     }
   }
-  useEffect(() => {
-    getAstrologerInfo(pid);
-    if (pid)
-      isAstrologer(pid).then((e) => {
-        if (e) setenabled(true);
-        else setenabled(false);
-      });
-  }, [pid]);
-
+ 
   const getDataForAstroLists = () => {
     switch (activeState) {
       case 1: {
@@ -138,13 +140,9 @@ const astrologer = withAdminAuth(() => {
         if (meetings.length == 0) {
           getAllMeeting(pid);
         }
-        return (
-          
-            meetings.map((e) => {
-              return <MeetingCard key={e.id} props={e.data}></MeetingCard>;
-            })
-          
-        );
+        return meetings.map((e) => {
+          return <MeetingCard key={e.id} props={e.data}></MeetingCard>;
+        });
       }
       case 3: {
         if (walletTransactions.length == 0) {
@@ -162,6 +160,109 @@ const astrologer = withAdminAuth(() => {
       }
     }
   };
+  // #################
+
+
+
+  // #################
+
+  // Popup Togle Functions 
+
+  // ################
+
+  const moreDetailView = () => {
+    MySwal.fire({
+      title: `Astrologer ${astro.firstName}`,
+      html: (
+        <>
+          <div className={`contianer text-start `}>
+            <h5>Contact Info</h5>
+            <div>Email: {astro.email}</div>
+            <div>Phone: {astro.phoneNumber}</div>
+            <h5 className={`my-2`}>Documents</h5>
+            @TODO <br />
+            Show adhar, pan images
+            <div className="my-4 d-flex flex-column gap-2">
+              <h5>Account Info</h5>
+              <div className="row ">
+                <div className="col font-weight-bold"> Pan Card Number </div>
+                <div className="col"> HNPY4017R </div>
+              </div>
+
+              <div className="row">
+                <div className="col font-weight-bold"> Account Number </div>
+                <div className="col"> 12345698708 </div>
+              </div>
+
+              <div className="row">
+                <div className="col font-weight-bold"> IFSC Code </div>
+                <div className="col"> ICICI00039 </div>
+              </div>
+
+              <div className="row">
+                <div className="col font-weight-bold"> Branch </div>
+                <div className="col">
+                  {" "}
+                  State Bank Of India, Mayur Vihar, Delhi, India{" "}
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col font-weight-bold">
+                  {" "}
+                  Account Holder's Name{" "}
+                </div>
+                <div className="col"> Anshul </div>
+              </div>
+            </div>
+            {/* Bug in button, will fix later  */}
+            {/* {astro.verified ? (
+              ""
+            ) : (
+              <div className={`my-2`}>
+                <button
+                  className={`btn btn-warning`}
+                  onClick={() => toggleVerify(pid)}
+                >
+                  Verify Astrologer
+                </button>
+              </div>
+            )} */}
+          </div>
+        </>
+      ),
+    });
+  };
+
+  const editPriceView = () => {
+    MySwal.fire({
+      html: (
+        <> 
+        
+        
+        hello
+        
+        
+        
+        </>
+      )
+    })
+  }
+// #################
+
+
+
+
+  useEffect(() => {
+    getAstrologerInfo(pid);
+    if (pid)
+      isAstrologer(pid).then((e) => {
+        if (e) setenabled(true);
+        else setenabled(false);
+      });
+  }, [pid]);
+
+
 
   return (
     <div className={` ${styles.base_container} `}>
@@ -174,33 +275,35 @@ const astrologer = withAdminAuth(() => {
           <div className={`${styles.astroPhoto}`}></div>
 
           <div className={`${styles.astroInfo}`}>
-            <h4>Astrologer Mahesh</h4>
+            <h4>Astrologer {astro.firstName}</h4>
 
             <div className={`d-flex `}>
-              <div className={`me-2`}>15th January 1991</div>
+              <div className={`me-2`}>
+                {astro.dob ? new Date(astro.dob).toDateString() : ""}
+              </div>
 
-              <div className={`mx-2`}>mahesh112@gmail.com</div>
+              <div className={`mx-2`}>{astro.email}</div>
 
-              <div className={`ms-2`}>+91 1234567869</div>
+              <div className={`ms-2`}>{astro.phoneNumber}</div>
             </div>
 
             <i>Vedic, Tarot</i>
 
             <br />
 
-            <i>15 Years of experience </i>
+            <i> {astro.experience} Years of experience </i>
 
             <br />
 
-            <i>Hindi English, Sanskrit </i>
+            <i>{astro.languages ? Object.keys(astro.languages) : ""} </i>
           </div>
 
           <div className={`${styles.subContainer}`}>
             <button
               className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+              onClick={() => toggleVerify(pid)}
             >
-              {" "}
-              Verify Astrologer
+              {astro.verified ? "Astrologer Verified" : "Verify Astrologer"}
             </button>
             <button
               className={`${styles.astroDiscardButton}  ${styles.astroButton}`}
@@ -214,25 +317,18 @@ const astrologer = withAdminAuth(() => {
         {/* About Container  */}
         <div className={`mt-3`}>
           <div className={`d-flex`}>
-            <h5 className={`me-2`}>About Mahesh </h5>
-            <RatingBox rating="4.3" />
+            <h5 className={`me-2`}>About {astro.firstName} </h5>
+            <RatingBox rating={astro.rating} />
 
             <div
               className={`ms-auto  ${styles.textButton}`}
-              onClick={() => MySwal.fire("More Details ")}
+              onClick={() => moreDetailView()}
             >
               More Details
             </div>
           </div>
 
-          <p>
-            Id deserunt ad cupidatat sit nulla pariatur deserunt aliquip. Quis
-            dolore voluptate ad incididunt nisi. Veniam minim fugiat magna amet
-            minim aute reprehenderit culpa. Veniam tempor fugiat eiusmod
-            adipisicing veniam cillum ad pariatur duis. Veniam qui enim laboris
-            id commodo ea. Do fugiat cillum cupidatat labore et mollit nostrud
-            non. Mollit irure do magna esse consequat.
-          </p>
+          <p>{astro.about}</p>
         </div>
 
         {/* Accomplishments Container  */}
@@ -276,7 +372,7 @@ const astrologer = withAdminAuth(() => {
 
           <div
             className={`col   text-end ${styles.textButton} `}
-            onClick={() => {}}
+            onClick={() => editPriceView()}
           >
             <FiEdit />
             Edit Price
@@ -317,9 +413,9 @@ const astrologer = withAdminAuth(() => {
       </div>
     </div>
   );
-}
+};
 
-);
+// );
 
 astrologer.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;
