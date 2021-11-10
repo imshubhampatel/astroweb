@@ -4,6 +4,9 @@ import RatingBox from "../../../components/ratingBox";
 import { MdOutlineMessage } from "react-icons/md";
 import { FiPhoneCall, FiEdit } from "react-icons/fi";
 import { BiVideoPlus } from "react-icons/bi";
+import { BsWallet2 } from "react-icons/bs";
+import { GiCash } from "react-icons/gi";
+import { AiOutlinePercentage } from "react-icons/ai";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -50,11 +53,9 @@ const astrologer = () => {
   const [walletTransactions, setWalletTransactions] = useState([]);
   const [activeState, setActiveState] = useState(0);
 
-
-
   // #################
 
-  // Firebase handlers 
+  // Firebase handlers
 
   // ################
 
@@ -125,7 +126,7 @@ const astrologer = () => {
       await updateDoc(ref, { ...astro, verified: false });
     }
   }
- 
+
   const getDataForAstroLists = () => {
     switch (activeState) {
       case 1: {
@@ -149,24 +150,83 @@ const astrologer = () => {
           getAllWalletTransactions(pid);
         }
         return (
-          <ul>
+          <>
+            <div className={`container my-3`}>
+              <div className="row gap-1">
+                <div className={`col ${styles.walletTransactionCard}`}>
+                  <div className="row">
+                    <div className="col-8">
+                      <p>Total Earnings</p>
+                      <div style={{ fontSize: "32px", color: "#896C06" }}>
+                        {" "}
+                        $10,1000
+                      </div>
+                    </div>
+                    <div
+                      className="col-4"
+                      style={{ color: "#896C06", fontSize: "55px" }}
+                    >
+                      {" "}
+                      <GiCash />
+                    </div>
+                  </div>
+                </div>
+
+                <div className={`col ${styles.walletTransactionCard}`}>
+                  <div className="row">
+                    <div className="col-8">
+                      <p>Current Balance</p>
+                      <div style={{ fontSize: "32px", color: "#896C06" }}>
+                        {" "}
+                        $10,1000
+                      </div>
+                    </div>
+                    <div
+                      className="col-4"
+                      style={{ color: "#896C06", fontSize: "50px" }}
+                    >
+                      {" "}
+                      <BsWallet2 />
+                    </div>
+                  </div>
+                </div>
+
+                <div className={`col ${styles.walletTransactionCard}`}>
+                  <div className="row">
+                    <div className="col-8">
+                      <p>Commision</p>
+                      <div style={{ fontSize: "32px", color: "#896C06" }}>
+                        {" "}
+                        12%
+                      </div>
+                    </div>
+                    <div
+                      className="col-4"
+                      style={{ color: "#896C06", fontSize: "50px" }}
+                    >
+                      {" "}
+                      <AiOutlinePercentage />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {walletTransactions.map((e) => {
               return (
                 <TransactionCard key={e.id} props={e.data}></TransactionCard>
               );
             })}
-          </ul>
+          </>
         );
       }
     }
   };
   // #################
 
-
-
   // #################
 
-  // Popup Togle Functions 
+  // Popup Togle Functions
 
   // ################
 
@@ -236,22 +296,99 @@ const astrologer = () => {
 
   const editPriceView = () => {
     MySwal.fire({
+      showConfirmButton: false,
       html: (
-        <> 
-        
-        
-        hello
-        
-        
-        
+        <>
+          <div className={`container text-start`}>
+            <h5>Edit Price</h5>
+            <hr />
+
+            {/* Prices input  */}
+            <div className="row">
+              <div className="col-4">
+                <MdOutlineMessage /> Chat
+                <div
+                  className={` 
+                  ${styles.editPriceInputFieldContainer} 
+                    d-flex my-1 flex-row justify-content-center p-3`}
+                >
+                  ₹
+                  <input
+                    className={`text-center ${styles.editPriceInputField} `}
+                    onChange={() => {
+                      // Call function to update values hook kere
+                    }}
+                    value="10"
+                  />
+                  /min
+                </div>
+              </div>
+
+              <div className="col-4 ">
+                <FiPhoneCall /> Audio Call
+                <div
+                  className={` 
+                    ${styles.editPriceInputFieldContainer} 
+                    d-flex my-1 flex-row justify-content-center p-3`}
+                >
+                  ₹
+                  <input
+                    className={`text-center ${styles.editPriceInputField} `}
+                    value="10"
+                    onChange={() => {
+                      // Call function to update values hook kere
+                    }}
+                  />
+                  /min
+                </div>
+              </div>
+
+              <div className="col-4">
+                <BiVideoPlus /> Video Call
+                <div
+                  className={` 
+                    ${styles.editPriceInputFieldContainer} 
+                    d-flex my-1 flex-row justify-content-center p-3`}
+                >
+                  ₹
+                  <input
+                    className={`text-center ${styles.editPriceInputField} `}
+                    value="10"
+                    onChange={() => {
+                      // Call function to update values hook kere
+                    }}
+                  />
+                  /min
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Save Button  */}
+          <div className="text-end mt-4">
+            <button
+              className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+              onClick={() => {
+                Swal.clickConfirm();
+              }}
+            >
+              Save
+            </button>
+          </div>
         </>
-      )
-    })
-  }
-// #################
+      ),
+      preConfirm: () => {
+        console.log("Values Changed");
 
+        // Call firebase to update values here
+      },
+    });
+  };
 
+  const discardRequestView = () => {
+    // @TODO
+  };
 
+  // #################
 
   useEffect(() => {
     getAstrologerInfo(pid);
@@ -261,8 +398,6 @@ const astrologer = () => {
         else setenabled(false);
       });
   }, [pid]);
-
-
 
   return (
     <div className={` ${styles.base_container} `}>
