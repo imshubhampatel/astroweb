@@ -25,7 +25,7 @@ import {
   AstrologerPrivateData,
 } from "../../dbObjects/AstrologerPrivateInfo";
 
-const storage = getStorage(firebase, "gs://astrochrchafirebase.appspot.com");
+const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
 const db = getFirestore(firebase);
 
 class Astrohome extends Component {
@@ -42,7 +42,11 @@ class Astrohome extends Component {
   }
   uploadDocToStorage({ path, file }) {
     const storageRef = ref(storage, path);
-    uploadBytes(storageRef, file).then((snapshot) => {});
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log(
+        "sucess"
+      )
+    }).catch(e=>console.log(e));
   }
 
   async getRegisterInfo(user) {
