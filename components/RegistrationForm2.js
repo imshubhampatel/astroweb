@@ -3,7 +3,13 @@ import styles from "../styles/components/RegistrationForm2.module.css";
 import Link from "next/link";
 
 function RegistrationForm(props) {
-  
+  const user = props.user;
+  const [date, setDate] = useState(getDate());
+  const [formPage, setFormPage] = useState(1);
+  const [questions,setQuestions] = useState(props.questions);
+  const toggleFormPage = () => {
+    setFormPage(formPage === 1 ? 2 : 1);
+  };
   // Return Form Completion Page 
   if (props.completed === "true") {
     return (
@@ -31,14 +37,17 @@ function RegistrationForm(props) {
       </div>
     );
   }
+  function renderQuestions() {
+    return props.questions.map((e) => {
+      return <input
+        type="text"
+        className="form-control"
+        id={e.id}
+        name={e.id}
+        required
+      />});
 
-  const user = props.user;
-  const [date, setDate] = useState(getDate());
-
-  const [formPage, setFormPage] = useState(1);
-  const toggleFormPage = () => {
-    setFormPage(formPage === 1 ? 2 : 1);
-  };
+  }
 
   function getDate() {
     var today = new Date();
@@ -330,6 +339,34 @@ function RegistrationForm(props) {
                     required
                   />
                 </div>
+                <div
+                  style={formPage === 1 ? { display: "none" } : {}}
+                  className={`col-12 col-md-6`}
+                >
+                  <label htmlFor="certification" className="form-label">
+                   Astrology Degree and Certification (in PDF format Only)
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    id="certification"
+                    accept="application/pdf"
+                    name="certification"
+                    required
+                  />
+                </div>
+                <div
+                  style={formPage === 1 ? { display: "none" } : {}}
+                  className={`col-12 `}
+                >
+                  <label htmlFor="profilePicture" className="form-label">
+                    Please Complete this Test 
+                  </label>
+                  {renderQuestions()}
+                  
+                </div>
+
+
                 <div
                   style={formPage === 1 ? { display: "none" } : {}}
                   className={`col-12 col-md-6`}

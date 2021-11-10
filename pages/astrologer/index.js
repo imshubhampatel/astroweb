@@ -1,12 +1,10 @@
 import withAuth from "../../auth/withAuth";
 import { firebase, auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
-// import RegistrationForm from "../../components/RegistrationForm";
 import router from "next/router";
 import RegistrationForm from "../../components/RegistrationForm2";
 
 import React, { Component } from "react";
-// import RegistrationForm from "../../components/RegistrationForm";
 
 
 import {
@@ -14,6 +12,7 @@ import {
   collection,
   query,
   where,
+  getDocs,
   getDoc,
   setDoc,
   doc,
@@ -24,6 +23,7 @@ import {
   astrologerPrivateDataConverter,
   AstrologerPrivateData,
 } from "../../dbObjects/AstrologerPrivateInfo";
+import { QuestionConverter, Question } from '../../dbObjects/Question'
 
 const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
 const db = getFirestore(firebase);
@@ -35,17 +35,16 @@ class Astrohome extends Component {
       user: null,
       registerStatus: false,
       astrologerProfileInfo: null,
+      questions : []
     };
     this.registerformhandler = this.registerformhandler.bind(this);
     this.uploadDocToStorage = this.uploadDocToStorage.bind(this);
     this.getAstrologerInfo = this.getAstrologerInfo.bind(this);
+    this.getQuestions = this.getQuestions.bind(this);
   }
   uploadDocToStorage({ path, file }) {
     const storageRef = ref(storage, path);
     uploadBytes(storageRef, file).then((snapshot) => {
-      console.log(
-        "sucess"
-      )
     }).catch(e=>console.log(e));
   }
 
@@ -59,6 +58,12 @@ class Astrohome extends Component {
       this.setState({ registerStatus: true });
     }
   }
+  async getQuestions() {
+    const astros = query(collection(db, "question_set"));
+    const querySnapshot = await getDocs(astros);
+    let data = querySnapshot.docs.map((doc) => { return new Question({id:doc.id,...doc.data()})});
+    this.setState({questions:data});
+  }
 
   componentDidMount() {
     onAuthStateChanged(auth, (authUser) => {
@@ -69,6 +74,9 @@ class Astrohome extends Component {
         this.getRegisterInfo(authUser);
         this.setState({ user: authUser });
         this.getAstrologerInfo(authUser.uid);
+        this.getQuestions();
+
+      
       }
     });
   }
@@ -149,6 +157,7 @@ class Astrohome extends Component {
           <div>
             <RegistrationForm
               registerFormHandler={this.registerformhandler}
+              questions={this.state.questions}
               user={this.state.user}
             />
           </div>
