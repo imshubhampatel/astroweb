@@ -4,7 +4,7 @@ class Question {
       this.question = data.question;
       this.type = data.type;
       this.options = data.options;
-      this.correctAnswer = data.correctAnswer;
+      this.correctOption = data.correctOption;
     }
     toString() {
         return this.question;
@@ -19,7 +19,7 @@ class Question {
         question: data.question,
         type: data.type,
         options: data.options,
-        correctAnswer: data.correctAnswer,
+        correctOption: data.correctOption,
       };
     },
     fromFirestore: (snapshot, options) => {

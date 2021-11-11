@@ -3,10 +3,7 @@ import { firebase, auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
 import router from "next/router";
 import RegistrationForm from "../../components/RegistrationForm2";
-
 import React, { Component } from "react";
-
-
 import {
   getFirestore,
   collection,
@@ -17,6 +14,8 @@ import {
   setDoc,
   doc,
 } from "firebase/firestore";
+import {testResultConverter,TestResult} from '../../dbObjects/TestResult'
+
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { astrologerConverter, Astrologer } from "../../dbObjects/Astrologer";
 import {
@@ -35,12 +34,14 @@ class Astrohome extends Component {
       user: null,
       registerStatus: false,
       astrologerProfileInfo: null,
-      questions : []
+      questions : [],
+      numQues: 5,
     };
     this.registerformhandler = this.registerformhandler.bind(this);
     this.uploadDocToStorage = this.uploadDocToStorage.bind(this);
     this.getAstrologerInfo = this.getAstrologerInfo.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
+    this.evaluate_test = this.evaluate_test.bind(this);
   }
   uploadDocToStorage({ path, file }) {
     const storageRef = ref(storage, path);
@@ -58,10 +59,22 @@ class Astrohome extends Component {
       this.setState({ registerStatus: true });
     }
   }
+  shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
   async getQuestions() {
     const astros = query(collection(db, "question_set"));
     const querySnapshot = await getDocs(astros);
     let data = querySnapshot.docs.map((doc) => { return new Question({id:doc.id,...doc.data()})});
+    data = this.shuffle(data).slice(0,this.state.numQues);
     this.setState({questions:data});
   }
 
@@ -70,15 +83,21 @@ class Astrohome extends Component {
       if (!authUser) {
         router.replace("/signin");
       } else {
-        // console.log(authUser.phoneNumber)
         this.getRegisterInfo(authUser);
         this.setState({ user: authUser });
         this.getAstrologerInfo(authUser.uid);
         this.getQuestions();
-
-      
       }
     });
+  }
+
+  evaluate_test(test_result,e){
+    this.state.questions.map(ques =>{ 
+      test_result.response.push({...ques,answer: e.target[ques.id].value})
+      test_result.score += ques.options[ques.correctOption] ==  e.target[ques.id].value ? 1: 0;
+  });
+    test_result.question_count = this.state.questions.length;
+    return test_result;
   }
 
   async registerformhandler(e) {
@@ -102,6 +121,9 @@ class Astrohome extends Component {
       pancardNumber: e.target.pancardNumber.value,
       phoneNumber: e.target.phoneNumber.value,
     };
+    let test_result = new TestResult();
+    test_result = this.evaluate_test(test_result,e);
+    console.log(test_result)
 
     let profilePic = e.target.profilePicture.files[0];
     let verificationIdFront = e.target.verificationIdFront.files[0];
@@ -133,14 +155,22 @@ class Astrohome extends Component {
       profileData.id
     ).withConverter(astrologerPrivateDataConverter);
     await setDoc(privateRef, new AstrologerPrivateData(privateInfo));
+    const testResultRef = doc(
+      db,
+      "astrologer",
+      String(profileData.id),
+      "test_result",
+      profileData.id
+    ).withConverter(testResultConverter);
+    await setDoc(testResultRef,test_result);
     this.setState({
       registerStatus: false,
       astrologerProfileInfo: profileData,
     });
   }
+
   async getAstrologerInfo(pid) {
     const astros = collection(db, "astrologer");
-
     const querySnapshot = await getDoc(
       doc(astros, String(pid)).withConverter(astrologerConverter)
     );

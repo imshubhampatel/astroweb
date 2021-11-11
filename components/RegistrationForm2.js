@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "../styles/components/RegistrationForm2.module.css";
 import Link from "next/link";
-
 function RegistrationForm(props) {
   const user = props.user;
   const [date, setDate] = useState(getDate());
@@ -10,6 +9,32 @@ function RegistrationForm(props) {
   const toggleFormPage = () => {
     setFormPage(formPage === 1 ? 2 : 1);
   };
+  function renderQuestions() {
+    return props.questions.map((e) => {
+      return <div>
+        <label for={e.id}> {e.question} <br/>Choose :</label>
+        <select id={e.id} name={e.id}>
+          {Object.values(e.options).map((val) => <option value={val}>{val}</option>)}
+        </select>
+      </div>});
+  }
+
+  function getDate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+
+    today = yyyy + "-" + mm + "-" + dd;
+    console.log(today);
+    return today;
+  }
   // Return Form Completion Page 
   if (props.completed === "true") {
     return (
@@ -37,34 +62,7 @@ function RegistrationForm(props) {
       </div>
     );
   }
-  function renderQuestions() {
-    return props.questions.map((e) => {
-      return <input
-        type="text"
-        className="form-control"
-        id={e.id}
-        name={e.id}
-        required
-      />});
-
-  }
-
-  function getDate() {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-      dd = "0" + dd;
-    }
-    if (mm < 10) {
-      mm = "0" + mm;
-    }
-
-    today = yyyy + "-" + mm + "-" + dd;
-    console.log(today);
-    return today;
-  }
+ 
 
   return (
     <div className={`${styles.baseContainer}`}>
