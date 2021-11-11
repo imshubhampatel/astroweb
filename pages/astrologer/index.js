@@ -6,6 +6,9 @@ import router from "next/router";
 import RegistrationForm from "../../components/RegistrationForm2";
 
 import React, { Component } from "react";
+// import RegistrationForm from "../../components/RegistrationForm";
+
+
 import {
   getFirestore,
   collection,
@@ -22,7 +25,7 @@ import {
   AstrologerPrivateData,
 } from "../../dbObjects/AstrologerPrivateInfo";
 
-const storage = getStorage(firebase, "gs://astrochrchafirebase.appspot.com");
+const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
 const db = getFirestore(firebase);
 
 class Astrohome extends Component {
@@ -39,7 +42,11 @@ class Astrohome extends Component {
   }
   uploadDocToStorage({ path, file }) {
     const storageRef = ref(storage, path);
-    uploadBytes(storageRef, file).then((snapshot) => {});
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log(
+        "sucess"
+      )
+    }).catch(e=>console.log(e));
   }
 
   async getRegisterInfo(user) {
@@ -56,7 +63,7 @@ class Astrohome extends Component {
   componentDidMount() {
     onAuthStateChanged(auth, (authUser) => {
       if (!authUser) {
-        router.push("/signin");
+        router.replace("/signin");
       } else {
         // console.log(authUser.phoneNumber)
         this.getRegisterInfo(authUser);
@@ -108,6 +115,7 @@ class Astrohome extends Component {
     const ref = doc(db, "astrologer", String(profileData.id)).withConverter(
       astrologerConverter
     );
+    
     await setDoc(ref, new Astrologer(profileData));
     const privateRef = doc(
       db,

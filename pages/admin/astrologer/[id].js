@@ -29,7 +29,6 @@ import AdminLayout from "../../../components/adminPanel/layout";
 import Review from "../../../components/adminPanel/Review";
 import MeetingCard from "../../../components/adminPanel/meetingCard";
 import TransactionCard from "../../../components/adminPanel/transactionCard";
-
 import {
   isAstrologer,
   setAstrologerPerm,
@@ -37,9 +36,12 @@ import {
 } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
 import { astrologerConverter, Astrologer } from "../../../dbObjects/Astrologer";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
+const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
 
 // const astrologer = withAdminAuth(() => {
 
@@ -48,10 +50,23 @@ const astrologer = () => {
   const { pid } = router.query;
   const [astro, setastro] = useState({});
   const [enabled, setenabled] = useState(true);
+  const [profilePicUrl,setprofilePicUrl] = useState("nothin");
   const [reviews, setReviews] = useState([]);
   const [meetings, setMeetings] = useState([]);
   const [walletTransactions, setWalletTransactions] = useState([]);
   const [activeState, setActiveState] = useState(0);
+  const [numPages, setNumPages] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [pdf,setPdf] = useState("");
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+  async function getFile(path) {
+    const storageRef = ref(storage, path);
+    const url = await getDownloadURL(storageRef);
+    return url;
+  };
 
   // #################
 
@@ -66,6 +81,13 @@ const astrologer = () => {
     );
     if (querySnapshot.exists()) {
       setastro(querySnapshot.data());
+  
+      let url = await getFile(querySnapshot.data().profilePic); 
+      setprofilePicUrl(url);    
+   
+      url = await getFile("18075072.pdf");
+      setPdf(url);                                
+
     } else {
       // console.log("no")
     }
@@ -412,7 +434,11 @@ const astrologer = () => {
         </h2>
 
         <div className={`${styles.mainInfoContainer}`}>
-          <div className={`${styles.astroPhoto}`}></div>
+          <div >
+            <img src={profilePicUrl}/>
+            {astro.profilePic}
+          </div>
+         
 
           <div className={`${styles.astroInfo}`}>
             <h4>Astrologer {astro.firstName}</h4>
@@ -437,8 +463,9 @@ const astrologer = () => {
 
             <i>{astro.languages ? Object.keys(astro.languages) : ""} </i>
           </div>
-
           <div className={`${styles.subContainer}`}>
+          {astro.verified ==false ? 
+          <>
             <button
               className={`${styles.astroVerifyButton} ${styles.astroButton}`}
               onClick={() => toggleVerify(pid)}
@@ -452,7 +479,15 @@ const astrologer = () => {
               {" "}
               Discard Request
             </button>
-          </div>
+            </>
+          :           
+          <button
+            className={"btn btn-primary"}
+            onClick={() => toggleEnable(pid)}
+          >
+            Enabled : {enabled ? "   On  " : "  off   "}
+          </button>}</div> 
+          
         </div>
 
         {/* About Container  */}

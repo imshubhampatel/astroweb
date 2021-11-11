@@ -18,6 +18,7 @@ import {
 import {setSubadminPerm} from "../../../auth/utils";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Employee, employeeConverter } from "../../../dbObjects/Employee";
+import { data } from "autoprefixer";
 
 const storage = getStorage(firebase, "gs://astrochrchafirebase.appspot.com");
 const db = getFirestore(firebase);
@@ -31,7 +32,8 @@ const register = withAdminAuth(() => {
     const storageRef = ref(storage, path);
     uploadBytes(storageRef, file).then((snapshot) => { });
   }
-  async function createEmployee(uid, e) {
+  async function createEmployee(data) {
+    const { uid, e } = data;
     let profileData = {
       id: uid,
       firstName: e.target.firstName.value,
@@ -69,21 +71,12 @@ const register = withAdminAuth(() => {
     await setDoc(ref, new Employee(profileData));
     setSubadminPerm(uid);
     alert("Employee Created");
-  }
-
-  let profilePic = e.target.profilePicture.files[0];
-  let verificationIdPic = e.target.verificationId.files[0];
-  let pancardPic = e.target.pancard.files[0];
-  this.uploadDocToStorage({ path: profileData.profilePic, file: profilePic });
-  this.uploadDocToStorage({
-    path: privateInfo.pancardLink,
-    file: pancardPic,
-  });
+  };
 
   async function registerformhandler(e) {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, e.target.email.value, "Windows8").then((user) => {
-      createEmployee(user.user.uid, e);
+      createEmployee({uid:user.user.uid,e: e});
       signOut(auth);
     }).catch((error) => {
       alert(error.message)
@@ -101,7 +94,7 @@ const register = withAdminAuth(() => {
 
 
 register.getLayout = function getLayout(page) {
-  return <AdminLayout active_page="2">{page}</AdminLayout>;
+  return <AdminLayout active_page="3">{page}</AdminLayout>;
 };
 
 export default register;
