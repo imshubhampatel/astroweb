@@ -22,6 +22,7 @@ import {
   getDocs,
   updateDoc,
   setDoc,
+  deleteDoc,
   getFirestore,
 } from "firebase/firestore";
 import { firebase } from "../../../config";
@@ -36,8 +37,9 @@ import {
 } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
 import { astrologerConverter, Astrologer } from "../../../dbObjects/Astrologer";
+import { astrologerPrivateDataConverter, AstrologerPrivateData } from "../../../dbObjects/AstrologerPrivateInfo";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-
+import Image from 'next/image'
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -50,12 +52,13 @@ const astrologer = () => {
   const { pid } = router.query;
   const [astro, setastro] = useState({});
   const [enabled, setenabled] = useState(true);
-  const [profilePicUrl,setprofilePicUrl] = useState("nothin");
+  const [profilePicUrl,setprofilePicUrl] = useState("/astrochrchaweb/public/astrochrchalogo.png");
   const [reviews, setReviews] = useState([]);
   const [meetings, setMeetings] = useState([]);
   const [walletTransactions, setWalletTransactions] = useState([]);
   const [activeState, setActiveState] = useState(0);
   const [numPages, setNumPages] = useState(1);
+  const [astrologerPrivateData,setAstrologerPrivateData] = useState({});
   const [pageNumber, setPageNumber] = useState(1);
   const [pdf,setPdf] = useState("");
 
@@ -67,13 +70,18 @@ const astrologer = () => {
     const url = await getDownloadURL(storageRef);
     return url;
   };
-
   // #################
 
   // Firebase handlers
 
   // ################
-
+  async function getPrivateData(pid) {
+    const astros = collection(db, "astrologer/"+pid+"/privateInfo/");
+    const querySnapshot = await getDoc(
+      doc(astros, String(pid)).withConverter(astrologerPrivateDataConverter)
+    );
+    return querySnapshot.data();
+  }
   async function getAstrologerInfo(pid) {
     const astros = collection(db, "astrologer");
     const querySnapshot = await getDoc(
@@ -81,13 +89,9 @@ const astrologer = () => {
     );
     if (querySnapshot.exists()) {
       setastro(querySnapshot.data());
-  
-      let url = await getFile(querySnapshot.data().profilePic); 
-      setprofilePicUrl(url);    
-   
-      url = await getFile("18075072.pdf");
-      setPdf(url);                                
-
+      getPrivateData(pid).then(e => setAstrologerPrivateData(e));
+      getFile(querySnapshot.data().profilePic).then((url)=> setprofilePicUrl(url));
+      getFile("18075072.pdf").then(url => setPdf(url));
     } else {
       // console.log("no")
     }
@@ -135,6 +139,10 @@ const astrologer = () => {
     // console.log(response);
     setenabled(!enabled);
   }
+  async function updateAstrologer(uid) {
+    const ref = doc(db, "astrologer", String(uid));
+    await updateDoc(ref, {...astro});
+  }
   async function toggleVerify(uid) {
     const ref = doc(db, "astrologer", String(uid)).withConverter(
       astrologerConverter
@@ -148,6 +156,10 @@ const astrologer = () => {
       await updateDoc(ref, { ...astro, verified: false });
     }
   }
+  const deleteReview = async (reviewId) => {
+    const review = doc(db, "astrologer/"+ String(pid)+'/astrologer_reviews/'+String(reviewId));
+    await deleteDoc(review);
+  }
 
   const getDataForAstroLists = () => {
     switch (activeState) {
@@ -156,7 +168,7 @@ const astrologer = () => {
           getAllReviews(pid);
         }
         return reviews.map((e) => {
-          return <Review key={e.id} props={e.data}></Review>;
+          return <Review key={e.id} props={e.data} deleteReviewHandler={()=>deleteReview(e.id)}></Review>;
         });
       }
       case 2: {
@@ -264,29 +276,30 @@ const astrologer = () => {
             <h5 className={`my-2`}>Documents</h5>
             @TODO <br />
             Show adhar, pan images
+            {astrologerPrivateData.verificationIdFront}
+            
+            
             <div className="my-4 d-flex flex-column gap-2">
               <h5>Account Info</h5>
               <div className="row ">
                 <div className="col font-weight-bold"> Pan Card Number </div>
-                <div className="col"> HNPY4017R </div>
+                <div className="col"> {astrologerPrivateData.pancardNumber} </div>
               </div>
 
               <div className="row">
                 <div className="col font-weight-bold"> Account Number </div>
-                <div className="col"> 12345698708 </div>
+                <div className="col"> {astrologerPrivateData.accountInfo.accountNo} </div>
               </div>
 
               <div className="row">
                 <div className="col font-weight-bold"> IFSC Code </div>
-                <div className="col"> ICICI00039 </div>
+                <div className="col"> {astrologerPrivateData.accountInfo.ISFC} </div>
               </div>
 
               <div className="row">
                 <div className="col font-weight-bold"> Branch </div>
-                <div className="col">
-                  {" "}
-                  State Bank Of India, Mayur Vihar, Delhi, India{" "}
-                </div>
+                <div className="col"> {astrologerPrivateData.accountInfo.bank + " " + astrologerPrivateData.accountInfo.branch} </div>
+
               </div>
 
               <div className="row">
@@ -294,7 +307,7 @@ const astrologer = () => {
                   {" "}
                   Account Holder's Name{" "}
                 </div>
-                <div className="col"> Anshul </div>
+                <div className="col"> {astrologerPrivateData.accountInfo.holderName} </div>
               </div>
             </div>
             {/* Bug in button, will fix later  */}
@@ -337,12 +350,15 @@ const astrologer = () => {
                   ₹
                   <input
                     className={`text-center ${styles.editPriceInputField} `}
-                    onChange={() => {
+                    onChange={(e) => {
                       // Call function to update values hook kere
+                      let astro_temp = astro;
+                      astro_temp.priceChat = e.target.value;
+                      setastro(astro_temp)
                     }}
-                    value="10"
+                    value={astro.priceChat}
                   />
-                  /min
+                  / 5 min
                 </div>
               </div>
 
@@ -356,12 +372,15 @@ const astrologer = () => {
                   ₹
                   <input
                     className={`text-center ${styles.editPriceInputField} `}
-                    value="10"
-                    onChange={() => {
+                    onChange={(e) => {
                       // Call function to update values hook kere
+                      let astro_temp = astro;
+                      astro_temp.priceVoice = e.target.value;
+                      setastro(astro_temp)
                     }}
+                    value={astro.priceVoice}
                   />
-                  /min
+                  / 5 min
                 </div>
               </div>
 
@@ -375,12 +394,15 @@ const astrologer = () => {
                   ₹
                   <input
                     className={`text-center ${styles.editPriceInputField} `}
-                    value="10"
-                    onChange={() => {
+                    onChange={(e) => {
                       // Call function to update values hook kere
+                      let astro_temp = astro;
+                      astro_temp.priceVideo = e.target.value;
+                      setastro(astro_temp)
                     }}
+                    value={astro.priceVideo}
                   />
-                  /min
+                  / 5 min
                 </div>
               </div>
             </div>
@@ -390,6 +412,7 @@ const astrologer = () => {
             <button
               className={`${styles.astroVerifyButton} ${styles.astroButton}`}
               onClick={() => {
+
                 Swal.clickConfirm();
               }}
             >
@@ -398,20 +421,36 @@ const astrologer = () => {
           </div>
         </>
       ),
-      preConfirm: () => {
-        console.log("Values Changed");
-
-        // Call firebase to update values here
-      },
+      preConfirm: () => updateAstrologer(pid),
     });
   };
 
   const discardRequestView = () => {
     MySwal.fire({
-      html: <DiscardRequestForm submitHandler={ (e) => {
-        e.preventDefault(); 
-        console.log(e.target)} 
-      }  />
+      showConfirmButton: false,
+      html: <div>
+        <textarea 
+      className="form-control"
+      placeholder="Please tell more about the reason of discarding the request "
+      name="reason-text"
+      
+      />
+      <div className="text-end mt-4">
+        <button
+          className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+          onClick={() => {
+
+            Swal.clickConfirm();
+          }}
+        >
+          Discard Request
+        </button>
+      </div>
+  </div>,
+  preConfirm: () => {
+    console.log("hello")
+
+  }
     })
   };
 
@@ -434,9 +473,8 @@ const astrologer = () => {
         </h2>
 
         <div className={`${styles.mainInfoContainer}`}>
-          <div >
-            <img src={profilePicUrl}/>
-            {astro.profilePic}
+          <div className={`${styles.astroPhoto}`}style={{display:"block"}}>
+            <Image src={profilePicUrl} height="100" width="100" layout="responsive"/>
           </div>
          
 
@@ -514,15 +552,15 @@ const astrologer = () => {
           </div>
 
           <div className="col-2 border-end  text-center">
-            <MdOutlineMessage /> 10k mins
+            <MdOutlineMessage /> {astro.chatSeconds} mins
           </div>
 
           <div className="col-2   text-center">
-            <FiPhoneCall /> 10k mins
+            <FiPhoneCall /> {astro.voiceSeconds} mins
           </div>
 
           <div className="col-2 border-start  text-center">
-            <BiVideoPlus /> 10k mins
+            <BiVideoPlus /> {astro.videoSeconds} mins
           </div>
 
           <div className="col  "></div>
@@ -531,19 +569,19 @@ const astrologer = () => {
         {/* Pricing Container  */}
         <div className={`row  justify-content-center my-3`}>
           <div className="col-2  ">
-            <h5> Price/minute </h5>
+            <h5> Price/ 5 minute </h5>
           </div>
 
           <div className="col-2  border-end text-center">
-            <MdOutlineMessage /> 10k mins
+            <MdOutlineMessage /> ₹{astro.priceChat} /5 mins
           </div>
 
           <div className="col-2  text-center">
-            <FiPhoneCall /> 10k mins
+            <FiPhoneCall /> ₹{astro.priceVoice} /5 mins
           </div>
 
           <div className="col-2 border-start text-center">
-            <BiVideoPlus /> 10k mins
+            <BiVideoPlus /> ₹{astro.priceVideo} /5 mins
           </div>
 
           <div
@@ -593,20 +631,6 @@ const astrologer = () => {
 
 // );
 
-
-function DiscardRequestForm(props) {
-  return (
-    <form>
-      <textarea 
-              className="form-control"
-              placeholder="Please tell more about the reason of discarding the request "
-              name="reason-text"
-          /> 
-
-          <button onSubmit={props.submitHandler} type="submit" className="btn btn-warning" >Submit</button>
-    </form>
-  )
-}
 
 astrologer.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;

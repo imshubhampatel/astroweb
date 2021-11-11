@@ -28,7 +28,7 @@ const RatingStars = ({ rating }) => {
   return [...yellowStars, ...grayStars];
 };
 
-const Review = ({ props }) => {
+const Review = ( {props,deleteReviewHandler} ) => {
   
   const [visibile, setVisibility] = useState(true); 
 
@@ -55,8 +55,7 @@ const Review = ({ props }) => {
 
       // @TODO 
       // MAKE CALL TO FIREBASE TO DELTE THE REVIEW
-
-
+      deleteReviewHandler();
       }
     })
 
