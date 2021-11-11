@@ -385,7 +385,12 @@ const astrologer = () => {
   };
 
   const discardRequestView = () => {
-    // @TODO
+    MySwal.fire({
+      html: <DiscardRequestForm submitHandler={ (e) => {
+        e.preventDefault(); 
+        console.log(e.target)} 
+      }  />
+    })
   };
 
   // #################
@@ -442,6 +447,7 @@ const astrologer = () => {
             </button>
             <button
               className={`${styles.astroDiscardButton}  ${styles.astroButton}`}
+              onClick={discardRequestView}
             >
               {" "}
               Discard Request
@@ -551,6 +557,21 @@ const astrologer = () => {
 };
 
 // );
+
+
+function DiscardRequestForm(props) {
+  return (
+    <form>
+      <textarea 
+              className="form-control"
+              placeholder="Please tell more about the reason of discarding the request "
+              name="reason-text"
+          /> 
+
+          <button onSubmit={props.submitHandler} type="submit" className="btn btn-warning" >Submit</button>
+    </form>
+  )
+}
 
 astrologer.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;
