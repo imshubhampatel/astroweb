@@ -5,6 +5,7 @@ class Question {
       this.type = data.type;
       this.options = data.options;
       this.correctOption = data.correctOption;
+      this.imgUrl = data.imgUrl;
     }
     toString() {
         return this.question;
@@ -20,6 +21,8 @@ class Question {
         type: data.type,
         options: data.options,
         correctOption: data.correctOption,
+        imgUrl : data.imgUrl,
+
       };
     },
     fromFirestore: (snapshot, options) => {

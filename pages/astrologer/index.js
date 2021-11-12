@@ -23,8 +23,8 @@ import {
   AstrologerPrivateData,
 } from "../../dbObjects/AstrologerPrivateInfo";
 import { QuestionConverter, Question } from '../../dbObjects/Question'
+import uploadDocToStorage from '../../utilities/utils'
 
-const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
 const db = getFirestore(firebase);
 
 class Astrohome extends Component {
@@ -38,17 +38,10 @@ class Astrohome extends Component {
       numQues: 5,
     };
     this.registerformhandler = this.registerformhandler.bind(this);
-    this.uploadDocToStorage = this.uploadDocToStorage.bind(this);
     this.getAstrologerInfo = this.getAstrologerInfo.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.evaluate_test = this.evaluate_test.bind(this);
   }
-  uploadDocToStorage({ path, file }) {
-    const storageRef = ref(storage, path);
-    uploadBytes(storageRef, file).then((snapshot) => {
-    }).catch(e=>console.log(e));
-  }
-
   async getRegisterInfo(user) {
     const docRef = doc(db, "astrologer", user?.uid);
     const docSnap = await getDoc(docRef);
@@ -123,22 +116,21 @@ class Astrohome extends Component {
     };
     let test_result = new TestResult();
     test_result = this.evaluate_test(test_result,e);
-    console.log(test_result)
-
+    
     let profilePic = e.target.profilePicture.files[0];
     let verificationIdFront = e.target.verificationIdFront.files[0];
     let verificationIdBack = e.target.verificationIdBack.files[0];
     let pancardPic = e.target.pancard.files[0];
-    this.uploadDocToStorage({ path: profileData.profilePic, file: profilePic });
-    this.uploadDocToStorage({
+    uploadDocToStorage({ path: profileData.profilePic, file: profilePic });
+    uploadDocToStorage({
       path: privateInfo.pancardLink,
       file: pancardPic,
     });
-    this.uploadDocToStorage({
+    uploadDocToStorage({
       path: privateInfo.verificationIdFront,
       file: verificationIdFront,
     });
-    this.uploadDocToStorage({
+    uploadDocToStorage({
       path: privateInfo.verificationIdBack,
       file: verificationIdBack,
     });
