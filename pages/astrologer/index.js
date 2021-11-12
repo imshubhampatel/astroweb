@@ -15,15 +15,13 @@ import {
   doc,
 } from "firebase/firestore";
 import {testResultConverter,TestResult} from '../../dbObjects/TestResult'
-
-import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { astrologerConverter, Astrologer } from "../../dbObjects/Astrologer";
 import {
   astrologerPrivateDataConverter,
   AstrologerPrivateData,
 } from "../../dbObjects/AstrologerPrivateInfo";
-import { QuestionConverter, Question } from '../../dbObjects/Question'
-import uploadDocToStorage from '../../utilities/utils'
+import { questionConverter, Question } from '../../dbObjects/Question'
+import {uploadDocToStorage} from '../../utilities/utils'
 
 const db = getFirestore(firebase);
 
@@ -86,7 +84,7 @@ class Astrohome extends Component {
 
   evaluate_test(test_result,e){
     this.state.questions.map(ques =>{ 
-      test_result.response.push({...ques,answer: e.target[ques.id].value})
+      test_result.response.push({...ques,answer: e.target[ques.id].value,explanation : e.target["exp_"+ques.id].value})
       test_result.score += ques.options[ques.correctOption] ==  e.target[ques.id].value ? 1: 0;
   });
     test_result.question_count = this.state.questions.length;

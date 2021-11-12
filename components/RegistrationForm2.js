@@ -11,11 +11,14 @@ function RegistrationForm(props) {
   };
   function renderQuestions() {
     return props.questions.map((e) => {
-      return <div>
+      return <div className="form-group">
         <label for={e.id}> {e.question} <br/>Choose :</label>
-        <select id={e.id} name={e.id}>
+        <select  className="form-control" id={e.id} name={e.id}>
           {Object.values(e.options).map((val) => <option value={val}>{val}</option>)}
         </select>
+        <label for={"exp_"+e.id}> Explain :</label>
+        <input  className="form-control"
+type="text" id={"exp_"+e.id} placeholder="please explain your choice !"></input>
       </div>});
   }
 
