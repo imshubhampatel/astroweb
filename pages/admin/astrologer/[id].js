@@ -181,7 +181,7 @@ const astrologer = () => {
           getAllMeeting(pid);
         }
         return meetings.map((e) => {
-          return <MeetingCard key={e.id} props={e.data}></MeetingCard>;
+          return <MeetingCard key={e.id} data={e.data}></MeetingCard>;
         });
       }
       case 3: {
@@ -361,7 +361,7 @@ const astrologer = () => {
                       astro_temp.priceChat = e.target.value;
                       setastro({...astro_temp});
                     }}
-                    value={astro.priceChat}
+                    defaultValue={astro.priceChat}
                   />
                   / 5 min
                 </div>
@@ -383,7 +383,7 @@ const astrologer = () => {
                       astro_temp.priceVoice = e.target.value;
                       setastro({...astro_temp});
                     }}
-                    value={astro.priceVoice}
+                    defaultValue={astro.priceVoice}
                   />
                   / 5 min
                 </div>
@@ -405,7 +405,7 @@ const astrologer = () => {
                       astro_temp.priceVideo = e.target.value;
                       setastro({...astro_temp});
                     }}
-                    value={astro.priceVideo}
+                    defaultValue={astro.priceVideo}
                   />
                   / 5 min
                 </div>
