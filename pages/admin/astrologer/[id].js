@@ -36,7 +36,7 @@ import {
   removeAstrologerPerm,
 } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
-import { astrologerConverter, Astrologer } from "../../../dbObjects/Astrologer";
+import { astrologerConverter, Astrologer ,astrologerStatus} from "../../../dbObjects/Astrologer";
 import { astrologerPrivateDataConverter, AstrologerPrivateData } from "../../../dbObjects/AstrologerPrivateInfo";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import Image from 'next/image'
@@ -61,10 +61,8 @@ const astrologer = () => {
   const [astrologerPrivateData,setAstrologerPrivateData] = useState({});
   const [pageNumber, setPageNumber] = useState(1);
   const [pdf,setPdf] = useState("");
+  const [remark, setRemark] = useState("")
 
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
   async function getFile(path) {
     const storageRef = ref(storage, path);
     const url = await getDownloadURL(storageRef);
@@ -85,10 +83,11 @@ const astrologer = () => {
   async function getAstrologerInfo(pid) {
     const astros = collection(db, "astrologer");
     const querySnapshot = await getDoc(
-      doc(astros, String(pid)).withConverter(astrologerConverter)
+      doc(astros, String(pid))
     );
     if (querySnapshot.exists()) {
-      setastro(querySnapshot.data());
+      let astro_temp = new Astrologer({id: querySnapshot.id,...querySnapshot.data()});
+      setastro(astro_temp);
       getPrivateData(pid).then(e => setAstrologerPrivateData(e));
       getFile(querySnapshot.data().profilePic).then((url)=> setprofilePicUrl(url));
       getFile("18075072.pdf").then(url => setPdf(url));
@@ -143,18 +142,24 @@ const astrologer = () => {
     const ref = doc(db, "astrologer", String(uid));
     await updateDoc(ref, {...astro});
   }
-  async function toggleVerify(uid) {
+  async function discardAstrologer(uid) {
     const ref = doc(db, "astrologer", String(uid)).withConverter(
       astrologerConverter
     );
-
-    if (!astro.verified) {
-      setastro({ ...astro, verified: true });
-      await updateDoc(ref, { ...astro, verified: true });
-    } else {
-      setastro({ ...astro, verified: false });
-      await updateDoc(ref, { ...astro, verified: false });
-    }
+    let astro_temp = astro;
+    astro_temp.status.state = astrologerStatus.REJECTED;
+    astro_temp.status.remark = remark;
+    setastro({ ...astro_temp});
+    await updateDoc(ref, { ...astro_temp });
+  }
+  async function VerifyAstrologer(uid) {
+    const ref = doc(db, "astrologer", String(uid)).withConverter(
+      astrologerConverter
+    );
+    let astro_temp = astro;
+    astro_temp.status.state = astrologerStatus.VERIFIED;
+    setastro({ ...astro_temp});
+    await updateDoc(ref, { ...astro_temp });
   }
   const deleteReview = async (reviewId) => {
     const review = doc(db, "astrologer/"+ String(pid)+'/astrologer_reviews/'+String(reviewId));
@@ -317,7 +322,7 @@ const astrologer = () => {
               <div className={`my-2`}>
                 <button
                   className={`btn btn-warning`}
-                  onClick={() => toggleVerify(pid)}
+                  onClick={() => VerifyAstrologer(pid)}
                 >
                   Verify Astrologer
                 </button>
@@ -354,7 +359,7 @@ const astrologer = () => {
                       // Call function to update values hook kere
                       let astro_temp = astro;
                       astro_temp.priceChat = e.target.value;
-                      setastro(astro_temp)
+                      setastro({...astro_temp});
                     }}
                     value={astro.priceChat}
                   />
@@ -376,7 +381,7 @@ const astrologer = () => {
                       // Call function to update values hook kere
                       let astro_temp = astro;
                       astro_temp.priceVoice = e.target.value;
-                      setastro(astro_temp)
+                      setastro({...astro_temp});
                     }}
                     value={astro.priceVoice}
                   />
@@ -398,7 +403,7 @@ const astrologer = () => {
                       // Call function to update values hook kere
                       let astro_temp = astro;
                       astro_temp.priceVideo = e.target.value;
-                      setastro(astro_temp)
+                      setastro({...astro_temp});
                     }}
                     value={astro.priceVideo}
                   />
@@ -429,11 +434,13 @@ const astrologer = () => {
     MySwal.fire({
       showConfirmButton: false,
       html: <div>
-        <textarea 
+      <textarea 
       className="form-control"
       placeholder="Please tell more about the reason of discarding the request "
       name="reason-text"
-      
+      onChange={e => {
+        setRemark(e.target.value);
+      }}      
       />
       <div className="text-end mt-4">
         <button
@@ -448,8 +455,7 @@ const astrologer = () => {
       </div>
   </div>,
   preConfirm: () => {
-    console.log("hello")
-
+    discardAstrologer(pid);
   }
     })
   };
@@ -465,7 +471,7 @@ const astrologer = () => {
       });
   }, [pid]);
 
-  return (
+    return (
     <div className={` ${styles.base_container} `}>
       <div className={`${styles.main_container}`}>
         <h2 className={`${styles.headingText}`}>
@@ -502,13 +508,13 @@ const astrologer = () => {
             <i>{astro.languages ? Object.keys(astro.languages) : ""} </i>
           </div>
           <div className={`${styles.subContainer}`}>
-          {astro.verified ==false ? 
+          { astro.status?.state != astrologerStatus.VERIFIED ? 
           <>
             <button
               className={`${styles.astroVerifyButton} ${styles.astroButton}`}
-              onClick={() => toggleVerify(pid)}
+              onClick={() => VerifyAstrologer(pid)}
             >
-              {astro.verified ? "Astrologer Verified" : "Verify Astrologer"}
+              {"Verify Astrologer"}
             </button>
             <button
               className={`${styles.astroDiscardButton}  ${styles.astroButton}`}
@@ -629,6 +635,7 @@ const astrologer = () => {
   );
 };
 
+
 // );
 
 
@@ -665,7 +672,7 @@ export default astrologer;
 
           <button
             className={"btn btn-primary"}
-            onClick={() => toggleVerify(pid)}
+            onClick={() => VerifyAstrologer(pid)}
           >
             Verified : {astro.verified ? "  Yes  " : "  Nope   "}
           </button>

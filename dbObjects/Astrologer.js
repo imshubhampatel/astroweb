@@ -36,14 +36,14 @@ class Astrologer {
     this.languages = data.languages ? {
       ...data.languages
     } : {}
-    this.tnc = data.tnc 
+    this.tnc = data.tnc ? data.tnc : true
     
     // //Rating & Reviews
     this.rating = data.rating ? data.rating : 0
     this.ratingCount = data.ratingCount ? data.ratingCount : 0
 
     // Enabled / Disabled 
-    this.verified = data.verified || false
+    this.status = data.status ? data.status : { state : astrologerStatus.UNVERIFIED , remark : "None" }
 
   }
   toString() {
@@ -85,11 +85,13 @@ const astrologerConverter = {
       ratingCount: data.ratingCount,
 
       // verification
-      verified: data.verified,
+      status: data.status,
+      
 
       // Reviews 
       reviews: data.reviews,
       languages: data.languages,    
+      tnc : data.tnc,
     };
   },
   fromFirestore: (snapshot, options) => {
@@ -98,4 +100,9 @@ const astrologerConverter = {
   },
 };
 
-export { astrologerConverter, Astrologer };
+const astrologerStatus = {
+  UNVERIFIED : 'unverified',
+  VERIFIED : 'verified',
+  REJECTED : 'rejected',
+}
+export { astrologerConverter, Astrologer ,astrologerStatus };
