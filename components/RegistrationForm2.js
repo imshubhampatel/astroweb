@@ -342,7 +342,7 @@ type="text" id={"exp_"+e.id} placeholder="please explain your choice !"></input>
                 </div>
                 <div
                   style={formPage === 1 ? { display: "none" } : {}}
-                  className={`col-12 col-md-6`}
+                  className={`col-12 `}
                 >
                   <label htmlFor="certification" className="form-label">
                    Astrology Degree and Certification (in PDF format Only)
@@ -356,7 +356,7 @@ type="text" id={"exp_"+e.id} placeholder="please explain your choice !"></input>
                     required
                   />
                 </div>
-                <div
+                {/* <div
                   style={formPage === 1 ? { display: "none" } : {}}
                   className={`col-12 `}
                 >
@@ -365,7 +365,7 @@ type="text" id={"exp_"+e.id} placeholder="please explain your choice !"></input>
                   </label>
                   {renderQuestions()}
                   
-                </div>
+                </div> */}
 
 
                 <div
