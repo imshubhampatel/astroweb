@@ -185,6 +185,47 @@ const astrologer = withAdminAuth(() => {
     }
   };
 
+  const testResultView = async () => {
+    const astros = collection(db, "astrologer");
+    const querySnapshot = await getDoc(
+      doc(astros, String(pid),"test_result",pid)
+    );
+    if(querySnapshot.exists()){
+      let data = querySnapshot.data();
+      console.log(data)
+      MySwal.fire({
+        showConfirmButton: true,
+        html: 
+        <div className="container">
+        <h4>Test Result </h4>
+        <div className="row">
+        <p>Score : {data.score}</p>
+        <p>Question Count : {data.questionCount}</p>
+
+        </div>
+        
+        <div className="row">
+          {data?.response.map( e=> {
+            return <div className="card mb-3">
+                  <img src="..." className="card-img-top" alt="..."/>
+                  <div className="card-body">
+                    <h5 className="card-title">Question</h5>
+                    <p className="card-text"> {e.question}</p>
+                    <p className="card-text"><small className="text-muted">Answer : {e.answer}</small></p>
+                    <p className="card-text"><small className="text-muted">Correct Answer : {e.options[e.correctOption]}</small></p>
+                    <p className="card-text"><small className="text-muted">Explanation : {e.explanation}</small></p>
+                  </div>
+          </div>
+          })}
+        </div>
+        </div>,
+
+      })}
+    else {
+      alert("Test Not Attempted");
+    }
+  };
+
   return (
     <div className={` ${styles.base_container} `}>
       <div className={`${styles.main_container}`}>
@@ -235,6 +276,13 @@ const astrologer = withAdminAuth(() => {
             >
               {" "}
               Discard Request
+            </button>
+            <button
+              className={`${styles.astroButton}`}
+              onClick={testResultView}
+            >
+              {" "}
+              View Test Result
             </button>
             </>
           :           

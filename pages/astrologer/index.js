@@ -2,6 +2,7 @@ import withAuth from "../../auth/withAuth";
 import { firebase, auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
 import router from "next/router";
+import RegistrationTest from "../../components/RegistrationTest";
 import RegistrationForm from "../../components/RegistrationForm2";
 import React, { Component } from "react";
 import {
@@ -31,43 +32,40 @@ class Astrohome extends Component {
     this.state = {
       user: null,
       registerStatus: false,
+      testStatus: false,
       astrologerProfileInfo: null,
       questions : [],
       numQues: 5,
     };
     this.registerformhandler = this.registerformhandler.bind(this);
     this.getAstrologerInfo = this.getAstrologerInfo.bind(this);
+    this.checkIfTestComplete = this.checkIfTestComplete.bind(this);
+    this.submitTestHandler = this.submitTestHandler.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.evaluate_test = this.evaluate_test.bind(this);
+    this.shuffle = this.shuffle.bind(this);
   }
   async getRegisterInfo(user) {
     const docRef = doc(db, "astrologer", user?.uid);
     const docSnap = await getDoc(docRef);
-
     if (docSnap.exists()) {
       this.setState({ registerStatus: false });
     } else {
       this.setState({ registerStatus: true });
     }
   }
-  shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+  async checkIfTestComplete(Id) {
+    const docRef = doc(db, "astrologer", Id , "test_result",  Id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      this.setState({ testStatus: true });
+    } else {
+      this.setState({ testStatus: false });
+      this.getQuestions().then(ques => this.setState({questions:ques}));
     }
-  
-    return array;
   }
-  async getQuestions() {
-    const astros = query(collection(db, "question_set"));
-    const querySnapshot = await getDocs(astros);
-    let data = querySnapshot.docs.map((doc) => { return new Question({id:doc.id,...doc.data()})});
-    data = this.shuffle(data).slice(0,this.state.numQues);
-    this.setState({questions:data});
-  }
+ 
 
   componentDidMount() {
     onAuthStateChanged(auth, (authUser) => {
@@ -77,20 +75,10 @@ class Astrohome extends Component {
         this.getRegisterInfo(authUser);
         this.setState({ user: authUser });
         this.getAstrologerInfo(authUser.uid);
-        this.getQuestions();
+        this.checkIfTestComplete(authUser.uid);
       }
     });
   }
-
-  evaluate_test(test_result,e){
-    this.state.questions.map(ques =>{ 
-      test_result.response.push({...ques,answer: e.target[ques.id].value,explanation : e.target["exp_"+ques.id].value})
-      test_result.score += ques.options[ques.correctOption] ==  e.target[ques.id].value ? 1: 0;
-  });
-    test_result.question_count = this.state.questions.length;
-    return test_result;
-  }
-
   async registerformhandler(e) {
     e.preventDefault();
     let profileData = {
@@ -112,9 +100,7 @@ class Astrohome extends Component {
       pancardNumber: e.target.pancardNumber.value,
       phoneNumber: e.target.phoneNumber.value,
     };
-    let test_result = new TestResult();
-    test_result = this.evaluate_test(test_result,e);
-    
+ 
     let profilePic = e.target.profilePicture.files[0];
     let verificationIdFront = e.target.verificationIdFront.files[0];
     let verificationIdBack = e.target.verificationIdBack.files[0];
@@ -145,14 +131,7 @@ class Astrohome extends Component {
       profileData.id
     ).withConverter(astrologerPrivateDataConverter);
     await setDoc(privateRef, new AstrologerPrivateData(privateInfo));
-    const testResultRef = doc(
-      db,
-      "astrologer",
-      String(profileData.id),
-      "test_result",
-      profileData.id
-    ).withConverter(testResultConverter);
-    await setDoc(testResultRef,test_result);
+
     this.setState({
       registerStatus: false,
       astrologerProfileInfo: profileData,
@@ -170,6 +149,56 @@ class Astrohome extends Component {
     }
   }
 
+  async submitTestHandler(e){
+    e.preventDefault();
+    let test_result = new TestResult();
+    test_result = this.evaluate_test(test_result,e);
+    
+    const testResultRef = doc(
+      db,
+      "astrologer",
+      (this.state.user?.uid),
+      "test_result",
+      (this.state.user?.uid),
+    ).withConverter(testResultConverter);
+    await setDoc(testResultRef,test_result);
+    this.setState({
+      testStatus: true,
+    });
+}
+
+ evaluate_test(test_result,e){
+  this.state.questions.map(ques =>{ 
+    test_result.response.push({...ques,answer: e.target[ques.id].value,explanation : e.target["exp_"+ques.id].value})
+    test_result.score += ques.options[ques.correctOption] ==  e.target[ques.id].value ? 1: 0;
+});
+  test_result.questionCount = this.state.questions.length;
+  return test_result;
+}
+
+
+ shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+async getQuestions() {
+  const astros = query(collection(db, "question_set"));
+  const querySnapshot = await getDocs(astros);
+  let data = querySnapshot.docs.map((doc) => {
+    return new Question({ id: doc.id, ...doc.data() });
+  });
+  data = this.shuffle(data).slice(0, 5);
+  return data;
+}
+
   render() {
     if (this.state.user) {
       if (this.state.registerStatus)
@@ -182,10 +211,17 @@ class Astrohome extends Component {
             />
           </div>
         );
-      else if (this.state.astrologerProfileInfo) {
+      else if (this.state.astrologerProfileInfo && this.state.testStatus) {
         return <RegistrationForm completed="true" />;
-      } else return <div></div>;
-    } else return <div>Loading</div>;
+      }
+     else if(this.state.astrologerProfileInfo) {
+      return <RegistrationTest questions={this.state.questions} submitTestHandler={this.submitTestHandler} />;
+    }
+    else 
+    return <div>Loading Test</div>;
+  }
+    else 
+      return <div>Loading</div>;
   }
 }
 

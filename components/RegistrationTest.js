@@ -2,7 +2,8 @@ import formStyles from "../styles/components/RegistrationForm2.module.css";
 import FireImage from "../components/FireImage";
 
 export default function RegistrationTest(props) {
-  console.log(props.questions);
+  console.log("here",props.questions)
+
   return (
     <>
       <div className={`container ${formStyles.formContainer} `}>
@@ -10,6 +11,7 @@ export default function RegistrationTest(props) {
           {" "}
           Please answer the following questions to complete registration.{" "}
         </h3>
+        <form onSubmit={props.submitTestHandler}>
 
         <div className={`d-flex gap-3 flex-column my-5`}>
           {props.questions.map((e, indx) => {
@@ -66,6 +68,8 @@ export default function RegistrationTest(props) {
             );
           })}
         </div>
+        <button type="submit" className="btn btn-success"> Submit </button>
+        </form>
       </div>
     </>
   );

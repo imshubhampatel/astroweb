@@ -1,11 +1,11 @@
 class TestResult {
     constructor(data) {
-      this.question_count = data ?data.question_count:0 ;
+      this.questionCount = data ?data.questionCount:0 ;
       this.response = data ? data.response : [];
       this.score = data ? data.score : 0;
     }
     toString() {
-        return this.question_count;
+        return this.questionCount;
     }
   }
   
@@ -13,7 +13,7 @@ class TestResult {
   const testResultConverter = {
     toFirestore: (data) => {
       return {
-        question_count: data.question_count,
+        questionCount: data.questionCount,
         response: data.response,
         score: data.score,
       };
