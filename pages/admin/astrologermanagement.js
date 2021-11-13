@@ -13,6 +13,7 @@ import { firebase } from "../../config";
 import Link from "next/link";
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
+import {Astrologer, astrologerStatus} from '../../dbObjects/Astrologer'
 
 const db = getFirestore(firebase);
 
@@ -43,7 +44,8 @@ const astrologermanagement = withAdminAuth(() => {
   async function getAllAstrologers() {
     const astros = query(collection(db, "astrologer"));
     const querySnapshot = await getDocs(astros);
-    let data = querySnapshot.docs.map((doc) => doc.data());
+    let data = querySnapshot.docs.map((doc) =>
+    { return new Astrologer({id:doc.id, ...doc.data()})});
     setastrologersList(data);
     initializePaginationData(data);
   }
@@ -57,7 +59,7 @@ const astrologermanagement = withAdminAuth(() => {
 
   function myFilter(item) {
     if (isVerfiedFilter) {
-      if (item.verified) return false;
+      if (item.status.state == astrologerStatus.VERIFIED) return false;
       else return true;
     }
     return true;
@@ -124,7 +126,7 @@ const astrologermanagement = withAdminAuth(() => {
                   <td>Name</td>
                   <td>Phone Number</td>
                   <td>Rating</td>
-                  <td>Verify</td>
+                  <td>State </td>
                   <td>Query</td>
                 </tr>
               </thead>
@@ -139,7 +141,7 @@ const astrologermanagement = withAdminAuth(() => {
                       {e.rating == "0" ? "Not rated" : e.rating}
                     </td>
                     <td className={`${styles.tableData}`}>
-                      {e.verified ? "Verified" : "Not Verfied"}
+                      {e.status.state}
                     </td>
                     <td className={`${styles.tableData}`}>
                       <Link

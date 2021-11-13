@@ -384,7 +384,7 @@ type="text" id={"exp_"+e.id} placeholder="please explain your choice !"></input>
                     <label className="form-check-label" htmlFor="tnc">
                       Agree to terms and conditions
                     </label>
-                    <div id="tncFeedback" className="invalid-feedback">
+                    <div id="tnc" className="invalid-feedback">
                       You must agree before submitting.
                     </div>
                   </div>
