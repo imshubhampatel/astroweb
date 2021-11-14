@@ -1,15 +1,19 @@
 import React from "react";
 import styles from "../../styles/pages/admin/astrologer/[id].module.css";
-
+import {v4 as uuidv4} from 'uuid';
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import {
   collection,
   where,
   getDocs,
+  setDoc,
+  addDoc,
+  doc,
   getFirestore,
   query,
     orderBy,
+    uploadBytes,
   limit,
     endAt,
   startAt,
@@ -20,24 +24,75 @@ import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-const MySwal = withReactContent(Swal);
 
+const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
 
 const storemanagement = withAdminAuth(()=> {
 
-    const [categories,setCategories] = useState([{name:"gemstone"}]);
+    const [categories,setCategories] = useState([]);
+
+    async function uploadDocToStorage({ path, file }) {
+        const storageRef = ref(storage, path);
+        uploadBytes(storageRef, file).then((snapshot) => {
+          console.log(
+            "sucess"
+          )
+        }).catch(e=>console.log(e));
+      }
+
+    useEffect(()=>{
+
+        getAllCategories()
+    },[]);
 
     async function addCategoryHandler(e) {
         e.preventDefault();
+        let category = {
+            id : String(e.target.name.value).toLowerCase(),
+            name: e.target.name.value,
+            description : e.target.description.value,
+            logo : 'testing/zoomgs.png',
+            visible : e.target.visible.checked,
+        }
+        const ref = doc(db, "app_details/store/categories",category.id);
+        await setDoc(ref,{...category});
         Swal.clickConfirm();
     }
     async function addItemHandler(e) {
         e.preventDefault();
-        console.log(e.target.images.files);
+        let uid = uuidv4();
+        let photosUrlList = []
+        
+        for(let i=0;i<e.target.photos.files.length;i++)
+        {
+            photosUrlList.push("testing/photo_"+uid+'_'+i);
+        }
+        let item = {
+            id:uid,
+            name: e.target.name.value,
+            description : e.target.description.value,
+            headline : e.target.headline.value,
+            category : e.target.category.value,
+            mrp : e.target.mrp.value,
+            available : 0,
+            sellingPrice : e.target.sellingPrice.value,
+            photos : photosUrlList,
+            visible : e.target.visible.checked,
+        }
+        console.log(item)
+
+        const ref = doc(db, "items",uid);
+        // await setDoc(ref,item);
         Swal.clickConfirm();
     }
     async function getAllCategories() {
+        const ref = query(collection(db, "app_details/store/categories"));
+        const querySnapshot = await getDocs(ref);
+        let data = querySnapshot.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });        
+        setCategories(data);
 
     }
   
@@ -49,14 +104,34 @@ const storemanagement = withAdminAuth(()=> {
             <input 
             className="form-control"
             placeholder="Name of Category "
-            name="reason-text"
-            onChange={e => {
-            }}      
+            name="name"
+            id="name"
+            type="text"
+            required
+              
+            />
+             <input 
+            className="form-control"
+            placeholder="Description of Category "
+            name="description"
+            id="description"
+            type="text"  
+            required   
+            />
+             <input 
+             class="form-check"
+            name="visible"
+            id="visible"
+            type="checkbox"
+            
+                
             />
              <input 
             className="form-control"
             type="file"
             name="reason-text"     
+            id="logo"
+            required
             />
             <div className="text-end mt-4">
               <button
@@ -83,46 +158,59 @@ const storemanagement = withAdminAuth(()=> {
             className="form-control"
             placeholder="Product Name "
             name="reason-text"
+            id="name"
                
             />  
             <input 
             className="form-control"
             placeholder="Product Description "
             name="reason-text"
+            id="description"
+
               
             />
             <input 
             className="form-control"
             placeholder="Product Headline "
             name="reason-text"
-              
+            id="headline"  
             />
              <input 
             className="form-control"
             type="file" multiple
-            name="images"
-            id="images" 
+            name="photos"
+            id="photos" 
             placeholder="Choose photos for product"
 
             />
-            <select className="form-control" >
-            {categories.map(e =><option value={e.name}>{e.name}</option>)}
+            <select className="form-control"  id="category">
+            {categories.map((e) =><option value={e.id}>{e.name}</option>)}
             </select>
             <input 
             className="form-control"
-            placeholder="MRP "
-            name="reason-text"
+            placeholder="please enter MRP"
+            name="mrp"
             type="number"
+            id="mrp"
               
             />
 
 
             <input 
             className="form-control"
-            placeholder="SP"
-            name="reason-text"
+            placeholder="please enter Selling Price"
+            name="sp"
             type="number"
-              
+            id="sellingPrice"
+            
+            />
+            <input 
+             class="form-check"
+            name="visible"
+            id="visible"
+            type="checkbox"
+            
+                
             />
 
             <div className="text-end mt-4">
