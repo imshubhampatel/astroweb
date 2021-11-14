@@ -2,7 +2,6 @@ import formStyles from "../styles/components/RegistrationForm2.module.css";
 import FireImage from "../components/FireImage";
 
 export default function RegistrationTest(props) {
-  console.log("here",props.questions)
 
   return (
     <>

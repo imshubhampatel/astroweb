@@ -38,7 +38,7 @@ function RegistrationForm(props) {
 
             <div className="col-sm-8 my-4  ">
               <p className="mx-sm-auto text-sm-center">
-                Thanks htmlFor fiilling out your details. We will verify your
+                Thanks For fiilling out your details. We will verify your
                 details in the next 24 hours and will get back to you!
               </p>
 
@@ -239,7 +239,7 @@ function RegistrationForm(props) {
                     />
                     <label
                       className={`btn btn-outline-warning `}
-                      htmlFor="opther"
+                      htmlFor="other"
                     >
                       Other
                     </label>

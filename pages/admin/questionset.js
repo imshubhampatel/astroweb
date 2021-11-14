@@ -16,7 +16,8 @@ import { firebase } from "../../config";
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import { questionConverter, Question } from '../../dbObjects/Question'
-import {uploadDocToStorage} from '../../utilities/utils'
+import {uploadDocToStorage, getFile} from '../../utilities/utils'
+import QuestionCard from '../../components/QuestionCard'
 
 const db = getFirestore(firebase);
 
@@ -57,7 +58,7 @@ const questionset = withAdminAuth(()=> {
         },
         type: "mcq",
         correctOption : e.target.correctOption.value,
-        imgUrl : "testing/question_" + uid
+        imgUrl : "question/question_" + uid + ".png"
       }
       addQues(new Question(response));
       uploadDocToStorage({path:response.imgUrl,file:e.target.img.files[0]});
@@ -66,13 +67,7 @@ const questionset = withAdminAuth(()=> {
 
     }
     function renderQuestions() {
-      return questions.map(e =>{ 
-      return <div key={e.id}> Question : {e.question} <br/> Options : <br/>
-      <ul>
-      {Object.values(e.options).map((val) => <li key={val} value={val}>{val}</li>)}
-      </ul>
-      <button className="btn btn-danger" onClick={() => deleteQues(e.id)}> Delete</button>
-      </div>})
+    return <div className={`container d-flex gap-3 flex-column my-5`}>{questions.map(e =><QuestionCard data={e} deleteQues={deleteQues}></QuestionCard >)}</div>
     }
     return (
         <div className="container">

@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import Image from "next/image";
-
+import { getFile} from '../utilities/utils'
 const FireImageLoader = ({ src, layout, width, height, alt }) => {
   const storage = getStorage();
   const [imgUrl, setImageUrl] = useState("/images/loading.svg");
 
-  useEffect(async () => {
-    getDownloadURL(ref(storage, src))
-      .then((url) => setImageUrl(url))
-      .catch((error) => {});
+  useEffect(() => {
+    getFile(src).then((url) => setImageUrl(url))
+    .catch((error) => {});      
   }, []);
 
   if (layout === "fill") {

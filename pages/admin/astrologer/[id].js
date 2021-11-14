@@ -40,6 +40,7 @@ import { astrologerConverter, Astrologer ,astrologerStatus} from "../../../dbObj
 import { astrologerPrivateDataConverter, AstrologerPrivateData } from "../../../dbObjects/AstrologerPrivateInfo";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import Image from 'next/image'
+import {getFile} from '../../../utilities/utils'
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -63,11 +64,6 @@ const astrologer = withAdminAuth(() => {
   const [pdf,setPdf] = useState("");
   const [remark, setRemark] = useState("")
 
-  async function getFile(path) {
-    const storageRef = ref(storage, path);
-    const url = await getDownloadURL(storageRef);
-    return url;
-  };
   // #################
 
   // Firebase handlers

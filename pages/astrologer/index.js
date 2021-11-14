@@ -89,14 +89,16 @@ class Astrohome extends Component {
       gender: e.target.gender.value,
       dob: e.target.dob.value,
       address: e.target.address.value,
-      profilePic: "testing/profile_" + this.state.user.uid + ".png",
+      profilePic: "astrologer/"+this.state.user.uid+"/profilePic.png",
       tnc: e.target.tnc.checked,
     };
     let privateInfo = {
       id: this.state.user.uid,
-      verificationIdFront: "testing/ID_front" + profileData.id + ".png",
-      verificationIdBack: "testing/ID_back" + profileData.id + ".png",
-      pancardLink: "testing/pancard_" + profileData.id + ".png",
+      verificationIdFront: "astrologer/"+profileData.id+"/id_front.png",
+      alternativePhoneNumber : e.target.alternativePhoneNumber.value,
+      verificationIdBack: "astrologer/"+profileData.id+"/id_back.png",
+      pancardLink: "astrologer/"+profileData.id+"/pancard.png",
+      certificationUrl : "astrologer/"+profileData.id+"/certification.png",
       pancardNumber: e.target.pancardNumber.value,
       phoneNumber: e.target.phoneNumber.value,
     };
@@ -105,6 +107,9 @@ class Astrohome extends Component {
     let verificationIdFront = e.target.verificationIdFront.files[0];
     let verificationIdBack = e.target.verificationIdBack.files[0];
     let pancardPic = e.target.pancard.files[0];
+    let certification = e.target.certification.files[0];
+    
+    uploadDocToStorage({ path: privateInfo.certificationUrl, file: certification });
     uploadDocToStorage({ path: profileData.profilePic, file: profilePic });
     uploadDocToStorage({
       path: privateInfo.pancardLink,
