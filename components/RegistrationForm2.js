@@ -5,22 +5,10 @@ function RegistrationForm(props) {
   const user = props.user;
   const [date, setDate] = useState(getDate());
   const [formPage, setFormPage] = useState(1);
-  const [questions,setQuestions] = useState(props.questions);
   const toggleFormPage = () => {
     setFormPage(formPage === 1 ? 2 : 1);
   };
-  function renderQuestions() {
-    return props.questions.map((e) => {
-      return <div className="form-group">
-        <label for={e.id}> {e.question} <br/>Choose :</label>
-        <select  className="form-control" id={e.id} name={e.id}>
-          {Object.values(e.options).map((val) => <option value={val}>{val}</option>)}
-        </select>
-        <label for={"exp_"+e.id}> Explain :</label>
-        <input  className="form-control"
-type="text" id={"exp_"+e.id} placeholder="please explain your choice !"></input>
-      </div>});
-  }
+
 
   function getDate() {
     var today = new Date();
@@ -50,7 +38,7 @@ type="text" id={"exp_"+e.id} placeholder="please explain your choice !"></input>
 
             <div className="col-sm-8 my-4  ">
               <p className="mx-sm-auto text-sm-center">
-                Thanks for fiilling out your details. We will verify your
+                Thanks htmlFor fiilling out your details. We will verify your
                 details in the next 24 hours and will get back to you!
               </p>
 
@@ -356,17 +344,7 @@ type="text" id={"exp_"+e.id} placeholder="please explain your choice !"></input>
                     required
                   />
                 </div>
-                {/* <div
-                  style={formPage === 1 ? { display: "none" } : {}}
-                  className={`col-12 `}
-                >
-                  <label htmlFor="profilePicture" className="form-label">
-                    Please Complete this Test 
-                  </label>
-                  {renderQuestions()}
-                  
-                </div> */}
-
+          
 
                 <div
                   style={formPage === 1 ? { display: "none" } : {}}

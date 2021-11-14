@@ -50,7 +50,8 @@ const user = withAdminAuth(() => {
     const querySnapshot = await getDocs(
       query(astros, where("user", "==", String(uuid)))
     );
-    let data = querySnapshot.docs.map((doc) => doc.data());
+    let data = querySnapshot.docs.map((doc) => {
+      return {id:doc.id,...doc.data()}});
     //    console.log(data);
     setOrders(data);
   }
@@ -59,14 +60,15 @@ const user = withAdminAuth(() => {
     const querySnapshot = await getDocs(
       query(astros, where("user", "==", uuid))
     );
-    let data = querySnapshot.docs.map((doc) => doc.data());
-    setMeetings(data);
+    let data = querySnapshot.docs.map((doc) => {
+      return {id:doc.id,...doc.data()}});    setMeetings(data);
   }
   async function getAllWalletTransactions(uuid) {
     const astros = query(collection(db, "user", uuid, "wallet_transaction"));
     const querySnapshot = await getDocs(astros);
-    let data = querySnapshot.docs.map((doc) => doc.data());
-    setWalletTransactions(data);
+    let data = querySnapshot.docs.map((doc) => {
+      return {id:doc.id,...doc.data()}});  
+        setWalletTransactions(data);
     return data;
   }
 
@@ -100,7 +102,7 @@ const user = withAdminAuth(() => {
           <div>
             {" "}
             {orders.map((e) => {
-              return <OrderCard props={e}></OrderCard>;
+              return <OrderCard key={e.id} props={e}></OrderCard>;
             })}
           </div>
         );
@@ -112,7 +114,7 @@ const user = withAdminAuth(() => {
         return (
           <ul>
             {meetings.map((e) => {
-              return <MeetingCard props={e}></MeetingCard>;
+              return <MeetingCard key={e.id} props={e}></MeetingCard>;
             })}
           </ul>
         );
@@ -124,7 +126,7 @@ const user = withAdminAuth(() => {
         return (
           <ul>
             {walletTransactions.map((e) => {
-              return <TransactionCard props={e}></TransactionCard>;
+              return <TransactionCard key={e.id}  props={e}></TransactionCard>;
             })}
           </ul>
         );

@@ -45,9 +45,9 @@ const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
 const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
 
-// const astrologer = withAdminAuth(() => {
+const astrologer = withAdminAuth(() => {
 
-const astrologer = () => {
+// const astrologer = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
@@ -310,7 +310,7 @@ const astrologer = () => {
               <div className="row">
                 <div className="col font-weight-bold">
                   {" "}
-                  Account Holder's Name{" "}
+                  Account Holders Name{" "}
                 </div>
                 <div className="col"> {astrologerPrivateData.accountInfo.holderName} </div>
               </div>
@@ -450,7 +450,7 @@ const astrologer = () => {
         
         <div className="row">
           {data?.response.map( e=> {
-            return <div className="card mb-3">
+            return <div className="card mb-3" key={e.id}>
                   <img src="..." className="card-img-top" alt="..."/>
                   <div className="card-body">
                     <h5 className="card-title">Question</h5>
@@ -560,7 +560,6 @@ const astrologer = () => {
               onClick={discardRequestView}
             >
               {" "}
-              Discard Request
             </button>
             <button
               className={`${styles.astroButton}`}
@@ -679,10 +678,7 @@ const astrologer = () => {
       </div>
     </div>
   );
-};
-
-
-// );
+});
 
 
 astrologer.getLayout = function getLayout(page) {
@@ -690,81 +686,3 @@ astrologer.getLayout = function getLayout(page) {
 };
 export default astrologer;
 
-{
-  /* <div className="container">
-<div className="row">
-  {astro ? (
-    <div className="container">
-      <div className="row">
-        <table>
-          <tbody>
-            <tr>
-              <td> {astro.firstName + " " + astro.secondName}</td>
-              <td> {astro.phoneNumber}</td>
-            </tr>
-            <tr>
-              <td> {astro.email}</td>
-              <td> {astro.verified ? "Verified" : "Not Verified"}</td>
-            </tr>
-          </tbody>
-        </table>
-        <div>
-          <button
-            className={"btn btn-primary"}
-            onClick={() => toggleEnable(pid)}
-          >
-            Enabled : {enabled ? "   On  " : "  off   "}
-          </button>
-
-          <button
-            className={"btn btn-primary"}
-            onClick={() => VerifyAstrologer(pid)}
-          >
-            Verified : {astro.verified ? "  Yes  " : "  Nope   "}
-          </button>
-        </div>
-      </div>
-    </div>
-  ) : (
-    "no user"
-  )}
-</div>
-
-<br></br>
-<hr></hr>
-
-<div className="row">
-  <div className="row">
-    <ul className="nav nav-pills">
-      <li className="nav-item">
-        <button
-          className={`nav-link ${activeState == 1 ? "active" : ""}`}
-          aria-current="page"
-          onClick={() => setActiveState(1)}
-        >
-          Reviews
-        </button>
-      </li>
-      <li className="nav-item">
-        <button
-          className={`nav-link ${activeState == 2 ? "active" : ""}`}
-          onClick={() => setActiveState(2)}
-        >
-          Meeting History
-        </button>
-      </li>
-      <li className="nav-item">
-        <button
-          className={`nav-link ${activeState == 3 ? "active" : ""}`}
-          onClick={() => setActiveState(3)}
-        >
-          Wallet History
-        </button>
-      </li>
-    </ul>
-  </div>
-  <hr></hr>
-  <div className="row">{getDataForAstroLists()}</div>
-</div>
-</div> */
-}

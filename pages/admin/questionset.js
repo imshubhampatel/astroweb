@@ -67,9 +67,9 @@ const questionset = withAdminAuth(()=> {
     }
     function renderQuestions() {
       return questions.map(e =>{ 
-      return <div> Question : {e.question} <br/> Options : <br/>
+      return <div key={e.id}> Question : {e.question} <br/> Options : <br/>
       <ul>
-      {Object.values(e.options).map((val) => <li value={val}>{val}</li>)}
+      {Object.values(e.options).map((val) => <li key={val} value={val}>{val}</li>)}
       </ul>
       <button className="btn btn-danger" onClick={() => deleteQues(e.id)}> Delete</button>
       </div>})

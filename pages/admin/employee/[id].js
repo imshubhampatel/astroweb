@@ -136,7 +136,7 @@ const employee = withAdminAuth(() => {
                 <form onSubmit={permissionChangeHandler}>
                   {astro.permissions
                     ? Object.keys(astro.permissions).map((key) => (
-                        <div className="form-check">
+                        <div className="form-check" key={key}>
                           <label className="form-check-label" htmlFor={key}>
                             {key}
                           </label>
