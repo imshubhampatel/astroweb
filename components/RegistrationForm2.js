@@ -1,44 +1,14 @@
 import React, { useState } from "react";
 import styles from "../styles/components/RegistrationForm2.module.css";
 import Link from "next/link";
-
 function RegistrationForm(props) {
-  
-  // Return Form Completion Page 
-  if (props.completed === "true") {
-    return (
-      <div className={`${styles.baseContainer}`}>
-        <div className="container-fluid bg-white">
-          <div className={`row`}>
-            <div className="col-sm">
-              <div className={`${styles.imageContainer}`} />
-            </div>
-
-            <div className="col-sm-8 my-4  ">
-              <p className="mx-sm-auto text-sm-center">
-                Thanks for fiilling out your details. We will verify your
-                details in the next 24 hours and will get back to you!
-              </p>
-
-              <div
-                className={`${styles.endingBlueText} mx-auto text-center my-5 `}
-              >
-                Hope to see you onboard!
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   const user = props.user;
   const [date, setDate] = useState(getDate());
-
   const [formPage, setFormPage] = useState(1);
   const toggleFormPage = () => {
     setFormPage(formPage === 1 ? 2 : 1);
   };
+
 
   function getDate() {
     var today = new Date();
@@ -56,6 +26,34 @@ function RegistrationForm(props) {
     console.log(today);
     return today;
   }
+  // Return Form Completion Page 
+  if (props.completed === "true") {
+    return (
+      <div className={`${styles.baseContainer}`}>
+        <div className="container-fluid bg-white">
+          <div className={`row`}>
+            <div className="col-sm">
+              <div className={`${styles.imageContainer}`} />
+            </div>
+
+            <div className="col-sm-8 my-4  ">
+              <p className="mx-sm-auto text-sm-center">
+                Thanks For fiilling out your details. We will verify your
+                details in the next 24 hours and will get back to you!
+              </p>
+
+              <div
+                className={`${styles.endingBlueText} mx-auto text-center my-5 `}
+              >
+                Hope to see you onboard!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+ 
 
   return (
     <div className={`${styles.baseContainer}`}>
@@ -241,7 +239,7 @@ function RegistrationForm(props) {
                     />
                     <label
                       className={`btn btn-outline-warning `}
-                      htmlFor="opther"
+                      htmlFor="other"
                     >
                       Other
                     </label>
@@ -330,6 +328,24 @@ function RegistrationForm(props) {
                     required
                   />
                 </div>
+                <div
+                  style={formPage === 1 ? { display: "none" } : {}}
+                  className={`col-12 `}
+                >
+                  <label htmlFor="certification" className="form-label">
+                   Astrology Degree and Certification (in PDF format Only)
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    id="certification"
+                    accept="application/pdf"
+                    name="certification"
+                    required
+                  />
+                </div>
+          
+
                 <div
                   style={formPage === 1 ? { display: "none" } : {}}
                   className={`col-12 col-md-6`}

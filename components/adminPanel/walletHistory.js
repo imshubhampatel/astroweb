@@ -47,14 +47,14 @@ function WalletHistory(props) {
     <div>
       <h4>History </h4>
       <div>
-        <label for="approved"> Approved</label>
+        <label htmlFor="approved"> Approved</label>
         <input
           type="checkbox"
           id="approved"
           checked={filter.approved}
           onChange={(e) => setfilter({ ...filter, approved: e.target.checked })}
         ></input>
-        <label for="rejected"> rejected</label>
+        <label htmlFor="rejected"> rejected</label>
 
         <input
           type="checkbox"
@@ -62,7 +62,7 @@ function WalletHistory(props) {
           checked={filter.rejected}
           onChange={(e) => setfilter({ ...filter, rejected: e.target.checked })}
         ></input>
-        <label for="completed"> completed</label>
+        <label htmlFor="completed"> completed</label>
 
         <input
           type="checkbox"
@@ -78,7 +78,7 @@ function WalletHistory(props) {
         .filter(myFilter)
         .slice(firstItem, lastItem)
         .map((e) => (
-          <WalletInfoCard data={e}></WalletInfoCard>
+          <WalletInfoCard key={e.id}data={e}></WalletInfoCard>
         ))}
       <div>
         <ReactPaginate

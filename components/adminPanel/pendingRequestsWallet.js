@@ -25,6 +25,7 @@ function PendingRequestWallet(props) {
       <h4>Pending Requests </h4>
       {props.data.slice(firstItem, lastItem).map((e) => (
         <WalletInfoCard
+          key={e.id}
           data={e}
           reject={props.rejectPendingRequest}
           approve={props.approvePendingRequest}

@@ -1,31 +1,29 @@
 import withAuth from "../../auth/withAuth";
 import { firebase, auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
-// import RegistrationForm from "../../components/RegistrationForm";
 import router from "next/router";
+import RegistrationTest from "../../components/RegistrationTest";
 import RegistrationForm from "../../components/RegistrationForm2";
-
 import React, { Component } from "react";
-// import RegistrationForm from "../../components/RegistrationForm";
-
-
 import {
   getFirestore,
   collection,
   query,
   where,
+  getDocs,
   getDoc,
   setDoc,
   doc,
 } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import {testResultConverter,TestResult} from '../../dbObjects/TestResult'
 import { astrologerConverter, Astrologer } from "../../dbObjects/Astrologer";
 import {
   astrologerPrivateDataConverter,
   AstrologerPrivateData,
 } from "../../dbObjects/AstrologerPrivateInfo";
+import { questionConverter, Question } from '../../dbObjects/Question'
+import {uploadDocToStorage} from '../../utilities/utils'
 
-const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
 const db = getFirestore(firebase);
 
 class Astrohome extends Component {
@@ -34,45 +32,53 @@ class Astrohome extends Component {
     this.state = {
       user: null,
       registerStatus: false,
+      testStatus: false,
       astrologerProfileInfo: null,
+      questions : [],
+      numQues: 5,
     };
     this.registerformhandler = this.registerformhandler.bind(this);
-    this.uploadDocToStorage = this.uploadDocToStorage.bind(this);
     this.getAstrologerInfo = this.getAstrologerInfo.bind(this);
+    this.checkIfTestComplete = this.checkIfTestComplete.bind(this);
+    this.submitTestHandler = this.submitTestHandler.bind(this);
+    this.getQuestions = this.getQuestions.bind(this);
+    this.evaluate_test = this.evaluate_test.bind(this);
+    this.shuffle = this.shuffle.bind(this);
   }
-  uploadDocToStorage({ path, file }) {
-    const storageRef = ref(storage, path);
-    uploadBytes(storageRef, file).then((snapshot) => {
-      console.log(
-        "sucess"
-      )
-    }).catch(e=>console.log(e));
-  }
-
   async getRegisterInfo(user) {
     const docRef = doc(db, "astrologer", user?.uid);
     const docSnap = await getDoc(docRef);
-
     if (docSnap.exists()) {
       this.setState({ registerStatus: false });
     } else {
       this.setState({ registerStatus: true });
     }
   }
+  async checkIfTestComplete(Id) {
+    const docRef = doc(db, "astrologer", Id , "test_result",  Id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      this.setState({ testStatus: true });
+    } else {
+      this.setState({ testStatus: false });
+      this.getQuestions().then(ques => this.setState({questions:ques}));
+    }
+  }
+ 
 
   componentDidMount() {
     onAuthStateChanged(auth, (authUser) => {
       if (!authUser) {
         router.replace("/signin");
       } else {
-        // console.log(authUser.phoneNumber)
         this.getRegisterInfo(authUser);
         this.setState({ user: authUser });
         this.getAstrologerInfo(authUser.uid);
+        this.checkIfTestComplete(authUser.uid);
       }
     });
   }
-
   async registerformhandler(e) {
     e.preventDefault();
     let profileData = {
@@ -83,32 +89,37 @@ class Astrohome extends Component {
       gender: e.target.gender.value,
       dob: e.target.dob.value,
       address: e.target.address.value,
-      profilePic: "testing/profile_" + this.state.user.uid + ".png",
+      profilePic: "astrologer/"+this.state.user.uid+"/profilePic.png",
       tnc: e.target.tnc.checked,
     };
     let privateInfo = {
       id: this.state.user.uid,
-      verificationIdFront: "testing/ID_front" + profileData.id + ".png",
-      verificationIdBack: "testing/ID_back" + profileData.id + ".png",
-      pancardLink: "testing/pancard_" + profileData.id + ".png",
+      verificationIdFront: "astrologer/"+profileData.id+"/id_front.png",
+      alternativePhoneNumber : e.target.alternativePhoneNumber.value,
+      verificationIdBack: "astrologer/"+profileData.id+"/id_back.png",
+      pancardLink: "astrologer/"+profileData.id+"/pancard.png",
+      certificationUrl : "astrologer/"+profileData.id+"/certification.png",
       pancardNumber: e.target.pancardNumber.value,
       phoneNumber: e.target.phoneNumber.value,
     };
-
+ 
     let profilePic = e.target.profilePicture.files[0];
     let verificationIdFront = e.target.verificationIdFront.files[0];
     let verificationIdBack = e.target.verificationIdBack.files[0];
     let pancardPic = e.target.pancard.files[0];
-    this.uploadDocToStorage({ path: profileData.profilePic, file: profilePic });
-    this.uploadDocToStorage({
+    let certification = e.target.certification.files[0];
+    
+    uploadDocToStorage({ path: privateInfo.certificationUrl, file: certification });
+    uploadDocToStorage({ path: profileData.profilePic, file: profilePic });
+    uploadDocToStorage({
       path: privateInfo.pancardLink,
       file: pancardPic,
     });
-    this.uploadDocToStorage({
+    uploadDocToStorage({
       path: privateInfo.verificationIdFront,
       file: verificationIdFront,
     });
-    this.uploadDocToStorage({
+    uploadDocToStorage({
       path: privateInfo.verificationIdBack,
       file: verificationIdBack,
     });
@@ -125,14 +136,15 @@ class Astrohome extends Component {
       profileData.id
     ).withConverter(astrologerPrivateDataConverter);
     await setDoc(privateRef, new AstrologerPrivateData(privateInfo));
+
     this.setState({
       registerStatus: false,
       astrologerProfileInfo: profileData,
     });
   }
+
   async getAstrologerInfo(pid) {
     const astros = collection(db, "astrologer");
-
     const querySnapshot = await getDoc(
       doc(astros, String(pid)).withConverter(astrologerConverter)
     );
@@ -142,6 +154,56 @@ class Astrohome extends Component {
     }
   }
 
+  async submitTestHandler(e){
+    e.preventDefault();
+    let test_result = new TestResult();
+    test_result = this.evaluate_test(test_result,e);
+    
+    const testResultRef = doc(
+      db,
+      "astrologer",
+      (this.state.user?.uid),
+      "test_result",
+      (this.state.user?.uid),
+    ).withConverter(testResultConverter);
+    await setDoc(testResultRef,test_result);
+    this.setState({
+      testStatus: true,
+    });
+}
+
+ evaluate_test(test_result,e){
+  this.state.questions.map(ques =>{ 
+    test_result.response.push({...ques,answer: e.target[ques.id].value,explanation : e.target["exp_"+ques.id].value})
+    test_result.score += ques.options[ques.correctOption] ==  e.target[ques.id].value ? 1: 0;
+});
+  test_result.questionCount = this.state.questions.length;
+  return test_result;
+}
+
+
+ shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+async getQuestions() {
+  const astros = query(collection(db, "question_set"));
+  const querySnapshot = await getDocs(astros);
+  let data = querySnapshot.docs.map((doc) => {
+    return new Question({ id: doc.id, ...doc.data() });
+  });
+  data = this.shuffle(data).slice(0, 5);
+  return data;
+}
+
   render() {
     if (this.state.user) {
       if (this.state.registerStatus)
@@ -149,14 +211,22 @@ class Astrohome extends Component {
           <div>
             <RegistrationForm
               registerFormHandler={this.registerformhandler}
+              questions={this.state.questions}
               user={this.state.user}
             />
           </div>
         );
-      else if (this.state.astrologerProfileInfo) {
+      else if (this.state.astrologerProfileInfo && this.state.testStatus) {
         return <RegistrationForm completed="true" />;
-      } else return <div></div>;
-    } else return <div>Loading</div>;
+      }
+     else if(this.state.astrologerProfileInfo) {
+      return <RegistrationTest questions={this.state.questions} submitTestHandler={this.submitTestHandler} />;
+    }
+    else 
+    return <div>Loading Test</div>;
+  }
+    else 
+      return <div>Loading</div>;
   }
 }
 
