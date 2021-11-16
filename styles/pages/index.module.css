@@ -1,0 +1,65 @@
+.container {
+  background: linear-gradient(0deg, #061528, #061528), #000000;
+}
+
+.heroContainer {
+  /* border: solid red; */
+  /* display: flex;
+    justify-content: center; */
+  position: relative;
+  height: 230px;
+  margin-top: 50px;
+}
+
+@media (min-width: 768px) {
+  .heroContainer {
+    /* border: solid red; */
+    /* display: flex;
+      justify-content: center; */
+    position: relative;
+    height: 426px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    /* margin-right: 50px; */
+  }
+}
+
+.launchingHeading {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 48px;
+  /* identical to box height */
+
+  color: #f0c944;
+}
+
+.mainText {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 140%;
+  /* or 25px */
+
+  color: #ffffff;
+
+  opacity: 0.5;
+}
+
+.timerNumber {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 35px;
+
+  color: #ffffff;
+}
+
+.timerText {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #ffffff;
+}
