@@ -1,5 +1,5 @@
 import { firebase } from '../config'
-import { getStorage, ref, uploadBytes , getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes ,deleteObject, getDownloadURL } from "firebase/storage";
 
 const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
 
@@ -15,4 +15,11 @@ async function getFile(path) {
     return url;
   };
 
-export {uploadDocToStorage , getFile};
+async function deleteDataFromStorage(path) {
+  const storageRef = ref(storage, path);
+  const response = await deleteObject(storageRef);
+  return response;
+
+}
+
+export {uploadDocToStorage , getFile, deleteDataFromStorage};

@@ -24,6 +24,7 @@ import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import {uploadDocToStorage} from '../../utilities/utils'
 
 const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
@@ -32,15 +33,6 @@ const storage =  getStorage(firebase);
 const storemanagement = withAdminAuth(()=> {
 
     const [categories,setCategories] = useState([]);
-
-    async function uploadDocToStorage({ path, file }) {
-        const storageRef = ref(storage, path);
-        uploadBytes(storageRef, file).then((snapshot) => {
-          console.log(
-            "sucess"
-          )
-        }).catch(e=>console.log(e));
-      }
 
     useEffect(()=>{
 
@@ -75,9 +67,9 @@ const storemanagement = withAdminAuth(()=> {
             description : e.target.description.value,
             headline : e.target.headline.value,
             category : e.target.category.value,
-            mrp : e.target.mrp.value,
+            mrp : Number(e.target.mrp.value),
             available : 0,
-            sellingPrice : e.target.sellingPrice.value,
+            sellingPrice : Number(e.target.sellingPrice.value),
             photos : photosUrlList,
             visible : e.target.visible.checked,
         }
