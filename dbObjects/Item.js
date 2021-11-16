@@ -1,43 +1,41 @@
-import { Timestamp } from "firebase/firestore";
-
-class Blog {
+class Item {
   constructor(data) {
     this.id = data.id;
-    this.author = data.author;
-    this.commentCount = data.commentCount;
+    this.name = data.name;
     this.description = data.description;
-    this.readDuration = data.readDuration;
-    this.time = new Timestamp(data.time).toDate();
-    this.title = data.title;
+    this.available = data.available;
+    this.headline = data.headline;
     this.visible = data.visible;
-    this.comment = data.comment ? data.comment : [];
+    this.sellingPrice = data.sellingPrice;
+    this.mrp = data.mrp;
+    this.category = data.category;
+    this.photos = data.photos;
   }
   toString() {
-    return this.commentCount + ", " + this.description + ", " + this.author;
+    return this.available + ", " + this.available + ", " + this.name;
   }
 }
 
 // Firestore data converter
-const blogConverter = {
+const ItemConverter = {
   toFirestore: (data) => {
     return {
       id: data.id,
-      author: data.author,
-      commentCount: data.commentCount,
+      name: data.name,
+      available: data.available,
       description: data.description,
-      readDuration: data.readDuration,
-      time: data.time,
+      headline: data.headline,
+      photos: data.photos,
+      category: data.category,
+      mrp: data.mrp,
+      sellingPrice: data.sellingPrice,
       visible: data.visible,
-      title: data.title,
     };
   },
   fromFirestore: (snapshot, options) => {
     const data = snapshot.data(options);
-    return new Blog(data);
+    return new Item(data);
   },
 };
-const blogStatus = {
-  CREATED: "created",
-  REMOVED: "removed"
-};
-export { blogConverter, Blog, blogStatus };
+
+export { ItemConverter, Item };

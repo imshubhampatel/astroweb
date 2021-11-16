@@ -13,13 +13,13 @@ import {
   getFirestore,
   query,
     orderBy,
-    uploadBytes,
   limit,
     endAt,
   startAt,
 } from "firebase/firestore";
 import { firebase } from "../../config";
 import Link from "next/link";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import Swal from "sweetalert2";
@@ -27,6 +27,7 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
+const storage =  getStorage(firebase);
 
 const storemanagement = withAdminAuth(()=> {
 
@@ -66,7 +67,7 @@ const storemanagement = withAdminAuth(()=> {
         
         for(let i=0;i<e.target.photos.files.length;i++)
         {
-            photosUrlList.push("testing/photo_"+uid+'_'+i);
+            photosUrlList.push("items/"+uid+"/photo_"+i);
         }
         let item = {
             id:uid,
@@ -80,10 +81,13 @@ const storemanagement = withAdminAuth(()=> {
             photos : photosUrlList,
             visible : e.target.visible.checked,
         }
+        for(let i=0;i<e.target.photos.files.length;i++)
+        {
+            uploadDocToStorage({path:item.photos[i],file:e.target.photos.files[i]});
+        }        
         console.log(item)
-
         const ref = doc(db, "items",uid);
-        // await setDoc(ref,item);
+        await setDoc(ref,item);
         Swal.clickConfirm();
     }
     async function getAllCategories() {
@@ -159,7 +163,7 @@ const storemanagement = withAdminAuth(()=> {
             placeholder="Product Name "
             name="reason-text"
             id="name"
-               
+            required
             />  
             <input 
             className="form-control"
@@ -167,13 +171,14 @@ const storemanagement = withAdminAuth(()=> {
             name="reason-text"
             id="description"
 
-              
+            required
             />
             <input 
             className="form-control"
             placeholder="Product Headline "
             name="reason-text"
             id="headline"  
+            required
             />
              <input 
             className="form-control"
@@ -181,9 +186,10 @@ const storemanagement = withAdminAuth(()=> {
             name="photos"
             id="photos" 
             placeholder="Choose photos for product"
+            required
 
             />
-            <select className="form-control"  id="category">
+            <select className="form-control"  id="category" required>
             {categories.map((e) =><option value={e.id}>{e.name}</option>)}
             </select>
             <input 
@@ -192,6 +198,7 @@ const storemanagement = withAdminAuth(()=> {
             name="mrp"
             type="number"
             id="mrp"
+            required
               
             />
 
@@ -202,6 +209,7 @@ const storemanagement = withAdminAuth(()=> {
             name="sp"
             type="number"
             id="sellingPrice"
+            required
             
             />
             <input 
@@ -209,6 +217,7 @@ const storemanagement = withAdminAuth(()=> {
             name="visible"
             id="visible"
             type="checkbox"
+            
             
                 
             />
