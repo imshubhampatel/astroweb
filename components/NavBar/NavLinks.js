@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+
 const NavLinks = (props) => {
   const animateFrom = { opacity: 0, y: -40 };
   const animateTo = { opacity: 1, y: 0 };
@@ -18,16 +19,26 @@ const NavLinks = (props) => {
         </Link>
       </motion.li>
 
-      <motion.li
+      {props.user ? <motion.li
         initial={animateFrom}
         animate={animateTo}
         transition={{delay: 0.10}}
         onClick={() => props.isMobile && props.closeMobileMenu()}
       >
-        <Link href="/">
+        <button onClick={props.signOut} className="btn btn-link">
+          Logout 
+        </button>
+      </motion.li>
+      :<motion.li
+        initial={animateFrom}
+        animate={animateTo}
+        transition={{delay: 0.10}}
+        onClick={() => props.isMobile && props.closeMobileMenu()}
+      >
+        <Link href="/signin">
           <a>Join As Astrologer </a>
         </Link>
-      </motion.li>
+      </motion.li>}
 
       <motion.li
         initial={animateFrom}
@@ -35,7 +46,7 @@ const NavLinks = (props) => {
         transition={{delay: 0.15}}
         onClick={() => props.isMobile && props.closeMobileMenu()}
       >
-        <Link href="/">
+        <Link href="/Contactus">
           <a>Contact Us</a>
         </Link>
       </motion.li>

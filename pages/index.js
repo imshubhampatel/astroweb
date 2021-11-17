@@ -70,11 +70,10 @@ export default function Home() {
               </div>
 
               <p className={`mb-1 text-center text-md-start ${styles.mainText} `}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
+                Dreshkan is an all-in-one solution for astrology and horoscopic needs. Get ready to join us on our journey in  world of astrology.
+                We will be providing plethora of services from live consultation to match making reports. 
+                Don't worry about your future as we are here to accompany you...
+                
               </p>
 
               {/* Timer  */}
