@@ -1,9 +1,8 @@
 import NavLinks from "./NavLinks";
 import styles from "../../styles/components/Navbar.module.css";
 import {firebase} from '../../config'
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged , signOut} from "firebase/auth";
 const auth = getAuth(firebase);
 
 const logout = () => {
