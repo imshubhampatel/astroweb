@@ -60,6 +60,7 @@ export default function Home() {
             {/* Image   */}
             <div className={` col-12  col-md-4 ${styles.heroContainer}`}>
               <Image src="/images/launching_soon_hero.svg" layout="fill" />
+              <a href="https://www.freepik.com/vectors/calendar"></a>
             </div>
 
             {/* Text Block  */}
