@@ -17,6 +17,7 @@ function WalletHistory(props) {
     rejected: true,
     completed: true,
   });
+  const [search, setSearch] = useState("");
 
    useEffect(() => {
      setTotalPages(props.data.length / props.ItemsPerPage);
@@ -29,10 +30,13 @@ function WalletHistory(props) {
    }, [props.data]);
   
   function myFilter(e) {
-    return (
+    let val = (
       (e.status == WalletWithdrawalStatus.APPROVED && filter.approved) ||
       (e.status == WalletWithdrawalStatus.REJECTED && filter.rejected) ||
       (e.status == WalletWithdrawalStatus.COMPLETED &&filter.completed));
+    
+    let s =  e.astrologer.includes(search)
+    return val && s;
 
   }
 
@@ -43,9 +47,13 @@ function WalletHistory(props) {
      setFirstItem(first);
      setLastItem(last);
    }
+   
   return (
-    <div>
+    <div className="container">
       <h4>History </h4>
+      <div className="row">
+        <input onChange={(e)=>setSearch(e.target.value)} placeholder="search by astrologer"></input>
+      </div>
       <div>
         <label htmlFor="approved"> Approved</label>
         <input

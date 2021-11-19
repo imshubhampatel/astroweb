@@ -84,7 +84,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="firstName"
                     name="firstName"
-                    required
+                    
                   />
                 </div>
 
@@ -100,7 +100,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="lastName"
                     name="secondName"
-                    required
+                    
                   />
                 </div>
 
@@ -116,7 +116,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="email"
                     nam="email"
-                    required
+                    
                   />
                 </div>
 
@@ -133,7 +133,7 @@ function RegistrationForm(props) {
                     id="date"
                     name="dob"
                     max={date}
-                    required
+                    
                   />
                 </div>
 
@@ -149,7 +149,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="address"
                     name="address"
-                    required
+                    
                   />
                 </div>
 
@@ -165,8 +165,8 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="phone"
                     name="phoneNumber"
-                    // value={user.phoneNumber}
-                    required
+                    value={user.phoneNumber}
+                    readOnly
                   />
                 </div>
 
@@ -185,7 +185,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="alternativePhoneNumber"
                     name="alternativePhoneNumber"
-                    required
+                    
                   />
                 </div>
 
@@ -324,7 +324,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="pancardNumber"
                     name="pancardNumber"
-                    pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+                    pattern="[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}"
                     required
                   />
                 </div>
@@ -360,7 +360,7 @@ function RegistrationForm(props) {
                       required
                     />
                     <label className="form-check-label" htmlFor="tnc">
-                      Agree to terms and conditions
+                      Agree to <Link href="/astrologer/termsncondition"><a>Terms and conditions</a></Link>
                     </label>
                     <div id="tnc" className="invalid-feedback">
                       You must agree before submitting.

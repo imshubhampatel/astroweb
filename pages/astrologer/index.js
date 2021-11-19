@@ -79,15 +79,47 @@ class Astrohome extends Component {
       }
     });
   }
+   validateRegisterForm(e) {
+    let data = {
+      firstName: e.target.firstName.value,
+      secondName: e.target.secondName.value,
+      email: e.target.email.value,
+      gender: e.target.gender.value,
+      dob: e.target.dob.value,
+      address: e.target.address.value,
+      tnc: e.target.tnc.checked,
+       profilePic : e.target.profilePicture.files.length,
+       verificationIdFront : e.target.verificationIdFront.files.length,
+       verificationIdBack : e.target.verificationIdBack.files.length,
+       pancardPic : e.target.pancard.files.length,
+       certification : e.target.certification.files.length,
+      alternativePhoneNumber : e.target.alternativePhoneNumber.value,
+      pancardNumber: e.target.pancardNumber.value,
+      phoneNumber: e.target.phoneNumber.value,
+      };
+      console.log(data);
+    if(data.firstName=="" ||data.secondName=="" ||data.email=="" || data.gender =="" 
+    || data.dob=="" || data.address =="" || data.alternativePhoneNumber=="" 
+    || data.phoneNumber=="" || data.profilePic==0 || data.verificationIdBack==0 || data.verificationIdFront==0
+    || data.pancardPic==0 || data.certification==0)
+      return false;
+    else return true;
+
+  }
   async registerformhandler(e) {
     e.preventDefault();
+    if(!this.validateRegisterForm(e))
+     {
+       alert("Please complete the form!");
+       return ;}
+
     let profileData = {
       id: this.state.user.uid,
       firstName: e.target.firstName.value,
       secondName: e.target.secondName.value,
       email: e.target.email.value,
       gender: e.target.gender.value,
-      dob: e.target.dob.value,
+      dob: Date(e.target.dob.value),
       address: e.target.address.value,
       profilePic: "astrologer/"+this.state.user.uid+"/profilePic.png",
       tnc: e.target.tnc.checked,
@@ -99,7 +131,7 @@ class Astrohome extends Component {
       verificationIdBack: "astrologer/"+profileData.id+"/id_back.png",
       pancardLink: "astrologer/"+profileData.id+"/pancard.png",
       certificationUrl : "astrologer/"+profileData.id+"/certification.png",
-      pancardNumber: e.target.pancardNumber.value,
+      pancardNumber: e.target.pancardNumber.value.toUpperCase(),
       phoneNumber: e.target.phoneNumber.value,
     };
  
