@@ -90,6 +90,17 @@ async function removeSubadminPerm(uid) {
   );
   return response;
 }
+async function getEmp(uid) {
+  const docRef = doc(db, "employee", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return getEmp;
+  } else {
+    return false;
+  }
+
+}
 export {
   isAdmin,
   isSubAdmin,
@@ -101,4 +112,5 @@ export {
   isUser,
   setUserPerm,
   removeUserPerm,
+  getEmp
 };

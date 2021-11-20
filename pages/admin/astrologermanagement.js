@@ -178,9 +178,8 @@ const astrologermanagement = withAdminAuth(() => {
           </div>
         </div>
       </div>
-    </>
-  );
-});
+    </>);
+}, "astro");
 
 astrologermanagement.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;
