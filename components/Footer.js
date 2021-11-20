@@ -29,9 +29,8 @@ function Footer() {
             <Link href="/">
               <a>Contact Us</a>
             </Link>
-
-            <Link href="/">
-              <a>Refund Policy</a>
+            <Link href="/privacypolicy">
+              <a>Privacy Policy</a>
             </Link>
           </div>
 
@@ -40,7 +39,10 @@ function Footer() {
             Copyright © 2021 Drekshan.
             <p className="mt-2">
               All Rights Reserved. Use of this website signifies your agreement
-              to the Terms of Use, Drekshan Privacy Policy .
+              to the Terms of Use, Drekshan   
+              <Link href="/privacypolicy">
+              <a>Privacy Policy</a>
+            </Link> .
             </p>
           </div>
 
