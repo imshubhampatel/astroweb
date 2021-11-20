@@ -1,5 +1,5 @@
 .container {
-  background: linear-gradient(0deg, #061528, #061528), #000000;
+  background: linear-gradient(0deg, #091B3F, #091B3F), #000000;
 }
 
 .heroContainer {
@@ -7,8 +7,8 @@
   /* display: flex;
     justify-content: center; */
   position: relative;
-  height: 230px;
-  margin-top: 50px;
+  height: 300px;
+  /* margin-top: 2px; */
 }
 
 @media (min-width: 768px) {
@@ -17,7 +17,7 @@
     /* display: flex;
       justify-content: center; */
     position: relative;
-    height: 426px;
+    height: 550px;
     margin-top: 100px;
     margin-bottom: 100px;
     /* margin-right: 50px; */
@@ -28,10 +28,17 @@
   font-style: normal;
   font-weight: bold;
   font-size: 32px;
-  line-height: 48px;
+  line-height: 72px;
   /* identical to box height */
+  color: #0CA8B7;
+}
 
-  color: #f0c944;
+@media (min-width: 992px) {
+  .launchingHeading {
+
+    font-size: 48px;
+
+  }
 }
 
 .mainText {
@@ -49,10 +56,23 @@
 .timerNumber {
   font-style: normal;
   font-weight: bold;
-  font-size: 32px;
-  line-height: 35px;
+  font-size: 48px;
+  line-height: 72px;
+  /* identical to box height */
+  
+}
 
-  color: #ffffff;
+.days {
+  color: #F74B98
+}
+.hours{
+  color: #E85234
+}
+.minutes{
+  color: #019AB1
+}
+.seconds{
+  color: #9FC03D
 }
 
 .timerText {
@@ -60,6 +80,6 @@
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
-
+  text-transform: capitalize;
   color: #ffffff;
 }

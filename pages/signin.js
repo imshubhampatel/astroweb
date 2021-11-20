@@ -9,6 +9,22 @@ import {
 } from "firebase/auth";
 import router from "next/router";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
+const Toast = MySwal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
+
 const FirebaseAuth = () => {
   const [countryCode, setcountryCode] = useState("+91")
   const [mynumber, setnumber] = useState("");
@@ -46,11 +62,24 @@ const FirebaseAuth = () => {
     signInWithPhoneNumber(auth, number, verify)
       .then((result) => {
         setfinal(result);
-        alert("code sent");
+        // alert("code sent");
+
+        Toast.fire({
+          icon: "info",
+          title: "Code Sent",
+        });
+
         setshow(true);
       })
       .catch((err) => {
-        alert(err);
+        // alert(err);
+        
+        Toast.fire({
+          icon: "error",
+          title: err,
+        });
+
+
         window.location.reload();
       });
   };
