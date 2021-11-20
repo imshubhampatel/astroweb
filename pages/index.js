@@ -39,7 +39,14 @@ export default function Home() {
 
     timerComponents.push(
       <div key={interval}  >
-        <div className={styles.timerNumber}>{timeLeft[interval]}</div>
+        <div className={`${styles.timerNumber}
+
+            ${ interval == "days" ? styles.days : "" }
+            ${ interval == "hours" ? styles.hours : "" }
+            ${ interval == "minutes" ? styles.minutes : "" }
+            ${ interval == "seconds" ? styles.seconds : "" }
+
+        `} >{timeLeft[interval]}</div>
         <div className={styles.timerText}>{interval}</div>
       </div>
     );
@@ -58,7 +65,7 @@ export default function Home() {
         <div className={` container-fluid ${styles.container}`}>
           <div className={`row justify-content-center align-items-center`}>
             {/* Image   */}
-            <div className={` col-12  col-md-4 ${styles.heroContainer}`}>
+            <div className={` col-12  col-md-5 ${styles.heroContainer}`}>
               <Image src="/images/launching_soon_hero.svg" layout="fill" />
             </div>
 
