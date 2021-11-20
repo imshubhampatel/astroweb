@@ -311,7 +311,8 @@ function RegistrationForm(props) {
                     required
                   />
                 </div>
-
+               
+                
                 <div
                   style={formPage === 1 ? { display: "none" } : {}}
                   className={`col-12 col-md-6`}
