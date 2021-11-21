@@ -70,5 +70,6 @@ const EmployeePermissions = {
  USER_MANAGEMENT :"user_management",
  BROADCAST_MANAGEMENT :"broadcast_management",
  STORE_MANAGEMENT :"store" ,
+ NONE : null,
 }
 export { employeeConverter, Employee ,EmployeePermissions };

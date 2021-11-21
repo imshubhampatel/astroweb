@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { firebase } from "../../config";
 import Link from "next/link";
+import {EmployeePermissions} from  '../../dbObjects/Employee'
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import {Astrologer, astrologerStatus} from '../../dbObjects/Astrologer'
@@ -179,7 +180,7 @@ const astrologermanagement = withAdminAuth(() => {
         </div>
       </div>
     </>);
-}, "astro");
+}, EmployeePermissions.ASTRO_MANAGEMENT);
 
 astrologermanagement.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;

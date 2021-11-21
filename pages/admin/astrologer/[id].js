@@ -49,6 +49,8 @@ import {
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import Image from "next/image";
 import { getFile } from "../../../utilities/utils";
+import {EmployeePermissions} from  '../../../dbObjects/Employee'
+
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -738,7 +740,7 @@ const astrologer = withAdminAuth(() => {
       </div>
     </div>
   );
-});
+},EmployeePermissions.ASTRO_MANAGEMENT);
 
 astrologer.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;

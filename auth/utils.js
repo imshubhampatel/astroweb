@@ -95,7 +95,7 @@ async function getEmp(uid) {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    return getEmp;
+    return docSnap.data();
   } else {
     return false;
   }

@@ -5,17 +5,16 @@ import { auth, firebase } from "../config";
 import { isAdmin, isSubAdmin , getEmp } from './utils'
 
 
-const withAdminAuth = (Component , name ) => (props) => {
-  var [loading, setLoading] = useState(true);
+const withAdminAuth = (Component , perm ) => (props) => {
 
-  
+  var [ loading, setLoading ] = useState(true);  
   useEffect(() => {
-    onAuthStateChanged(auth, (authUser) => {
+    onAuthStateChanged(auth, (authUser) => {    
+                                                 
       setLoading(true)
       if (!authUser) {
         router.replace("/admin/signin");
       } else {
-        getEmp(authUser.uid).then((e)=> console.log(e));
         isAdmin(authUser.uid).then((e) => {
           if (e)
           {     
@@ -25,6 +24,15 @@ const withAdminAuth = (Component , name ) => (props) => {
             isSubAdmin(authUser.uid).then(e => {
               if (e)
               {
+                if(perm) {
+                getEmp(authUser.uid).then((e)=> {
+                  console.log(e);
+                  if(!e.permissions[perm]) {
+                    alert("You are not allowed to manage this!");
+                    router.replace("/admin");
+                  }   
+                });
+              }
                 setLoading(false);
               }
               else {

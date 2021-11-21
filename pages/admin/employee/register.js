@@ -17,7 +17,7 @@ import {
 } from "firebase/firestore";
 import {setSubadminPerm} from "../../../auth/utils";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { Employee, employeeConverter } from "../../../dbObjects/Employee";
+import { Employee, employeeConverter ,EmployeePermissions} from "../../../dbObjects/Employee";
 import { data } from "autoprefixer";
 
 const storage = getStorage(firebase, "gs://astrochrchafirebase.appspot.com");
@@ -89,7 +89,7 @@ const register = withAdminAuth(() => {
       <EmployeeRegistrationForm registerFormHandler={registerformhandler} />
     </div>
   );
-});
+},EmployeePermissions.EMP_MANAGEMENT);
 
 
 
