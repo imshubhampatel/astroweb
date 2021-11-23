@@ -5,6 +5,9 @@ function RegistrationForm(props) {
   const user = props.user;
   const [date, setDate] = useState(getDate());
   const [formPage, setFormPage] = useState(1);
+  const [expertisedropdown,setExpertisedropdown] = useState(true);
+  const [languagesdropdown,setlanguagesdropdown] = useState(true);
+  
   const toggleFormPage = () => {
     setFormPage(formPage === 1 ? 2 : 1);
   };
@@ -188,6 +191,31 @@ function RegistrationForm(props) {
                     
                   />
                 </div>
+                <div
+                  style={formPage === 2 ? { display: "none" } : {}}
+                  className={`col-12 col-md-6`}
+                >
+                 <div >
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onClick={()=>setExpertisedropdown(!expertisedropdown)}>Choose Expertise
+                    <span class="caret"></span></button>
+                    <ul style={expertisedropdown ? { display: "none"} : {}}>
+                      {props.data.expertises.map(e => <li><input type="checkbox" class="form-checkbox" id={e} /> {e} </li> )}
+                    </ul>
+                  </div>
+                </div>
+
+                <div
+                  style={formPage === 2 ? { display: "none" } : {}}
+                  className={`col-12 col-md-6`}
+                >
+                 <div >
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onClick={()=>setlanguagesdropdown(!languagesdropdown)}>Choose languages
+                    <span class="caret"></span></button>
+                    <ul style={languagesdropdown ? { display: "none"} : {}}>
+                      {props.data.languages.map(e => <li><input type="checkbox" class="form-checkbox" id={e} /> {e} </li> )}
+                    </ul>
+                  </div>
+                </div>
 
                 <div
                   style={formPage === 2 ? { display: "none" } : {}}
@@ -343,6 +371,18 @@ function RegistrationForm(props) {
                     name="certification"
                     required
                   />
+                </div>
+                <div
+                  style={formPage === 1 ? { display: "none" } : {}}
+                  className={`col-12 `}
+                >
+                  <label htmlFor="work" className="form-label">
+                    Are you working with any other similar platform ?
+                  </label>
+                  <select id="work" class="form-select" aria-label="Default select example">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
                 </div>
           
 

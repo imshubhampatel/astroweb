@@ -10,6 +10,8 @@ class Astrologer {
     this.experience = data.experience ? data.experience : 0;
     this.profilePic = data.profilePic
     this.about = data.about ? data.about : "Please add some line about you" 
+
+    this.workingwithother = data.workingwithother ? data.workingwithother : "No"
     
     this.profileComplete = data.profileComplete ? data.profileComplete : false;
     // // Meeting Pricing
@@ -23,7 +25,7 @@ class Astrologer {
     this.voiceSeconds = data.voiceSeconds  ?data.voiceSeconds : 0
     
     // // Expertise 
-    this.expertise = {
+    this.expertise = data.expertise ? data.expertise : {
      vedicAstrology : data.vedicAstrology ? data.vedicAstrology : false,
      tarotCardReading : data.tarotCardReading ? data.tarotCardReading:false,
      numerlogy : data.numerlogy ? data.numerlogy: false,
@@ -65,6 +67,7 @@ const astrologerConverter = {
       experience: data.experience,
       profilePic: data.profilePic,
       about : data.about,
+      workingwithother : data.workingwithother,
 
       profileComplete: data.profileComplete,
       // Meeting Pricing
