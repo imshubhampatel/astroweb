@@ -134,7 +134,6 @@ class Astrohome extends Component {
       data.gender == "" ||
       data.dob == "" ||
       data.address == "" ||
-      data.alternativePhoneNumber == "" ||
       data.phoneNumber == "" ||
       data.profilePic == 0 ||
       data.verificationIdBack == 0 ||

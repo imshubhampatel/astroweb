@@ -352,7 +352,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="pancardNumber"
                     name="pancardNumber"
-                    pattern="[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}"
+                    pattern="^[ ]*[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[ ]*$"
                     required
                   />
                 </div>
