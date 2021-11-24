@@ -266,6 +266,7 @@ class Astrohome extends Component {
         ques.options[ques.correctOption] == e.target[ques.id].value ? 1 : 0;
     });
     test_result.questionCount = this.state.questions.length;
+    
     return test_result;
   }
 
@@ -280,7 +281,6 @@ class Astrohome extends Component {
         array[currentIndex],
       ];
     }
-
     return array;
   }
 
