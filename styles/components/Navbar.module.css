@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border-bottom: 1px solid rgba(240, 201, 68, 1); */
+  /* border: solid red; */
 }
 
 .NavBar nav ul {
@@ -46,7 +46,10 @@
 .NavBar .logoContainer {
   width: 50px;
   margin-left: 90px;
+  height: 70px;
+  /* border: solid red;  */
   /* margin-top: 1vw; */
+  margin-bottom: 10px;
 }
 
 @media (max-width: 770px) {

@@ -27,6 +27,7 @@ function Navbar() {
 
     return (
       <div className={styles.NavBar} >
+  
         <div className={styles.logoContainer} >
 
           <Image src="/images/logo_tranparent.png" width="60" height="60" />
