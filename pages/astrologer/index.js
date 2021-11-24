@@ -167,7 +167,7 @@ class Astrohome extends Component {
       dob: Date(e.target.dob.value),
       address: e.target.address.value,
       expertise : expertiseData,
-      language : languageData,
+      languages : languageData,
       profilePic: "astrologer/" + this.state.user.uid + "/profilePic.png",
       tnc: e.target.tnc.checked,
       workingwithother : e.target.work.value ,
@@ -266,7 +266,7 @@ class Astrohome extends Component {
         ques.options[ques.correctOption] == e.target[ques.id].value ? 1 : 0;
     });
     test_result.questionCount = this.state.questions.length;
-    
+
     return test_result;
   }
 
