@@ -88,6 +88,7 @@
     /* border: solid red; */
     background: #061528;
     height: 100vh;
+    height: -webkit-fill-available;
     width: 60vw;
     border-top: 1px solid rgba(240, 201, 68, 1);
   }

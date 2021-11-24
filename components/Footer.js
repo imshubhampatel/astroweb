@@ -30,7 +30,7 @@ function Footer() {
           </div>
 
           {/* Links  */}
-          <div className=" d-flex justify-content-center gap-3 my-3">
+          <div className=" d-flex flex-column  align-items-center flex-md-row justify-content-center gap-3 my-3">
     
             <Link href="/privacypolicy">
               <a>Privacy Policy</a>
@@ -48,9 +48,11 @@ function Footer() {
             Copyright © 2021 Dreshkan.
             <p className="mt-2">
               All Rights Reserved. Use of this website signifies your agreement
-              to the Terms of Use, Dreshkan   
+              to the <Link href="/termsncondition">
+              <a className="text-decoration-underline" >Terms {"&"} Conditions</a>
+            </Link> and Dreshkan{" "}   
               <Link href="/privacypolicy">
-              <a>Privacy Policy</a>
+              <a className="text-decoration-underline" >Privacy Policy</a>
             </Link> .
             </p>
           </div>
