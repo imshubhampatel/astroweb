@@ -26,9 +26,13 @@
 .imageContainer{
     height: 193px;
     /* border: 1px solid red; */
-    background-image: url("/images/tarrot-small.jpg");
+    background-image: url("/images/mascot-mobile.svg");
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #FAF6E7;
+   
+    
 }
 
 
@@ -37,9 +41,10 @@
         min-height: 90vh;
         height: 100%;
         /* border: 1px solid red; */
-        background-image: url("/images/tarrot-large.jpg");
+        background-image: url("/images/mascot.png");
         background-position: center;
         background-size: cover;
+        background-color: #FAF6E7;
     }
 }
 
