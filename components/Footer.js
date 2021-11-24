@@ -11,35 +11,44 @@ function Footer() {
         <div className={`${styles.container} d-flex flex-column `}>
           {/* Social Icons  */}
           <div className="d-flex   justify-content-center gap-3 my-3">
-            <div style={{ fontSize: "22px" }}>
+           <Link href="https://www.instagram.com/dreshkan/"><a>
+           <div style={{ fontSize: "22px" }}>
               <AiFillInstagram />
             </div>
+            </a></Link>
+         
 
             <div style={{ fontSize: "21px" }}>
               <BsFacebook />
             </div>
-
-            <div style={{ fontSize: "22px" }}>
+          <Link href="https://www.youtube.com/channel/UCiwoSk0-TK-hY2Ox98V2TsA"><a>
+          <div style={{ fontSize: "22px" }}>
               <AiFillYoutube />
             </div>
+            </a></Link>
+            
           </div>
 
           {/* Links  */}
           <div className=" d-flex justify-content-center gap-3 my-3">
-            <Link href="/">
-              <a>Contact Us</a>
-            </Link>
+    
             <Link href="/privacypolicy">
               <a>Privacy Policy</a>
+            </Link>
+            <Link href="/refundncancellationpolicy">
+              <a>Refund and Cancellation policy</a>
+            </Link>
+            <Link href="/termsncondition">
+              <a>Terms and Conditions</a>
             </Link>
           </div>
 
           {/* Bottom text   */}
           <div className="text-center">
-            Copyright © 2021 Drekshan.
+            Copyright © 2021 Dreshkan.
             <p className="mt-2">
               All Rights Reserved. Use of this website signifies your agreement
-              to the Terms of Use, Drekshan   
+              to the Terms of Use, Dreshkan   
               <Link href="/privacypolicy">
               <a>Privacy Policy</a>
             </Link> .
