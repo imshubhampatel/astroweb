@@ -547,8 +547,7 @@ const astrologer = withAdminAuth(() => {
     let astro_temp = astrologerPrivateData;
     astro_temp.razorpayId = e.target.razorpayId.value;
     setAstrologerPrivateData({ ...astro_temp });
-    await updateDoc(ref, { ...astro_temp });
-    
+    await updateDoc(astros, { ...astro_temp });
     MySwal.clickConfirm();
 
   }
@@ -564,6 +563,7 @@ const astrologer = withAdminAuth(() => {
             className="form-control"
             placeholder="Please enter razorpay ID "
             name="reason-text"
+            id="razorpayId"
             defaultValue={astrologerPrivateData.razorpayId}
           />
           <div className="text-end mt-4">
@@ -620,7 +620,7 @@ const astrologer = withAdminAuth(() => {
 
               <div className={`ms-2`}>{astro.phoneNumber}</div>
             </div>
-            <i> Razorpay Id : XXXXX</i>
+            <i> Razorpay Id : {astrologerPrivateData?.razorpayId}</i>
             <br/>
 
             <i>Vedic, Tarot</i>

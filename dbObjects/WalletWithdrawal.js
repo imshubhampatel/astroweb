@@ -38,5 +38,6 @@ const WalletWithdrawalStatus = {
   APPROVED: "approved",
   REJECTED: "rejected",
   COMPLETED: "completed",
+  FAILED : "failed",
 };
 export { walletWithdrawalConverter, WalletWithdrawal, WalletWithdrawalStatus };

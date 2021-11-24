@@ -69,7 +69,7 @@ const astrologerConverter = {
       about : data.about,
       workingwithother : data.workingwithother,
 
-      profileComplete: data.profileComplete,
+      profileComplete: data.profileComplete ? data.profileComplete: false ,
       // Meeting Pricing
       priceChat: data.priceChat,
       priceVideo: data.priceVideo,
