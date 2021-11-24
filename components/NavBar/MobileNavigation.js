@@ -28,9 +28,15 @@ const MobileNavigation = () => {
   }, [user]);
 
   const ref = useRef();
+  const refMenuButton = useRef();
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
-      if (open && ref.current && !ref.current.contains(e.target)) {
+      if (
+        open &&
+        ref.current &&
+        !refMenuButton.current.contains(e.target) &&
+        !ref.current.contains(e.target)
+      ) {
         closeMenu();
       }
     };
@@ -44,12 +50,14 @@ const MobileNavigation = () => {
 
   return (
     <nav className={styles.MobileNavigation}>
-      <FiMenu
-        className={styles.HamBurger}
-        size="40px"
-        color="white"
-        onClick={() => setOpen(!open)}
-      />
+      <div ref={refMenuButton}>
+        <FiMenu
+          className={styles.HamBurger}
+          size="40px"
+          color="white"
+          onClick={() => setOpen(!open)}
+        />
+      </div>
       {open && (
         <div ref={ref}>
           <NavLinks

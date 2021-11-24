@@ -66,3 +66,18 @@ line-height: 140%;
 
 color: #4175DF;
 }
+
+
+.listDropdownContainer{
+    /* border: 1px solid red; */
+    position: absolute;
+    /* top: 50px;  */
+    width: 100%;
+    background: white;
+    padding: 15px;
+    height: 300px;
+    overflow: auto;
+    border-radius: 5px;
+    margin-top: 5px;
+    z-index: 1;
+}

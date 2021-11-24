@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styles from "../styles/components/RegistrationForm2.module.css";
 import Link from "next/link";
 import Swal from "sweetalert2";
@@ -32,6 +32,47 @@ function RegistrationForm(props) {
     });
   }
   
+  const langDropdownRef = useRef(); 
+  const langDropdownButtonRef = useRef(); 
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (!languagesdropdown && langDropdownRef.current && 
+        
+        !langDropdownButtonRef.current.contains(e.target) &&
+        
+        !langDropdownRef.current.contains(e.target)) {
+        setlanguagesdropdown(true);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [languagesdropdown]);
+
+
+  const expDropdownRef = useRef(); 
+  const expDropdownButtonRef = useRef();
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (!expertisedropdown && expDropdownRef.current 
+        
+         && !expDropdownButtonRef.current.contains(e.target)
+        && !expDropdownRef.current.contains(e.target)) {
+        setExpertisedropdown(true);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [expertisedropdown]);
+
+
   const toggleFormPage = () => {
     if(formPage==1) {
       if (localState.firstName == "" )
@@ -257,12 +298,14 @@ function RegistrationForm(props) {
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-12 col-md-6`}
                 >
-                 <div >
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onClick={()=>setExpertisedropdown(!expertisedropdown)}>Choose Expertise
-                    <span class="caret"></span></button>
-                    <ul style={expertisedropdown ? { display: "none"} : {}}>
-                      {props.data.expertises.map(e => <li><input type="checkbox" class="form-checkbox" id={e} /> {e} </li> )}
+                 <div style={{position:"relative"}} >
+                    <button  ref={expDropdownButtonRef} className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown" onClick={()=>setExpertisedropdown((e) => !e)}>Choose Expertise
+                    <span className="caret"></span></button>
+                    <div ref={expDropdownRef}  style={expertisedropdown ? { display: "none"} : {}} className={`${styles.listDropdownContainer} form-check shadow `}> 
+                    <ul style={{listStyle: "none"}} >
+                      {props.data.expertises.map(e => <li key={e} ><input type="checkbox" className="form-check-input" id={e} /> <label className="form-check-label" htmlFor={e}> {e} </label> </li> )}
                     </ul>
+                    </div>
                   </div>
                 </div>
 
@@ -270,12 +313,17 @@ function RegistrationForm(props) {
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-12 col-md-6`}
                 >
-                 <div >
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onClick={()=>setlanguagesdropdown(!languagesdropdown)}>Choose languages
-                    <span class="caret"></span></button>
-                    <ul style={languagesdropdown ? { display: "none"} : {}}>
-                      {props.data.languages.map(e => <li><input type="checkbox" class="form-checkbox" id={e} /> {e} </li> )}
+                 <div style={{position:"relative"}} >
+                    <button ref={langDropdownButtonRef} className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown" onClick={()=>setlanguagesdropdown(!languagesdropdown)}>Choose languages
+                    <span className="caret"/>
+                    </button>
+                    <div ref={langDropdownRef}  style={languagesdropdown ? { display: "none"} : {}} className={`${styles.listDropdownContainer} form-check shadow `}> 
+                    <ul style={{listStyle: "none"}} >
+                      {props.data.languages.map(e => <li key={e}><input type="checkbox" className="form-check-input" id={e} />   <label className="form-check-label" htmlFor={e}> {e} </label>   </li> )}
                     </ul>
+
+                    </div> 
+                    
                   </div>
                 </div>
 
@@ -445,7 +493,7 @@ function RegistrationForm(props) {
                   <label htmlFor="work" className="form-label">
                     Are you working with any other similar platform ?
                   </label>
-                  <select id="work" class="form-select" aria-label="Default select example">
+                  <select id="work" className="form-select" aria-label="Default select example">
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
