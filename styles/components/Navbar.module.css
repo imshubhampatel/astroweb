@@ -1,5 +1,5 @@
 .NavBar {
-  background: #091B3F;
+  background: linear-gradient(0deg, #061528, #061528), #000000;;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border-bottom: 1px solid rgba(240, 201, 68, 1); */
+  /* border: solid red; */
 }
 
 .NavBar nav ul {
@@ -46,7 +46,11 @@
 .NavBar .logoContainer {
   width: 50px;
   margin-left: 90px;
+  height: 60px;
+  /* border: solid red;  */
   /* margin-top: 1vw; */
+  /* border: 1px solid red; */
+  margin-top: auto;
 }
 
 @media (max-width: 770px) {
@@ -60,6 +64,7 @@
     height: 40px;
     margin-left: 20px;
     margin-top: 15px;
+    margin-bottom: 10px;
   }
 
   .NavBar .MobileNavigation {
@@ -88,6 +93,7 @@
     /* border: solid red; */
     background: #061528;
     height: 100vh;
+    height: -webkit-fill-available;
     width: 60vw;
     border-top: 1px solid rgba(240, 201, 68, 1);
   }

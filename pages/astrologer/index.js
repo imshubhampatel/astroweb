@@ -51,6 +51,10 @@ class Astrohome extends Component {
       astrologerProfileInfo: null,
       questions: [],
       numQues: 5,
+      formOptionData : {
+        expertises : [],
+        languages : []
+      }
     };
     this.registerformhandler = this.registerformhandler.bind(this);
     this.getAstrologerInfo = this.getAstrologerInfo.bind(this);
@@ -59,6 +63,7 @@ class Astrohome extends Component {
     this.getQuestions = this.getQuestions.bind(this);
     this.evaluate_test = this.evaluate_test.bind(this);
     this.shuffle = this.shuffle.bind(this);
+    this.getFormOptionsData = this.getFormOptionsData.bind(this);
   }
   async getRegisterInfo(user) {
     const docRef = doc(db, "astrologer", user?.uid);
@@ -67,6 +72,15 @@ class Astrohome extends Component {
       this.setState({ registerStatus: false });
     } else {
       this.setState({ registerStatus: true });
+    }
+  }
+  async getFormOptionsData() {
+    const docRef = doc(db, "app_details/astro_reg");
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      this.setState({ formOptionData: docSnap.data() });
+    } else {
     }
   }
   async checkIfTestComplete(Id) {
@@ -90,6 +104,7 @@ class Astrohome extends Component {
         this.setState({ user: authUser });
         this.getAstrologerInfo(authUser.uid);
         this.checkIfTestComplete(authUser.uid);
+        this.getFormOptionsData();
       }
     });
   }
@@ -107,11 +122,9 @@ class Astrohome extends Component {
       verificationIdBack: e.target.verificationIdBack.files.length,
       pancardPic: e.target.pancard.files.length,
       certification: e.target.certification.files.length,
-      alternativePhoneNumber: e.target.alternativePhoneNumber.value,
       pancardNumber: e.target.pancardNumber.value,
       phoneNumber: e.target.phoneNumber.value,
     };
-    console.log(data);
     if (
       data.firstName == "" ||
       data.secondName == "" ||
@@ -119,7 +132,6 @@ class Astrohome extends Component {
       data.gender == "" ||
       data.dob == "" ||
       data.address == "" ||
-      data.alternativePhoneNumber == "" ||
       data.phoneNumber == "" ||
       data.profilePic == 0 ||
       data.verificationIdBack == 0 ||
@@ -133,13 +145,18 @@ class Astrohome extends Component {
   async registerformhandler(e) {
     e.preventDefault();
     if (!this.validateRegisterForm(e)) {
-      // alert("Please complete the form!");
       Toast.fire({
         icon: "error",
         title: "Please Complete Registration Form",
       });
       return;
     }
+
+    let languageData = {}
+    let expertiseData = {}
+
+    this.state.formOptionData.expertises.map(exp => expertiseData[exp] = e.target[exp].checked)
+    this.state.formOptionData.languages.map(lan => languageData[lan] = e.target[lan].checked)
 
     let profileData = {
       id: this.state.user.uid,
@@ -149,8 +166,11 @@ class Astrohome extends Component {
       gender: e.target.gender.value,
       dob: Date(e.target.dob.value),
       address: e.target.address.value,
+      expertise : expertiseData,
+      languages : languageData,
       profilePic: "astrologer/" + this.state.user.uid + "/profilePic.png",
       tnc: e.target.tnc.checked,
+      workingwithother : e.target.work.value ,
     };
     let privateInfo = {
       id: this.state.user.uid,
@@ -246,6 +266,7 @@ class Astrohome extends Component {
         ques.options[ques.correctOption] == e.target[ques.id].value ? 1 : 0;
     });
     test_result.questionCount = this.state.questions.length;
+
     return test_result;
   }
 
@@ -260,7 +281,6 @@ class Astrohome extends Component {
         array[currentIndex],
       ];
     }
-
     return array;
   }
 
@@ -282,6 +302,7 @@ class Astrohome extends Component {
             <RegistrationForm
               registerFormHandler={this.registerformhandler}
               questions={this.state.questions}
+              data = {this.state.formOptionData}
               user={this.state.user}
             />
           </div>

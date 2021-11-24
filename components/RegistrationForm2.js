@@ -1,11 +1,115 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styles from "../styles/components/RegistrationForm2.module.css";
 import Link from "next/link";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
+
+const Toast = MySwal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 function RegistrationForm(props) {
   const user = props.user;
+  const [localState,setLocalState] = useState({firstName:"",secondName:"",email:"",dob:"",address:"",gender:""});
   const [date, setDate] = useState(getDate());
   const [formPage, setFormPage] = useState(1);
+  const [expertisedropdown,setExpertisedropdown] = useState(true);
+  const [languagesdropdown,setlanguagesdropdown] = useState(true);
+  console.log(user)
+
+  const firetoast = (name) =>{
+    Toast.fire({
+      icon: "error",
+      title: "Please fill "+name+" !",
+    });
+  }
+  
+  const langDropdownRef = useRef(); 
+  const langDropdownButtonRef = useRef(); 
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (!languagesdropdown && langDropdownRef.current && 
+        
+        !langDropdownButtonRef.current.contains(e.target) &&
+        
+        !langDropdownRef.current.contains(e.target)) {
+        setlanguagesdropdown(true);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [languagesdropdown]);
+
+
+  const expDropdownRef = useRef(); 
+  const expDropdownButtonRef = useRef();
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (!expertisedropdown && expDropdownRef.current 
+        
+         && !expDropdownButtonRef.current.contains(e.target)
+        && !expDropdownRef.current.contains(e.target)) {
+        setExpertisedropdown(true);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [expertisedropdown]);
+
+
   const toggleFormPage = () => {
+    if(formPage==1) {
+      if (localState.firstName == "" )
+       {
+         firetoast("first name")
+         return false;
+       }
+       else if( localState.secondName == "" )
+       {
+        firetoast("second name")
+        return false;
+      }
+       else if (localState.email == "")
+       {
+        firetoast("email")
+        return false;
+      }
+       else if(
+        localState.gender == "")
+        {
+          firetoast("gender")
+          return false;
+        }
+        else if(
+          localState.dob == "" )
+          {
+            firetoast("dob")
+            return false;
+          }
+        else if(
+          localState.address == "")
+          {
+            firetoast("address")
+            return false;
+          }
+    }
+
     setFormPage(formPage === 1 ? 2 : 1);
   };
 
@@ -59,7 +163,7 @@ function RegistrationForm(props) {
     <div className={`${styles.baseContainer}`}>
       <div className="container-fluid bg-white">
         <div className={`row`}>
-          <div className="col-sm">
+          <div className="col-sm" style={{background:"#FAF6E7"}}>
             <div className={`${styles.imageContainer}`} />
           </div>
 
@@ -70,21 +174,22 @@ function RegistrationForm(props) {
                 Astrologer Registration Form
               </h3>
 
-              <form className={`row g-3`} onSubmit={props.registerFormHandler}>
+              <form className={`row g-3 needs-validation`} onSubmit={props.registerFormHandler}>
                 {/* Form Part one  */}
                 <div
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-xs-12 col-md-6`}
                 >
                   <label htmlFor="firstName" className="form-label">
-                    First Name
+                    First Name <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="firstName"
                     name="firstName"
-                    
+                    onChange={(e)=>setLocalState({...localState,firstName:e.target.value})}
+                    required
                   />
                 </div>
 
@@ -93,14 +198,15 @@ function RegistrationForm(props) {
                   className={`col-xs-12 col-md-6`}
                 >
                   <label htmlFor="lastName" className="form-label">
-                    Last Name
+                    Last Name <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="lastName"
                     name="secondName"
-                    
+                    onChange={(e)=>setLocalState({...localState,secondName:e.target.value})}
+
                   />
                 </div>
 
@@ -109,14 +215,14 @@ function RegistrationForm(props) {
                   className={`col-12 `}
                 >
                   <label htmlFor="email" className="form-label">
-                    Email
+                    Email <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="email"
                     className="form-control"
                     id="email"
                     nam="email"
-                    
+                    onChange={(e)=>setLocalState({...localState,email:e.target.value})}
                   />
                 </div>
 
@@ -125,7 +231,7 @@ function RegistrationForm(props) {
                   className={`col-12 `}
                 >
                   <label htmlFor="date" className="form-label">
-                    Date of Birth
+                    Date of Birth  <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="date"
@@ -133,7 +239,7 @@ function RegistrationForm(props) {
                     id="date"
                     name="dob"
                     max={date}
-                    
+                    onChange={(e)=>setLocalState({...localState,dob:e.target.value})}
                   />
                 </div>
 
@@ -142,14 +248,14 @@ function RegistrationForm(props) {
                   className={`col-12 `}
                 >
                   <label htmlFor="address" className="form-label">
-                    Complete Address
+                    Current Address <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="address"
                     name="address"
-                    
+                    onChange={(e)=>setLocalState({...localState,address:e.target.value})}
                   />
                 </div>
 
@@ -158,15 +264,15 @@ function RegistrationForm(props) {
                   className={`col-12 col-md-6`}
                 >
                   <label htmlFor="phone" className="form-label">
-                    Phone Number
+                    Your main Phone Number <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="tel"
                     className="form-control"
                     id="phone"
                     name="phoneNumber"
-                    value={user.phoneNumber}
-                    readOnly
+                    defaultValue={user.phoneNumber}
+                    readOnly={user.phoneNumber ? true:false}
                   />
                 </div>
 
@@ -178,7 +284,7 @@ function RegistrationForm(props) {
                     htmlFor="alternativePhoneNumber"
                     className="form-label"
                   >
-                    Alternate Phone Number
+                    Alternate Phone Number 
                   </label>
                   <input
                     type="tel"
@@ -188,6 +294,38 @@ function RegistrationForm(props) {
                     
                   />
                 </div>
+                <div
+                  style={formPage === 2 ? { display: "none" } : {}}
+                  className={`col-12 col-md-6`}
+                >
+                 <div style={{position:"relative"}} >
+                    <button  ref={expDropdownButtonRef} className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown" onClick={()=>setExpertisedropdown((e) => !e)}>Choose Expertise
+                    <span className="caret"></span></button>
+                    <div ref={expDropdownRef}  style={expertisedropdown ? { display: "none"} : {}} className={`${styles.listDropdownContainer} form-check shadow `}> 
+                    <ul style={{listStyle: "none"}} >
+                      {props.data.expertises.map(e => <li key={e} ><input type="checkbox" className="form-check-input" id={e} /> <label className="form-check-label" htmlFor={e}> {e} </label> </li> )}
+                    </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  style={formPage === 2 ? { display: "none" } : {}}
+                  className={`col-12 col-md-6`}
+                >
+                 <div style={{position:"relative"}} >
+                    <button ref={langDropdownButtonRef} className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown" onClick={()=>setlanguagesdropdown(!languagesdropdown)}>Choose languages
+                    <span className="caret"/>
+                    </button>
+                    <div ref={langDropdownRef}  style={languagesdropdown ? { display: "none"} : {}} className={`${styles.listDropdownContainer} form-check shadow `}> 
+                    <ul style={{listStyle: "none"}} >
+                      {props.data.languages.map(e => <li key={e}><input type="checkbox" className="form-check-input" id={e} />   <label className="form-check-label" htmlFor={e}> {e} </label>   </li> )}
+                    </ul>
+
+                    </div> 
+                    
+                  </div>
+                </div>
 
                 <div
                   style={formPage === 2 ? { display: "none" } : {}}
@@ -195,7 +333,7 @@ function RegistrationForm(props) {
                 >
                   <div>
                     <label className="form-label" htmlFor="maleOption">
-                      Gender
+                      Gender <span style={{color:"red"}}>*</span>
                     </label>
                   </div>
                   <div className={`d-flex justify-content-between flex-wrap`}>
@@ -206,13 +344,15 @@ function RegistrationForm(props) {
                       value="male"
                       id="maleOption"
                       autoComplete="off"
+                      onChange={(e)=>setLocalState({...localState,gender:e.target.value})}
+
                     />
                     <label
                       className="btn btn-outline-warning"
                       htmlFor="maleOption"
                     >
                       Male
-                    </label>
+                    </label> 
 
                     <input
                       type="radio"
@@ -221,6 +361,8 @@ function RegistrationForm(props) {
                       value="female"
                       id="femaleOption"
                       autoComplete="off"
+                      onChange={(e)=>setLocalState({...localState,gender:e.target.value})}
+
                     />
                     <label
                       className={`btn btn-outline-warning `}
@@ -236,6 +378,7 @@ function RegistrationForm(props) {
                       value="other"
                       id="other"
                       autoComplete="off"
+                      onChange={(e)=>setLocalState({...localState,gender:e.target.value})}
                     />
                     <label
                       className={`btn btn-outline-warning `}
@@ -253,7 +396,7 @@ function RegistrationForm(props) {
                   className={`col-12 col-md-6 `}
                 >
                   <label htmlFor="verificationIdFront" className="form-label">
-                    (Aadhar/DL) Front
+                    (Aadhar/DL) Front <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="file"
@@ -269,7 +412,7 @@ function RegistrationForm(props) {
                   className={`col-12 col-md-6 `}
                 >
                   <label htmlFor="verificationIdBack" className="form-label">
-                    (Aadhar/DL) Back
+                    (Aadhar/DL) Back <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="file"
@@ -285,7 +428,7 @@ function RegistrationForm(props) {
                   className={`col-12 `}
                 >
                   <label htmlFor="profilePicture" className="form-label">
-                    Recent Profile Picture
+                    Recent Profile Picture <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="file"
@@ -301,7 +444,7 @@ function RegistrationForm(props) {
                   className={`col-12 col-md-6`}
                 >
                   <label htmlFor="pancard" className="form-label">
-                    PAN Card
+                    PAN Card <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="file"
@@ -317,14 +460,14 @@ function RegistrationForm(props) {
                   className={`col-12 col-md-6`}
                 >
                   <label htmlFor="pancardNumber" className="form-label">
-                    PAN Card Number
+                    PAN Card Number <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="pancardNumber"
                     name="pancardNumber"
-                    pattern="[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}"
+                    pattern="^[ ]*[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[ ]*$"
                     required
                   />
                 </div>
@@ -333,16 +476,27 @@ function RegistrationForm(props) {
                   className={`col-12 `}
                 >
                   <label htmlFor="certification" className="form-label">
-                   Astrology Degree and Certification (in PDF format Only)
+                   Astrology Degree and Certification (in PDF format Only) <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="file"
                     className="form-control"
                     id="certification"
-                    accept="application/pdf"
                     name="certification"
                     required
                   />
+                </div>
+                <div
+                  style={formPage === 1 ? { display: "none" } : {}}
+                  className={`col-12 `}
+                >
+                  <label htmlFor="work" className="form-label">
+                    Are you working with any other similar platform ?
+                  </label>
+                  <select id="work" className="form-select" aria-label="Default select example">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
                 </div>
           
 
@@ -388,7 +542,7 @@ function RegistrationForm(props) {
 
             {/* Bottom button container  */}
             <div
-              className={`  ${styles.formContainer} mt-4 mt-sm-0 mb-sm-4 px-4`}
+              className={`${styles.formContainer} mt-4 mt-sm-0 mb-sm-4 px-4`}
             >
               <div className={`d-flex `}>
                 <button
