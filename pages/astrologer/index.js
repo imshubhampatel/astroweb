@@ -122,11 +122,9 @@ class Astrohome extends Component {
       verificationIdBack: e.target.verificationIdBack.files.length,
       pancardPic: e.target.pancard.files.length,
       certification: e.target.certification.files.length,
-      alternativePhoneNumber: e.target.alternativePhoneNumber.value,
       pancardNumber: e.target.pancardNumber.value,
       phoneNumber: e.target.phoneNumber.value,
     };
-    console.log(data);
     if (
       data.firstName == "" ||
       data.secondName == "" ||
@@ -147,7 +145,6 @@ class Astrohome extends Component {
   async registerformhandler(e) {
     e.preventDefault();
     if (!this.validateRegisterForm(e)) {
-      // alert("Please complete the form!");
       Toast.fire({
         icon: "error",
         title: "Please Complete Registration Form",
