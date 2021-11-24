@@ -3,8 +3,8 @@ class WalletWithdrawal {
     this.id = data.id;
     this.astrologer = data.astrologer;
     this.status = data.status;
-      this.amount = data.amount;
-      this.time = data.time;
+    this.amount = data.amount;
+    this.time = data.time;
     this.approvedBy = data.approvedBy ? data.approvedBy : "";
     this.remark = data.remark;
    

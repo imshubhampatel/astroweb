@@ -8,6 +8,7 @@ class AstrologerPrivateData {
     this.certificationUrl = data.certificationUrl; 
     this.pancardNumber = data.pancardNumber;
     this.pancardLink = data.pancardLink;
+    this.razorpayId = data.razorpayId ? data.razorpayId : null;
     this.accountInfo = data.accountInfo ? data.accountInfo : {accountNo : "",bank:"",branch:"",ISFC :"",holderName:""};
 
 
@@ -30,6 +31,7 @@ const astrologerPrivateDataConverter = {
       verificationIdBack: data.verificationIdBack,
       pancardNumber: data.pancardNumber,
       accountInfo: data.accountInfo,
+      razorpayId : data.razorpayId,
     };
   },
   fromFirestore: (snapshot, options) => {
