@@ -103,7 +103,7 @@ function RegistrationForm(props) {
     <div className={`${styles.baseContainer}`}>
       <div className="container-fluid bg-white">
         <div className={`row`}>
-          <div className="col-sm">
+          <div className="col-sm" style={{background:"#FAF6E7"}}>
             <div className={`${styles.imageContainer}`} />
           </div>
 
