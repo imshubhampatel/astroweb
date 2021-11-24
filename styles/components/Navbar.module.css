@@ -46,9 +46,11 @@
 .NavBar .logoContainer {
   width: 50px;
   margin-left: 90px;
-  height: 70px;
+  height: 60px;
   /* border: solid red;  */
   /* margin-top: 1vw; */
+  /* border: 1px solid red; */
+  margin-top: auto;
 }
 
 @media (max-width: 770px) {
@@ -62,7 +64,7 @@
     height: 40px;
     margin-left: 20px;
     margin-top: 15px;
-
+    margin-bottom: 10px;
   }
 
   .NavBar .MobileNavigation {
