@@ -4,7 +4,7 @@ import styles from "../styles/pages/index.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import HeroImage from "../public/images/launching_soon_hero.svg";
+import HeroImage from "../public/images/launchingSoon.png";
 
 const calculateTimeLeft = () => {
   const launchDate = new Date("February 15, 2022 03:00:00");
@@ -67,7 +67,7 @@ export default function Home() {
         <div className={` container-fluid ${styles.container}`}>
           <div className={`row justify-content-center align-items-center`}>
             {/* Image   */}
-            <div className={` col-12  col-md-4 ${styles.heroContainer}`}>
+            <div className={` col-12  col-md-3 ${styles.heroContainer}`}>
               <Image src={HeroImage} />
             </div>
 
