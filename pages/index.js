@@ -4,6 +4,8 @@ import styles from "../styles/pages/index.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import HeroImage from "../public/images/launching_soon_hero.svg";
+
 const calculateTimeLeft = () => {
   const launchDate = new Date("February 15, 2022 03:00:00");
   const difference = +launchDate - +new Date();
@@ -65,9 +67,8 @@ export default function Home() {
         <div className={` container-fluid ${styles.container}`}>
           <div className={`row justify-content-center align-items-center`}>
             {/* Image   */}
-            <div className={` col-12  col-md-5 ${styles.heroContainer}`}>
-              <Image src="/images/launching_soon_hero.svg" layout="fill" />
-              <a href="https://www.freepik.com/vectors/calendar"></a>
+            <div className={` col-12  col-md-4 ${styles.heroContainer}`}>
+              <Image src={HeroImage} />
             </div>
 
             {/* Text Block  */}
