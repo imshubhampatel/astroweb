@@ -18,7 +18,7 @@ const Toast = MySwal.mixin({
 });
 function RegistrationForm(props) {
   const user = props.user;
-  const [localState,setLocalState] = useState({firstName:"",secondName:"",email:"",dob:"",address:"",gender:""});
+  const [localState,setLocalState] = useState({firstName:"",secondName:"",email:"",dob:"",address:"",gender:"",expertise:0,languages:0});
   const [date, setDate] = useState(getDate());
   const [formPage, setFormPage] = useState(1);
   const [expertisedropdown,setExpertisedropdown] = useState(true);
@@ -58,7 +58,6 @@ function RegistrationForm(props) {
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
       if (!expertisedropdown && expDropdownRef.current 
-        
          && !expDropdownButtonRef.current.contains(e.target)
         && !expDropdownRef.current.contains(e.target)) {
         setExpertisedropdown(true);
@@ -102,10 +101,19 @@ function RegistrationForm(props) {
             firetoast("dob")
             return false;
           }
-        else if(
-          localState.address == "")
+        else if(localState.address == "")
           {
             firetoast("address")
+            return false;
+          }
+          else if(localState.expertise == 0)
+          {
+            firetoast("Expertise")
+            return false;
+          }
+          else if(localState.languages == 0)
+          {
+            firetoast("Languages")
             return false;
           }
     }
@@ -303,7 +311,10 @@ function RegistrationForm(props) {
                     <span className="caret"></span></button>
                     <div ref={expDropdownRef}  style={expertisedropdown ? { display: "none"} : {}} className={`${styles.listDropdownContainer} form-check shadow `}> 
                     <ul style={{listStyle: "none"}} >
-                      {props.data.expertises.map(e => <li key={e} ><input type="checkbox" className="form-check-input" id={e} /> <label className="form-check-label" htmlFor={e}> {e} </label> </li> )}
+                      {props.data.expertises.map(e => <li key={e} ><input type="checkbox" onChange={e=>{
+                        let val = e.target.checked==true ? 1 : -1;
+                        val = localState.expertise + val;
+                        setLocalState({...localState,expertise:val}); }} className="form-check-input" id={e} /> <label className="form-check-label" htmlFor={e}> {e} </label> </li> )}
                     </ul>
                     </div>
                   </div>
@@ -319,7 +330,10 @@ function RegistrationForm(props) {
                     </button>
                     <div ref={langDropdownRef}  style={languagesdropdown ? { display: "none"} : {}} className={`${styles.listDropdownContainer} form-check shadow `}> 
                     <ul style={{listStyle: "none"}} >
-                      {props.data.languages.map(e => <li key={e}><input type="checkbox" className="form-check-input" id={e} />   <label className="form-check-label" htmlFor={e}> {e} </label>   </li> )}
+                      {props.data.languages.map(e => <li key={e}><input type="checkbox" onChange={e=>{
+                        let val = e.target.checked==true ? 1 : -1;
+                        val = localState.languages + val;
+                        setLocalState({...localState,languages:val}); }} className="form-check-input" id={e} />   <label className="form-check-label" htmlFor={e}> {e} </label>   </li> )}
                     </ul>
 
                     </div> 
@@ -497,6 +511,38 @@ function RegistrationForm(props) {
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
+                </div>
+                <div
+                  style={formPage === 1 ? { display: "none" } : {}}
+                  className={`col-12 col-md-4`}
+                >
+                  <label htmlFor="experience" className="form-label">
+                    Experience (in years) <span style={{color:"red"}}>*</span>
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="experience"
+                    name="experience"
+                    required
+                  />
+                </div>
+                <div
+                  style={formPage === 1 ? { display: "none" } : {}}
+                  className={`col-12 col-md-8`}
+                >
+                  <label htmlFor="dailyHours" className="form-label">
+                    How many hours you can contribute daily ? <span style={{color:"red"}}>*</span>
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="dailyHours"
+                    name="dailyHours"
+                    max={24}
+                    min={0}
+                    required
+                  />
                 </div>
           
 

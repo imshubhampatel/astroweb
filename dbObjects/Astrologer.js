@@ -7,7 +7,8 @@ class Astrologer {
     this.dob = data.dob
     this.address = data.address 
     this.gender = data.gender
-    this.experience = data.experience ? data.experience : 0;
+    this.experience = data.experience ? Number(data.experience) : 0;
+    this.dailyHours = data.dailyHours ? Number(data.dailyHours):0;
     this.profilePic = data.profilePic
     this.about = data.about ? data.about : "Please add some line about you" 
 
@@ -60,6 +61,7 @@ const astrologerConverter = {
       address: data.address,
       gender: data.gender,
       experience: data.experience,
+      dailyHours : data.dailyHours,
       profilePic: data.profilePic,
       about : data.about,
       workingwithother : data.workingwithother,
