@@ -7,7 +7,11 @@
   /* display: flex;
     justify-content: center; */
   position: relative;
-  height: 300px;
+  /* height: 300px; */
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+  max-width: 350px;
   /* margin-top: 2px; */
 }
 
@@ -17,9 +21,11 @@
     /* display: flex;
       justify-content: center; */
     position: relative;
-    height: 520px;
+    /* height: 520px; */
     margin-top: 100px;
     margin-bottom: 100px;
+    display: block;
+    max-width: none
     /* margin-right: 50px; */
   }
 }
