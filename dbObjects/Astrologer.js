@@ -25,12 +25,7 @@ class Astrologer {
     this.voiceSeconds = data.voiceSeconds  ?data.voiceSeconds : 0
     
     // // Expertise 
-    this.expertise = data.expertise ? data.expertise : {
-     vedicAstrology : data.vedicAstrology ? data.vedicAstrology : false,
-     tarotCardReading : data.tarotCardReading ? data.tarotCardReading:false,
-     numerlogy : data.numerlogy ? data.numerlogy: false,
-     matchMaking : data.matchMaking ? data.matchMaking: false
-    }
+    this.expertise = data.expertise ? data.expertise : {}
     this.reviews = data.reviews ?{
       ...data.reviews
     } : {}

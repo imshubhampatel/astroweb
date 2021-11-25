@@ -113,6 +113,7 @@ const FirebaseAuth = () => {
                 <select
                   className="form-control"
                   onChange={(e) => setcountryCode(e.target.value)}
+                  defaultValue="+91"
                 >
                   <option selected="selected" value="+91">
                     +91
