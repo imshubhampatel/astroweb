@@ -137,7 +137,7 @@ class Astrohome extends Component {
       data.verificationIdBack == 0 ||
       data.verificationIdFront == 0 ||
       data.pancardPic == 0 ||
-      data.certification == 0
+      data.certification == 0 
     )
       return false;
     else return true;
@@ -166,6 +166,8 @@ class Astrohome extends Component {
       gender: e.target.gender.value,
       dob: Date(e.target.dob.value),
       address: e.target.address.value,
+      experience : Number(e.target.experience.value),
+      dailyHours : Number(e.target.dailyHours.value),
       expertise : expertiseData,
       languages : languageData,
       profilePic: "astrologer/" + this.state.user.uid + "/profilePic.png",
@@ -307,17 +309,13 @@ class Astrohome extends Component {
             />
           </div>
         );
-      else if (this.state.astrologerProfileInfo && this.state.testStatus) {
+      else if (this.state.astrologerProfileInfo ) {
         return <RegistrationForm completed="true" />;
-      } else if (this.state.astrologerProfileInfo) {
-        return (
-          <RegistrationTest
-            questions={this.state.questions}
-            submitTestHandler={this.submitTestHandler}
-          />
-        );
-      } else return <div>Loading Test</div>;
-    } else return <div>Loading</div>;
+      }
+      else return <div>Loading</div>;
+    }
+    else return <div>Loading</div>;
+
   }
 }
 

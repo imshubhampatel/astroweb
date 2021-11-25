@@ -67,7 +67,7 @@ export default function Home() {
         <div className={` container-fluid ${styles.container}`}>
           <div className={`row justify-content-center align-items-center`}>
             {/* Image   */}
-            <div className={` col-12  col-md-3 ${styles.heroContainer}`}>
+            <div className={` col-9  col-md-3 ${styles.heroContainer}`}>
               <Image src={HeroImage} />
             </div>
 
