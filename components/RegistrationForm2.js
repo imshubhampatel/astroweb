@@ -142,8 +142,8 @@ function RegistrationForm(props) {
 
             <div className="col-sm-8 my-4  ">
               <p className="mx-sm-auto text-sm-center">
-                Thanks For fiilling out your details. We will verify your
-                details in the next 24 hours and will get back to you!
+                Thanks For filling out your details. We will verify your
+                details and get back to you!                            
               </p>
 
               <div
