@@ -23,7 +23,7 @@ function RegistrationForm(props) {
   const [formPage, setFormPage] = useState(1);
   const [expertisedropdown,setExpertisedropdown] = useState(true);
   const [languagesdropdown,setlanguagesdropdown] = useState(true);
-  console.log(user)
+  // console.log(user)
 
   const firetoast = (name) =>{
     Toast.fire({
@@ -135,7 +135,7 @@ function RegistrationForm(props) {
     }
 
     today = yyyy + "-" + mm + "-" + dd;
-    console.log(today);
+    // console.log(today);
     return today;
   }
   // Return Form Completion Page 

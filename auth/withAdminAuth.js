@@ -16,14 +16,14 @@ const withAdminAuth = (Component) => (props) => {
           if (e)
           {
             
-            console.log("You are admin")
+            // console.log("You are admin")
             setLoading(false);
           }
           else {
             isSubAdmin(authUser.uid).then(e => {
               if (e)
               {
-                console.log("You are Subadmin");
+                // console.log("You are Subadmin");
                 setLoading(false);
               }
               else {

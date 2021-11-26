@@ -3,7 +3,7 @@ import styles from "../../styles/components/adminPanel/meetingCard.module.css"
 
 export default function MeetingCard( props ) {
 
-  console.log(props);
+  // console.log(props);
 
   return (
     <div className={`${styles.container}  d-flex gap-2 `}>
