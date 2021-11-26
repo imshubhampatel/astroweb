@@ -27,9 +27,6 @@ class Astrologer {
     
     // // Expertise 
     this.expertise = data.expertise ? data.expertise : {}
-    this.reviews = data.reviews ?{
-      ...data.reviews
-    } : {}
     
     this.languages = data.languages ? {
       ...data.languages
@@ -89,7 +86,6 @@ const astrologerConverter = {
       
 
       // Reviews 
-      reviews: data.reviews,
       languages: data.languages,    
       tnc : data.tnc,
     };
