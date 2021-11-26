@@ -417,6 +417,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="verificationIdFront"
                     name="verificationIdFront"
+                    accept="image/*"
                     required
                   />
                 </div>
@@ -433,6 +434,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="verificationIdBack"
                     name="verificationIdBack"
+                    accept="image/*"
                     required
                   />
                 </div>
@@ -449,6 +451,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="profilePicture"
                     name="profilePicture"
+                    accept="image/*"
                     required
                   />
                 </div>
@@ -465,6 +468,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="pancard"
                     name="pancard"
+                    accept="image/*"
                     required
                   />
                 </div>
@@ -497,6 +501,7 @@ function RegistrationForm(props) {
                     className="form-control"
                     id="certification"
                     name="certification"
+                    accept="application/pdf,application/vnd.ms-excel,image/*"
                     required
                   />
                 </div>

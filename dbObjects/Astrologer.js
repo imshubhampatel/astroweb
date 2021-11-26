@@ -80,11 +80,8 @@ const astrologerConverter = {
       //Rating & Reviews
       rating: data.rating,
       ratingCount: data.ratingCount,
-
       // verification
       status: data.status,
-      
-
       // Reviews 
       languages: data.languages,    
       tnc : data.tnc,
