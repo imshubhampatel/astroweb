@@ -30,7 +30,7 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    background-color: #FAF6E7;
+    background-color: #FBE5AD;
    
     
 }
@@ -44,7 +44,7 @@
         background-image: url("/images/mascot.png");
         background-position: center;
         background-size: cover;
-        background-color: #FAF6E7;
+        background-color: #FBE5AD;
     }
 }
 
