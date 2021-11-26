@@ -16,10 +16,10 @@ async function isAdmin(uid) {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    console.log("Admin:", docSnap.data());
+    // console.log("Admin:", docSnap.data());
     return true;
   } else {
-    console.log("You are not admin!");
+    // console.log("You are not admin!");
     return false;
   }
 }
@@ -29,10 +29,10 @@ async function isSubAdmin(uid) {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    console.log("Sub Admin", docSnap.data());
+    // console.log("Sub Admin", docSnap.data());
     return true;
   } else {
-    console.log("Not a SubAdmin");
+    // console.log("Not a SubAdmin");
     return false;
   }
 }
