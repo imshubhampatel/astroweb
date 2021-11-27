@@ -52,7 +52,11 @@ function RegistrationForm(props) {
     };
   }, [languagesdropdown]);
 
-
+  const validateEmail = (email) => {
+    return       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    .test(String(email)
+      .toLowerCase());
+      }; 
   const expDropdownRef = useRef(); 
   const expDropdownButtonRef = useRef();
   useEffect(() => {
@@ -84,9 +88,9 @@ function RegistrationForm(props) {
         firetoast("second name")
         return false;
       }
-       else if (localState.email == "")
+       else if (localState.email == "" || !validateEmail(localState.email))
        {
-        firetoast("email")
+        firetoast("correct email address")
         return false;
       }
        else if(
@@ -98,7 +102,7 @@ function RegistrationForm(props) {
         else if(
           localState.dob == "" )
           {
-            firetoast("dob")
+            firetoast("Date of birth")
             return false;
           }
         else if(localState.address == "")
@@ -453,38 +457,6 @@ function RegistrationForm(props) {
                   />
                 </div>
 
-                <div
-                  style={formPage === 1 ? { display: "none" } : {}}
-                  className={`col-12 col-md-6`}
-                >
-                  <label htmlFor="pancard" className="form-label">
-                    PAN Card <span style={{color:"red"}}>*</span>
-                  </label>
-                  <input
-                    type="file"
-                    className="form-control"
-                    id="pancard"
-                    name="pancard"
-                    required
-                  />
-                </div>
-
-                <div
-                  style={formPage === 1 ? { display: "none" } : {}}
-                  className={`col-12 col-md-6`}
-                >
-                  <label htmlFor="pancardNumber" className="form-label">
-                    PAN Card Number <span style={{color:"red"}}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="pancardNumber"
-                    name="pancardNumber"
-                    pattern="^[ ]*[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[ ]*$"
-                    required
-                  />
-                </div>
                 <div
                   style={formPage === 1 ? { display: "none" } : {}}
                   className={`col-12 `}

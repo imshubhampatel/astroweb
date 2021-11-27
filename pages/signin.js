@@ -107,7 +107,6 @@ const FirebaseAuth = () => {
             className="form-group"
           >
             <label htmlFor="phoneNumber">Please Enter your Phone Number</label>
-            {countryCode}
             <div className="row">
               <div className="col-3">
                 <select
@@ -151,6 +150,7 @@ const FirebaseAuth = () => {
               onChange={(e) => {
                 setotp(e.target.value);
               }}
+              maxLength="6"
             ></input>
             <br />
             <br />
