@@ -9,7 +9,6 @@ import {
   getFirestore,
   collection,
   query,
-  where,
   getDocs,
   getDoc,
   setDoc,
@@ -120,9 +119,7 @@ class Astrohome extends Component {
       profilePic: e.target.profilePicture.files.length,
       verificationIdFront: e.target.verificationIdFront.files.length,
       verificationIdBack: e.target.verificationIdBack.files.length,
-      pancardPic: e.target.pancard.files.length,
       certification: e.target.certification.files.length,
-      pancardNumber: e.target.pancardNumber.value,
       phoneNumber: e.target.phoneNumber.value,
     };
     if (
@@ -136,7 +133,6 @@ class Astrohome extends Component {
       data.profilePic == 0 ||
       data.verificationIdBack == 0 ||
       data.verificationIdFront == 0 ||
-      data.pancardPic == 0 ||
       data.certification == 0 
     )
       return false;
@@ -147,7 +143,7 @@ class Astrohome extends Component {
     if (!this.validateRegisterForm(e)) {
       Toast.fire({
         icon: "error",
-        title: "Please Complete Registration Form",
+        title: "Please Complete Registration Form and fill correct details",
       });
       return;
     }
@@ -179,16 +175,15 @@ class Astrohome extends Component {
       verificationIdFront: "astrologer/" + profileData.id + "/id_front.png",
       alternativePhoneNumber: e.target.alternativePhoneNumber.value,
       verificationIdBack: "astrologer/" + profileData.id + "/id_back.png",
-      pancardLink: "astrologer/" + profileData.id + "/pancard.png",
+      pancardLink: "",
       certificationUrl: "astrologer/" + profileData.id + "/certification.png",
-      pancardNumber: e.target.pancardNumber.value.toUpperCase(),
+      pancardNumber:"",
       phoneNumber: e.target.phoneNumber.value,
     };
 
     let profilePic = e.target.profilePicture.files[0];
     let verificationIdFront = e.target.verificationIdFront.files[0];
     let verificationIdBack = e.target.verificationIdBack.files[0];
-    let pancardPic = e.target.pancard.files[0];
     let certification = e.target.certification.files[0];
 
     uploadDocToStorage({
@@ -196,10 +191,6 @@ class Astrohome extends Component {
       file: certification,
     });
     uploadDocToStorage({ path: profileData.profilePic, file: profilePic });
-    uploadDocToStorage({
-      path: privateInfo.pancardLink,
-      file: pancardPic,
-    });
     uploadDocToStorage({
       path: privateInfo.verificationIdFront,
       file: verificationIdFront,
