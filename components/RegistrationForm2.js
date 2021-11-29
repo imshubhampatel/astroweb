@@ -242,13 +242,13 @@ function RegistrationForm(props) {
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-12 `}
                 >
-                  <label htmlFor="date" className="form-label">
+                  <label htmlFor="dob" className="form-label">
                     Date of Birth  <span style={{color:"red"}}>*</span>
                   </label>
                   <input
                     type="date"
                     className="form-control"
-                    id="date"
+                    id="dob"
                     name="dob"
                     max={date}
                     onChange={(e)=>setLocalState({...localState,dob:e.target.value})}
