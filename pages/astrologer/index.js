@@ -160,7 +160,7 @@ class Astrohome extends Component {
       secondName: e.target.secondName.value,
       email: e.target.email.value,
       gender: e.target.gender.value,
-      dob: Date(e.target.dob.value),
+      dob: new Date(Date.parse(e.target.dob.value)),
       address: e.target.address.value,
       experience : Number(e.target.experience.value),
       dailyHours : Number(e.target.dailyHours.value),
