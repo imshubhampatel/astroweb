@@ -13,7 +13,7 @@ const OrderSearchPagination = (props) => {
   
   useEffect(() => {
     initializePaginationData(props.data);
-  }, [props])
+  }, [props.data])
   function initializePaginationData(data) {
     setpaginationData(data);
     settotalPages(data.length / props.ItemsPerPage);
@@ -66,7 +66,7 @@ const OrderSearchPagination = (props) => {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Order ID</th>
-                <th scope="col">Status</th>
+                <th scope="col">Change Status</th>
                 <th scope="col">Item Count</th>
                 <th scope="col">Amount</th>
                 <th scope="col">user</th>
@@ -86,7 +86,7 @@ const OrderSearchPagination = (props) => {
                     >
                       <a target="_blank">{e.id}</a>
                     </Link></td>
-                  <td>{e.status}</td>
+                  <td><button className="btn btn-primary" onClick={()=>props.onChangeOrderStatus(e)}>{e.status}</button></td>
                   <td>{e.itemCount}</td>
                   <td>{e.amount}</td>
                   <td>

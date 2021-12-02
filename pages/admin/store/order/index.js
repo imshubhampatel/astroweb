@@ -8,6 +8,7 @@ import {
   where,
   getDocs,
   getFirestore,
+  doc,setDoc,
   addDoc,
 } from "firebase/firestore";
 import { firebase,auth } from "../../../../config";
@@ -18,62 +19,71 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import OrderSearchPagination from '../../../../components/adminPanel/OrderSearchPagination'
 import {Order ,OrderConverter,OrderStatus} from '../../../../dbObjects/Order'
-
+import { FaCut } from "react-icons/fa";
+import {changeOrderStatus} from '../../../../utilities/store/order'
 
 
 const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
 
 function OrderManagement() {
-    const [statusOptions,setStatusOptions] = useState("");
+    const [statusOption,setStatusOption] = useState(OrderStatus.CREATED);
     const [ordersList,setOrdersList] = useState([]);
 
     useEffect(()=>{
         getAllOrders();
-    },[]);
+    },[statusOption]);
     async function getAllOrders() {
-        const ref = query(collection(db, "order"));
+        const ref = query(collection(db, "order"),where("status","==",statusOption));
         const querySnapshot = await getDocs(ref);
         let data = querySnapshot.docs.map((doc) => {
           return { id: doc.id, ...doc.data() };
         });        
         setOrdersList(data);
     }
-    async function changeOrderStatus(ItemId) {
+    function removeFromOrderList(data) {
+        let pr = ordersList;
+        pr.splice(ordersList.indexOf(data), 1);
+        setOrdersList(pr);
+      }
+ 
+    async function changeOrderStatusHandler(event,order) {
+        event.preventDefault();
+        removeFromOrderList(order);
+        order.status = event.target.orderStatus.value;
+        changeOrderStatus(order);
+        MySwal.clickConfirm();
+    }
+    async function onChangeOrderStatusView(order) {
         MySwal.fire({
             showConfirmButton: false,
             html: <div>
-                <form onSubmit={addInventory}>
-        <input 
-            className="form-control"
-            placeholder="ID"
-            name="id"
-            id="id"
-            value={ItemId}
-            type="text"  
-            disabled   
-            />         
+          <form onSubmit={(e)=>
+              changeOrderStatusHandler(e,order)}>      
              <input 
             className="form-control"
             placeholder="Qauntity of item "
-            name="quantity"
-            id="quantity"
-            type="number"  
-            required   
+            name="orderId"
+            id="orderId"
+            type="text"  
+            value={order.id} 
+            readOnly
             />
-             <input 
-             class="form-check"
-            name="remark"
-            id="remark"
-            type="text"    
-            />
+             <select 
+             className="form-select"
+            name="orderStatus"
+            id="orderStatus"
+            defaultValue={order.status}
+            >
+             {Object.keys(OrderStatus).map((ctg) => <option value={OrderStatus[ctg]}> {ctg}</option>)}
+                </select>
     
             <div className="text-end mt-4">
               <button
-                className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+                className="btn btn-success"
                 type="submit"
               >
-                  Add
+                  Change Status
               </button>
             </div>
         </form>
@@ -83,7 +93,6 @@ function OrderManagement() {
         }
           })
 
-   
     }
     return (
         <div className="container">
@@ -94,13 +103,14 @@ function OrderManagement() {
             </div> 
             <div className="dropdown">
                 <label for="status" > Select Order Status  </label>
-                <select name="status" onChange={(e)=>setStatusOptions(e.target.value)} class="btn btn-secondary dropdown-toggle">
-                    {["categories"].map((ctg) => <option value={ctg.id}> {ctg.name}</option>)}
+                <select name="status" onChange={(e)=>{
+                    setStatusOption(e.target.value)}} 
+                    class="btn btn-secondary dropdown-toggle">
+                    {Object.keys(OrderStatus).map((ctg) => <option value={OrderStatus[ctg]}> {ctg}</option>)}
                 </select>
-     
             </div>
             <div className="row">
-                <OrderSearchPagination data={ordersList} changeOrderStatus={changeOrderStatus} ItemsPerPage={10}></OrderSearchPagination>
+                <OrderSearchPagination data={ordersList} onChangeOrderStatus={onChangeOrderStatusView} ItemsPerPage={10}></OrderSearchPagination>
 
             </div>
             
