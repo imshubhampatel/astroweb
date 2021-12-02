@@ -1,5 +1,5 @@
 .container {
-  background: linear-gradient(0deg, #091B3F, #091B3F), #000000;
+  background: linear-gradient(0deg, #061528, #061528), #000000;
 }
 
 .heroContainer {
@@ -7,9 +7,18 @@
   /* display: flex;
     justify-content: center; */
   position: relative;
-  height: 300px;
-  /* margin-top: 2px; */
+  /* height: 300px; */
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+  max-width: 350px;
+  -webkit-animation:spin 18s linear infinite;
+  -moz-animation:spin 18s linear infinite;
+  animation:spin 18s linear infinite;
 }
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 @media (min-width: 768px) {
   .heroContainer {
@@ -17,9 +26,11 @@
     /* display: flex;
       justify-content: center; */
     position: relative;
-    height: 550px;
+    /* height: 520px; */
     margin-top: 100px;
     margin-bottom: 100px;
+    display: block;
+    max-width: none
     /* margin-right: 50px; */
   }
 }
@@ -63,16 +74,16 @@
 }
 
 .days {
-  color: #F74B98
+  color: #59F0E9;
 }
 .hours{
-  color: #E85234
+  color:  #F8BE2E;
 }
 .minutes{
-  color: #019AB1
+  color: #F29359;
 }
 .seconds{
-  color: #9FC03D
+  color: #C37075;
 }
 
 .timerText {
