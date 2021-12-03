@@ -40,7 +40,13 @@ const FirebaseAuth = () => {
 
   // Sent OTP
   const signin = () => {
-    if (mynumber === "" || mynumber.length < 10) return;
+    if (mynumber === "") {
+       Toast.fire({
+         icon: "error",
+         title: "Please Enter Phone Number",
+       });
+      return;
+    }
 
     let verify = new RecaptchaVerifier(
       "recaptcha-container",
@@ -117,7 +123,12 @@ const FirebaseAuth = () => {
                   <option selected="selected" value="+91">
                     +91
                   </option>
+                  <option value="+16">+16</option>
+                  <option value="+12">+12</option>
                   <option value="+61">+61</option>
+                  <option value="+44">+44</option>
+                  <option value="+49">+49</option>
+                  <option value="+61">+1</option>
                 </select>
               </div>
               <div className="col-9">
