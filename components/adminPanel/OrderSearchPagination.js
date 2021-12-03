@@ -16,15 +16,13 @@ const OrderSearchPagination = (props) => {
   }, [props.data])
   function initializePaginationData(data) {
     setpaginationData(data);
-    settotalPages(data.length / props.ItemsPerPage);
+    settotalPages(props.totalOrders / props.ItemsPerPage);
     setfirstItemNum(0);
-    setlastItemNum(props.ItemsPerPage);
   }
   function handlePageChange({ selected }) {
     let last = (selected + 1) * props.ItemsPerPage;
-    let first = last - ItemsPerPage;
-    setfirstItemNum(first);
-    setlastItemNum(last);
+    let first = last - props.ItemsPerPage;
+    props.getAllOrders(first,last);
   }
   function searchHandler(event) {
     initializePaginationData(
@@ -74,7 +72,7 @@ const OrderSearchPagination = (props) => {
               </tr>
             </thead>
             <tbody>
-              {paginationData.slice(firstItemNum, lastItemNum).map((e) => (
+              {paginationData.map((e) => (
                 <tr key={e.id}>
                   <td> 1 </td>
                   <td> 
@@ -112,7 +110,7 @@ const OrderSearchPagination = (props) => {
           previousLabel={"← Previous"}
           nextLabel={"Next →"}
           breakLabel={"..."}
-          pageCount={props.data.length / props.ItemsPerPage}
+          pageCount={props.totalOrders / props.ItemsPerPage}
           marginPagesDisplayed={2}
           onPageChange={(e) => handlePageChange(e)}
           containerClassName={"pagination"}
