@@ -63,4 +63,13 @@ const employeeConverter = {
   },
 };
 
-export { employeeConverter, Employee };
+const EmployeePermissions = {
+ ASTRO_MANAGEMENT :"astro_management",
+ EMP_MANAGEMENT :"emp_management",
+ WALLET_MANAGEMENT :"wallet_management",
+ USER_MANAGEMENT :"user_management",
+ BROADCAST_MANAGEMENT :"broadcast_management",
+ STORE_MANAGEMENT :"store" ,
+ NONE : null,
+}
+export { employeeConverter, Employee ,EmployeePermissions };

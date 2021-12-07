@@ -19,6 +19,7 @@ import {
 } from "../../dbObjects/WalletWithdrawal";
 import PendingRequestWallet from "../../components/adminPanel/pendingRequestsWallet";
 import WalletHistory from "../../components/adminPanel/walletHistory";
+import {EmployeePermissions} from  '../../dbObjects/Employee'
 
 const db = getFirestore(firebase);
 
@@ -102,7 +103,7 @@ const walletManagment = withAdminAuth(() => {
       </div>
     </div>
   );
-});
+},EmployeePermissions.WALLET_MANAGEMENT);
 
 walletManagment.getLayout = function getLayout(page) {
   return <AdminLayout active_page="4">{page}</AdminLayout>;
