@@ -29,6 +29,8 @@ function PendingRequestWallet(props) {
           data={e}
           reject={props.rejectPendingRequest}
           approve={props.approvePendingRequest}
+          astrologerPrivateDetailView={props.astrologerPrivateDetailView}
+
         ></WalletInfoCard>
       ))}
       <div>

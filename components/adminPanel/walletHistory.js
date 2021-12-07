@@ -86,7 +86,7 @@ function WalletHistory(props) {
         .filter(myFilter)
         .slice(firstItem, lastItem)
         .map((e) => (
-          <WalletInfoCard key={e.id}data={e}></WalletInfoCard>
+          <WalletInfoCard key={e.id}data={e} astrologerPrivateDetailView={props.astrologerPrivateDetailView}></WalletInfoCard>
         ))}
       <div>
         <ReactPaginate
