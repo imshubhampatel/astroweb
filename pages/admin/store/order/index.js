@@ -14,6 +14,9 @@ import {
   doc,
   setDoc,
   addDoc,
+  endAt,
+  endBefore,
+  startAfter,
 } from "firebase/firestore";
 import { firebase, auth } from "../../../../config";
 import Link from "next/link";
@@ -28,7 +31,11 @@ import {
   OrderStatus,
 } from "../../../../dbObjects/Order";
 import { FaCut } from "react-icons/fa";
-import { changeOrderStatus } from "../../../../utilities/store/order";
+import {
+  changeOrderStatus,
+  getAllOrdersBySearchValue,
+  getAllOrdersByDate
+} from "../../../../utilities/store/order";
 
 const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
@@ -36,25 +43,50 @@ const db = getFirestore(firebase);
 function OrderManagement() {
   const [statusOption, setStatusOption] = useState(OrderStatus.CREATED);
   const [ordersList, setOrdersList] = useState([]);
+  const [lastQuerySnapshot, setlastQuerySnapshot] = useState([]);
   const [totalOrders, settotalOrders] = useState(100);
-  const [itemsPerPage, setItemPerPage] = useState(10);
+  const [itemsPerPage, setItemPerPage] = useState(2);
 
   useEffect(() => {
-    getAllOrders(0, itemsPerPage);
+    getOrders(-1);
   }, [statusOption]);
-  async function getAllOrders(first,last) {
-    const ref = query(
-      collection(db, "order"),
-      where("status", "==", statusOption),
-      orderBy("counter"),
-      startAt(first),
-      limit(last-first)
-    );
+  async function getAllOrders(object, type, itemsPerPage) {
+    let ref = null;
+    if (type == 1 && typeof object.docs[object.docs.length - 1] !== "undefined")
+      ref = query(
+        collection(db, "order"),
+        where("status", "==", statusOption),
+        orderBy("timestamp"),
+        startAfter(object.docs[object.docs.length - 1]),
+        limit(itemsPerPage)
+      );
+    else if (type == 0 && typeof object.docs[0] !== "undefined") {
+      ref = query(
+        collection(db, "order"),
+        where("status", "==", statusOption),
+        orderBy("timestamp"),
+        endBefore(object.docs[0]),
+        limit(itemsPerPage)
+      );
+    } else if (type == -1) {
+      ref = query(
+        collection(db, "order"),
+        where("status", "==", statusOption),
+        orderBy("timestamp"),
+        limit(itemsPerPage)
+      );
+    }
     const querySnapshot = await getDocs(ref);
+    setlastQuerySnapshot(querySnapshot);
     let data = querySnapshot.docs.map((doc) => {
-      return { id: doc.id, ...doc.data() };
+      return doc.data();
     });
-    setOrdersList(data);
+    return data;
+  }
+  async function getOrders(first) {
+    getAllOrders(lastQuerySnapshot, first, itemsPerPage).then((data) => {
+      setOrdersList(data);
+    });
   }
   function removeFromOrderList(data) {
     let pr = ordersList;
@@ -106,6 +138,13 @@ function OrderManagement() {
       preConfirm: () => {},
     });
   }
+ 
+  async function searchOrder(searchValue) {
+    getAllOrdersBySearchValue(searchValue).then(data => setOrdersList(data));
+  }
+  async function getAllOrdersByDateHandler(search) {
+    getAllOrdersByDate(statusOption,search).then(data => setOrdersList(data));
+  }
   return (
     <div className="container">
       <div class="jumbotron jumbotron-fluid bg-dark text-white">
@@ -114,7 +153,7 @@ function OrderManagement() {
         </div>
       </div>
       <div className="dropdown">
-        <label for="status"> Select Order Status </label>
+        <label htmlFor="status"> Select Order Status </label>
         <select
           name="status"
           onChange={(e) => {
@@ -133,7 +172,9 @@ function OrderManagement() {
           onChangeOrderStatus={onChangeOrderStatusView}
           ItemsPerPage={5}
           totalOrders={totalOrders}
-          getAllOrders={getAllOrders}
+          getAllOrders={getOrders}
+          searchOrder={searchOrder}
+          getAllOrdersByDate={getAllOrdersByDateHandler}
         ></OrderSearchPagination>
       </div>
     </div>

@@ -13,12 +13,16 @@ const withAdminAuth = (Component) => (props) => {
         router.replace("/admin/signin");
       } else {
         isAdmin(authUser.uid).then((e) => {
-          if (e) {
+          if (e)
+          {          
+            // console.log("You are admin")
             setLoading(false);
-          } else {
-            isSubAdmin(authUser.uid).then((e) => {
-              if (e) {
-                console.log("You are Subadmin");
+          }
+          else {
+            isSubAdmin(authUser.uid).then(e => {
+              if (e)
+              {
+                // console.log("You are Subadmin");
                 setLoading(false);
               } else {
                 alert("Access Not allowed");

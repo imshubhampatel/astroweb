@@ -95,7 +95,7 @@ const ItemEdit = withAdminAuth(() =>{
             showConfirmButton: false,
             html: <div>
                 <form onSubmit={addInventory}>
-                    <label for="id" >Item ID</label>
+                    <label htmlFor="id" >Item ID</label>
         <input 
             className="form-control"
             placeholder="ID"
@@ -105,7 +105,7 @@ const ItemEdit = withAdminAuth(() =>{
             type="text"  
             disabled   
             />        
-              <label for="quantity" > Quantity</label>
+              <label htmlFor="quantity" > Quantity</label>
  
              <input 
             className="form-control"
@@ -115,7 +115,7 @@ const ItemEdit = withAdminAuth(() =>{
             type="number"  
             required   
             />
-            <label for="remark" > remark</label>
+            <label htmlFor="remark" > remark</label>
 
              <input 
              class="form-check"
@@ -147,7 +147,7 @@ const ItemEdit = withAdminAuth(() =>{
             showConfirmButton: false,
             html: <div>
         <form onSubmit={addPhotos}>
-       <label for="photos"> photos : </label>
+       <label htmlFor="photos"> photos : </label>
         <input 
             className="form-control"
             type="file" multiple

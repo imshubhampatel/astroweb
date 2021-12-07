@@ -15,7 +15,7 @@ import { firebase } from "../../../config";
 import AdminLayout from "../../../components/adminPanel/layout";
 import MeetingCard from "../../../components/adminPanel/meetingCard";
 import TransactionCard from "../../../components/adminPanel/transactionCard";
-import OrderCard from "../../../components/adminPanel/orderCard";
+import OrderCard from "../../../components/adminPanel/OrderCard";
 
 import { isUser, setUserPerm, removeUserPerm } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";

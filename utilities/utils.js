@@ -6,7 +6,7 @@ const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
 async function uploadDocToStorage({ path, file }) {
     const storageRef = ref(storage, path);
     uploadBytes(storageRef, file).then((snapshot) => {
-    }).catch(e => console.log(e));
+    }).catch(e => {});
   }
 
 async function getFile(path) {

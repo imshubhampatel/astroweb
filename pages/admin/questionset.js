@@ -67,7 +67,7 @@ const questionset = withAdminAuth(()=> {
 
     }
     function renderQuestions() {
-    return <div className={`container d-flex gap-3 flex-column my-5`}>{questions.map(e =><QuestionCard data={e} deleteQues={deleteQues}></QuestionCard >)}</div>
+    return <div className={`container d-flex gap-3 flex-column my-5`}>{questions.map(e =><QuestionCard key={e.id} data={e} deleteQues={deleteQues}></QuestionCard >)}</div>
     }
     return (
         <div className="container">

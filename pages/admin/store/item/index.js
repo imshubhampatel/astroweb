@@ -134,7 +134,7 @@ const itemManagement = withAdminAuth(()=> {
             </div>
             </div> 
             <div className="dropdown">
-                <label for="category" > Select Category  </label>
+                <label htmlFor="category" > Select Category  </label>
                 <select name="category" onChange={(e)=>selectCategory(e.target.value)} class="btn btn-secondary dropdown-toggle">
                     {categories.map((ctg) => <option value={ctg.id}> {ctg.name}</option>)}
                 </select>

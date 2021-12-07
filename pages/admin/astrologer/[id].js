@@ -1,5 +1,6 @@
 import styles from "../../../styles/pages/admin/astrologer/[id].module.css";
 import RatingBox from "../../../components/ratingBox";
+import FireImage from "../../../components/FireImage";
 
 import { MdOutlineMessage } from "react-icons/md";
 import { FiPhoneCall, FiEdit } from "react-icons/fi";
@@ -36,33 +37,41 @@ import {
   removeAstrologerPerm,
 } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
-import { astrologerConverter, Astrologer ,astrologerStatus} from "../../../dbObjects/Astrologer";
-import { astrologerPrivateDataConverter, AstrologerPrivateData } from "../../../dbObjects/AstrologerPrivateInfo";
+import {
+  astrologerConverter,
+  Astrologer,
+  astrologerStatus,
+} from "../../../dbObjects/Astrologer";
+import {
+  astrologerPrivateDataConverter,
+  AstrologerPrivateData,
+} from "../../../dbObjects/AstrologerPrivateInfo";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import Image from 'next/image'
-import {getFile} from '../../../utilities/utils'
+import Image from "next/image";
+import { getFile } from "../../../utilities/utils";
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
 const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
 
 const astrologer = withAdminAuth(() => {
-
-// const astrologer = () => {
+  // const astrologer = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
   const [enabled, setenabled] = useState(true);
-  const [profilePicUrl,setprofilePicUrl] = useState("/astrochrchaweb/public/astrochrchalogo.png");
+  const [profilePicUrl, setprofilePicUrl] = useState(
+    "/astrochrchaweb/public/astrochrchalogo.png"
+  );
   const [reviews, setReviews] = useState([]);
   const [meetings, setMeetings] = useState([]);
   const [walletTransactions, setWalletTransactions] = useState([]);
   const [activeState, setActiveState] = useState(0);
   const [numPages, setNumPages] = useState(1);
-  const [astrologerPrivateData,setAstrologerPrivateData] = useState({});
+  const [astrologerPrivateData, setAstrologerPrivateData] = useState({});
   const [pageNumber, setPageNumber] = useState(1);
-  const [pdf,setPdf] = useState("");
-  const [remark, setRemark] = useState("")
+  const [pdf, setPdf] = useState("");
+  const [remark, setRemark] = useState("");
 
   // #################
 
@@ -70,7 +79,7 @@ const astrologer = withAdminAuth(() => {
 
   // ################
   async function getPrivateData(pid) {
-    const astros = collection(db, "astrologer/"+pid+"/privateInfo/");
+    const astros = collection(db, "astrologer/" + pid + "/privateInfo/");
     const querySnapshot = await getDoc(
       doc(astros, String(pid)).withConverter(astrologerPrivateDataConverter)
     );
@@ -78,15 +87,18 @@ const astrologer = withAdminAuth(() => {
   }
   async function getAstrologerInfo(pid) {
     const astros = collection(db, "astrologer");
-    const querySnapshot = await getDoc(
-      doc(astros, String(pid))
-    );
+    const querySnapshot = await getDoc(doc(astros, String(pid)));
     if (querySnapshot.exists()) {
-      let astro_temp = new Astrologer({id: querySnapshot.id,...querySnapshot.data()});
+      let astro_temp = new Astrologer({
+        id: querySnapshot.id,
+        ...querySnapshot.data(),
+      });
       setastro(astro_temp);
-      getPrivateData(pid).then(e => setAstrologerPrivateData(e));
-      getFile(querySnapshot.data().profilePic).then((url)=> setprofilePicUrl(url));
-      getFile("18075072.pdf").then(url => setPdf(url));
+      getPrivateData(pid).then((e) => setAstrologerPrivateData(e));
+      getFile(querySnapshot.data().profilePic).then((url) =>
+        setprofilePicUrl(url)
+      );
+      getFile("18075072.pdf").then((url) => setPdf(url));
     } else {
       // console.log("no")
     }
@@ -136,7 +148,7 @@ const astrologer = withAdminAuth(() => {
   }
   async function updateAstrologer(uid) {
     const ref = doc(db, "astrologer", String(uid));
-    await updateDoc(ref, {...astro});
+    await updateDoc(ref, { ...astro });
   }
   async function discardAstrologer(uid) {
     const ref = doc(db, "astrologer", String(uid)).withConverter(
@@ -145,7 +157,7 @@ const astrologer = withAdminAuth(() => {
     let astro_temp = astro;
     astro_temp.status.state = astrologerStatus.REJECTED;
     astro_temp.status.remark = remark;
-    setastro({ ...astro_temp});
+    setastro({ ...astro_temp });
     await updateDoc(ref, { ...astro_temp });
   }
   async function VerifyAstrologer(uid) {
@@ -154,13 +166,16 @@ const astrologer = withAdminAuth(() => {
     );
     let astro_temp = astro;
     astro_temp.status.state = astrologerStatus.VERIFIED;
-    setastro({ ...astro_temp});
+    setastro({ ...astro_temp });
     await updateDoc(ref, { ...astro_temp });
   }
   const deleteReview = async (reviewId) => {
-    const review = doc(db, "astrologer/"+ String(pid)+'/astrologer_reviews/'+String(reviewId));
+    const review = doc(
+      db,
+      "astrologer/" + String(pid) + "/astrologer_reviews/" + String(reviewId)
+    );
     await deleteDoc(review);
-  }
+  };
 
   const getDataForAstroLists = () => {
     switch (activeState) {
@@ -169,7 +184,13 @@ const astrologer = withAdminAuth(() => {
           getAllReviews(pid);
         }
         return reviews.map((e) => {
-          return <Review key={e.id} props={e.data} deleteReviewHandler={()=>deleteReview(e.id)}></Review>;
+          return (
+            <Review
+              key={e.id}
+              props={e.data}
+              deleteReviewHandler={() => deleteReview(e.id)}
+            ></Review>
+          );
         });
       }
       case 2: {
@@ -278,29 +299,40 @@ const astrologer = withAdminAuth(() => {
             @TODO <br />
             Show adhar, pan images
             {astrologerPrivateData.verificationIdFront}
-            
-            
             <div className="my-4 d-flex flex-column gap-2">
               <h5>Account Info</h5>
               <div className="row ">
                 <div className="col font-weight-bold"> Pan Card Number </div>
-                <div className="col"> {astrologerPrivateData.pancardNumber} </div>
+                <div className="col">
+                  {" "}
+                  {astrologerPrivateData.pancardNumber}{" "}
+                </div>
               </div>
 
               <div className="row">
                 <div className="col font-weight-bold"> Account Number </div>
-                <div className="col"> {astrologerPrivateData.accountInfo.accountNo} </div>
+                <div className="col">
+                  {" "}
+                  {astrologerPrivateData.accountInfo.accountNo}{" "}
+                </div>
               </div>
 
               <div className="row">
                 <div className="col font-weight-bold"> IFSC Code </div>
-                <div className="col"> {astrologerPrivateData.accountInfo.ISFC} </div>
+                <div className="col">
+                  {" "}
+                  {astrologerPrivateData.accountInfo.ISFC}{" "}
+                </div>
               </div>
 
               <div className="row">
                 <div className="col font-weight-bold"> Branch </div>
-                <div className="col"> {astrologerPrivateData.accountInfo.bank + " " + astrologerPrivateData.accountInfo.branch} </div>
-
+                <div className="col">
+                  {" "}
+                  {astrologerPrivateData.accountInfo.bank +
+                    " " +
+                    astrologerPrivateData.accountInfo.branch}{" "}
+                </div>
               </div>
 
               <div className="row">
@@ -308,7 +340,10 @@ const astrologer = withAdminAuth(() => {
                   {" "}
                   Account Holders Name{" "}
                 </div>
-                <div className="col"> {astrologerPrivateData.accountInfo.holderName} </div>
+                <div className="col">
+                  {" "}
+                  {astrologerPrivateData.accountInfo.holderName}{" "}
+                </div>
               </div>
             </div>
             {/* Bug in button, will fix later  */}
@@ -355,7 +390,7 @@ const astrologer = withAdminAuth(() => {
                       // Call function to update values hook kere
                       let astro_temp = astro;
                       astro_temp.priceChat = e.target.value;
-                      setastro({...astro_temp});
+                      setastro({ ...astro_temp });
                     }}
                     defaultValue={astro.priceChat}
                   />
@@ -377,7 +412,7 @@ const astrologer = withAdminAuth(() => {
                       // Call function to update values hook kere
                       let astro_temp = astro;
                       astro_temp.priceVoice = e.target.value;
-                      setastro({...astro_temp});
+                      setastro({ ...astro_temp });
                     }}
                     defaultValue={astro.priceVoice}
                   />
@@ -399,7 +434,7 @@ const astrologer = withAdminAuth(() => {
                       // Call function to update values hook kere
                       let astro_temp = astro;
                       astro_temp.priceVideo = e.target.value;
-                      setastro({...astro_temp});
+                      setastro({ ...astro_temp });
                     }}
                     defaultValue={astro.priceVideo}
                   />
@@ -413,7 +448,6 @@ const astrologer = withAdminAuth(() => {
             <button
               className={`${styles.astroVerifyButton} ${styles.astroButton}`}
               onClick={() => {
-
                 Swal.clickConfirm();
               }}
             >
@@ -428,71 +462,96 @@ const astrologer = withAdminAuth(() => {
   const testResultView = async () => {
     const astros = collection(db, "astrologer");
     const querySnapshot = await getDoc(
-      doc(astros, String(pid),"test_result",pid)
+      doc(astros, String(pid), "test_result", pid)
     );
-    if(querySnapshot.exists()){
+    if (querySnapshot.exists()) {
       let data = querySnapshot.data();
-      console.log(data)
+      console.log(data);
       MySwal.fire({
         showConfirmButton: true,
-        html: 
-        <div className="container">
-        <h4>Test Result </h4>
-        <div className="row">
-        <p>Score : {data.score}</p>
-        <p>Question Count : {data.questionCount}</p>
+        html: (
+          <div className="container">
+            <h4>Test Result </h4>
+            <div className="row">
+              <p>Score : {data.score}</p>
+              <p>Question Count : {data.questionCount}</p>
+            </div>
 
-        </div>
-        
-        <div className="row">
-          {data?.response.map( e=> {
-            return <div className="card mb-3" key={e.id}>
-                  <img src="..." className="card-img-top" alt="..."/>
-                  <div className="card-body">
-                    <h5 className="card-title">Question</h5>
-                    <p className="card-text"> {e.question}</p>
-                    <p className="card-text"><small className="text-muted">Answer : {e.answer}</small></p>
-                    <p className="card-text"><small className="text-muted">Correct Answer : {e.options[e.correctOption]}</small></p>
-                    <p className="card-text"><small className="text-muted">Explanation : {e.explanation}</small></p>
+            <div className="row">
+              {data?.response.map((e) => {
+                return (
+                  <div className="card mb-3" key={e.id}>
+                    {e.imgUrl ? (
+                      <>
+                        <FireImage
+                          src={e.imgUrl}
+                          layout="responsive"
+                          width="400"
+                          height="200"
+                        />
+                      </>
+                    ) : (
+                      ""
+                    )}
+                    <div className="card-body">
+                      <h5 className="card-title">Question</h5>
+                      <p className="card-text"> {e.question}</p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          Answer : {e.answer}
+                        </small>
+                      </p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          Correct Answer : {e.options[e.correctOption]}
+                        </small>
+                      </p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          Explanation : {e.explanation}
+                        </small>
+                      </p>
+                    </div>
                   </div>
+                );
+              })}
+            </div>
           </div>
-          })}
-        </div>
-        </div>,
-
-      })}
-    else {
+        ),
+      });
+    } else {
       alert("Test Not Attempted");
     }
   };
   const discardRequestView = () => {
     MySwal.fire({
       showConfirmButton: false,
-      html: <div>
-      <textarea 
-      className="form-control"
-      placeholder="Please tell more about the reason of discarding the request "
-      name="reason-text"
-      onChange={e => {
-        setRemark(e.target.value);
-      }}      
-      />
-      <div className="text-end mt-4">
-        <button
-          className={`${styles.astroVerifyButton} ${styles.astroButton}`}
-          onClick={() => {
-
-            Swal.clickConfirm();
-          }}
-        >
-          Discard Request
-        </button>
-      </div>
-  </div>,
-  preConfirm: () => {
-    discardAstrologer(pid);
-  }
-    })
+      html: (
+        <div>
+          <textarea
+            className="form-control"
+            placeholder="Please tell more about the reason of discarding the request "
+            name="reason-text"
+            onChange={(e) => {
+              setRemark(e.target.value);
+            }}
+          />
+          <div className="text-end mt-4">
+            <button
+              className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+              onClick={() => {
+                Swal.clickConfirm();
+              }}
+            >
+              Discard Request
+            </button>
+          </div>
+        </div>
+      ),
+      preConfirm: () => {
+        discardAstrologer(pid);
+      },
+    });
   };
 
   // #################
@@ -506,7 +565,7 @@ const astrologer = withAdminAuth(() => {
       });
   }, [pid]);
 
-    return (
+  return (
     <div className={` ${styles.base_container} `}>
       <div className={`${styles.main_container}`}>
         <h2 className={`${styles.headingText}`}>
@@ -514,10 +573,14 @@ const astrologer = withAdminAuth(() => {
         </h2>
 
         <div className={`${styles.mainInfoContainer}`}>
-          <div className={`${styles.astroPhoto}`}style={{display:"block"}}>
-            <Image src={profilePicUrl} height="100" width="100" layout="responsive"/>
+          <div className={`${styles.astroPhoto}`} style={{ display: "block" }}>
+            <Image
+              src={profilePicUrl}
+              height="100"
+              width="100"
+              layout="responsive"
+            />
           </div>
-         
 
           <div className={`${styles.astroInfo}`}>
             <h4>Astrologer {astro.firstName}</h4>
@@ -543,36 +606,37 @@ const astrologer = withAdminAuth(() => {
             <i>{astro.languages ? Object.keys(astro.languages) : ""} </i>
           </div>
           <div className={`${styles.subContainer}`}>
-          { astro.status?.state != astrologerStatus.VERIFIED ? 
-          <>
-            <button
-              className={`${styles.astroVerifyButton} ${styles.astroButton}`}
-              onClick={() => VerifyAstrologer(pid)}
-            >
-              {"Verify Astrologer"}
-            </button>
-            <button
-              className={`${styles.astroDiscardButton}  ${styles.astroButton}`}
-              onClick={discardRequestView}
-            >
-              {" "}
-            </button>
-            <button
-              className={`${styles.astroButton}`}
-              onClick={testResultView}
-            >
-              {" "}
-              View Test Result
-            </button>
-            </>
-          :           
-          <button
-            className={"btn btn-primary"}
-            onClick={() => toggleEnable(pid)}
-          >
-            Enabled : {enabled ? "   On  " : "  off   "}
-          </button>}</div> 
-          
+            {astro.status?.state != astrologerStatus.VERIFIED ? (
+              <>
+                <button
+                  className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+                  onClick={() => VerifyAstrologer(pid)}
+                >
+                  {"Verify Astrologer"}
+                </button>
+                <button
+                  className={`${styles.astroDiscardButton}  ${styles.astroButton}`}
+                  onClick={discardRequestView}
+                >
+                  Discard Request
+                </button>
+                <button
+                  className={`${styles.astroButton}`}
+                  onClick={testResultView}
+                >
+                  {" "}
+                  View Test Result
+                </button>
+              </>
+            ) : (
+              <button
+                className={"btn btn-primary"}
+                onClick={() => toggleEnable(pid)}
+              >
+                Enabled : {enabled ? "   On  " : "  off   "}
+              </button>
+            )}
+          </div>
         </div>
 
         {/* About Container  */}
@@ -676,9 +740,7 @@ const astrologer = withAdminAuth(() => {
   );
 });
 
-
 astrologer.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;
 };
 export default astrologer;
-
