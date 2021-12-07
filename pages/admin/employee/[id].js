@@ -1,7 +1,8 @@
 import layoutStyles from "../../../styles/pages/admin/BaseLayout.module.css";
 import styles from "../../../styles/pages/admin/employee/[id].module.css";
 import FireImage from "../../../components/FireImage";
-import {RiToggleFill, RiToggleLine} from "react-icons/ri"
+import { RiToggleFill, RiToggleLine } from "react-icons/ri";
+import SimpleToggleButton from "../../../components/SimpleToggleButton";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
@@ -121,31 +122,142 @@ const employee = () => {
             )}
           </div>
 
-
-
           <div className={`${styles.empInfo}`}>
-           <h4>Astrologer Mahesh</h4>
+            <h4>Astrologer Mahesh</h4>
 
-           <div className={`d-flex gap-1 flex-column`}>
-              <div className={``}>
-                Hyderabad, India
-              </div>
+            <div className={`d-flex gap-1 flex-column`}>
+              <div className={``}>Hyderabad, India</div>
 
               <div className={``}>+91 9877263549</div>
 
               <div className={``}>mahesh@gmail.com</div>
             </div>
-
-
           </div>
 
           <div>
+            Enabled <SimpleToggleButton size="32" clickHandler={() => {}} />
+          </div>
+        </div>
 
-            Enabled <RiToggleFill fill="green" rotate="90"/>  <RiToggleLine fill="red" />
+        {/* Documents  */}
+        <div>
+
+          <div className="d-flex gap-3 align-items-center">
+            <h5>Documents </h5>
+            <div
+              style={{ height: "0.3px" }}
+              className="border-top flex-grow-1"
+            />
           </div>
 
 
+          Aadhar Card: 
+          Pancard: 
 
+        </div>
+
+        {/* Permissions   */}
+        <div className={`${styles.permissionsContainer}`}>
+          <div className="d-flex gap-3 align-items-center">
+            <h5>Permissions</h5>
+            <div
+              style={{ height: "0.3px" }}
+              className="border-top flex-grow-1"
+            ></div>
+          </div>
+
+          <div className={`${styles.twoGridLayout}`}>
+            <div className={`${styles.gridItem}`}>
+              {" "}
+              Astro management
+              <div className="float-end">
+                <SimpleToggleButton
+                  initialState={
+                    astro.permissions
+                      ? astro.permissions.astro_management
+                      : "not-set"
+                  }
+                  size="32"
+                  clickHandler={() => {}}
+                />
+              </div>
+            </div>
+
+            <div className={`${styles.gridItem}`}>
+              {" "}
+              User management
+              <div className="float-end">
+                <SimpleToggleButton
+                  initialState={
+                    astro.permissions
+                      ? astro.permissions.user_management
+                      : "not-set"
+                  }
+                  size="32"
+                  clickHandler={() => {}}
+                />
+              </div>
+            </div>
+            <div className={`${styles.gridItem}`}>
+              {" "}
+              Broadcast management
+              <div className="float-end">
+                <SimpleToggleButton
+                  initialState={
+                    astro.permissions
+                      ? astro.permissions.broadcast_management
+                      : "not-set"
+                  }
+                  size="32"
+                  clickHandler={() => {}}
+                />
+              </div>
+            </div>
+            <div className={`${styles.gridItem}`}>
+              {" "}
+              Wallet management
+              <div className="float-end">
+                <SimpleToggleButton
+                  initialState={
+                    astro.permissions
+                      ? astro.permissions.wallet_management
+                      : "not-set"
+                  }
+                  size="32"
+                  clickHandler={() => {}}
+                />
+              </div>
+            </div>
+
+            <div className={`${styles.gridItem}`}>
+              {" "}
+              Employee management
+              <div className="float-end">
+                <SimpleToggleButton
+                  initialState={
+                    astro.permissions
+                      ? astro.permissions.emp_management
+                      : "not-set"
+                  }
+                  size="32"
+                  clickHandler={() => {}}
+                />
+              </div>
+            </div>
+            <div className={`${styles.gridItem}`}>
+              {" "}
+              Store
+              <div className="float-end">
+                <SimpleToggleButton
+                  initialState={
+                    astro.permissions ? astro.permissions.store : "not-set"
+                  }
+                  size="32"
+                  clickHandler={() => {}}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

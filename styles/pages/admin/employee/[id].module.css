@@ -1,5 +1,5 @@
 .mainInfoContainer {
-    border: solid red; 
+    /* border: solid red;  */
   
     margin-top: 15px;
     display: flex;
@@ -8,16 +8,32 @@
   }
   
   .empPhoto {
-    height: 144px;
-    width: 144px;
+    height: 120px;
+    width: 120px;
     border-radius: 100%;
     background: #dedede;
-    border: dotted pink;
+    /* border: dotted pink; */
     position: relative;
+    z-index: 5;
   }
 
   .empInfo {
-    border: dotted green;
+    /* border: dotted green; */
     flex-grow: 2;
     
+  }
+
+  .permissionsContainer{
+    /* border: solid red; */
+    margin-top: 20px;
+
+  }
+
+  .twoGridLayout{
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+  .gridItem{
+    width: 70%;
   }
