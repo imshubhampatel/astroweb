@@ -5,6 +5,7 @@ import { RiToggleFill, RiToggleLine } from "react-icons/ri";
 import SimpleToggleButton from "../../../components/SimpleToggleButton";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { getFile } from "../../../utilities/utils";
 import {
   collection,
   query,
@@ -140,7 +141,7 @@ const employee = () => {
         </div>
 
         {/* Documents  */}
-        <div>
+        <div className="my-2">
 
           <div className="d-flex gap-3 align-items-center">
             <h5>Documents </h5>
@@ -151,8 +152,8 @@ const employee = () => {
           </div>
 
 
-          Aadhar Card: 
-          Pancard: 
+          Aadhar Card: <a > Link </a> <br/> 
+          Pancard: <a> Link </a> <br/> 
 
         </div>
 
