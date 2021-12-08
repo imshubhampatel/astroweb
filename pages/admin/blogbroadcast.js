@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import BlogsDashboard from '../../components/adminPanel/BlogsDashboard';
 import BroadcastsDashboard from "../../components/adminPanel/BroadcastsDashboard";
+import {EmployeePermissions} from  '../../dbObjects/Employee'
 
 import {
   collection,
@@ -142,7 +143,7 @@ const Blogbroadcast = withAdminAuth(() => {
         </div>
       </div>
     );
-});
+},EmployeePermissions.BROADCAST_MANAGEMENT);
 
 Blogbroadcast.getLayout = function getLayout(page) {
   return <AdminLayout active_page="1">{page}</AdminLayout>;

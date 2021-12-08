@@ -27,6 +27,7 @@ import withAdminAuth from "../../auth/withAdminAuth";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { uploadDocToStorage } from "../../utilities/utils";
+import { EmployeePermissions } from "../../dbObjects/Employee";
 
 const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
@@ -261,7 +262,7 @@ const storemanagement = withAdminAuth(() => {
       <div className="row"></div>
     </div>
   );
-});
+}, EmployeePermissions.STORE_MANAGEMENT);
 
 storemanagement.getLayout = function getLayout(page) {
   return <AdminLayout active_page="4">{page}</AdminLayout>;

@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 function WalletInfoCard(props) {
     return (
@@ -11,6 +12,8 @@ function WalletInfoCard(props) {
                     ID : {props.data.id}
           </h7>
           <h6>Status : {props.data.status}</h6>
+          <Link href={"/admin/astrologer/"+props.data.astrologer}><a target="_blank">See profile</a></Link>
+          <button className="btn btn-primary" onClick={()=>props.astrologerPrivateDetailView(props.data)}> See Astrologer Account Details</button>
           <p className="card-text">{props.data.remark}</p>
           {props.data.status == "initiated" ? (
             <div>

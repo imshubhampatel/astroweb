@@ -36,11 +36,12 @@ import {
   getAllOrdersBySearchValue,
   getAllOrdersByDate
 } from "../../../../utilities/store/order";
+import { Employee, EmployeePermissions } from "../../../../dbObjects/Employee";
 
 const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
 
-function OrderManagement() {
+const OrderManagement = withAdminAuth(() => {
   const [statusOption, setStatusOption] = useState(OrderStatus.CREATED);
   const [ordersList, setOrdersList] = useState([]);
   const [lastQuerySnapshot, setlastQuerySnapshot] = useState([]);
@@ -135,7 +136,7 @@ function OrderManagement() {
           </form>
         </div>
       ),
-      preConfirm: () => {},
+      preConfirm: () => { },
     });
   }
  
@@ -143,7 +144,7 @@ function OrderManagement() {
     getAllOrdersBySearchValue(searchValue).then(data => setOrdersList(data));
   }
   async function getAllOrdersByDateHandler(search) {
-    getAllOrdersByDate(statusOption,search).then(data => setOrdersList(data));
+    getAllOrdersByDate(statusOption, search).then(data => setOrdersList(data));
   }
   return (
     <div className="container">
@@ -179,7 +180,7 @@ function OrderManagement() {
       </div>
     </div>
   );
-}
+},EmployeePermissions.STORE_MANAGEMENT);
 OrderManagement.getLayout = function getLayout(page) {
   return <AdminLayout active_page="4">{page}</AdminLayout>;
 };

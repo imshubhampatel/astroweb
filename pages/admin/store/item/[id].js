@@ -23,6 +23,7 @@ import {uploadDocToStorage} from '../../../../utilities/utils'
 import {Item ,ItemConverter} from '../../../../dbObjects/Item'
 import FireImage from '../../../../components/FireImage'
 import {deleteDataFromStorage} from '../../../../utilities/utils'
+import { EmployeePermissions } from "../../../../dbObjects/Employee";
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -320,7 +321,7 @@ const ItemEdit = withAdminAuth(() =>{
             
         </div>
     );
-});
+},EmployeePermissions.STORE_MANAGEMENT);
 
 ItemEdit.getLayout = function getLayout(page) {
     return <AdminLayout active_page="4">{page}</AdminLayout>;

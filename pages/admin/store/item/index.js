@@ -19,6 +19,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import ItemsSearchPagination from '../../../../components/adminPanel/ItemsSearchPagination'
 import {Item ,ItemConverter} from '../../../../dbObjects/Item'
+import { EmployeePermissions } from "../../../../dbObjects/Employee";
 
 const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
@@ -147,7 +148,7 @@ const itemManagement = withAdminAuth(()=> {
             
         </div>
     )
-});
+},EmployeePermissions.STORE_MANAGEMENT);
 itemManagement.getLayout = function getLayout(page) {
     return <AdminLayout active_page="4">{page}</AdminLayout>;
   };

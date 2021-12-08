@@ -10,6 +10,7 @@ import {
   setDoc,
   getFirestore,
 } from "firebase/firestore";
+
 import { firebase } from "../../../config";
 import AdminLayout from "../../../components/adminPanel/layout";
 import {
@@ -18,7 +19,7 @@ import {
   removeSubadminPerm,
 } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
-import { employeeConverter, Employee } from "../../../dbObjects/Employee";
+import { employeeConverter, Employee , EmployeePermissions } from "../../../dbObjects/Employee";
 
 const db = getFirestore(firebase);
 
@@ -167,7 +168,7 @@ const employee = withAdminAuth(() => {
       )}
     </div>
   );
-});
+},EmployeePermissions.EMP_MANAGEMENT);
 
 employee.getLayout = function getLayout(page) {
   return <AdminLayout active_page="3">{page}</AdminLayout>;
