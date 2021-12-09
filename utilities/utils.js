@@ -10,9 +10,16 @@ async function uploadDocToStorage({ path, file }) {
   }
 
 async function getFile(path) {
-    const storageRef = ref(storage, path);
-    const url = await getDownloadURL(storageRef);
-    return url;
+  const storageRef = ref(storage, path);
+  let url = "";
+  try {
+   url = await getDownloadURL(storageRef);
+  }
+  catch {
+    alert("error");
+  }
+
+  return url;
   };
 
 export {uploadDocToStorage , getFile};
