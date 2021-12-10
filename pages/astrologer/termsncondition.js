@@ -1,8 +1,8 @@
-import React from "react";
+import React from  'react';
 
 function termsncondition() {
   return (
-    <div className="container">
+    <div className= "container">
       <p>
         <br /> This Terms is entered between the Astrologer who sign up to
         become an
@@ -17,13 +17,13 @@ function termsncondition() {
         <br /> carefully and are bound by the same once your selection as an
         Astrologer
         <br /> Advisory is completed with Astrochrcha and its plateform
-        DRESHKAN.{" "}
+        DRESHKAN.
       </p>
       <br />
       <br />
       <b>ASTROCHRCHA </b>(“us” “We”, or “Astrochrcha” which also includes its
       affiliates) is the author and publisher of the internet resources,
-      <a href="www.dreshkan.com">www.dreshkan.com</a>. <br />
+      <a href='www.dreshkan.com'>www.dreshkan.com</a>. <br />
       1. NATURE APPLICABILITY OF THE TERMS
       <br />
       a. Terms shall include the present Service Terms and Conditions and the
@@ -35,7 +35,7 @@ function termsncondition() {
       remove the present Terms which shall be duly communicated to you, via
       Email/or/Website Notification/Application/Other Messaging Services. Your
       continued use of the Website(
-      <a href="www.dreshkan.com">www.dreshkan.com</a>) shall signify your
+      <a href='www.dreshkan.com'>www.dreshkan.com</a>) shall signify your
       acceptance to the
       <br /> changed terms and conditions.
       <br />
@@ -148,7 +148,7 @@ function termsncondition() {
       profile without any warning to you. iii. You agree not to upload, post,
       email, transmit, or otherwise make available any Content that is unlawful,
       harmful, threatening, abusive, harassing, tortious, defamatory, vulgar,
-      obscene, libelous, invasive of another's privacy, hateful, or racially,
+      obscene, libelous, invasive of another `&quot`s privacy, hateful, or racially,
       ethnically, or otherwise objectionable on/through DRESHKAN.
       <br /> iv. You agree to maintain decorum while replying to
       <br /> any comment posted on DRESHKAN inclusive of any comment or review
@@ -437,6 +437,7 @@ function termsncondition() {
       this
       <br /> Terms i.e. You and Astrochrcha. <br />
       (b)For the foreign users taking
+          `&quot`
       <br /> consultation through the website, any amount paid on the payment
       gateway
       <br /> will also subject to refund if any complaint is raised for refund
@@ -473,7 +474,7 @@ function termsncondition() {
       indemnifying
       <br /> will be relieved of its indemnification obligations to the extent
       it was
-      <br /> prejudiced by the indemnified party's failure.
+      <br /> prejudiced by the indemnified party `&quot`s failure.
       <br /> 6. GOVERNING LAWS <br />
       a. This Terms, and, any disputes arising out of the present Terms shall be
       governed by the laws applicable to the National Capital Region at Noida.
@@ -512,7 +513,7 @@ function termsncondition() {
       any part of it, for its own purposes or the purposes of any other party.
       <br />
       <br />
-      10. INTELLECTUAL PROPERTY Astrochrcha and its website and application{" "}
+      10. INTELLECTUAL PROPERTY Astrochrcha and its website and application{ `&quot`  `&quot`}
       <br />
       DRESHKAN shall be the sole
       <br /> owner of and retain all ownership rights to all content generated
@@ -532,15 +533,15 @@ function termsncondition() {
       reasonably
       <br /> have foreseen on entry into this Terms.
       <br /> b. Assignment: Neither party may assign this Terms or any of their
-      rights or obligations under this Terms without the other party's written
+      rights or obligations under this Terms without the other party `&quot`s written
       consent.
       <br />
       <br /> 12. Modification of Terms Astrochrcha reserves the right to change
       or modify, from time to time, any provision related to the Service(s) or
       these Terms, including ,but
-      <br /> not limited to penalty clauses under the sections - "Obligations
+      <br /> not limited to penalty clauses under the sections -  `&quot`Obligations
       and
-      <br /> Performance" , "Usage of Features","Refunds and Cancellation" etc,
+      <br /> Performance `&quot` ,  `&quot`Usage of Features `&quot`, `&quot`Refunds and Cancellation `&quot` etc,
       at
       <br /> its sole discretion. Any such change(s) shall be effective
       immediately
@@ -549,9 +550,9 @@ function termsncondition() {
       revised
       <br /> by referring to ‘LAST UPDATED’ at the top of these Terms. By
       signing
-      <br /> onto the application by agreeing to the "Terms and Conditions"
+      <br /> onto the application by agreeing to the  `&quot`Terms and Conditions `&quot`
       anytime
-      <br /> after the "LAST UPDATED" date, you shall be deemed to have accepted
+      <br /> after the  `&quot`LAST UPDATED `&quot` date, you shall be deemed to have accepted
       the
       <br /> Terms herein including the amended Terms published from time to
       time.
@@ -561,8 +562,8 @@ function termsncondition() {
       any
       <br /> such change, your sole and exclusive remedy is to terminate your
       use of
-      <br /> the Application. We encourage you to refer to the "Terms and
-      Conditions"
+      <br /> the Application. We encourage you to refer to the  `&quot`Terms and
+      Conditions `&quot`
       <br /> every time you login into the application. It is, further,
       clarified
       <br /> that your use and access of the Application/Service(s) is subject
