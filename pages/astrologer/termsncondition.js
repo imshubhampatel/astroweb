@@ -513,7 +513,7 @@ function termsncondition() {
       any part of it, for its own purposes or the purposes of any other party.
       <br />
       <br />
-      10. INTELLECTUAL PROPERTY Astrochrcha and its website and application{ `&quot`  `&quot`}
+      10. INTELLECTUAL PROPERTY Astrochrcha and its website and application
       <br />
       DRESHKAN shall be the sole
       <br /> owner of and retain all ownership rights to all content generated
