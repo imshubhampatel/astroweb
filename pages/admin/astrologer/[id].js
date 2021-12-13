@@ -49,6 +49,8 @@ import {
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import Image from "next/image";
 import { getFile } from "../../../utilities/utils";
+import {EmployeePermissions} from  '../../../dbObjects/Employee'
+
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -346,19 +348,6 @@ const astrologer = withAdminAuth(() => {
                 </div>
               </div>
             </div>
-            {/* Bug in button, will fix later  */}
-            {/* {astro.verified ? (
-              ""
-            ) : (
-              <div className={`my-2`}>
-                <button
-                  className={`btn btn-warning`}
-                  onClick={() => VerifyAstrologer(pid)}
-                >
-                  Verify Astrologer
-                </button>
-              </div>
-            )} */}
           </div>
         </>
       ),
@@ -554,6 +543,45 @@ const astrologer = withAdminAuth(() => {
     });
   };
 
+  async function addRazorpayIdFunc(e) {
+    e.preventDefault();
+    const astros = doc(db, "astrologer/" + pid + "/privateInfo/"+pid);
+    let astro_temp = astrologerPrivateData;
+    astro_temp.razorpayId = e.target.razorpayId.value;
+    setAstrologerPrivateData({ ...astro_temp });
+    await updateDoc(astros, { ...astro_temp });
+    MySwal.clickConfirm();
+
+  }
+
+  const editRazorpayId = () => {
+    MySwal.fire({
+      showConfirmButton: false,
+      html: (
+        <div>
+          <form onSubmit={addRazorpayIdFunc}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Please enter razorpay ID "
+            name="reason-text"
+            id="razorpayId"
+            defaultValue={astrologerPrivateData.razorpayId}
+          />
+          <div className="text-end mt-4">
+            <button
+              className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+              type="submit"
+            >
+              Edit RazorpayId
+            </button>
+          </div>
+          </form>
+        </div>
+      ),
+    });
+  };
+
   // #################
 
   useEffect(() => {
@@ -594,6 +622,8 @@ const astrologer = withAdminAuth(() => {
 
               <div className={`ms-2`}>{astro.phoneNumber}</div>
             </div>
+            <i> Razorpay Id : {astrologerPrivateData?.razorpayId}</i>
+            <br/>
 
             <i>Vedic, Tarot</i>
 
@@ -644,13 +674,19 @@ const astrologer = withAdminAuth(() => {
           <div className={`d-flex`}>
             <h5 className={`me-2`}>About {astro.firstName} </h5>
             <RatingBox rating={astro.rating} />
-
+            <div
+              className={`ms-auto  ${styles.textButton}`}
+              onClick={() => editRazorpayId()}
+            >
+              Razorpay
+            </div>
             <div
               className={`ms-auto  ${styles.textButton}`}
               onClick={() => moreDetailView()}
             >
               More Details
             </div>
+            
           </div>
 
           <p>{astro.about}</p>
@@ -738,7 +774,7 @@ const astrologer = withAdminAuth(() => {
       </div>
     </div>
   );
-});
+},EmployeePermissions.ASTRO_MANAGEMENT);
 
 astrologer.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;

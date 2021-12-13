@@ -16,6 +16,7 @@ import {
   setDoc,
   getFirestore,
 } from "firebase/firestore";
+
 import { firebase } from "../../../config";
 import AdminLayout from "../../../components/adminPanel/layout";
 import {
@@ -24,14 +25,13 @@ import {
   removeSubadminPerm,
 } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
-import { employeeConverter, Employee } from "../../../dbObjects/Employee";
-import Image from "next/image";
-import Link from "next/link";
+import { employeeConverter, Employee , EmployeePermissions } from "../../../dbObjects/Employee";
+
 const db = getFirestore(firebase);
 
-// const employee = withAdminAuth(() => {
+const employee = withAdminAuth(() => {
 
-const employee = () => {
+// const employee = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
@@ -307,9 +307,7 @@ const employee = () => {
       </div>
     </div>
   );
-};
-
-// );
+},EmployeePermissions.EMP_MANAGEMENT);
 
 employee.getLayout = function getLayout(page) {
   return <AdminLayout active_page="3">{page}</AdminLayout>;

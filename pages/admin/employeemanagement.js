@@ -15,6 +15,7 @@ import { firebase } from "../../config";
 import Link from "next/link";
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
+import {EmployeePermissions} from  '../../dbObjects/Employee'
 
 const db = getFirestore(firebase);
 
@@ -165,7 +166,7 @@ const employeemanagement = withAdminAuth(() => {
       </div>
     </div>
   );
-});
+},EmployeePermissions.EMP_MANAGEMENT);
 
 employeemanagement.getLayout = function getLayout(page) {
   return <AdminLayout active_page="3">{page}</AdminLayout>;

@@ -11,11 +11,15 @@ import {
 } from "firebase/firestore";
 import { firebase } from "../../config";
 import Link from "next/link";
+import {EmployeePermissions} from  '../../dbObjects/Employee'
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import {Astrologer, astrologerStatus} from '../../dbObjects/Astrologer'
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const db = getFirestore(firebase);
+const MySwal = withReactContent(Swal);
 
 const astrologermanagement = withAdminAuth(() => {
   
@@ -64,14 +68,63 @@ const astrologermanagement = withAdminAuth(() => {
     }
     return true;
   };
+  const filterView = () => {
+    MySwal.fire({
+      showConfirmButton: false,
+      html: (
+        <div className="container">
+          <h4>Filter</h4>
+          <label for="verified">Verify  </label>
+          <input
+            type="checkbox"
+            className="form-check-input"
+            placeholder="Please enter razorpay ID "
+            name="reason-checkbox"
+            id="verified"
+          />
+          <br/>
+          <label for="verified">Enabled   </label>
+          <input
+            type="checkbox"
+            className="form-check-input"
+            placeholder="Please enter razorpay ID "
+            name="reason-checkbox"
+            id="razorpayId"
+          />
+          <br/>
+          <label for="verified">Profile Complete  </label>
+          <input
+            type="checkbox"
+            className="form-check-input"
+            placeholder="Please enter razorpay ID "
+            name="reason-checkbox"
+            id="razorpayId"
+          />
+        <div className="text-end mt-4">
+            <button
+              className={"btn btn-success"}
+              onClick={() => {
+                Swal.clickConfirm();
+              }}
+            >
+              Filter
+            </button>
+          </div>
+          
+        </div>
+      ),
+    });
+  };
   
   function searchHandler(event) {
+    let val = event.target.value.toLowerCase();
     initializePaginationData(
       astrologersList.filter((e) => {
         if (
-          e.firstName.includes(event.target.value) ||
-          e.secondName.includes(event.target.value) ||
-          e.email.includes(event.target.value)
+          e.firstName.toLowerCase().includes(val) ||
+          e.secondName.toLowerCase().includes(val) ||
+          e.email.toLowerCase().includes(val) ||
+          e.profileComplete.toString().toLowerCase().includes(val)
         )
           return true;
         else return false;
@@ -103,6 +156,12 @@ const astrologermanagement = withAdminAuth(() => {
                 Filter Unverified
               </button>
               <button
+                className={`${styles.filterButton} ${styles.button} `}
+                onClick={filterView}
+              >
+                Filter 
+              </button>
+              <button
                 className={`${styles.getButton} ${styles.button}`}
                 onClick={() => getAllAstrologers()}
               >
@@ -124,8 +183,8 @@ const astrologermanagement = withAdminAuth(() => {
               <thead>
                 <tr className={`${styles.tableHeading}`}>
                   <td>Name</td>
-                  <td>Phone Number</td>
                   <td>Rating</td>
+                  <td>Profile Complete</td>
                   <td>State </td>
                   <td>Query</td>
                 </tr>
@@ -136,9 +195,11 @@ const astrologermanagement = withAdminAuth(() => {
                     <td className={`${styles.tableData}  `}>
                       {e.firstName + e.secondName}
                     </td>
-                    <td className={`${styles.tableData} `}> {e.phoneNumber}  </td>
                     <td className={`${styles.tableData}`}>
                       {e.rating == "0" ? "Not rated" : e.rating}
+                    </td>
+                    <td className={`${styles.tableData}`}>
+                      {e.profileComplete?"True":"false"}
                     </td>
                     <td className={`${styles.tableData}`}>
                       {e.status.state}
@@ -178,9 +239,8 @@ const astrologermanagement = withAdminAuth(() => {
           </div>
         </div>
       </div>
-    </>
-  );
-});
+    </>);
+}, EmployeePermissions.ASTRO_MANAGEMENT);
 
 astrologermanagement.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;

@@ -2,6 +2,7 @@ import AdminLayout from "../../components/adminPanel/layout";
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import withAdminAuth from "../../auth/withAdminAuth";
+import {EmployeePermissions} from  '../../dbObjects/Employee'
 
 const Home = withAdminAuth(() => {
   return (
@@ -24,7 +25,7 @@ const Home = withAdminAuth(() => {
       </div>
     </>
   );
-});
+},EmployeePermissions.NONE);
 Home.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;
 };
