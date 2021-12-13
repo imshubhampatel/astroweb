@@ -1,0 +1,33 @@
+.mainInfoContainer {
+    /* border: solid red;  */
+  
+    margin-top: 15px;
+    display: flex;
+  
+    gap: 16px;
+  }
+  
+  .astroPhoto {
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+    background: #dedede;
+    /* border: dotted pink; */
+  }
+  
+  .astroInfo {
+    /* border: dotted green; */
+    flex-grow: 2;
+    
+  }
+  
+  .subContainer {
+    margin-left: auto;
+    display: flex;
+    /* border: 1px solid red;  */
+    /* justify-content: space-around; */
+    /* align-items: center; */
+    flex-direction: row;
+    gap: 10px;
+  }
+  

@@ -1,3 +1,6 @@
+import layoutStyles from "../../../styles/pages/admin/BaseLayout.module.css" 
+import styles from "../../../styles/pages/admin/user/[id].module.css"
+import ToggleButton from "../../../components/SimpleToggleButton"
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
@@ -23,7 +26,9 @@ import { UserConverter, User } from "../../../dbObjects/User";
 
 const db = getFirestore(firebase);
 
-const user = withAdminAuth(() => {
+// const user = withAdminAuth(() => {
+
+  const user = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
@@ -134,79 +139,134 @@ const user = withAdminAuth(() => {
     }
   };
 
+  console.log(astro)
+
   return (
-    <div className="container">
-      <div className="row">
-        {astro ? (
-          <div className="container">
-            <div className="row">
-              <table>
-                <tbody>
-                  <tr>
-                    <td> {astro.firstName + " " + astro.secondName}</td>
-                    <td> {astro.phoneNumber}</td>
-                  </tr>
-                  <tr>
-                    <td> {astro.email}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div>
-                <button
-                  className={"btn btn-primary"}
-                  onClick={() => toggleEnable(pid)}
-                >
-                  Enabled : {enabled ? "   On  " : "  off   "}
-                </button>
-              </div>
-            </div>
+
+    <div className={` ${layoutStyles.base_container} `}>
+      <div className={`${layoutStyles.main_container}`}>
+        <h2 className={`${layoutStyles.headingText}`}>
+          User Management System
+        </h2>
+
+
+        <div className={`${styles.mainInfoContainer}`}>
+          <div className={`${styles.astroPhoto}`} style={{ display: "block" }}>
+            PHOTO
           </div>
-        ) : (
-          "no user"
-        )}
-      </div>
 
-      <br></br>
-      <hr></hr>
+          <div className={`${styles.astroInfo}`}>
+            <h4>User Mahesh </h4>
 
-      <div className="row">
-        <div className="row">
-          <ul className="nav nav-pills">
-            <li className="nav-item">
-              <button
-                className={`nav-link ${activeState == 1 ? "active" : ""}`}
-                onClick={() => setActiveState(1)}
-              >
-                Orders History
-              </button>
-            </li>
-            <li className="nav-item">
-              <button
-                className={`nav-link ${activeState == 2 ? "active" : ""}`}
-                onClick={() => setActiveState(2)}
-              >
-                Meeting History
-              </button>
-            </li>
+            <div className={`d-flex flex-column  `}>
+              <div className={``}>
+                {/* {astro.dob ? new Date(astro.dob).toDateString() : ""} */}
+                DOB
+              </div>
 
-            <li className="nav-item">
-              <button
-                className={`nav-link ${activeState == 3 ? "active" : ""}`}
-                onClick={() => setActiveState(3)}
-              >
-                Wallet History
-              </button>
-            </li>
-          </ul>
+              <div className={``}>
+                {/* {astro.email} */}
+                EMAIL 
+                
+                </div>
+
+              <div className={``}>
+                {/* {astro.phoneNumber} */} 
+                PHONE 
+                </div>
+            </div>
+
+
+
+          </div>
+
+          <div className={`${styles.subContainer}`}>
+            Enabled <ToggleButton size="32" initialState={true} clickHandler={() => {}}/> 
+          </div>
         </div>
-        <hr></hr>
-        <div className="row">{getDataForAstroLists()}</div>
+
+
+
       </div>
-    </div>
+      </div>
+
   );
-});
+
+}
+
+// );
 
 user.getLayout = function getLayout(page) {
-  return <AdminLayout active_page="2">{page}</AdminLayout>;
+  return <AdminLayout active_page="0">{page}</AdminLayout>;
 };
 export default user;
+
+
+// <div className="container">
+// <div className="row">
+//   {astro ? (
+//     <div className="container">
+//       <div className="row">
+//         <table>
+//           <tbody>
+//             <tr>
+//               <td> {astro.firstName + " " + astro.secondName}</td>
+//               <td> {astro.phoneNumber}</td>
+//             </tr>
+//             <tr>
+//               <td> {astro.email}</td>
+//             </tr>
+//           </tbody>
+//         </table>
+//         <div>
+//           <button
+//             className={"btn btn-primary"}
+//             onClick={() => toggleEnable(pid)}
+//           >
+//             Enabled : {enabled ? "   On  " : "  off   "}
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   ) : (
+//     "no user"
+//   )}
+// </div>
+
+// <br></br>
+// <hr></hr>
+
+// <div className="row">
+//   <div className="row">
+//     <ul className="nav nav-pills">
+//       <li className="nav-item">
+//         <button
+//           className={`nav-link ${activeState == 1 ? "active" : ""}`}
+//           onClick={() => setActiveState(1)}
+//         >
+//           Orders History
+//         </button>
+//       </li>
+//       <li className="nav-item">
+//         <button
+//           className={`nav-link ${activeState == 2 ? "active" : ""}`}
+//           onClick={() => setActiveState(2)}
+//         >
+//           Meeting History
+//         </button>
+//       </li>
+
+//       <li className="nav-item">
+//         <button
+//           className={`nav-link ${activeState == 3 ? "active" : ""}`}
+//           onClick={() => setActiveState(3)}
+//         >
+//           Wallet History
+//         </button>
+//       </li>
+//     </ul>
+//   </div>
+//   <hr></hr>
+//   <div className="row">{getDataForAstroLists()}</div>
+// </div>
+// </div>

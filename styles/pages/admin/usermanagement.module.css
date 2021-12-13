@@ -1,0 +1,141 @@
+.topSearchContainer{
+    /* border: solid red; */
+    padding: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+
+  .searchBox {
+    max-width: 472px;
+    flex-grow: 2;
+    height: 48px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px; 
+    padding-bottom: 12px;
+  }
+  
+
+
+.buttonContainer{
+    margin-left: auto;
+    display: flex;
+    gap: 25px;
+  }
+  
+  .button{
+    padding: 12px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+  
+  }
+  
+  .filterButton{
+    border: 1.6px solid #4175DF;
+    color: #4175DF;
+    
+    border-radius: 8px;
+  
+  }
+
+  .getButton{
+    border: 1.6px solid #52B680;
+    color: #52B680;
+    
+    border-radius: 8px;
+  }
+  
+
+
+  .tableContainer{
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .mainTable{
+    width: 100%;
+  
+  }
+  
+  .tableHeading{
+    background:rgba(136, 136, 136, 0.25);
+    height: 48px;
+    text-align: center;
+  }
+  
+  .tableData{
+    min-height: 48px;
+    text-align: center;
+ 
+    /* border: dotted green; */
+  }
+  
+
+
+  .paginationContainer {
+    /* border: dotted green ; */
+    padding-left: 16px;
+    padding-right: 16px;
+    /* margin-top: auto; */
+  }
+  
+  
+  .centerDivFlex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .paginationActive{
+    border: solid red;
+  
+  }
+
+
+  .statsContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 10px;
+    justify-items: center; 
+    
+  }
+
+  .statsItem{
+    /* border: 1px solid red; */
+    /* padding: 20px; */
+    display: flex;
+    justify-content: space-around;
+    max-width: 310px;
+    gap: 20px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #E3E7EE;
+    background: #FFFFFF;
+box-sizing: border-box;
+border-radius: 8px;
+    
+  }
+
+  .statsText{
+    font-weight: 500;
+font-size: 20px;
+line-height: 24px;
+display: flex; 
+align-items: center;
+justify-content: center;
+/* border: 1px solid green; */
+  }
+
+  .statsNumber{
+    font-weight: 500;
+font-size: 25px;
+line-height: 25px;
+display: flex; 
+align-items: center;
+justify-content: center;
+/* border: 1px solid blue; */
+  }
