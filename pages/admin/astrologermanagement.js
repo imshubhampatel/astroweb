@@ -74,7 +74,7 @@ const astrologermanagement = withAdminAuth(() => {
       html: (
         <div className="container">
           <h4>Filter</h4>
-          <label for="verified">Verify  </label>
+          <label htmlFor="verified">Verify  </label>
           <input
             type="checkbox"
             className="form-check-input"
@@ -83,7 +83,7 @@ const astrologermanagement = withAdminAuth(() => {
             id="verified"
           />
           <br/>
-          <label for="verified">Enabled   </label>
+          <label htmlFor="verified">Enabled   </label>
           <input
             type="checkbox"
             className="form-check-input"
@@ -92,7 +92,7 @@ const astrologermanagement = withAdminAuth(() => {
             id="razorpayId"
           />
           <br/>
-          <label for="verified">Profile Complete  </label>
+          <label htmlFor="verified">Profile Complete  </label>
           <input
             type="checkbox"
             className="form-check-input"
