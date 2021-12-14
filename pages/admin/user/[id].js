@@ -19,6 +19,7 @@ import AdminLayout from "../../../components/adminPanel/layout";
 import MeetingCard from "../../../components/adminPanel/meetingCard";
 import TransactionCard from "../../../components/adminPanel/transactionCard";
 import OrderCard from "../../../components/adminPanel/orderCard";
+import {EmployeePermissions} from  '../../../dbObjects/Employee'
 
 import { isUser, setUserPerm, removeUserPerm } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
@@ -26,7 +27,7 @@ import { UserConverter, User } from "../../../dbObjects/User";
 
 const db = getFirestore(firebase);
 
-// const user = withAdminAuth(() => {
+const user = withAdminAuth(() => {
 
   const user = () => {
   const router = useRouter();
@@ -191,10 +192,7 @@ const db = getFirestore(firebase);
       </div>
 
   );
-
-}
-
-// );
+},EmployeePermissions.USER_MANAGEMENT);
 
 user.getLayout = function getLayout(page) {
   return <AdminLayout active_page="0">{page}</AdminLayout>;

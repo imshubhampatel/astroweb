@@ -16,6 +16,7 @@ import {
   setDoc,
   getFirestore,
 } from "firebase/firestore";
+
 import { firebase } from "../../../config";
 import AdminLayout from "../../../components/adminPanel/layout";
 import {
@@ -24,18 +25,20 @@ import {
   removeSubadminPerm,
 } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
-import { employeeConverter, Employee } from "../../../dbObjects/Employee";
-import Image from "next/image";
+import { employeeConverter, Employee , EmployeePermissions } from "../../../dbObjects/Employee";
+
 const db = getFirestore(firebase);
 
-// const employee = withAdminAuth(() => {
+const employee = withAdminAuth(() => {
 
-const employee = () => {
+// const employee = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
   var [enabled, setenabled] = useState(true);
   const [edit, setedit] = useState(false);
+  const [verificationIdLink, setverificationIdLink] = useState("");
+  const [panardLink, setpancardLink] = useState("");
 
   async function getemployeeInfo(pid) {
     const astros = collection(db, "employee");
@@ -43,9 +46,9 @@ const employee = () => {
       doc(astros, String(pid)).withConverter(employeeConverter)
     );
     if (querySnapshot.exists()) {
-      setastro(querySnapshot.data());
+      return querySnapshot.data();
     } else {
-      // console.log("no")
+      return {};
     }
   }
   async function toggleEnable(uid) {
@@ -60,7 +63,11 @@ const employee = () => {
   }
 
   useEffect(() => {
-    getemployeeInfo(pid);
+    getemployeeInfo(pid).then(data => {
+      setastro(data);
+      // getFile(data.verificationId).then((d) => setverificationIdLink(d)).catch();
+      // getFile(data.pancardLink).then((d) => setpancardLink(d)).catch();
+    });
     if (pid)
       isSubAdmin(pid).then((e) => {
         if (e) setenabled(true);
@@ -68,27 +75,16 @@ const employee = () => {
       });
   }, [pid]);
 
-  async function permissionChangeHandler(e) {
-    e.preventDefault();
+  async function permissionChangeHandler(astro_temp_perm) {
     const emp = {
       ...astro,
       permissions: {
-        astro_management: e.target.astro_management
-          ? e.target.astro_management.checked
-          : false,
-        emp_management: e.target.emp_management
-          ? e.target.emp_management.checked
-          : false,
-        wallet_management: e.target.wallet_management
-          ? e.target.wallet_management.checked
-          : false,
-        user_management: e.target.user_management
-          ? e.target.user_management.checked
-          : false,
-        broadcast_management: e.target.broadcast_management
-          ? e.target.broadcast_management.checked
-          : false,
-        store: e.target.store ? e.target.store.checked : false,
+        astro_management: astro_temp_perm.astro_management,
+        emp_management: astro_temp_perm.emp_management,
+        wallet_management: astro_temp_perm.wallet_management,
+        user_management: astro_temp_perm.user_management,
+        broadcast_management: astro_temp_perm.broadcast_management,
+        store: astro_temp_perm.store,
       },
     };
 
@@ -100,9 +96,6 @@ const employee = () => {
     });
     setastro(emp);
   }
-
-  console.log(astro);
-
   return (
     <div className={` ${layoutStyles.base_container} `}>
       <div className={`${layoutStyles.main_container}`}>
@@ -136,13 +129,23 @@ const employee = () => {
           </div>
 
           <div>
-            Enabled <SimpleToggleButton size="32" clickHandler={() => {}} />
+            Enabled{" "}
+            <SimpleToggleButton
+              initialState={
+                enabled !=null
+                  ? enabled
+                  : "not-set"
+              }
+              size="32"
+              clickHandler={() => {
+                toggleEnable(pid);
+              }}
+            />
           </div>
         </div>
 
         {/* Documents  */}
         <div className="my-2">
-
           <div className="d-flex gap-3 align-items-center">
             <h5>Documents </h5>
             <div
@@ -150,12 +153,33 @@ const employee = () => {
               className="border-top flex-grow-1"
             />
           </div>
-
-
-          Aadhar Card: <a > Link </a> <br/> 
-          Pancard: <a> Link </a> <br/> 
-
+          Aadhar Card :{" "}
+          {astro.verificationId ? (
+            <div className={`${styles.empPhoto}`}>
+              <FireImage
+                src={astro.verificationId}
+                alt="Aadhar Card"
+                layout="fill"
+              />
+            </div>
+          ) : (
+            ""
+          )}
+          <br />
+          Pancard:
+          {astro.pancardLink ? (
+            <div className={`${styles.empPhoto}`}>
+              <FireImage
+                src={astro.pancardLink}
+                alt="Profile Picture"
+                layout="fill"
+              />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
+        <br />
 
         {/* Permissions   */}
         <div className={`${styles.permissionsContainer}`}>
@@ -179,7 +203,11 @@ const employee = () => {
                       : "not-set"
                   }
                   size="32"
-                  clickHandler={() => {}}
+                  clickHandler={() => {
+                    let temp = astro.permissions;
+                    temp.astro_management = !temp.astro_management;
+                    permissionChangeHandler(temp);
+                  }}
                 />
               </div>
             </div>
@@ -195,7 +223,11 @@ const employee = () => {
                       : "not-set"
                   }
                   size="32"
-                  clickHandler={() => {}}
+                  clickHandler={() => {
+                    let temp = astro.permissions;
+                    temp.user_management = !temp.user_management;
+                    permissionChangeHandler(temp);
+                  }}
                 />
               </div>
             </div>
@@ -210,7 +242,11 @@ const employee = () => {
                       : "not-set"
                   }
                   size="32"
-                  clickHandler={() => {}}
+                  clickHandler={() => {
+                    let temp = astro.permissions;
+                    temp.broadcast_management = !temp.broadcast_management;
+                    permissionChangeHandler(temp);
+                  }}
                 />
               </div>
             </div>
@@ -225,7 +261,11 @@ const employee = () => {
                       : "not-set"
                   }
                   size="32"
-                  clickHandler={() => {}}
+                  clickHandler={() => {
+                    let temp = astro.permissions;
+                    temp.wallet_management = !temp.wallet_management;
+                    permissionChangeHandler(temp);
+                  }}
                 />
               </div>
             </div>
@@ -254,7 +294,11 @@ const employee = () => {
                     astro.permissions ? astro.permissions.store : "not-set"
                   }
                   size="32"
-                  clickHandler={() => {}}
+                  clickHandler={() => {
+                    let temp = astro.permissions;
+                    temp.store = !temp.store;
+                    permissionChangeHandler(temp);
+                  }}
                 />
               </div>
             </div>
@@ -263,81 +307,9 @@ const employee = () => {
       </div>
     </div>
   );
-};
-
-// );
+},EmployeePermissions.EMP_MANAGEMENT);
 
 employee.getLayout = function getLayout(page) {
   return <AdminLayout active_page="3">{page}</AdminLayout>;
 };
 export default employee;
-
-// <div>
-// {astro ? (
-//   <div className="container">
-//     <div className="row">
-//       <table>
-//         <tbody>
-//           <tr>
-//             <td> {astro.firstName + " " + astro.secondName}</td>
-//             <td> {astro.phoneNumber}</td>
-//           </tr>
-//           <tr>
-//             <td> {astro.email}</td>
-//             <td> {astro.verified ? "Verified" : "Not Verified"}</td>
-//           </tr>
-//         </tbody>
-//       </table>
-//       <div>
-//         <button
-//           className={"btn btn-primary"}
-//           onClick={() => toggleEnable(pid)}
-//         >
-//           Enabled : {enabled ? "   On  " : "  off   "}
-//         </button>
-//         <button
-//           onClick={() => {
-//             setedit(!edit);
-//           }}
-//           className={"btn btn-primary"}
-//         >
-//           Edit Profile
-//         </button>
-//       </div>
-//       <div>
-//         <h4>Permissions</h4>
-
-//         <div>
-//           <form onSubmit={permissionChangeHandler}>
-//             {astro.permissions
-//               ? Object.keys(astro.permissions).map((key) => (
-//                   <div className="form-check" key={key}>
-//                     <label className="form-check-label" htmlFor={key}>
-//                       {key}
-//                     </label>
-//                     <input
-//                       className="form-check-input"
-//                       name={key}
-//                       id={key}
-//                       type="checkbox"
-//                       defaultChecked={astro.permissions[key]}
-//                       disabled={!edit}
-//                     ></input>
-//                   </div>
-//                 ))
-//               : ""}
-//             {edit ? (
-//               <button type="submit" className={"btn btn-primary"}>
-//                 {" "}
-//                 Save
-//               </button>
-//             ) : null}
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-// ) : (
-//   "no user"
-// )}
-// </div>

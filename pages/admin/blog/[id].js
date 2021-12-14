@@ -11,6 +11,8 @@ import {
   getFirestore,
   updateDoc,
 } from "firebase/firestore";
+import {EmployeePermissions} from  '../../../dbObjects/Employee'
+
 import { firebase } from "../../../config";
 import AdminLayout from "../../../components/adminPanel/layout";
 import withAdminAuth from "../../../auth/withAdminAuth";
@@ -86,7 +88,7 @@ const blog = withAdminAuth(() => {
       </div>
     </div>
   );
-});
+}, EmployeePermissions.BROADCAST_MANAGEMENT);
 
 blog.getLayout = function getLayout(page) {
   return <AdminLayout active_page="3">{page}</AdminLayout>;
