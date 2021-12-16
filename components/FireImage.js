@@ -9,7 +9,7 @@ const FireImageLoader = ({ src, layout, width, height, alt }) => {
   useEffect(() => {
     getFile(src).then((url) => setImageUrl(url))
     .catch((error) => {});      
-  }, []);
+  }, [src]);
 
   if (layout === "fill") {
     return <Image src={imgUrl} alt={alt} layout="fill" />;

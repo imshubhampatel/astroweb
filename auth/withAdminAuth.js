@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import router from "next/router";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, firebase } from "../config";
@@ -34,24 +34,20 @@ const withAdminAuth = (Component , perm ) => (props) => {
                 });
               }
                 setLoading(false);
-              }
-              else {
+              } else {
                 alert("Access Not allowed");
                 router.replace("/");
               }
-            })
+            });
           }
-        })
+        });
       }
     });
     setLoading(false);
   }, []);
 
-
   return (
-    <div>
-      {loading ? "Loading ....":<Component {...props}></Component>}
-    </div>
+    <div>{loading ? "Loading ...." : <Component {...props}></Component>}</div>
   );
 };
 
