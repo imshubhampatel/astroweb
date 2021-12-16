@@ -25,6 +25,7 @@ import MeetingCard from "../../../components/adminPanel/meetingCard";
 import TransactionCard from "../../../components/adminPanel/transactionCard";
 import OrderCard from "../../../components/adminPanel/orderCard";
 import { EmployeePermissions } from "../../../dbObjects/Employee";
+import FireImage from "../../../components/FireImage";
 
 import { isUser, setUserPerm, removeUserPerm } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
@@ -148,8 +149,6 @@ const user = () => {
     }
   };
 
-  console.log(astro);
-
   return (
     <div className={` ${layoutStyles.base_container} `}>
       <div className={`${layoutStyles.main_container}`}>
@@ -159,26 +158,35 @@ const user = () => {
 
         <div className={`${styles.mainInfoContainer}`}>
           <div className={`${styles.astroPhoto}`} style={{ display: "block" }}>
-            PHOTO
+            {astro.profilePhoto ? (
+              <>
+                <FireImage
+                  src={astro.profilePhoto}
+                  layout="responsive"
+                  width="400"
+                  height="400"
+                />
+              </>
+            ) : (
+              ""
+            )}{" "}
           </div>
 
           <div className={`${styles.astroInfo}`}>
-            <h4>User Mahesh </h4>
+            <h4>User {astro.firstName + " " + astro.secondName}</h4>
 
             <div className={`d-flex flex-column gap-1 `}>
               <div className={`${styles.astroInfoText}`}>
-                {/* {astro.dob ? new Date(astro.dob).toDateString() : ""} */}
-                <AiOutlineCalendar /> 15th January 1991
+                <AiOutlineCalendar />{" "}
+                {astro.dob ? new Date(astro.dob).toDateString() : ""}
               </div>
 
               <div className={`${styles.astroInfoText}`}>
-                {/* {astro.phoneNumber} */}
-                <AiOutlinePhone /> +91 9123455670
+                <AiOutlinePhone /> {astro.phoneNumber}
               </div>
 
               <div className={`${styles.astroInfoText}`}>
-                {/* {astro.email} */}
-                <AiOutlineMail /> mahesh112@gmail.com
+                <AiOutlineMail /> {astro.email}
               </div>
             </div>
           </div>
@@ -187,14 +195,14 @@ const user = () => {
             Enabled{" "}
             <ToggleButton
               size="32"
-              initialState={true}
-              clickHandler={() => {}}
+              initialState={enabled}
+              clickHandler={() => {
+                toggleEnable(pid);
+              }}
             />
           </div>
         </div>
 
-
-          
         <div className={`${styles.buttonContainer}`}>
           <button
             className={`${styles.blueButton}   ${
@@ -225,9 +233,7 @@ const user = () => {
           </button>
         </div>
 
-          <div className="d-flex my-3 gap-1">{getDataForAstroLists()}</div>
-
-        
+        <div className="d-flex my-3 gap-1">{getDataForAstroLists()}</div>
       </div>
     </div>
   );
@@ -241,106 +247,3 @@ user.getLayout = function getLayout(page) {
 export default user;
 
 
-{/* <div className="row ">
-<div className="row">
-  <ul className="nav nav-pills">
-    <li className="nav-item">
-      <button
-        className={`nav-link ${activeState == 1 ? "active" : ""}`}
-        onClick={() => setActiveState(1)}
-      >
-        Orders History
-      </button>
-    </li>
-    <li className="nav-item">
-      <button
-        className={`nav-link ${activeState == 2 ? "active" : ""}`}
-        onClick={() => setActiveState(2)}
-      >
-        Meeting History
-      </button>
-    </li>
-
-    <li className="nav-item">
-      <button
-        className={`nav-link ${activeState == 3 ? "active" : ""}`}
-        onClick={() => setActiveState(3)}
-      >
-        Wallet History
-      </button>
-    </li>
-  </ul>
-</div> */}
-
-
-
-// <div className="container">
-// <div className="row">
-//   {astro ? (
-//     <div className="container">
-//       <div className="row">
-//         <table>
-//           <tbody>
-//             <tr>
-//               <td> {astro.firstName + " " + astro.secondName}</td>
-//               <td> {astro.phoneNumber}</td>
-//             </tr>
-//             <tr>
-//               <td> {astro.email}</td>
-//             </tr>
-//           </tbody>
-//         </table>
-//         <div>
-//           <button
-//             className={"btn btn-primary"}
-//             onClick={() => toggleEnable(pid)}
-//           >
-//             Enabled : {enabled ? "   On  " : "  off   "}
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   ) : (
-//     "no user"
-//   )}
-// </div>
-
-// <br></br>
-// <hr></hr>
-
-{
-  /* <div className="row">
-  <div className="row">
-    <ul className="nav nav-pills">
-      <li className="nav-item">
-        <button
-          className={`nav-link ${activeState == 1 ? "active" : ""}`}
-          onClick={() => setActiveState(1)}
-        >
-          Orders History
-        </button>
-      </li>
-      <li className="nav-item">
-        <button
-          className={`nav-link ${activeState == 2 ? "active" : ""}`}
-          onClick={() => setActiveState(2)}
-        >
-          Meeting History
-        </button>
-      </li>
-
-      <li className="nav-item">
-        <button
-          className={`nav-link ${activeState == 3 ? "active" : ""}`}
-          onClick={() => setActiveState(3)}
-        >
-          Wallet History
-        </button>
-      </li>
-    </ul>
-  </div>
-  <hr></hr>
-  <div className="row">{getDataForAstroLists()}</div> */
-}
-// </div>
-// </div>

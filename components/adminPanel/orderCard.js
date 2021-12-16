@@ -10,15 +10,18 @@ function OrderCard({ props }) {
         <div className={styles.leftInfoSubContainer}>
           <div className={styles.name}>Gemstone 1</div>
 
-          <div className={styles.status}>Status: Delivered</div>
+          <div className={styles.status}>Status: {props.status}</div>
 
-          <div className={styles.orderId}>Order Id: #0009999999999</div>
+          <div className={styles.orderId}>Order Id: {props.id}</div>
         </div>
 
         <div className={styles.rightInfoSubContainer}>
-          <div className={styles.price}>Rs 3000</div>
+          <div className={styles.price}>Rs {props.amount}</div>
 
-          <div className={styles.date}>Ordered on: 12th June, 2021</div>
+          <div className={styles.date}>
+            
+            Ordered on: {(new Date(props.timestamp)).toDateString()}
+          </div>
 
           <div className={styles.date}>Delivered by: 20th June, 2021</div>
 

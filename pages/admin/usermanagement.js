@@ -84,6 +84,7 @@ const userManagement = withAdminAuth(() => {
         query(astros, where("phoneNumber", "==", String(search)))
       );
       querySnapshot.docs.map((doc) => data.add(doc.data()));
+      console.log(data);
       setusersList(Array.from(data));
     }
   }
@@ -179,13 +180,13 @@ const userManagement = withAdminAuth(() => {
             className={`${styles.searchBox}`}
             type="text"
             placeholder="Search by name/email"
-            // onChange={searchHandler}
+            onChange={(e) => setsearch(e.target.value)}
           />
 
           <div className={`${styles.buttonContainer}`}>
             <button
               className={`${styles.filterButton} ${styles.button} `}
-              onClick={() => {}}
+              onClick={()=>searchHandler(search)}
             >
               Search
             </button>
@@ -215,36 +216,3 @@ userManagement.getLayout = function getLayout(page) {
 
 export default userManagement;
 
-// <div className="container">
-// <div className="row">
-//   <div className="col-12">Total users : {totalusers}</div>
-// </div>
-// <div className="row">
-//   <div className="col">
-//     <input
-//       type="text"
-//       placeholder="search by email or name"
-//       onChange={(e) => setsearch(e.target.value)}
-//     ></input>
-//     <button
-//       onClick={() => searchHandler(search)}
-//       className="btn btn-primary"
-//     >
-//       Search
-//     </button>
-//   </div>
-//   <div className="col">
-//     <button
-//       onClick={refresh}
-//       className="btn btn-success"
-//     >
-//       Refresh
-//     </button>
-//   </div>
-// </div>
-// {search != "" ? (
-//   <SearchPagination ItemsPerPage={ItemsPerPage} usersList={usersList} />
-// ) : (
-//   renderUserPagination()
-// )}
-// </div>

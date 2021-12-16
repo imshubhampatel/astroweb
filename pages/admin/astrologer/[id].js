@@ -455,7 +455,6 @@ const astrologer = withAdminAuth(() => {
     );
     if (querySnapshot.exists()) {
       let data = querySnapshot.data();
-      console.log(data);
       MySwal.fire({
         showConfirmButton: true,
         html: (
