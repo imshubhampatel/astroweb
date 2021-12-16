@@ -1,6 +1,11 @@
-import layoutStyles from "../../../styles/pages/admin/BaseLayout.module.css" 
-import styles from "../../../styles/pages/admin/user/[id].module.css"
-import ToggleButton from "../../../components/SimpleToggleButton"
+import layoutStyles from "../../../styles/pages/admin/BaseLayout.module.css";
+import styles from "../../../styles/pages/admin/user/[id].module.css";
+import ToggleButton from "../../../components/SimpleToggleButton";
+import {
+  AiOutlineCalendar,
+  AiOutlinePhone,
+  AiOutlineMail,
+} from "react-icons/ai";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
@@ -19,7 +24,7 @@ import AdminLayout from "../../../components/adminPanel/layout";
 import MeetingCard from "../../../components/adminPanel/meetingCard";
 import TransactionCard from "../../../components/adminPanel/transactionCard";
 import OrderCard from "../../../components/adminPanel/orderCard";
-import {EmployeePermissions} from  '../../../dbObjects/Employee'
+import { EmployeePermissions } from "../../../dbObjects/Employee";
 
 import { isUser, setUserPerm, removeUserPerm } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
@@ -27,9 +32,9 @@ import { UserConverter, User } from "../../../dbObjects/User";
 
 const db = getFirestore(firebase);
 
-const user = withAdminAuth(() => {
+// const user = withAdminAuth(() => {
 
-  const user = () => {
+const user = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
@@ -57,7 +62,8 @@ const user = withAdminAuth(() => {
       query(astros, where("user", "==", String(uuid)))
     );
     let data = querySnapshot.docs.map((doc) => {
-      return {id:doc.id,...doc.data()}});
+      return { id: doc.id, ...doc.data() };
+    });
     //    console.log(data);
     setOrders(data);
   }
@@ -67,14 +73,17 @@ const user = withAdminAuth(() => {
       query(astros, where("user", "==", uuid))
     );
     let data = querySnapshot.docs.map((doc) => {
-      return {id:doc.id,...doc.data()}});    setMeetings(data);
+      return { id: doc.id, ...doc.data() };
+    });
+    setMeetings(data);
   }
   async function getAllWalletTransactions(uuid) {
     const astros = query(collection(db, "user", uuid, "wallet_transaction"));
     const querySnapshot = await getDocs(astros);
     let data = querySnapshot.docs.map((doc) => {
-      return {id:doc.id,...doc.data()}});  
-        setWalletTransactions(data);
+      return { id: doc.id, ...doc.data() };
+    });
+    setWalletTransactions(data);
     return data;
   }
 
@@ -105,12 +114,11 @@ const user = withAdminAuth(() => {
           getAllOrders(pid);
         }
         return (
-          <div>
-            {" "}
+          <>
             {orders.map((e) => {
               return <OrderCard key={e.id} props={e}></OrderCard>;
             })}
-          </div>
+          </>
         );
       }
       case 2: {
@@ -118,11 +126,11 @@ const user = withAdminAuth(() => {
           getAllMeeting(pid);
         }
         return (
-          <ul>
+          <>
             {meetings.map((e) => {
               return <MeetingCard key={e.id} props={e}></MeetingCard>;
             })}
-          </ul>
+          </>
         );
       }
       case 3: {
@@ -130,26 +138,24 @@ const user = withAdminAuth(() => {
           getAllWalletTransactions(pid);
         }
         return (
-          <ul>
+          <>
             {walletTransactions.map((e) => {
-              return <TransactionCard key={e.id}  props={e}></TransactionCard>;
+              return <TransactionCard key={e.id} props={e}></TransactionCard>;
             })}
-          </ul>
+          </>
         );
       }
     }
   };
 
-  console.log(astro)
+  console.log(astro);
 
   return (
-
     <div className={` ${layoutStyles.base_container} `}>
       <div className={`${layoutStyles.main_container}`}>
         <h2 className={`${layoutStyles.headingText}`}>
           User Management System
         </h2>
-
 
         <div className={`${styles.mainInfoContainer}`}>
           <div className={`${styles.astroPhoto}`} style={{ display: "block" }}>
@@ -159,46 +165,78 @@ const user = withAdminAuth(() => {
           <div className={`${styles.astroInfo}`}>
             <h4>User Mahesh </h4>
 
-            <div className={`d-flex flex-column  `}>
-              <div className={``}>
+            <div className={`d-flex flex-column gap-1 `}>
+              <div className={`${styles.astroInfoText}`}>
                 {/* {astro.dob ? new Date(astro.dob).toDateString() : ""} */}
-                DOB
+                <AiOutlineCalendar /> 15th January 1991
               </div>
 
-              <div className={``}>
+              <div className={`${styles.astroInfoText}`}>
+                {/* {astro.phoneNumber} */}
+                <AiOutlinePhone /> +91 9123455670
+              </div>
+
+              <div className={`${styles.astroInfoText}`}>
                 {/* {astro.email} */}
-                EMAIL 
-                
-                </div>
-
-              <div className={``}>
-                {/* {astro.phoneNumber} */} 
-                PHONE 
-                </div>
+                <AiOutlineMail /> mahesh112@gmail.com
+              </div>
             </div>
-
-
-
           </div>
 
           <div className={`${styles.subContainer}`}>
-            Enabled <ToggleButton size="32" initialState={true} clickHandler={() => {}}/> 
+            Enabled{" "}
+            <ToggleButton
+              size="32"
+              initialState={true}
+              clickHandler={() => {}}
+            />
           </div>
         </div>
 
+        <div className="row ">
+          <div className="row">
+            <ul className="nav nav-pills">
+              <li className="nav-item">
+                <button
+                  className={`nav-link ${activeState == 1 ? "active" : ""}`}
+                  onClick={() => setActiveState(1)}
+                >
+                  Orders History
+                </button>
+              </li>
+              <li className="nav-item">
+                <button
+                  className={`nav-link ${activeState == 2 ? "active" : ""}`}
+                  onClick={() => setActiveState(2)}
+                >
+                  Meeting History
+                </button>
+              </li>
 
-
+              <li className="nav-item">
+                <button
+                  className={`nav-link ${activeState == 3 ? "active" : ""}`}
+                  onClick={() => setActiveState(3)}
+                >
+                  Wallet History
+                </button>
+              </li>
+            </ul>
+          </div>
+          <hr></hr>
+          <div className="d-flex gap-1">{getDataForAstroLists()}</div>
+        </div>
       </div>
-      </div>
-
+    </div>
   );
-},EmployeePermissions.USER_MANAGEMENT);
+};
+
+// ,EmployeePermissions.USER_MANAGEMENT);
 
 user.getLayout = function getLayout(page) {
   return <AdminLayout active_page="0">{page}</AdminLayout>;
 };
 export default user;
-
 
 // <div className="container">
 // <div className="row">
@@ -234,37 +272,39 @@ export default user;
 // <br></br>
 // <hr></hr>
 
-// <div className="row">
-//   <div className="row">
-//     <ul className="nav nav-pills">
-//       <li className="nav-item">
-//         <button
-//           className={`nav-link ${activeState == 1 ? "active" : ""}`}
-//           onClick={() => setActiveState(1)}
-//         >
-//           Orders History
-//         </button>
-//       </li>
-//       <li className="nav-item">
-//         <button
-//           className={`nav-link ${activeState == 2 ? "active" : ""}`}
-//           onClick={() => setActiveState(2)}
-//         >
-//           Meeting History
-//         </button>
-//       </li>
+{
+  /* <div className="row">
+  <div className="row">
+    <ul className="nav nav-pills">
+      <li className="nav-item">
+        <button
+          className={`nav-link ${activeState == 1 ? "active" : ""}`}
+          onClick={() => setActiveState(1)}
+        >
+          Orders History
+        </button>
+      </li>
+      <li className="nav-item">
+        <button
+          className={`nav-link ${activeState == 2 ? "active" : ""}`}
+          onClick={() => setActiveState(2)}
+        >
+          Meeting History
+        </button>
+      </li>
 
-//       <li className="nav-item">
-//         <button
-//           className={`nav-link ${activeState == 3 ? "active" : ""}`}
-//           onClick={() => setActiveState(3)}
-//         >
-//           Wallet History
-//         </button>
-//       </li>
-//     </ul>
-//   </div>
-//   <hr></hr>
-//   <div className="row">{getDataForAstroLists()}</div>
+      <li className="nav-item">
+        <button
+          className={`nav-link ${activeState == 3 ? "active" : ""}`}
+          onClick={() => setActiveState(3)}
+        >
+          Wallet History
+        </button>
+      </li>
+    </ul>
+  </div>
+  <hr></hr>
+  <div className="row">{getDataForAstroLists()}</div> */
+}
 // </div>
 // </div>
