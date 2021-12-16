@@ -615,7 +615,7 @@ const astrologer = withAdminAuth(() => {
 
             <div className={`d-flex `}>
               <div className={`me-2`}>
-                {astro.dob ? new Date(astro.dob).toDateString() : ""}
+                {astro?.dob ? astro.dob.toDate() : ""}
               </div>
 
               <div className={`mx-2`}>{astro.email}</div>
