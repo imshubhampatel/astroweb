@@ -193,39 +193,41 @@ const user = () => {
           </div>
         </div>
 
-        <div className="row ">
-          <div className="row">
-            <ul className="nav nav-pills">
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${activeState == 1 ? "active" : ""}`}
-                  onClick={() => setActiveState(1)}
-                >
-                  Orders History
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${activeState == 2 ? "active" : ""}`}
-                  onClick={() => setActiveState(2)}
-                >
-                  Meeting History
-                </button>
-              </li>
 
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${activeState == 3 ? "active" : ""}`}
-                  onClick={() => setActiveState(3)}
-                >
-                  Wallet History
-                </button>
-              </li>
-            </ul>
-          </div>
-          <hr></hr>
-          <div className="d-flex gap-1">{getDataForAstroLists()}</div>
+          
+        <div className={`${styles.buttonContainer}`}>
+          <button
+            className={`${styles.blueButton}   ${
+              activeState == 1 ? styles.blueButtonActive : ""
+            } `}
+            aria-current="page"
+            onClick={() => setActiveState(1)}
+          >
+            Reviews
+          </button>
+
+          <button
+            className={`${styles.blueButton}   ${
+              activeState == 2 ? styles.blueButtonActive : ""
+            }  `}
+            onClick={() => setActiveState(2)}
+          >
+            Meeting History
+          </button>
+
+          <button
+            className={`${styles.blueButton}  ${
+              activeState == 3 ? styles.blueButtonActive : ""
+            }   `}
+            onClick={() => setActiveState(3)}
+          >
+            Wallet History
+          </button>
         </div>
+
+          <div className="d-flex my-3 gap-1">{getDataForAstroLists()}</div>
+
+        
       </div>
     </div>
   );
@@ -237,6 +239,40 @@ user.getLayout = function getLayout(page) {
   return <AdminLayout active_page="0">{page}</AdminLayout>;
 };
 export default user;
+
+
+{/* <div className="row ">
+<div className="row">
+  <ul className="nav nav-pills">
+    <li className="nav-item">
+      <button
+        className={`nav-link ${activeState == 1 ? "active" : ""}`}
+        onClick={() => setActiveState(1)}
+      >
+        Orders History
+      </button>
+    </li>
+    <li className="nav-item">
+      <button
+        className={`nav-link ${activeState == 2 ? "active" : ""}`}
+        onClick={() => setActiveState(2)}
+      >
+        Meeting History
+      </button>
+    </li>
+
+    <li className="nav-item">
+      <button
+        className={`nav-link ${activeState == 3 ? "active" : ""}`}
+        onClick={() => setActiveState(3)}
+      >
+        Wallet History
+      </button>
+    </li>
+  </ul>
+</div> */}
+
+
 
 // <div className="container">
 // <div className="row">
