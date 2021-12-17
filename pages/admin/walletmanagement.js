@@ -194,7 +194,7 @@ const walletManagment = withAdminAuth(() => {
 },EmployeePermissions.WALLET_MANAGEMENT);
 
 walletManagment.getLayout = function getLayout(page) {
-  return <AdminLayout active_page="4">{page}</AdminLayout>;
+  return <AdminLayout active_page="5">{page}</AdminLayout>;
 };
 
 export default walletManagment;

@@ -20,7 +20,7 @@ function OrderCard({ props }) {
 
           <div className={styles.date}>
             
-            Ordered on: {(new Date(props.timestamp)).toDateString()}
+            Ordered on: {(props.timestamp).toDate().toDateString()}
           </div>
 
           <div className={styles.date}>Delivered by: 20th June, 2021</div>

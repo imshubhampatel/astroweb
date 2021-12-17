@@ -296,7 +296,8 @@ const astrologer = withAdminAuth(() => {
           <div className={`contianer text-start `}>
             <h5>Contact Info</h5>
             <div>Email: {astro.email}</div>
-            <div>Phone: {astro.phoneNumber}</div>
+            <div>Phone: {astrologerPrivateData.phoneNumber}</div>
+            <div>Alternative Phone: {astrologerPrivateData.alternativePhoneNumber}</div>
             <h5 className={`my-2`}>Documents</h5>
             @TODO <br />
             Show adhar, pan images
@@ -614,7 +615,7 @@ const astrologer = withAdminAuth(() => {
 
             <div className={`d-flex `}>
               <div className={`me-2`}>
-                {astro.dob ? new Date(astro.dob).toDateString() : ""}
+                {astro.dob ? astro.dob.toDate().toDateString() : ""}
               </div>
 
               <div className={`mx-2`}>{astro.email}</div>
@@ -622,17 +623,28 @@ const astrologer = withAdminAuth(() => {
               <div className={`ms-2`}>{astro.phoneNumber}</div>
             </div>
             <i> Razorpay Id : {astrologerPrivateData?.razorpayId}</i>
-            <br/>
+            <br />
 
-            <i>Vedic, Tarot</i>
+            <i>
+              {astro.expertise
+                ? Object.keys(astro.expertise).map((e) => {
+                    return astro.expertise[e] ? e + " " : "";
+                  })
+                : ""}{" "}
+            </i>
 
             <br />
 
             <i> {astro.experience} Years of experience </i>
 
             <br />
-
-            <i>{astro.languages ? Object.keys(astro.languages) : ""} </i>
+            <i>
+              {astro.languages
+                ? Object.keys(astro.languages).map((e) => {
+                    return astro.languages[e] ? e + " " : "";
+                  })
+                : ""}{" "}
+            </i>
           </div>
           <div className={`${styles.subContainer}`}>
             {astro.status?.state != astrologerStatus.VERIFIED ? (
@@ -685,7 +697,6 @@ const astrologer = withAdminAuth(() => {
             >
               More Details
             </div>
-            
           </div>
 
           <p>{astro.about}</p>

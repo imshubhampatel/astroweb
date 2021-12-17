@@ -23,7 +23,7 @@ import { firebase } from "../../../config";
 import AdminLayout from "../../../components/adminPanel/layout";
 import MeetingCard from "../../../components/adminPanel/meetingCard";
 import TransactionCard from "../../../components/adminPanel/transactionCard";
-import OrderCard from "../../../components/adminPanel/orderCard";
+import OrderCard from "../../../components/adminPanel/OrderCard";
 import { EmployeePermissions } from "../../../dbObjects/Employee";
 import FireImage from "../../../components/FireImage";
 
@@ -71,7 +71,7 @@ const user = () => {
   async function getAllMeeting(uuid) {
     const astros = collection(db, "meetings");
     const querySnapshot = await getDocs(
-      query(astros, where("user", "==", uuid))
+      query(astros, where("userUid", "==", uuid))
     );
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
