@@ -129,7 +129,7 @@ const user = withAdminAuth(() => {
         return (
           <>
             {meetings.map((e) => {
-              return <MeetingCard key={e.id} props={e}></MeetingCard>;
+              return <MeetingCard key={e.id} props={e} type="user"></MeetingCard>;
             })}
           </>
         );
@@ -178,7 +178,7 @@ const user = withAdminAuth(() => {
             <div className={`d-flex flex-column gap-1 `}>
               <div className={`${styles.astroInfoText}`}>
                 <AiOutlineCalendar />{" "}
-                {astro.dob ? new Date(astro.dob).toDateString() : ""}
+                {astro.dob ? astro.dob.toDate().toDateString() : "Not Recorded"}
               </div>
 
               <div className={`${styles.astroInfoText}`}>

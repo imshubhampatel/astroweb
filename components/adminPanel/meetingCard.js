@@ -1,9 +1,8 @@
 import styles from "../../styles/components/adminPanel/meetingCard.module.css"
 
 
-export default function MeetingCard( props ) {
+export default function MeetingCard( {props,type} ) {
 
-  // console.log(props);
 
   return (
     <div className={`${styles.container}  d-flex gap-2 `}>
@@ -15,11 +14,11 @@ export default function MeetingCard( props ) {
         {/* Order Status  */}
         <div className={`flex-grow-1  `} style={{height: "100%"}}> 
 
-          <h6>{props.type} Call with {props.user}</h6>
+          <h6>{props.type} Call with {type=="astrologer"?props.user:props.astrologerUid}</h6>
 
           <div className={`${styles.orderDetailText}`} >Order id: {props.id} <br/>
 
-          12th June 2021 09:30pm</div>
+          {props?.scheduledTime.toDate().toDateString()}</div>
 
           <div className={`${styles.orderStatus}  ${styles.orderStatusSuccess} `} >{props.status}</div>
 

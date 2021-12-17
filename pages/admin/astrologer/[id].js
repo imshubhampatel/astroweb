@@ -200,7 +200,9 @@ const astrologer = withAdminAuth(() => {
           getAllMeeting(pid);
         }
         return meetings.map((e) => {
-          return <MeetingCard key={e.id} data={e.data}></MeetingCard>;
+          return (
+            <MeetingCard key={e.id} data={e.data} type="astrologer"></MeetingCard>
+          );
         });
       }
       case 3: {
