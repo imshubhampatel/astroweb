@@ -12,6 +12,8 @@ import {
   query,
   orderBy,
   limit,
+  doc,
+  getDoc,
   endAt,
   startAt,
 } from "firebase/firestore";
@@ -32,14 +34,26 @@ const userManagement = withAdminAuth(() => {
   const [search, setsearch] = useState("");
 
   useEffect(() => {
+    getAppDetails();
     if (search == "") {
       initializePaginationData(90);
       getAllusers(0, ItemsPerPage);
     }
   }, [search]);
+   async function getAppDetails() {
+     const astros = collection(db, "app_details");
+     const querySnapshot = await getDoc(
+       doc(astros, "userDetails")
+       // .withConverter(UserConverter)
+     );
+     if (querySnapshot.exists()) {
+       settotalusers(querySnapshot.data().userCount);
+     } else {
+       // console.log("no")
+     }
+   }
 
   function initializePaginationData(dataSize) {
-    settotalusers(dataSize);
     settotalPages(dataSize / ItemsPerPage);
   }
   async function refresh() {
@@ -157,9 +171,9 @@ const userManagement = withAdminAuth(() => {
 
         <div className={styles.statsContainer}>
           <div className={styles.statsItem}>
-            <div className={styles.statsText}>Online Users</div>
+            <div className={styles.statsText}>Total Users</div>
 
-            <div className={styles.statsNumber}>12289</div>
+            <div className={styles.statsNumber}>{totalusers}</div>
           </div>
 
           <div className={styles.statsItem}>

@@ -13,10 +13,10 @@ import {
   query,
   where,
   doc,
-  getDoc,
   getDocs,
   updateDoc,
   setDoc,
+  getDoc,
   getFirestore,
 } from "firebase/firestore";
 import { firebase } from "../../../config";
@@ -33,9 +33,9 @@ import { UserConverter, User } from "../../../dbObjects/User";
 
 const db = getFirestore(firebase);
 
-// const user = withAdminAuth(() => {
+const user = withAdminAuth(() => {
 
-const user = () => {
+// const user = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
@@ -237,9 +237,8 @@ const user = () => {
       </div>
     </div>
   );
-};
-
-// ,EmployeePermissions.USER_MANAGEMENT);
+  
+},EmployeePermissions.USER_MANAGEMENT);
 
 user.getLayout = function getLayout(page) {
   return <AdminLayout active_page="0">{page}</AdminLayout>;

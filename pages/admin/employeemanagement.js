@@ -29,7 +29,21 @@ const employeemanagement = withAdminAuth(() => {
   const [lastItemNum, setlastItemNum] = useState(3);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getAppDetails();
+  }, []);
+   async function getAppDetails() {
+     const astros = collection(db, "app_details");
+     const querySnapshot = await getDoc(
+       doc(astros, "adminDetails")
+       // .withConverter(UserConverter)
+     );
+     if (querySnapshot.exists()) {
+       setastro(querySnapshot.data().adminCount);
+     } else {
+       // console.log("no")
+     }
+   }
 
   function initializePaginationData(data) {
     setpaginationData(data);

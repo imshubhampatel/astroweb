@@ -7,6 +7,8 @@ import {
   query,
   where,
   getDocs,
+  doc,
+  getDoc,
   getFirestore,
 } from "firebase/firestore";
 import { firebase } from "../../config";
@@ -35,9 +37,22 @@ const astrologermanagement = withAdminAuth(() => {
   const [filterDetails, setFilterDetails] = useState({ enabled:0,profileComplete:0,verified:0});
 
   useEffect(() => {
+    getAppDetails();
     initializePaginationData(astrologersList.filter(myFilter));
   }, [filterDetails]);
-
+   
+ async function getAppDetails() {
+   const astros = collection(db, "app_details");
+   const querySnapshot = await getDoc(
+     doc(astros, "astrologerDetails")
+     // .withConverter(UserConverter)
+   );
+   if (querySnapshot.exists()) {
+     settotalAstrologers(querySnapshot.data().astrologerCount);
+   } else {
+     // console.log("no")
+   }
+ }
   function initializePaginationData(data) {
     setpaginationData(data);
     settotalAstrologers(data.length);
