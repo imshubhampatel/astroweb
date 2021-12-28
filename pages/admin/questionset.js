@@ -18,6 +18,7 @@ import withAdminAuth from "../../auth/withAdminAuth";
 import { questionConverter, Question } from '../../dbObjects/Question'
 import {uploadDocToStorage, getFile} from '../../utilities/utils'
 import QuestionCard from '../../components/QuestionCard'
+import {EmployeePermissions} from  '../../dbObjects/Employee'
 
 const db = getFirestore(firebase);
 
@@ -119,7 +120,7 @@ const questionset = withAdminAuth(()=> {
 
         </div>
     )
-});
+},EmployeePermissions.ASTRO_MANAGEMENT);
 questionset.getLayout = function getLayout(page) {
     return <AdminLayout active_page="2">{page}</AdminLayout>;
   };

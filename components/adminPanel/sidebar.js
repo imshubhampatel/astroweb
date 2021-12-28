@@ -151,9 +151,11 @@ export default function Sidebar(props) {
         </Link>
 
         {/* Store Management Button  */}
+        <Link href="/admin/storemanagement">
+          <a>
         <div
           className={`${styles.button}  ${
-            props.active_page === "3" ? styles.buttonActive : ""
+            props.active_page === "4" ? styles.buttonActive : ""
           }  ${styles.center_div} my-2`}
         >
           <span>
@@ -166,13 +168,15 @@ export default function Sidebar(props) {
             <IoIosArrowForward />
           </span>
         </div>
+        </a>
+        </Link>
 
         {/* Wallet Management Button  */}
            <Link href="/admin/walletmanagement">
           <a>
         <div
           className={`${styles.button} ${
-            props.active_page === "4" ? styles.buttonActive : ""
+            props.active_page === "5" ? styles.buttonActive : ""
           }   ${styles.center_div} my-2`}
         >
           <span>
@@ -189,7 +193,7 @@ export default function Sidebar(props) {
         {/* History Button  */}
         <div
           className={`${styles.button}  ${
-            props.active_page === "4" ? styles.buttonActive : ""
+            props.active_page === "6" ? styles.buttonActive : ""
           }  ${styles.center_div} mt-2`}
         >
           <span>

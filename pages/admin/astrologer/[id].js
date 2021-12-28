@@ -49,6 +49,8 @@ import {
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import Image from "next/image";
 import { getFile } from "../../../utilities/utils";
+import {EmployeePermissions} from  '../../../dbObjects/Employee'
+
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -294,11 +296,26 @@ const astrologer = withAdminAuth(() => {
           <div className={`contianer text-start `}>
             <h5>Contact Info</h5>
             <div>Email: {astro.email}</div>
-            <div>Phone: {astro.phoneNumber}</div>
+            <div>Phone: {astrologerPrivateData.phoneNumber}</div>
+            <div>
+              Alternative Phone: {astrologerPrivateData.alternativePhoneNumber}
+            </div>
             <h5 className={`my-2`}>Documents</h5>
-            @TODO <br />
-            Show adhar, pan images
-            {astrologerPrivateData.verificationIdFront}
+           <br />
+            <b>Aadhar card : </b>
+            <FireImage
+              src={astrologerPrivateData.verificationIdFront}
+              layout="responsive"
+              width="400"
+              height="200"
+            />
+            <br/>
+            <FireImage
+              src={astrologerPrivateData.verificationIdBack}
+              layout="responsive"
+              width="400"
+              height="200"
+            />
             <div className="my-4 d-flex flex-column gap-2">
               <h5>Account Info</h5>
               <div className="row ">
@@ -346,19 +363,6 @@ const astrologer = withAdminAuth(() => {
                 </div>
               </div>
             </div>
-            {/* Bug in button, will fix later  */}
-            {/* {astro.verified ? (
-              ""
-            ) : (
-              <div className={`my-2`}>
-                <button
-                  className={`btn btn-warning`}
-                  onClick={() => VerifyAstrologer(pid)}
-                >
-                  Verify Astrologer
-                </button>
-              </div>
-            )} */}
           </div>
         </>
       ),
@@ -554,6 +558,45 @@ const astrologer = withAdminAuth(() => {
     });
   };
 
+  async function addRazorpayIdFunc(e) {
+    e.preventDefault();
+    const astros = doc(db, "astrologer/" + pid + "/privateInfo/"+pid);
+    let astro_temp = astrologerPrivateData;
+    astro_temp.razorpayId = e.target.razorpayId.value;
+    setAstrologerPrivateData({ ...astro_temp });
+    await updateDoc(astros, { ...astro_temp });
+    MySwal.clickConfirm();
+
+  }
+
+  const editRazorpayId = () => {
+    MySwal.fire({
+      showConfirmButton: false,
+      html: (
+        <div>
+          <form onSubmit={addRazorpayIdFunc}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Please enter razorpay ID "
+            name="reason-text"
+            id="razorpayId"
+            defaultValue={astrologerPrivateData.razorpayId}
+          />
+          <div className="text-end mt-4">
+            <button
+              className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+              type="submit"
+            >
+              Edit RazorpayId
+            </button>
+          </div>
+          </form>
+        </div>
+      ),
+    });
+  };
+
   // #################
 
   useEffect(() => {
@@ -587,23 +630,36 @@ const astrologer = withAdminAuth(() => {
 
             <div className={`d-flex `}>
               <div className={`me-2`}>
-                {astro.dob ? new Date(astro.dob).toDateString() : ""}
+                {astro.dob ? astro.dob.toDate().toDateString() : ""}
               </div>
 
               <div className={`mx-2`}>{astro.email}</div>
 
               <div className={`ms-2`}>{astro.phoneNumber}</div>
             </div>
+            <i> Razorpay Id : {astrologerPrivateData?.razorpayId}</i>
+            <br />
 
-            <i>Vedic, Tarot</i>
+            <i>
+              {astro.expertise
+                ? Object.keys(astro.expertise).map((e) => {
+                    return astro.expertise[e] ? e + " " : "";
+                  })
+                : ""}{" "}
+            </i>
 
             <br />
 
             <i> {astro.experience} Years of experience </i>
 
             <br />
-
-            <i>{astro.languages ? Object.keys(astro.languages) : ""} </i>
+            <i>
+              {astro.languages
+                ? Object.keys(astro.languages).map((e) => {
+                    return astro.languages[e] ? e + " " : "";
+                  })
+                : ""}{" "}
+            </i>
           </div>
           <div className={`${styles.subContainer}`}>
             {astro.status?.state != astrologerStatus.VERIFIED ? (
@@ -644,7 +700,12 @@ const astrologer = withAdminAuth(() => {
           <div className={`d-flex`}>
             <h5 className={`me-2`}>About {astro.firstName} </h5>
             <RatingBox rating={astro.rating} />
-
+            <div
+              className={`ms-auto  ${styles.textButton}`}
+              onClick={() => editRazorpayId()}
+            >
+              Razorpay
+            </div>
             <div
               className={`ms-auto  ${styles.textButton}`}
               onClick={() => moreDetailView()}
@@ -738,7 +799,7 @@ const astrologer = withAdminAuth(() => {
       </div>
     </div>
   );
-});
+},EmployeePermissions.ASTRO_MANAGEMENT);
 
 astrologer.getLayout = function getLayout(page) {
   return <AdminLayout active_page="2">{page}</AdminLayout>;

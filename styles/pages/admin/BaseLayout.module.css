@@ -1,0 +1,140 @@
+.base_container {
+    background-color: #e8e8e8ea;
+    width: 100%;
+    
+    min-height: 100vh;
+    padding: 17px;
+    
+  }
+  
+  .main_container {
+    background-color: white;
+    width: 100%;
+    
+    min-height: inherit;
+    
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 16px;
+    
+  }
+  
+  .headingText {
+    /* padding: 16px; */
+    /* border: solid red; */
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(185, 193, 206, 0.39);
+  }
+  
+  .mainInfoContainer {
+    /* border: solid red;  */
+  
+    margin-top: 15px;
+    display: flex;
+  
+    gap: 16px;
+  }
+  
+  .astroPhoto {
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+    background: #dedede;
+    /* border: dotted pink; */
+  }
+  
+  .astroInfo {
+    border: dotted green;
+    flex-grow: 2;
+    
+  }
+  
+  .subContainer {
+    margin-left: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+  
+  
+  .astroButton{
+    box-sizing: border-box;
+    border-radius: 4px;
+    width: 160px;
+    height: 40px;
+  }
+  
+  .astroVerifyButton {
+    /* border: dotted green; */
+    color: #7C6106;;
+    border: 1px solid #FDD036;
+    background: #FDD036;
+  
+  }
+  
+  .astroDiscardButton{
+    color: #4175DF;
+    border: 1px solid #4175DF;;
+    background: white;
+  }
+  
+  .astroDiscardButton:hover{
+    color: white;
+    border: 1px solid #4175DF;
+    background: #4175DF;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .yelloButton {
+    border: 1px solid #fdd036;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: white;
+    min-width: 145px;
+    height: 48px;
+  }
+  
+  .yelloButton:hover{
+    background: #fdd036;
+  }
+  
+  .yelloButtonActive{
+    background: #fdd036;
+  }
+  
+  
+  
+  
+  .textButton{
+    color: #4175DF;
+    cursor: pointer;
+  }
+  
+  
+  .editPriceInputFieldContainer{
+    background: rgba(255, 246, 210, 0.5);
+    border-radius: 4px;
+  }
+  
+  .editPriceInputField{
+    width: 30px;
+    border: rgba(255, 246, 210, 0.5);
+    background: rgba(255, 246, 210, 0.5);
+  }
+  
+  .walletTransactionCard{
+  
+  height: 144px;
+  
+  
+  background: #FFFBE8;
+  border: 1px solid #EBEBEB;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 36px;
+  
+  }

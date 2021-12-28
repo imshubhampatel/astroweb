@@ -1,3 +1,6 @@
+import layoutStyles from "../../styles/pages/admin/BaseLayout.module.css";
+import styles from "../../styles/pages/admin/employeemanagement.module.css";
+import SimpleTogleButton from "../../components/SimpleToggleButton"
 import React from "react";
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
@@ -12,6 +15,7 @@ import { firebase } from "../../config";
 import Link from "next/link";
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
+import {EmployeePermissions} from  '../../dbObjects/Employee'
 
 const db = getFirestore(firebase);
 
@@ -49,6 +53,7 @@ const employeemanagement = withAdminAuth(() => {
     setfirstItemNum(first);
     setlastItemNum(last);
   }
+ 
 
   function searchHandler(event) {
     initializePaginationData(
@@ -63,52 +68,67 @@ const employeemanagement = withAdminAuth(() => {
     );
   }
 
+
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-12">Total employees : {totalemployees}</div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <button className="btn btn-primary" onClick={() => getAllemployees()}>
-            Get all employees
-          </button>
+    <div className={` ${layoutStyles.base_container} `}>
+      <div className={`${layoutStyles.main_container}`}>
+        <h2 className={`${layoutStyles.headingText}`}>
+          Employee Management System
+        </h2>
 
-          <Link href="/admin/employee/register">
-            <a className="btn btn-primary" target="_blank">
-              Add Employee
-            </a>
-          </Link>
-
+        <div className={styles.topSearchContainer}>
           <input
+            className={`${styles.searchBox}`}
             type="text"
-            placeholder="search by email or name"
+            placeholder="Search by name/email"
             onChange={searchHandler}
-          ></input>
+          />
+
+          <div className={`${styles.buttonContainer}`}>
+            <button
+              className={`${styles.filterButton} ${styles.button} `}
+              onClick={() => {}}
+            >
+              Filter
+            </button>
+            <Link href="employee/register">
+              <a className={`${styles.filterButton} ${styles.button} `}>
+                Add Employee
+              </a>
+            </Link>
+
+            <button
+              className={`${styles.getButton} ${styles.button}`}
+              onClick={() => getAllemployees()}
+            >
+              Get Employees
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-8">
-          <table className="table">
-            <thead className="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Phone Number</th>
-                <th scope="col">Email Address</th>
-                <th scope="col">Actions</th>
-                <th scope="col">Profile Link</th>
+
+        <div className={`${styles.tableContainer}`}>
+          <table className={`${styles.mainTable} table table-borderless`}>
+            <thead>
+              <tr className={`${styles.tableHeading}`}>
+                <td># </td>
+                <td>Name</td>
+                <td>Phone Number</td>
+                <td>Email</td>
+                <td>Profile Link </td>
+                <td>Status</td>
               </tr>
             </thead>
             <tbody>
-              {paginationData.slice(firstItemNum, lastItemNum).map((e) => (
-                <tr key={e.phoneNumber}>
-                  <td> 1 </td>
-                  <td>{e.firstName + e.secondName}</td>
-                  <td>{e.phoneNumber}</td>
-                  <td>{e.email}</td>
-                  <td> {e.verified} </td>
-                  <td>
+              {paginationData.slice(firstItemNum, lastItemNum).map((e, idx) => (
+                <tr key={e.phoneNumber + idx}>
+                  <td className={`${styles.tableData}  `}> {idx + 1} </td>
+                  <td className={`${styles.tableData}  `}>
+                    {e.firstName + e.secondName}
+                  </td>
+                  <td className={`${styles.tableData}  `}>{e.phoneNumber}</td>
+                  <td className={`${styles.tableData}  `}>{e.email}</td>
+
+                  <td className={`${styles.tableData}  `}>
                     {" "}
                     <Link
                       href={{
@@ -116,17 +136,18 @@ const employeemanagement = withAdminAuth(() => {
                         query: { pid: e.id },
                       }}
                     >
-                      <a target="_blank">click me</a>
+                      <a target="_blank">Link</a>
                     </Link>
+                  </td>
+                  <td className={`${styles.tableData}  `}>
+                    {e.verified ? "Enabled" : "Disabled"}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </div>
 
-      <div>
         <ReactPaginate
           previousLabel={"← Previous"}
           nextLabel={"Next →"}
@@ -134,7 +155,7 @@ const employeemanagement = withAdminAuth(() => {
           pageCount={totalPages}
           marginPagesDisplayed={2}
           onPageChange={(e) => handlePageChange(e)}
-          containerClassName={"pagination"}
+          containerClassName={`pagination ${styles.paginationContainer} ${styles.centerDivFlex}`}
           previousLinkClassName={"page-link"}
           pageClassName={"page-link"}
           breakLinkClassName={"page-link"}
@@ -145,7 +166,7 @@ const employeemanagement = withAdminAuth(() => {
       </div>
     </div>
   );
-});
+},EmployeePermissions.EMP_MANAGEMENT);
 
 employeemanagement.getLayout = function getLayout(page) {
   return <AdminLayout active_page="3">{page}</AdminLayout>;
