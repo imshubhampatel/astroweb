@@ -153,7 +153,7 @@ function termsncondition() {
         deactivation of your profile without any warning to you. iii. You agree
         not to upload, post, email, transmit, or otherwise make available any
         Content that is unlawful, harmful, threatening, abusive, harassing,
-        tortious, defamatory, vulgar, obscene, libelous, invasive of another's
+        tortious, defamatory, vulgar, obscene, libelous, invasive of another{'&pos'}s
         privacy, hateful, or racially, ethnically, or otherwise objectionable
         on/through DRESHKAN.
         <br /> iv. You agree to maintain decorum while replying to
@@ -502,7 +502,7 @@ function termsncondition() {
         indemnifying
         <br /> will be relieved of its indemnification obligations to the extent
         it was
-        <br /> prejudiced by the indemnified party's failure.
+        <br /> prejudiced by the indemnified party{'&pos'}s failure.
         <br /> 6. GOVERNING LAWS <br />
         a. This Terms, and, any disputes arising out of the present Terms shall
         be governed by the laws applicable to the National Capital Region at
@@ -564,15 +564,15 @@ function termsncondition() {
         reasonably
         <br /> have foreseen on entry into this Terms.
         <br /> b. Assignment: Neither party may assign this Terms or any of
-        their rights or obligations under this Terms without the other party's
+        their rights or obligations under this Terms without the other party{'&pos'}s
         written consent.
         <br />
         <br /> 12. Modification of Terms Astrochrcha reserves the right to
         change or modify, from time to time, any provision related to the
         Service(s) or these Terms, including ,but
-        <br /> not limited to penalty clauses under the sections - "Obligations
+        <br /> not limited to penalty clauses under the sections - {'&quot'}Obligations
         and
-        <br /> Performance" , "Usage of Features","Refunds and Cancellation"
+        <br /> Performance{'&quot'} , {'&quot'}Usage of Features{'&quot'},{'&quot'}Refunds and Cancellation{'&quot'}
         etc, at
         <br /> its sole discretion. Any such change(s) shall be effective
         immediately
@@ -582,9 +582,9 @@ function termsncondition() {
         revised
         <br /> by referring to ‘LAST UPDATED’ at the top of these Terms. By
         signing
-        <br /> onto the application by agreeing to the "Terms and Conditions"
+        <br /> onto the application by agreeing to the {'&quot'}Terms and Conditions{'&quot'}
         anytime
-        <br /> after the "LAST UPDATED" date, you shall be deemed to have
+        <br /> after the {'&quot'}LAST UPDATED{'&quot'} date, you shall be deemed to have
         accepted the
         <br /> Terms herein including the amended Terms published from time to
         time.
@@ -594,8 +594,8 @@ function termsncondition() {
         with any
         <br /> such change, your sole and exclusive remedy is to terminate your
         use of
-        <br /> the Application. We encourage you to refer to the "Terms and
-        Conditions"
+        <br /> the Application. We encourage you to refer to the {'&quot'}Terms and
+        Conditions{'&quot'}
         <br /> every time you login into the application. It is, further,
         clarified
         <br /> that your use and access of the Application/Service(s) is subject

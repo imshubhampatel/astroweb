@@ -124,7 +124,7 @@ const OrderManagement = withAdminAuth(() => {
               defaultValue={order.status}
             >
               {Object.keys(OrderStatus).map((ctg) => (
-                <option value={OrderStatus[ctg]}> {ctg}</option>
+                <option value={OrderStatus[ctg]} key={ctg}> {ctg}</option>
               ))}
             </select>
 
@@ -148,9 +148,9 @@ const OrderManagement = withAdminAuth(() => {
   }
   return (
     <div className="container">
-      <div class="jumbotron jumbotron-fluid bg-dark text-white">
-        <div class="container">
-          <h1 class="display-4">Manage Store Orders</h1>
+      <div className="jumbotron jumbotron-fluid bg-dark text-white">
+        <div className="container">
+          <h1 className="display-4">Manage Store Orders</h1>
         </div>
       </div>
       <div className="dropdown">
@@ -160,10 +160,10 @@ const OrderManagement = withAdminAuth(() => {
           onChange={(e) => {
             setStatusOption(e.target.value);
           }}
-          class="btn btn-secondary dropdown-toggle"
+          className="btn btn-secondary dropdown-toggle"
         >
           {Object.keys(OrderStatus).map((ctg) => (
-            <option value={OrderStatus[ctg]}> {ctg}</option>
+            <option value={OrderStatus[ctg]} key={ctg}> {ctg}</option>
           ))}
         </select>
       </div>

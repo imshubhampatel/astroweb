@@ -90,7 +90,7 @@ const itemManagement = withAdminAuth(()=> {
             required   
             />
              <input 
-             class="form-check"
+             className="form-check"
             name="remark"
             id="remark"
             type="text"    
@@ -129,15 +129,15 @@ const itemManagement = withAdminAuth(()=> {
 
     return (
         <div className="container">
-              <div class="jumbotron jumbotron-fluid bg-dark text-white">
-            <div class="container">
-                <h1 class="display-4">Manage Store Items</h1>
+              <div className="jumbotron jumbotron-fluid bg-dark text-white">
+            <div className="container">
+                <h1 className="display-4">Manage Store Items</h1>
             </div>
             </div> 
             <div className="dropdown">
                 <label htmlFor="category" > Select Category  </label>
-                <select name="category" onChange={(e)=>selectCategory(e.target.value)} class="btn btn-secondary dropdown-toggle">
-                    {categories.map((ctg) => <option value={ctg.id}> {ctg.name}</option>)}
+                <select name="category" onChange={(e)=>selectCategory(e.target.value)} className="btn btn-secondary dropdown-toggle">
+                    {categories.map((ctg) => <option value={ctg.id} key={ctg.id}> {ctg.name}</option>)}
                 </select>
      
             </div>

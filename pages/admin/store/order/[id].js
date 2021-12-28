@@ -88,7 +88,7 @@ const OrderDetail = withAdminAuth(() => {
             id="orderStatus"
             defaultValue={order.status}
           >
-            {Object.keys(OrderStatus).map((ctg) => <option value={OrderStatus[ctg]}> {ctg}</option>)}
+            {Object.keys(OrderStatus).map((ctg) => <option value={OrderStatus[ctg]} key={ctg}> {ctg}</option>)}
           </select>
   
           <div className="text-end mt-4">
@@ -125,7 +125,7 @@ const OrderDetail = withAdminAuth(() => {
       <div className="row">
         <h1>Order Items</h1>
         {orderItems.map((e) => {
-          return <OrderItemCard data={e} orderId={orderDetails.id} changeOrderItemStatus={changeOrderItemStatus}></OrderItemCard>
+          return <OrderItemCard data={e} orderId={orderDetails.id} key={ orderDetails.id}changeOrderItemStatus={changeOrderItemStatus}></OrderItemCard>
         })}
 
 

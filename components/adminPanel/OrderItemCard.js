@@ -41,7 +41,7 @@ function OrderItemCard(props) {
             id="orderItemStatus"
             defaultValue={orderItem.status}
             >
-             {Object.keys(OrderItemStatus).map((ctg) => <option value={OrderItemStatus[ctg]}> {ctg}</option>)}
+             {Object.keys(OrderItemStatus).map((ctg) => <option value={OrderItemStatus[ctg]} key={ctg}> {ctg}</option>)}
                 </select>
     
             <div className="text-end mt-4">
