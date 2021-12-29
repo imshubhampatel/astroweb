@@ -15,7 +15,7 @@ export default function MeetingCard( props ) {
         {/* Order Status  */}
         <div className={`flex-grow-1  `} style={{height: "100%"}}> 
 
-          <h6>{props.data.type} Call with {props.data.user}</h6>
+          <h6>{props.data.type} Call with {props.data.userUid}</h6>
 
           <div className={`${styles.orderDetailText}`} >Order id: {props.data.id} <br/>
 

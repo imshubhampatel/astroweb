@@ -119,7 +119,7 @@ const astrologer = withAdminAuth(() => {
   async function getAllMeeting(uuid) {
     const astros = collection(db, "meetings");
     const querySnapshot = await getDocs(
-      query(astros, where("astrologer", "==", uuid))
+      query(astros, where("astrologerUid", "==", uuid))
     );
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, data: doc.data() };
