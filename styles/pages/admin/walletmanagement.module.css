@@ -1,0 +1,9 @@
+.topButtonContainer{
+    display: flex;
+    gap: 10px; 
+}
+
+.pendingRequestContainer{
+    /* border: solid red; */
+    margin-top: 20px;
+}

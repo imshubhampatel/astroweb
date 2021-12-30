@@ -1,3 +1,8 @@
+import layoutStyles from "../../styles/pages/admin/BaseLayout.module.css";
+import styles from "../../styles/pages/admin/walletmanagement.module.css";
+
+
+
 import React from "react";
 import { useState, useEffect } from "react";
 import {
@@ -166,30 +171,62 @@ const walletManagment = withAdminAuth(() => {
     setHistory([...history, data]);
   }
 
+  const [pageNum, setPageNum ] = useState(0); 
+  const viewPendingRequest = () => { setPageNum(0)}; 
+  const viewHistory = () => {setPageNum(1)}; 
+
+  console.log(pageNum);
+
   return (
-    <div className="container">
-      <div className="row">
-        <h3>Wallet Management</h3>
-      </div>
-      <div className="row">
-        <div className="col">
-          <PendingRequestWallet 
-            astrologerPrivateDetailView={astrologerPrivateDetailView}
-            data={pendingRequests}
-            ItemsPerPage={itemsPerPage}
-            approvePendingRequest={approvePendingRequest}
-            rejectPendingRequest={rejectPendingRequest}
-          ></PendingRequestWallet>
+    <div className={` ${layoutStyles.base_container} `}>
+      <div className={`${layoutStyles.main_container}`}>
+        <h2 className={`${layoutStyles.headingText}`}>
+          Manage Wallet 
+        </h2>
+
+        <div className={styles.topButtonContainer} > 
+        
+          <button onClick={viewPendingRequest}  className="btn btn-primary" > Pending Requests </button>
+          <button onClick={viewHistory} className="btn btn-primary" > History </button>
+
+
         </div>
-        <div className="col">
-          <WalletHistory
-            astrologerPrivateDetailView={astrologerPrivateDetailView}
-            data={history}
-            ItemsPerPage={itemsPerPage}
-          ></WalletHistory>
+      
+
+        {/* Pending Requests  container */}
+        
+        <div className={styles.pendingRequestContainer} style={ pageNum == 1 ? {display: "none"} : {}  } >
+   
+
+        <PendingRequestWallet 
+      astrologerPrivateDetailView={astrologerPrivateDetailView}
+      data={pendingRequests}
+      ItemsPerPage={itemsPerPage}
+      approvePendingRequest={approvePendingRequest}
+      rejectPendingRequest={rejectPendingRequest}
+    ></PendingRequestWallet>
+
+
+
         </div>
-      </div>
-    </div>
+
+
+
+        {/* Wallet history Container  */}
+        <div className={styles.historyContainer} style={ pageNum == 0 ? {display: "none"} : {}  }  > 
+          
+
+        <WalletHistory
+      astrologerPrivateDetailView={astrologerPrivateDetailView}
+      data={history}
+      ItemsPerPage={itemsPerPage}
+    ></WalletHistory>
+
+
+        </div>
+
+      </div> 
+      </div> 
   );
 },EmployeePermissions.WALLET_MANAGEMENT);
 
@@ -198,3 +235,29 @@ walletManagment.getLayout = function getLayout(page) {
 };
 
 export default walletManagment;
+
+
+
+{/* <div className="container">
+<div className="row">
+  <h3>Wallet Management</h3>
+</div>
+<div className="row">
+  <div className="col">
+    <PendingRequestWallet 
+      astrologerPrivateDetailView={astrologerPrivateDetailView}
+      data={pendingRequests}
+      ItemsPerPage={itemsPerPage}
+      approvePendingRequest={approvePendingRequest}
+      rejectPendingRequest={rejectPendingRequest}
+    ></PendingRequestWallet>
+  </div>
+  <div className="col">
+    <WalletHistory
+      astrologerPrivateDetailView={astrologerPrivateDetailView}
+      data={history}
+      ItemsPerPage={itemsPerPage}
+    ></WalletHistory>
+  </div>
+</div>
+</div> */}

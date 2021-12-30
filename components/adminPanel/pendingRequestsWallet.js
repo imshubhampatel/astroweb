@@ -22,7 +22,7 @@ function PendingRequestWallet(props) {
   }
   return (
     <div>
-      <h4>Pending Requests </h4>
+      {/* <h4>Pending Requests </h4> */}
       {props.data.slice(firstItem, lastItem).map((e) => (
         <WalletInfoCard
           key={e.id}
