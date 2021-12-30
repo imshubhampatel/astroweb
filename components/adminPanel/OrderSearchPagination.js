@@ -56,7 +56,7 @@ const OrderSearchPagination = (props) => {
       html: (
         <div>
           <form onSubmit={filterViewHandler}>
-            <label for="date"> Date </label>
+            <label htmlFor="date"> Date </label>
             <input
               className="form-control"
               placeholder="Date"

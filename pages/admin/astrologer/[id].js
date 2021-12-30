@@ -119,7 +119,7 @@ const astrologer = withAdminAuth(() => {
   async function getAllMeeting(uuid) {
     const astros = collection(db, "meetings");
     const querySnapshot = await getDocs(
-      query(astros, where("astrologer", "==", uuid))
+      query(astros, where("astrologerUid", "==", uuid))
     );
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, data: doc.data() };
@@ -299,11 +299,25 @@ const astrologer = withAdminAuth(() => {
             <h5>Contact Info</h5>
             <div>Email: {astro.email}</div>
             <div>Phone: {astrologerPrivateData.phoneNumber}</div>
-            <div>Alternative Phone: {astrologerPrivateData.alternativePhoneNumber}</div>
+            <div>
+              Alternative Phone: {astrologerPrivateData.alternativePhoneNumber}
+            </div>
             <h5 className={`my-2`}>Documents</h5>
-            @TODO <br />
-            Show adhar, pan images
-            {astrologerPrivateData.verificationIdFront}
+           <br />
+            <b>Aadhar card : </b>
+            <FireImage
+              src={astrologerPrivateData.verificationIdFront}
+              layout="responsive"
+              width="400"
+              height="200"
+            />
+            <br/>
+            <FireImage
+              src={astrologerPrivateData.verificationIdBack}
+              layout="responsive"
+              width="400"
+              height="200"
+            />
             <div className="my-4 d-flex flex-column gap-2">
               <h5>Account Info</h5>
               <div className="row ">

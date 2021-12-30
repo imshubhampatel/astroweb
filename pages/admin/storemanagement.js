@@ -115,7 +115,7 @@ const storemanagement = withAdminAuth(() => {
               required
             />
             <input
-              class="form-check"
+              className="form-check"
               name="visible"
               id="visible"
               type="checkbox"
@@ -179,7 +179,7 @@ const storemanagement = withAdminAuth(() => {
             />
             <select className="form-control" id="category" required>
               {categories.map((e) => (
-                <option value={e.id}>{e.name}</option>
+                <option value={e.id} key={e.id}>{e.name}</option>
               ))}
             </select>
             <input
@@ -200,7 +200,7 @@ const storemanagement = withAdminAuth(() => {
               required
             />
             <input
-              class="form-check"
+              className="form-check"
               name="visible"
               id="visible"
               type="checkbox"
@@ -222,9 +222,9 @@ const storemanagement = withAdminAuth(() => {
   };
   return (
     <div className="container">
-      <div class="jumbotron jumbotron-fluid bg-dark text-white">
-        <div class="container">
-          <h1 class="display-4">Manage Store</h1>
+      <div className="jumbotron jumbotron-fluid bg-dark text-white">
+        <div className="container">
+          <h1 className="display-4">Manage Store</h1>
         </div>
       </div>
       <div className="row">

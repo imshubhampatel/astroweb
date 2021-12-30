@@ -119,7 +119,7 @@ const ItemEdit = withAdminAuth(() =>{
             <label htmlFor="remark" > remark</label>
 
              <input 
-             class="form-check"
+             className="form-check"
             name="remark"
             id="remark"
             type="text"   
@@ -249,7 +249,7 @@ const ItemEdit = withAdminAuth(() =>{
             
             />
             <input 
-             class="form-check"
+             className="form-check"
             name="visible"
             id="visible"
             type="checkbox"

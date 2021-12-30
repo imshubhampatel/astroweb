@@ -116,7 +116,7 @@ const astrologermanagement = withAdminAuth(() => {
       html: (
         <div className="container">
           <h4>Filter</h4>
-          <label for="verified">
+          <label htmlFor="verified">
             Verify
             <select
               id="verified"
@@ -133,7 +133,7 @@ const astrologermanagement = withAdminAuth(() => {
             </select>
           </label>
           <br />
-          <label for="enabled">
+          <label htmlFor="enabled">
             Enabled
             <select
               id="enabled"
@@ -150,7 +150,7 @@ const astrologermanagement = withAdminAuth(() => {
             </select>
           </label>
           <br />
-          <label for="profileComplete">
+          <label htmlFor="profileComplete">
             Profile Complete
             <select
               id="profileComplete"
