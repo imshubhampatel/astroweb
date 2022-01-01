@@ -48,6 +48,7 @@ color: #979797
    display: flex;
    justify-content: flex-end;
    gap: 10px; 
+   margin-top: 15px;
 }
 
 .rightColumn .buttonContainer .declineButton{

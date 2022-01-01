@@ -9,7 +9,13 @@ function WalletInfoCard(props) {
       {/* left column   */}
 
       <div className={styles.leftColumn}>
+
+      <Link href={"/admin/astrologer/"+props.data.astrologer}><a target="_blank">
+
+
         <h5>astrologer mahesh</h5>
+
+        </a></Link>
 
         <div className={styles.uid}>UID: #0009999999999</div>
 
@@ -17,6 +23,8 @@ function WalletInfoCard(props) {
           Amount
           <span className="text-success"> Rs 3000 </span>
         </div>
+
+
       </div>
 
       {/* right column   */}
@@ -25,16 +33,25 @@ function WalletInfoCard(props) {
 
         <div className={styles.time}>Time: 1234567890</div>
 
-        <div className={styles.buttonContainer} >
 
-          <button className={styles.declineButton} > 
-            Decline
-            </button>
+        {props.data.status == "initiated" ? (
+               <div className={styles.buttonContainer}>
+               <button className={styles.declineButton}>Decline</button>
+     
+               <button className={styles.acceptButton}> Accept </button>
+             </div>
+          ) : (
+            <div className={styles.buttonContainer} >
 
-            <button className={styles.acceptButton} > Accept </button>
 
 
-        </div>
+                More details 
+            
+            </div> 
+          )}
+
+
+     
       </div>
     </div>
   );
