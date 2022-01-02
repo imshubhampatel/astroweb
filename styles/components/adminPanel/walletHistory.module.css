@@ -1,0 +1,17 @@
+.filterButton{ 
+
+    width: 116px;
+
+    height: 48px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 5px; 
+cursor: pointer;
+background: #ffffff;
+border: 1.6px solid #4175DF;
+border-radius: 8px;
+
+
+}
+

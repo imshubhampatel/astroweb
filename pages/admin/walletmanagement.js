@@ -1,6 +1,6 @@
 import layoutStyles from "../../styles/pages/admin/BaseLayout.module.css";
 import styles from "../../styles/pages/admin/walletmanagement.module.css";
-
+import {BsFunnel} from "react-icons/bs";
 import React from "react";
 import { useState, useEffect } from "react";
 import {
@@ -172,14 +172,22 @@ const walletManagment = withAdminAuth(() => {
         <h2 className={`${layoutStyles.headingText}`}>Manage Wallet</h2>
 
         <div className={styles.topButtonContainer}>
-          <button onClick={viewPendingRequest} className="btn btn-primary">
+          <div onClick={viewPendingRequest} className={`${styles.button} ${ pageNum == 0 ? styles.buttonActive : "" }`}>
             {" "}
             Pending Requests{" "}
-          </button>
-          <button onClick={viewHistory} className="btn btn-primary">
+          </div>
+          <div onClick={viewHistory} className={`${styles.button} ${ pageNum == 1 ? styles.buttonActive : "" } `}>
             {" "}
             History{" "}
-          </button>
+          </div>
+
+
+          {/* <div onClick={() => {}} className={`${styles.filterButton}  `}>
+            
+          <BsFunnel/>
+            Filter
+          </div> */}
+
         </div>
 
         {/* Pending Requests  container */}
