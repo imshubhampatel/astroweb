@@ -52,7 +52,7 @@ function WalletHistory(props) {
     <div className="container">
       <h4>History </h4>
       <div className="row">
-        <input onChange={(e)=>setSearch(e.target.value)} placeholder="search by astrologer"></input>
+        <input onChange={(e)=>setSearch(e.target.value)} placeholder="search by astrologer/transaction ID"></input>
       </div>
       <div>
         <label htmlFor="approved"> Approved</label>

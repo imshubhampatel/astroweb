@@ -117,14 +117,14 @@ const employee = withAdminAuth(() => {
           </div>
 
           <div className={`${styles.empInfo}`}>
-            <h4>Astrologer Mahesh</h4>
+            <h4>{astro?.firstName +" " + astro?.secondName}</h4>
 
             <div className={`d-flex gap-1 flex-column`}>
-              <div className={``}>Hyderabad, India</div>
+              <div className={``}>{astro?.address}</div>
 
-              <div className={``}>+91 9877263549</div>
+              <div className={``}>{astro.phoneNumber}</div>
 
-              <div className={``}>mahesh@gmail.com</div>
+              <div className={``}>{astro.email}</div>
             </div>
           </div>
 

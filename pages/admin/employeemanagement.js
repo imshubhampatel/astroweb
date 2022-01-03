@@ -9,6 +9,8 @@ import {
   query,
   where,
   getDocs,
+  getDoc,
+  doc,
   getFirestore,
 } from "firebase/firestore";
 import { firebase } from "../../config";
@@ -39,7 +41,7 @@ const employeemanagement = withAdminAuth(() => {
        // .withConverter(UserConverter)
      );
      if (querySnapshot.exists()) {
-       setastro(querySnapshot.data().adminCount);
+      //  setastro(querySnapshot.data().adminCount);
      } else {
        // console.log("no")
      }

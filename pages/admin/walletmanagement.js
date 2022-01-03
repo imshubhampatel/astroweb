@@ -1,6 +1,6 @@
 import layoutStyles from "../../styles/pages/admin/BaseLayout.module.css";
 import styles from "../../styles/pages/admin/walletmanagement.module.css";
-
+import FireImage from "../../components/FireImage";
 import React from "react";
 import { useState, useEffect } from "react";
 import {
@@ -73,10 +73,27 @@ const walletManagment = withAdminAuth(() => {
           <>
             <div className={`contianer text-start `}>
               <h5>Contact Info</h5>
+              <div>Phone: {data.phoneNumber}</div>
+              <div>
+                Alternative Phone:{" "}
+                {data.alternativePhoneNumber}
+              </div>
               <h5 className={`my-2`}>Documents</h5>
-              @TODO <br />
-              Show adhar, pan images
-              {data.verificationIdFront}
+              <br />
+              <b>Aadhar card : </b>
+              <FireImage
+                src={data.verificationIdFront}
+                layout="responsive"
+                width="400"
+                height="200"
+              />
+              <br />
+              <FireImage
+                src={data.verificationIdBack}
+                layout="responsive"
+                width="400"
+                height="200"
+              />
               <div className="my-4 d-flex flex-column gap-2">
                 <h5>Account Info</h5>
                 <div className="row ">
