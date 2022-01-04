@@ -100,7 +100,7 @@ const Blogbroadcast = withAdminAuth(() => {
           getAllBroadcasts();
         }
         return (
-          <ul>
+          <div className="d-flex flex-column gap-3">
             {broadcasts.map((e) => {
               return (
                 <BroadcastCard
@@ -110,7 +110,7 @@ const Blogbroadcast = withAdminAuth(() => {
                 ></BroadcastCard>
               );
             })}
-          </ul>
+          </div>
         );
       }
     }
