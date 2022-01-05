@@ -7,12 +7,7 @@ function BlogsDashboard(props) {
       <div className='d-flex flex-column gap-2'>
         {" "}
         {props.data.map((e) => {
-          return (
-            <BlogCard
-              key={e.id}
-              props={e}
-            ></BlogCard>
-          );
+          return <BlogCard key={e.id} props={e} remove={props.remove}></BlogCard>;
         })}
       </div>
         <button className='my-3 btn btn-primary' onClick={() => props.getAfterBlog()}> View More</button>

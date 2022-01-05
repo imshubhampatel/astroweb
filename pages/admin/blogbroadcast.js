@@ -39,7 +39,7 @@ const Blogbroadcast = withAdminAuth(() => {
   const [blogs, setBlogs] = useState([]);
   const [lastBlog, setLastBlog] = useState(null);
   const [broadcasts, setBroadcasts] = useState([]);
-  const numItems = 1;
+  const numItems = 3;
   useEffect(() => {
     getAllBlogs();
     getAllBroadcasts();
@@ -86,6 +86,12 @@ const Blogbroadcast = withAdminAuth(() => {
       status: broadcastStatus.CANCELLED,
     });
   }
+   async function removeBlog(pid) {
+     const blog = doc(db, "blog", String(pid));
+     await updateDoc(blog, {
+       visible: false,
+     });
+   }
 
   function getData() {
     switch (activeState) {
@@ -93,7 +99,13 @@ const Blogbroadcast = withAdminAuth(() => {
         if (blogs.length == 0) {
           getAllBlogs();
         }
-        return <BlogsDashboard data={blogs} getAfterBlog={getAfterBlog} />;
+        return (
+          <BlogsDashboard
+            data={blogs}
+            getAfterBlog={getAfterBlog}
+            remove={removeBlog}
+          />
+        );
       }
       case 2: {
         if (broadcasts.length == 0) {
@@ -120,7 +132,7 @@ const Blogbroadcast = withAdminAuth(() => {
     <div className={` ${layoutStyles.base_container} `}>
       <div className={`${layoutStyles.main_container}`}>
         <h2 className={`${layoutStyles.headingText}`}>
-          Manage Brodacast and Blogs
+          Manage Broadcast and Blogs
         </h2>
 
 

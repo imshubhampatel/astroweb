@@ -1,54 +1,49 @@
 import styles from "../../styles/components/adminPanel/BlogCard.module.css";
 
-import React from "react";
+import React, { useState,useEffect}from "react";
 import Link from "next/link";
-export default function BlogCard({ props }) {
+export default function BlogCard({ props ,remove}) {
+  const [visible, setvisible] = useState(true);
+  useEffect(() => {
+    setvisible(props.visible)
+  }, [])
   return (
-
     <div className={styles.container}>
-
-
-    <Link
-      href={{
-        pathname: `/admin/blog/${props.id}`,
-        query: { pid: props.id },
-      }}
-    >
-      <a target="_blank">
-        
+      <Link
+        href={{
+          pathname: `/admin/blog/${props.id}`,
+          query: { pid: props.id },
+        }}
+      >
+        <a target="_blank">
           {/* Main content  */}
           <div className={styles.mainContainer}>
-            <div className={styles.heading}>Horoscope 22 for Letter A</div>
+            <div className={styles.heading}>{props.title}</div>
 
-            <div className={styles.subtext}>By Astrologer Mahesh</div>
+            <div className={styles.subtext}>By Astrologer {props.author}</div>
 
             <div className={styles.mainText}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a Read More
+              <p> {props.description.slice(0, 100)}...</p>
             </div>
           </div>
+        </a>
+      </Link>
 
+      {/* Sub content   */}
+      <div className={styles.subContainer}>
+        <div className={styles.blogId}>Blog Id: {props.id}</div>
 
-          </a>
-    </Link>
+        <div className={styles.time}>Time: {props.time.toDate().toDateString()}</div>
 
-          {/* Sub content   */}
-          <div className={styles.subContainer}>
-            <div className={styles.blogId}>Blog Id: #0009999999999</div>
-
-            <div className={styles.time}>Time: 12:00 PM</div>
-
-            <div onClick={() => {}} className={styles.deleteButton}>
-              Remove
-            </div>
-          </div>
-      
-   
-
-
-</div>
+        {visible ? 
+          <div onClick={() => {
+            remove(props.id)
+            setvisible(false)
+          }} className={styles.deleteButton}>
+          Remove
+        </div> : " Removed "}
+      </div>
+    </div>
   );
 }
 

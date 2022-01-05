@@ -12,25 +12,30 @@ function BroadcastCard(props) {
       <div className={styles.mainContainer}>
         <div className={styles.heading}>
           {" "}
-          How to build Healthy Relationships{" "}
+          {props.data.title}
         </div>
-        <div className={styles.about}> By Astrologer Mahesh </div>
+        <div className={styles.about}>
+          {" "}
+          By Astrologer {props.data.astrologerName}{" "}
+        </div>
         <div className={styles.status}>
           {" "}
           Status:
-          <span className={styles.statusColor}> Initiated </span>
-          
+          <span className={styles.statusColor}> {present ? props.data.status : "Cancelled"} </span>
         </div>
       </div>
 
       <div className={styles.subContainer}>
-        <div className={styles.boradcastId}>boradcastId: #0009999999999</div>
+        <div className={styles.boradcastId}>broadcastId: {props.data.id}</div>
 
-        <div className={styles.time}>Time: 12:00 PM</div>
+        <div className={styles.time}>Time: {props.data.scheduledTime.toDate().toDateString()}</div>
 
-        <div onClick={() => {}} className={styles.deleteButton}>
+       {present ? <div onClick={() => {
+          props.cancelBroadcast(props.data.id);
+          setPresent(false);
+        }} className={styles.deleteButton}>
           Cancel
-        </div>
+        </div> : null}
       </div>
     </div>
   );
@@ -38,20 +43,3 @@ function BroadcastCard(props) {
 
 export default BroadcastCard;
 
-{
-  /* <div className="card bg-light mb-3">
-            
-            <div className="card-header">Title : {props.data.title}</div>
-            <div className="card-body">
-              {props.data.id}
-              <p className="card-text">Author : {props.data.astrologerName}</p>
-                    <p className="card-text">status : {props.data.status}
-              </p>
-              {present ? <button className="btn btn-danger" onClick={() => {
-                props.cancelBroadcast(props.data.id)
-                setPresent(false)
-              }
-              }>Cancel</button> :"Cancelled"} 
-            </div>
-          </div> */
-}
