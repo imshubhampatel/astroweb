@@ -1,0 +1,71 @@
+.container{
+    height: 134px;
+
+/* Shadow 1 */
+
+box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+border-radius: 10px;
+padding: 16px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+margin-bottom: 20px; 
+}
+
+.container .leftColumn{
+    font-size: 14px;
+line-height: 26px;
+/* border: dotted blue;  */
+}
+
+.container .rightColumn {
+    /* justify-self: end; */
+    /* text-align: left;  */
+  
+
+    /* border: dotted green; */
+}
+
+.leftColumn .uid{
+    font-size: 14px;
+line-height: 26px;
+/* identical to box height, or 189% */
+
+
+color: #979797
+}
+
+.rightColumn .orderId {
+    color: #979797;
+    text-align: right;
+}
+
+.rightColumn .time {
+    text-align: right;
+}
+
+.rightColumn .buttonContainer{ 
+   /* border: dotted green;  */
+   display: flex;
+   justify-content: flex-end;
+   gap: 10px; 
+   margin-top: 15px;
+}
+
+.rightColumn .buttonContainer .declineButton{
+    background: #FF0000;
+    border-radius: 4px;
+    color: white;
+    width: 98.21px;
+height: 40px;
+border-style: none;
+
+}
+
+.rightColumn .buttonContainer .acceptButton{
+    background:  #59C36A;
+    border-radius: 4px;
+    color: white;
+    width: 98.21px;
+height: 40px;
+border-style: none;
+}

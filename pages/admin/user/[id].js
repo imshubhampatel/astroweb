@@ -1,3 +1,11 @@
+import layoutStyles from "../../../styles/pages/admin/BaseLayout.module.css";
+import styles from "../../../styles/pages/admin/user/[id].module.css";
+import ToggleButton from "../../../components/SimpleToggleButton";
+import {
+  AiOutlineCalendar,
+  AiOutlinePhone,
+  AiOutlineMail,
+} from "react-icons/ai";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
@@ -5,10 +13,10 @@ import {
   query,
   where,
   doc,
-  getDoc,
   getDocs,
   updateDoc,
   setDoc,
+  getDoc,
   getFirestore,
 } from "firebase/firestore";
 import { firebase } from "../../../config";
@@ -16,7 +24,8 @@ import AdminLayout from "../../../components/adminPanel/layout";
 import MeetingCard from "../../../components/adminPanel/meetingCard";
 import TransactionCard from "../../../components/adminPanel/transactionCard";
 import OrderCard from "../../../components/adminPanel/OrderCard";
-import {EmployeePermissions} from  '../../../dbObjects/Employee'
+import { EmployeePermissions } from "../../../dbObjects/Employee";
+import FireImage from "../../../components/FireImage";
 
 import { isUser, setUserPerm, removeUserPerm } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
@@ -25,6 +34,8 @@ import { UserConverter, User } from "../../../dbObjects/User";
 const db = getFirestore(firebase);
 
 const user = withAdminAuth(() => {
+
+// const user = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
@@ -52,24 +63,28 @@ const user = withAdminAuth(() => {
       query(astros, where("user", "==", String(uuid)))
     );
     let data = querySnapshot.docs.map((doc) => {
-      return {id:doc.id,...doc.data()}});
+      return { id: doc.id, ...doc.data() };
+    });
     //    console.log(data);
     setOrders(data);
   }
   async function getAllMeeting(uuid) {
     const astros = collection(db, "meetings");
     const querySnapshot = await getDocs(
-      query(astros, where("user", "==", uuid))
+      query(astros, where("userUid", "==", uuid))
     );
     let data = querySnapshot.docs.map((doc) => {
-      return {id:doc.id,...doc.data()}});    setMeetings(data);
+      return { id: doc.id, ...doc.data() };
+    });
+    setMeetings(data);
   }
   async function getAllWalletTransactions(uuid) {
     const astros = query(collection(db, "user", uuid, "wallet_transaction"));
     const querySnapshot = await getDocs(astros);
     let data = querySnapshot.docs.map((doc) => {
-      return {id:doc.id,...doc.data()}});  
-        setWalletTransactions(data);
+      return { id: doc.id, ...doc.data() };
+    });
+    setWalletTransactions(data);
     return data;
   }
 
@@ -100,12 +115,11 @@ const user = withAdminAuth(() => {
           getAllOrders(pid);
         }
         return (
-          <div>
-            {" "}
+          <>
             {orders.map((e) => {
               return <OrderCard key={e.id} props={e}></OrderCard>;
             })}
-          </div>
+          </>
         );
       }
       case 2: {
@@ -113,11 +127,11 @@ const user = withAdminAuth(() => {
           getAllMeeting(pid);
         }
         return (
-          <ul>
+          <>
             {meetings.map((e) => {
-              return <MeetingCard key={e.id} props={e}></MeetingCard>;
+              return <MeetingCard key={e.id} props={e} type="user"></MeetingCard>;
             })}
-          </ul>
+          </>
         );
       }
       case 3: {
@@ -125,89 +139,110 @@ const user = withAdminAuth(() => {
           getAllWalletTransactions(pid);
         }
         return (
-          <ul>
+          <>
             {walletTransactions.map((e) => {
-              return <TransactionCard key={e.id}  props={e}></TransactionCard>;
+              return <TransactionCard key={e.id} props={e}></TransactionCard>;
             })}
-          </ul>
+          </>
         );
       }
     }
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        {astro ? (
-          <div className="container">
-            <div className="row">
-              <table>
-                <tbody>
-                  <tr>
-                    <td> {astro.firstName + " " + astro.secondName}</td>
-                    <td> {astro.phoneNumber}</td>
-                  </tr>
-                  <tr>
-                    <td> {astro.email}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div>
-                <button
-                  className={"btn btn-primary"}
-                  onClick={() => toggleEnable(pid)}
-                >
-                  Enabled : {enabled ? "   On  " : "  off   "}
-                </button>
+    <div className={` ${layoutStyles.base_container} `}>
+      <div className={`${layoutStyles.main_container}`}>
+        <h2 className={`${layoutStyles.headingText}`}>
+          User Management System
+        </h2>
+
+        <div className={`${styles.mainInfoContainer}`}>
+          <div className={`${styles.astroPhoto}`} style={{ display: "block" }}>
+            {astro.profilePhoto ? (
+              <>
+                <FireImage
+                  src={astro.profilePhoto}
+                  layout="responsive"
+                  width="400"
+                  height="400"
+                />
+              </>
+            ) : (
+              ""
+            )}{" "}
+          </div>
+
+          <div className={`${styles.astroInfo}`}>
+            <h4>User {astro.firstName + " " + astro.secondName}</h4>
+
+            <div className={`d-flex flex-column gap-1 `}>
+              <div className={`${styles.astroInfoText}`}>
+                <AiOutlineCalendar />{" "}
+                {astro.dob ? astro.dob.toDate().toDateString() : "Not Recorded"}
+              </div>
+
+              <div className={`${styles.astroInfoText}`}>
+                <AiOutlinePhone /> {astro.phoneNumber}
+              </div>
+
+              <div className={`${styles.astroInfoText}`}>
+                <AiOutlineMail /> {astro.email}
               </div>
             </div>
           </div>
-        ) : (
-          "no user"
-        )}
-      </div>
 
-      <br></br>
-      <hr></hr>
-
-      <div className="row">
-        <div className="row">
-          <ul className="nav nav-pills">
-            <li className="nav-item">
-              <button
-                className={`nav-link ${activeState == 1 ? "active" : ""}`}
-                onClick={() => setActiveState(1)}
-              >
-                Orders History
-              </button>
-            </li>
-            <li className="nav-item">
-              <button
-                className={`nav-link ${activeState == 2 ? "active" : ""}`}
-                onClick={() => setActiveState(2)}
-              >
-                Meeting History
-              </button>
-            </li>
-
-            <li className="nav-item">
-              <button
-                className={`nav-link ${activeState == 3 ? "active" : ""}`}
-                onClick={() => setActiveState(3)}
-              >
-                Wallet History
-              </button>
-            </li>
-          </ul>
+          <div className={`${styles.subContainer}`}>
+            Enabled{" "}
+            <ToggleButton
+              size="32"
+              initialState={enabled}
+              clickHandler={() => {
+                toggleEnable(pid);
+              }}
+            />
+          </div>
         </div>
-        <hr></hr>
-        <div className="row">{getDataForAstroLists()}</div>
+
+        <div className={`${styles.buttonContainer}`}>
+          <button
+            className={`${styles.blueButton}   ${
+              activeState == 1 ? styles.blueButtonActive : ""
+            } `}
+            aria-current="page"
+            onClick={() => setActiveState(1)}
+          >
+            Reviews
+          </button>
+
+          <button
+            className={`${styles.blueButton}   ${
+              activeState == 2 ? styles.blueButtonActive : ""
+            }  `}
+            onClick={() => setActiveState(2)}
+          >
+            Meeting History
+          </button>
+
+          <button
+            className={`${styles.blueButton}  ${
+              activeState == 3 ? styles.blueButtonActive : ""
+            }   `}
+            onClick={() => setActiveState(3)}
+          >
+            Wallet History
+          </button>
+        </div>
+
+        <div className="d-flex my-3 gap-1">{getDataForAstroLists()}</div>
       </div>
     </div>
   );
+  
 },EmployeePermissions.USER_MANAGEMENT);
 
 user.getLayout = function getLayout(page) {
-  return <AdminLayout active_page="2">{page}</AdminLayout>;
+  return <AdminLayout active_page="0">{page}</AdminLayout>;
 };
 export default user;
+
+

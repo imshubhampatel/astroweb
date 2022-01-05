@@ -1,0 +1,54 @@
+.topButtonContainer{
+    display: flex;
+    gap: 10px; 
+}
+
+.topButtonContainer .button{ 
+    
+height: 48px;
+width: 160px;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+background: #ffffff;
+border: 1px solid #4175DF;
+color: #4175DF;
+border-radius: 4px;
+}
+
+
+.topButtonContainer .buttonActive,
+.topButtonContainer .button:hover{ 
+    
+   
+    background: #4175DF;
+    color: #fff;
+
+}
+
+.topButtonContainer .filterButton{ 
+
+    width: 116px;
+
+    height: 48px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 5px; 
+cursor: pointer;
+background: #ffffff;
+border: 1.6px solid #4175DF;
+border-radius: 8px;
+margin-left: auto;
+
+
+}
+
+
+
+
+.pendingRequestContainer{
+    /* border: solid red; */
+    margin-top: 20px;
+}

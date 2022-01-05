@@ -119,7 +119,7 @@ const astrologer = withAdminAuth(() => {
   async function getAllMeeting(uuid) {
     const astros = collection(db, "meetings");
     const querySnapshot = await getDocs(
-      query(astros, where("astrologer", "==", uuid))
+      query(astros, where("astrologerUid", "==", uuid))
     );
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, data: doc.data() };
@@ -200,7 +200,9 @@ const astrologer = withAdminAuth(() => {
           getAllMeeting(pid);
         }
         return meetings.map((e) => {
-          return <MeetingCard key={e.id} data={e.data}></MeetingCard>;
+          return (
+            <MeetingCard key={e.id} data={e.data} type="astrologer"></MeetingCard>
+          );
         });
       }
       case 3: {
@@ -470,7 +472,6 @@ const astrologer = withAdminAuth(() => {
     );
     if (querySnapshot.exists()) {
       let data = querySnapshot.data();
-      console.log(data);
       MySwal.fire({
         showConfirmButton: true,
         html: (
@@ -630,7 +631,7 @@ const astrologer = withAdminAuth(() => {
 
             <div className={`d-flex `}>
               <div className={`me-2`}>
-                {astro.dob ? astro.dob.toDate().toDateString() : ""}
+                {astro.dob ? (typeof astro.dob == "string"? astro.dob:astro.dob.toDate().toDateString() ) : ""}
               </div>
 
               <div className={`mx-2`}>{astro.email}</div>

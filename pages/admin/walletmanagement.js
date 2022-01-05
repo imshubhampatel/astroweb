@@ -1,3 +1,7 @@
+import layoutStyles from "../../styles/pages/admin/BaseLayout.module.css";
+import styles from "../../styles/pages/admin/walletmanagement.module.css";
+import FireImage from "../../components/FireImage";
+import {BsFunnel} from "react-icons/bs";
 import React from "react";
 import { useState, useEffect } from "react";
 import {
@@ -20,7 +24,7 @@ import {
 } from "../../dbObjects/WalletWithdrawal";
 import PendingRequestWallet from "../../components/adminPanel/pendingRequestsWallet";
 import WalletHistory from "../../components/adminPanel/walletHistory";
-import {EmployeePermissions} from  '../../dbObjects/Employee'
+import { EmployeePermissions } from "../../dbObjects/Employee";
 import {
   astrologerPrivateDataConverter,
   AstrologerPrivateData,
@@ -63,69 +67,72 @@ const walletManagment = withAdminAuth(() => {
   }
 
   async function astrologerPrivateDetailView(requestData) {
-    getPrivateData(requestData.astrologer).then(data => 
-    MySwal.fire({
-      title: `Astrologer ${data.astrologer}`,
-      html: (
-        <>
-          <div className={`contianer text-start `}>
-            <h5>Contact Info</h5>
-            <h5 className={`my-2`}>Documents</h5>
-            @TODO <br />
-            Show adhar, pan images
-            {data.verificationIdFront}
-            <div className="my-4 d-flex flex-column gap-2">
-              <h5>Account Info</h5>
-              <div className="row ">
-                <div className="col font-weight-bold"> Pan Card Number </div>
-                <div className="col">
-                  {" "}
-                  {data.pancardNumber}{" "}
-                </div>
+    getPrivateData(requestData.astrologer).then((data) =>
+      MySwal.fire({
+        title: `Astrologer ${data.astrologer}`,
+        html: (
+          <>
+            <div className={`contianer text-start `}>
+              <h5>Contact Info</h5>
+              <div>Phone: {data.phoneNumber}</div>
+              <div>
+                Alternative Phone:{" "}
+                {data.alternativePhoneNumber}
               </div>
-
-              <div className="row">
-                <div className="col font-weight-bold"> Account Number </div>
-                <div className="col">
-                  {" "}
-                  {data.accountInfo.accountNo}{" "}
+              <h5 className={`my-2`}>Documents</h5>
+              <br />
+              <b>Aadhar card : </b>
+              <FireImage
+                src={data.verificationIdFront}
+                layout="responsive"
+                width="400"
+                height="200"
+              />
+              <br />
+              <FireImage
+                src={data.verificationIdBack}
+                layout="responsive"
+                width="400"
+                height="200"
+              />
+              <div className="my-4 d-flex flex-column gap-2">
+                <h5>Account Info</h5>
+                <div className="row ">
+                  <div className="col font-weight-bold"> Pan Card Number </div>
+                  <div className="col"> {data.pancardNumber} </div>
                 </div>
-              </div>
 
-              <div className="row">
-                <div className="col font-weight-bold"> IFSC Code </div>
-                <div className="col">
-                  {" "}
-                  {data.accountInfo.ISFC}{" "}
+                <div className="row">
+                  <div className="col font-weight-bold"> Account Number </div>
+                  <div className="col"> {data.accountInfo.accountNo} </div>
                 </div>
-              </div>
 
-              <div className="row">
-                <div className="col font-weight-bold"> Branch </div>
-                <div className="col">
-                  {" "}
-                  {data.accountInfo.bank +
-                    " " +
-                    data.accountInfo.branch}{" "}
+                <div className="row">
+                  <div className="col font-weight-bold"> IFSC Code </div>
+                  <div className="col"> {data.accountInfo.ISFC} </div>
                 </div>
-              </div>
 
-              <div className="row">
-                <div className="col font-weight-bold">
-                  {" "}
-                  Account Holders Name{" "}
+                <div className="row">
+                  <div className="col font-weight-bold"> Branch </div>
+                  <div className="col">
+                    {" "}
+                    {data.accountInfo.bank + " " + data.accountInfo.branch}{" "}
+                  </div>
                 </div>
-                <div className="col">
-                  {" "}
-                  {data.accountInfo.holderName}{" "}
+
+                <div className="row">
+                  <div className="col font-weight-bold">
+                    {" "}
+                    Account Holders Name{" "}
+                  </div>
+                  <div className="col"> {data.accountInfo.holderName} </div>
                 </div>
               </div>
             </div>
-          </div>
-        </>
-      ),
-    }));
-
+          </>
+        ),
+      })
+    );
   }
   function removeFromPR(data) {
     let pr = pendingRequests;
@@ -133,7 +140,7 @@ const walletManagment = withAdminAuth(() => {
     setPendingRequests(pr);
   }
   async function getPrivateData(pid) {
-    console.log(pid)
+    console.log(pid);
     const astros = collection(db, "astrologer/" + pid + "/privateInfo/");
     const querySnapshot = await getDoc(
       doc(astros, String(pid)).withConverter(astrologerPrivateDataConverter)
@@ -143,8 +150,10 @@ const walletManagment = withAdminAuth(() => {
 
   async function approvePendingRequest(data) {
     let private_data = await getPrivateData(data.astrologer);
-    if(private_data.razorpayId == null || private_data.razorpayId=="") {
-      alert("please Update Razorpay Id of this astrologer , cannot proceed this request");
+    if (private_data.razorpayId == null || private_data.razorpayId == "") {
+      alert(
+        "please Update Razorpay Id of this astrologer , cannot proceed this request"
+      );
       return;
     }
     data.status = WalletWithdrawalStatus.APPROVED;
@@ -166,14 +175,46 @@ const walletManagment = withAdminAuth(() => {
     setHistory([...history, data]);
   }
 
+  const [pageNum, setPageNum] = useState(0);
+  const viewPendingRequest = () => {
+    setPageNum(0);
+  };
+  const viewHistory = () => {
+    setPageNum(1);
+  };
+
+
   return (
-    <div className="container">
-      <div className="row">
-        <h3>Wallet Management</h3>
-      </div>
-      <div className="row">
-        <div className="col">
-          <PendingRequestWallet 
+    <div className={` ${layoutStyles.base_container} `}>
+      <div className={`${layoutStyles.main_container}`}>
+        <h2 className={`${layoutStyles.headingText}`}>Manage Wallet</h2>
+
+        <div className={styles.topButtonContainer}>
+          <div onClick={viewPendingRequest} className={`${styles.button} ${ pageNum == 0 ? styles.buttonActive : "" }`}>
+            {" "}
+            Pending Requests{" "}
+          </div>
+          <div onClick={viewHistory} className={`${styles.button} ${ pageNum == 1 ? styles.buttonActive : "" } `}>
+            {" "}
+            History{" "}
+          </div>
+
+
+          {/* <div onClick={() => {}} className={`${styles.filterButton}  `}>
+            
+          <BsFunnel/>
+            Filter
+          </div> */}
+
+        </div>
+
+        {/* Pending Requests  container */}
+
+        <div
+          className={styles.pendingRequestContainer}
+          style={pageNum == 1 ? { display: "none" } : {}}
+        >
+          <PendingRequestWallet
             astrologerPrivateDetailView={astrologerPrivateDetailView}
             data={pendingRequests}
             ItemsPerPage={itemsPerPage}
@@ -181,7 +222,12 @@ const walletManagment = withAdminAuth(() => {
             rejectPendingRequest={rejectPendingRequest}
           ></PendingRequestWallet>
         </div>
-        <div className="col">
+
+        {/* Wallet history Container  */}
+        <div
+          className={styles.historyContainer}
+          style={pageNum == 0 ? { display: "none" } : {}}
+        >
           <WalletHistory
             astrologerPrivateDetailView={astrologerPrivateDetailView}
             data={history}
@@ -191,10 +237,36 @@ const walletManagment = withAdminAuth(() => {
       </div>
     </div>
   );
-},EmployeePermissions.WALLET_MANAGEMENT);
+}, EmployeePermissions.WALLET_MANAGEMENT);
 
 walletManagment.getLayout = function getLayout(page) {
   return <AdminLayout active_page="5">{page}</AdminLayout>;
 };
 
 export default walletManagment;
+
+{
+  /* <div className="container">
+<div className="row">
+  <h3>Wallet Management</h3>
+</div>
+<div className="row">
+  <div className="col">
+    <PendingRequestWallet 
+      astrologerPrivateDetailView={astrologerPrivateDetailView}
+      data={pendingRequests}
+      ItemsPerPage={itemsPerPage}
+      approvePendingRequest={approvePendingRequest}
+      rejectPendingRequest={rejectPendingRequest}
+    ></PendingRequestWallet>
+  </div>
+  <div className="col">
+    <WalletHistory
+      astrologerPrivateDetailView={astrologerPrivateDetailView}
+      data={history}
+      ItemsPerPage={itemsPerPage}
+    ></WalletHistory>
+  </div>
+</div>
+</div> */
+}

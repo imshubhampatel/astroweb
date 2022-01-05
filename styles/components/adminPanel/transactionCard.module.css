@@ -1,0 +1,52 @@
+.container {
+  min-height: 140px;
+  width: 100%;
+
+  padding: 12px;
+  display: flex;
+
+  /* gap: 10px; */
+  /* Shadow 1 */
+
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.leftContainer {
+  /* border: 1px solid blue; */
+  flex-grow: 1;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.leftContainer .mainText {
+  color: #3a3a3c;
+}
+
+.leftContainer .status {
+  font-size: 14px;
+}
+
+.leftContainer .subText {
+  font-size: 14px;
+  color: #979797;
+}
+
+.rightContainer {
+  /* border: 1px solid green; */
+}
+
+
+.gridContainer {
+display: grid;
+grid-template-columns: 1fr 1fr;
+/* column-gap: 10px; */
+row-gap: 3px;
+
+}
+
+.gridItem:nth-child(even) {
+text-align: right;
+}

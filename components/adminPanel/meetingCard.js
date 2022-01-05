@@ -1,9 +1,8 @@
 import styles from "../../styles/components/adminPanel/meetingCard.module.css"
 
 
-export default function MeetingCard( props ) {
+export default function MeetingCard( {props,type} ) {
 
-  // console.log(props);
 
   return (
     <div className={`${styles.container}  d-flex gap-2 `}>
@@ -15,13 +14,13 @@ export default function MeetingCard( props ) {
         {/* Order Status  */}
         <div className={`flex-grow-1  `} style={{height: "100%"}}> 
 
-          <h6>{props.data.type} Call with {props.data.user}</h6>
+          <h6>{props?.type} Call with {type=="astrologer"?props.user:props.astrologerUid}</h6>
 
-          <div className={`${styles.orderDetailText}`} >Order id: {props.data.id} <br/>
+          <div className={`${styles.orderDetailText}`} >Order id: {props.id} <br/>
 
-          12th June 2021 09:30pm</div>
+          {props?.scheduledTime.toDate().toDateString()}</div>
 
-          <div className={`${styles.orderStatus}  ${styles.orderStatusSuccess} `} >{props.data.status}</div>
+          <div className={`${styles.orderStatus}  ${styles.orderStatusSuccess} `} >{props.status}</div>
 
         </div>
 
@@ -35,21 +34,21 @@ export default function MeetingCard( props ) {
         <div className={`row  ${styles.orderDetailText}`} >
 
           <div className={`col`}>Consult Rate</div>
-          <div className={`col text-end`}>Rs&nbsp;{props.data.rate}/5 minute</div>
+          <div className={`col text-end`}>Rs&nbsp;{props.rate}/5 minute</div>
 
         </div>
 
         <div className={`row  ${styles.orderDetailText}`} >
 
           <div className={`col`}>Duration</div>
-          <div className={`col text-end`}>{props.data.duration} minutes</div>
+          <div className={`col text-end`}>{props.duration} minutes</div>
 
         </div>
 
         <div className={`row  ${styles.orderDetailText}`} >
 
           <div className={`col`}>Total cost:</div>
-  <div className={`col text-end`}>Rs {props.data.amount}</div>
+  <div className={`col text-end`}>Rs {props.amount}</div>
 
         </div>
 

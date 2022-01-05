@@ -1,0 +1,76 @@
+.container {
+  min-height: 125px;
+  width: 100%;
+
+
+  padding: 12px;
+  display: flex;
+
+  gap: 10px;
+  /* Shadow 1 */
+
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.imageContainer {
+  width: 100px;
+  height: 100px;
+  /* position: relative; */
+
+  background: #c4c4c4;
+  border-radius: 8px;
+}
+
+.infoContainer {
+  /* border: 1px dotted blue; */
+  height: 100px;
+  /* width: 75%; */
+  display: flex;
+  flex-grow: 1;
+  /* flex-direction: row; */
+  /* align-content: space-between; */
+}
+
+.infoContainer .leftInfoSubContainer {
+  /* border: 1px solid red; */
+  height: 100%;
+
+  font-style: normal;
+
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.infoContainer .leftInfoSubContainer .name {
+  font-weight: 500;
+}
+
+.infoContainer .leftInfoSubContainer .status {
+  font-size: 14px;
+}
+
+.infoContainer .leftInfoSubContainer .orderId {
+  font-size: 14px;
+  color: #979797;
+}
+
+.infoContainer .rightInfoSubContainer {
+  /* border: 1px solid green; */
+  margin-left: auto;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: right;
+  /* identical to box height, or 165% */
+}
+
+.infoContainer .rightInfoSubContainer .price {
+  font-weight: 600;
+  color: #66c670;
+}
+
+.infoContainer .rightInfoSubContainer .date {
+  font-size: 14px;
+}
