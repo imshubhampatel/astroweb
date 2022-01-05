@@ -1,6 +1,15 @@
+import styles from "../../styles/components/adminPanel/walletHistory.module.css"
+import {BsFunnel} from "react-icons/bs"
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import WalletInfoCard from "./WalletInfoCard";
+
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
+
+
 import {
   WalletWithdrawalStatus,
 } from "../../dbObjects/WalletWithdrawal";
@@ -48,14 +57,15 @@ function WalletHistory(props) {
      setLastItem(last);
    }
    
-  return (
-    <div className="container">
-      <h4>History </h4>
-      <div className="row">
-        <input onChange={(e)=>setSearch(e.target.value)} placeholder="search by astrologer/transaction ID"></input>
-      </div>
-      <div>
-        <label htmlFor="approved"> Approved</label>
+
+   const filterPopup = () => { 
+     MySwal.fire({
+
+     
+       html: (
+         <> 
+         
+         <label htmlFor="approved"> Approved</label>
         <input
           type="checkbox"
           id="approved"
@@ -80,6 +90,22 @@ function WalletHistory(props) {
             setfilter({ ...filter, completed: e.target.checked })
           }
         ></input>
+         </>
+       )
+
+      }
+     )
+   }
+
+  return (
+    <div className="">
+      <div className="my-3 d-flex gap-2 ">
+        <input className="p-1" onChange={(e)=>setSearch(e.target.value)} placeholder="search by astrologer"></input>
+      
+          <button onClick={filterPopup} className={styles.filterButton}> <BsFunnel/> Filter</button>
+      </div>
+      <div className="my-3">
+        
       </div>
 
       {paginationData
