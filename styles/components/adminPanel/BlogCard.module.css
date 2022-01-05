@@ -1,0 +1,83 @@
+.container{ 
+    /* width: 1057px; */
+min-height: 126px;
+
+
+background: #FFFFFF;
+/* Shadow 1 */
+
+box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+border-radius: 10px;
+padding: 16px;
+
+display: grid;
+grid-template-columns: 1fr .25fr;
+
+}
+
+.mainContainer{ 
+
+    font-weight: 500;
+font-size: 16px;
+line-height: 26px;
+}
+
+/* 
+.mainContainer .heading{ 
+
+} */
+
+.mainContainer .subtext{
+    font-size: 14px;
+
+color: #979797;
+}
+
+.mainContainer .mainText{
+    font-size: 14px;
+line-height: 140%;
+}
+
+.subContainer{ 
+display: flex;
+align-items: flex-end;
+flex-direction: column;
+
+font-size: 14px;
+line-height: 26px;
+/* identical to box height, or 189% */
+
+text-align: right;
+
+
+}
+
+.subContainer .blogId{ 
+    color: #979797;
+    font-weight: 500;
+
+}
+
+/* .subContainer .time{
+
+} */
+
+.subContainer .deleteButton{ 
+    width: 98px;
+height: 40px;
+
+
+background: #FF0000;
+border-radius: 4px;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+color: #fff;
+}
+
+.subContainer .deleteButton:hover{ 
+
+background: #c70202;
+
+}

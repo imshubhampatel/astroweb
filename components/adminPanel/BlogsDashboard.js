@@ -3,7 +3,8 @@ import BlogCard from './BlogCard'
 
 function BlogsDashboard(props) {
     return (
-      <div>
+      <>
+      <div className='d-flex flex-column gap-2'>
         {" "}
         {props.data.map((e) => {
           return (
@@ -13,8 +14,10 @@ function BlogsDashboard(props) {
             ></BlogCard>
           );
         })}
-        <button onClick={() => props.getAfterBlog()}> View More</button>
       </div>
+        <button className='my-3 btn btn-primary' onClick={() => props.getAfterBlog()}> View More</button>
+
+        </>
     );
 }
 
