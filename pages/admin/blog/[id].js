@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactMarkdown from 'react-markdown'
 import { useRouter } from "next/router";
 import {
   collection,
@@ -66,13 +67,14 @@ const blog = withAdminAuth(() => {
   }, [pid]);
 
 
-
+console.log(astro.description);
   return (
     <div className="container">
       <div className="row  my-3">
         <h3>{astro.title }</h3>
-        <p>
-          {astro.description}</p>
+        <ReactMarkdown>
+          {astro.description}
+          </ReactMarkdown>
       </div>
       <div>
         { astro.visible ?
