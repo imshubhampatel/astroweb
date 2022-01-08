@@ -173,7 +173,7 @@ const user = withAdminAuth(() => {
           </div>
 
           <div className={`${styles.astroInfo}`}>
-            <h4>User {astro.firstName + " " + astro.secondName}</h4>
+            <h4>User {astro.firstName + " " + astro.lastName}</h4>
 
             <div className={`d-flex flex-column gap-1 `}>
               <div className={`${styles.astroInfoText}`}>
@@ -211,7 +211,7 @@ const user = withAdminAuth(() => {
             aria-current="page"
             onClick={() => setActiveState(1)}
           >
-            Reviews
+            Order
           </button>
 
           <button

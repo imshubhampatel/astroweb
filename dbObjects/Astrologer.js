@@ -11,6 +11,7 @@ class Astrologer {
     this.dailyHours = data.dailyHours ? Number(data.dailyHours):0;
     this.profilePic = data.profilePic
     this.about = data.about ? data.about : "Please add some line about you" 
+    this.phoneNumber = data.phoneNumber 
 
     this.workingwithother = data.workingwithother ? data.workingwithother : "No"
     
@@ -53,7 +54,7 @@ const astrologerConverter = {
       id: data.id,
       email: data.email,
       firstName: data.firstName,
-      secondName: data.secondName,
+      secondName: data.secondName ? data.secondName : "",
       dob: data.dob,
       address: data.address,
       gender: data.gender,
@@ -62,7 +63,7 @@ const astrologerConverter = {
       profilePic: data.profilePic,
       about : data.about,
       workingwithother : data.workingwithother,
-
+      phoneNumber : data.phoneNumber,
       profileComplete: data.profileComplete ? data.profileComplete: false ,
       // Meeting Pricing
       priceChat: data.priceChat,

@@ -1,7 +1,7 @@
 import styles from "../../../styles/pages/admin/astrologer/[id].module.css";
 import RatingBox from "../../../components/ratingBox";
 import FireImage from "../../../components/FireImage";
-
+import Link from 'next/link'
 import { MdOutlineMessage } from "react-icons/md";
 import { FiPhoneCall, FiEdit } from "react-icons/fi";
 import { BiVideoPlus } from "react-icons/bi";
@@ -54,7 +54,7 @@ import {EmployeePermissions} from  '../../../dbObjects/Employee'
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
-const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
+const storage = getStorage(firebase);
 
 const astrologer = withAdminAuth(() => {
   // const astrologer = () => {
@@ -72,7 +72,7 @@ const astrologer = withAdminAuth(() => {
   const [numPages, setNumPages] = useState(1);
   const [astrologerPrivateData, setAstrologerPrivateData] = useState({});
   const [pageNumber, setPageNumber] = useState(1);
-  const [pdf, setPdf] = useState("");
+  const [pdf, setPdf] = useState("/");
   const [remark, setRemark] = useState("");
 
   // #################
@@ -96,11 +96,17 @@ const astrologer = withAdminAuth(() => {
         ...querySnapshot.data(),
       });
       setastro(astro_temp);
-      getPrivateData(pid).then((e) => setAstrologerPrivateData(e));
+      getPrivateData(pid).then((e) => {
+        setAstrologerPrivateData(e)
+
+        getFile(e?.certificationUrl).then((url) => {
+          setPdf(url)
+        });
+
+      });
       getFile(querySnapshot.data().profilePic).then((url) =>
         setprofilePicUrl(url)
       );
-      getFile("18075072.pdf").then((url) => setPdf(url));
     } else {
       // console.log("no")
     }
@@ -152,15 +158,17 @@ const astrologer = withAdminAuth(() => {
     const ref = doc(db, "astrologer", String(uid));
     await updateDoc(ref, { ...astro });
   }
-  async function discardAstrologer(uid) {
-    const ref = doc(db, "astrologer", String(uid)).withConverter(
+  async function discardAstrologer(e) {
+    e.preventDefault()
+    const ref = doc(db, "astrologer", String(pid)).withConverter(
       astrologerConverter
     );
     let astro_temp = astro;
     astro_temp.status.state = astrologerStatus.REJECTED;
-    astro_temp.status.remark = remark;
+    astro_temp.status.remark = e.target.remark.value;
     setastro({ ...astro_temp });
     await updateDoc(ref, { ...astro_temp });
+    Swal.clickConfirm();
   }
   async function VerifyAstrologer(uid) {
     const ref = doc(db, "astrologer", String(uid)).withConverter(
@@ -318,6 +326,8 @@ const astrologer = withAdminAuth(() => {
               width="400"
               height="200"
             />
+            <br />
+            <Link href={pdf}><a target="_blank">Certification</a></Link>
             <div className="my-4 d-flex flex-column gap-2">
               <h5>Account Info</h5>
               <div className="row ">
@@ -533,28 +543,26 @@ const astrologer = withAdminAuth(() => {
       showConfirmButton: false,
       html: (
         <div>
-          <textarea
-            className="form-control"
-            placeholder="Please tell more about the reason of discarding the request "
-            name="reason-text"
-            onChange={(e) => {
-              setRemark(e.target.value);
-            }}
-          />
-          <div className="text-end mt-4">
-            <button
-              className={`${styles.astroVerifyButton} ${styles.astroButton}`}
-              onClick={() => {
-                Swal.clickConfirm();
-              }}
-            >
-              Discard Request
-            </button>
-          </div>
+          <form onSubmit={discardAstrologer}>
+            <textarea
+              className="form-control"
+              placeholder="Please tell more about the reason of discarding the request "
+              name="remark"
+              id="remark"
+
+            />
+            <div className="text-end mt-4">
+              <button
+                className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+                type="submit"
+              >
+                Discard Request
+              </button>
+            </div>
+          </form>
         </div>
       ),
       preConfirm: () => {
-        discardAstrologer(pid);
       },
     });
   };

@@ -186,10 +186,11 @@ const astrologermanagement = withAdminAuth(() => {
     initializePaginationData(
       astrologersList.filter((e) => {
         if (
-          e.firstName.toLowerCase().includes(val) ||
-          e.secondName.toLowerCase().includes(val) ||
-          e.email.toLowerCase().includes(val) ||
-          e.profileComplete.toString().toLowerCase().includes(val)
+          e?.firstName?.toLowerCase().includes(val) ||
+          e?.secondName?.toLowerCase().includes(val) ||
+          e?.email?.toLowerCase().includes(val) ||
+          e?.phoneNumber?.toLowerCase().includes(val) ||
+          e?.profileComplete?.toString().toLowerCase().includes(val)
         )
           return true;
         else return false;
@@ -243,6 +244,7 @@ const astrologermanagement = withAdminAuth(() => {
                 <tr className={`${styles.tableHeading}`}>
                   <td>Name</td>
                   <td>Rating</td>
+                  <td>Phone Number </td>
                   <td>Profile Complete</td>
                   <td>State </td>
                   <td>Query</td>
@@ -252,10 +254,13 @@ const astrologermanagement = withAdminAuth(() => {
                 {paginationData.slice(firstItemNum, lastItemNum).map((e) => (
                   <tr key={e.id} style={{}}>
                     <td className={`${styles.tableData}  `}>
-                      {e.firstName + e.secondName}
+                      {e.firstName + " " + e.secondName}
                     </td>
                     <td className={`${styles.tableData}`}>
                       {e.rating == "0" ? "Not rated" : e.rating}
+                    </td>
+                    <td className={`${styles.tableData}`}>
+                      {e.phoneNumber}
                     </td>
                     <td className={`${styles.tableData}`}>
                       {e.profileComplete ? "True" : "false"}
