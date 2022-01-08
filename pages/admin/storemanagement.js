@@ -220,6 +220,87 @@ const storemanagement = withAdminAuth(() => {
       preConfirm: () => {},
     });
   };
+   const addCouponView = () => {
+     MySwal.fire({
+       showConfirmButton: false,
+       html: (
+         <div>
+           <form onSubmit={addItemHandler}>
+             <input
+               className="form-control"
+               placeholder="Product Name "
+               name="reason-text"
+               id="name"
+               required
+             />
+             <input
+               className="form-control"
+               placeholder="Product Description "
+               name="reason-text"
+               id="description"
+               required
+             />
+             <input
+               className="form-control"
+               placeholder="Product Headline "
+               name="reason-text"
+               id="headline"
+               required
+             />
+             <input
+               className="form-control"
+               type="file"
+               multiple
+               name="photos"
+               id="photos"
+               placeholder="Choose photos for product"
+               required
+             />
+             <select className="form-control" id="category" required>
+               {categories.map((e) => (
+                 <option value={e.id} key={e.id}>
+                   {e.name}
+                 </option>
+               ))}
+             </select>
+             <input
+               className="form-control"
+               placeholder="please enter MRP"
+               name="mrp"
+               type="number"
+               id="mrp"
+               required
+             />
+
+             <input
+               className="form-control"
+               placeholder="please enter Selling Price"
+               name="sp"
+               type="number"
+               id="sellingPrice"
+               required
+             />
+             <input
+               className="form-check"
+               name="visible"
+               id="visible"
+               type="checkbox"
+             />
+
+             <div className="text-end mt-4">
+               <button
+                 className={`${styles.astroVerifyButton} ${styles.astroButton}`}
+                 type="submit"
+               >
+                 Add
+               </button>
+             </div>
+           </form>
+         </div>
+       ),
+       preConfirm: () => {},
+     });
+   };
   return (
     <div className="container">
       <div className="jumbotron jumbotron-fluid bg-dark text-white">
@@ -241,6 +322,10 @@ const storemanagement = withAdminAuth(() => {
             {" "}
             Add Item
           </button>
+          <button className="btn btn-primary" onClick={addCouponView}>
+            {" "}
+            Add Coupon
+          </button>
         </div>
         <div className="col">
           <button
@@ -256,6 +341,13 @@ const storemanagement = withAdminAuth(() => {
           >
             {" "}
             Manage Orders
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => router.push("/admin/store/order")}
+          >
+            {" "}
+            Manage Coupons
           </button>
         </div>
       </div>

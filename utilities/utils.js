@@ -16,7 +16,6 @@ async function getFile(path) {
    url = await getDownloadURL(storageRef);
   }
   catch {
-    alert("error");
   }
 
   return url;
