@@ -17,6 +17,7 @@ class Astrologer {
     
     this.profileComplete = data.profileComplete ? data.profileComplete : false;
     // // Meeting Pricing
+    this.pricingCategory = data.pricingCategory ? data.pricingCategory : "base";
     this.priceChat = data.priceChat ?  data.priceChat : null
     this.priceVideo = data.priceVideo ?data.priceVideo:null
     this.priceVoice = data.priceVoice? data.priceVoice: null
@@ -69,6 +70,7 @@ const astrologerConverter = {
       phoneNumber : data.phoneNumber,
       profileComplete: data.profileComplete ? data.profileComplete: false ,
       // Meeting Pricing
+      pricingCategory : data.pricingCategory,
       priceChat: data.priceChat,
       priceVideo: data.priceVideo,
       priceVoice: data.priceVoice,

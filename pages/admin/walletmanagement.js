@@ -39,6 +39,7 @@ const walletManagment = withAdminAuth(() => {
   const [history, setHistory] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(2);
+  
 
   useEffect(() => {
     getWalletInformation();
@@ -65,6 +66,52 @@ const walletManagment = withAdminAuth(() => {
     });
     setHistory(data);
   }
+  const approvePendingRequestView = (data) => {
+     MySwal.fire({
+       showConfirmButton: false,
+       html: (
+         <div>
+           <form onSubmit={(e) => approvePendingRequest(data, e)}>
+             <label htmlFor="type">Automate it ? </label>
+             <input
+               type="checkbox"
+               name="type"
+               id="type"
+               required
+             />
+             <br />
+             <label htmlFor="type">Approved Amount </label>
+             <input
+               className="form-control"
+               placeholder="Amount to be approved "
+               name="approvedAmount"
+               id="approvedAmount"
+               type="number"
+               max={data.amount}
+               required
+             />
+             <label htmlFor="type">Please Fill transactionId (If want to do manually)</label>
+             <input
+               className="form-control"
+               placeholder="transactionId "
+               name="transactionId"
+               id="transactionId"
+             />
+
+             <div className="text-end mt-4">
+               <button
+                 className={"btn btn-primary"}
+                 type="submit"
+               >
+                 Approve
+               </button>
+             </div>
+           </form>
+         </div>
+       ),
+       preConfirm: () => {},
+     });
+   };
 
   async function astrologerPrivateDetailView(requestData) {
     getPrivateData(requestData.astrologer).then((data) =>
@@ -148,7 +195,8 @@ const walletManagment = withAdminAuth(() => {
     return querySnapshot.data();
   }
 
-  async function approvePendingRequest(data) {
+  async function approvePendingRequest(data,e) {
+    e.preventDefault();
     let private_data = await getPrivateData(data.astrologer);
     if (private_data.razorpayId == null || private_data.razorpayId == "") {
       alert(
@@ -157,13 +205,19 @@ const walletManagment = withAdminAuth(() => {
       return;
     }
     data.status = WalletWithdrawalStatus.APPROVED;
+    data.approvedAmount = parseInt(e.target.approvedAmount.value);
+    data.transactionId = e.target.transactionId.value;
+    data.type = e.target.type.checked ? "automated" : "manual"
+
     const ref = doc(db, "wallet_withdrawal", data.id).withConverter(
       walletWithdrawalConverter
     );
     await setDoc(ref, data);
     removeFromPR(data);
     setHistory([...history, data]);
+    MySwal.clickConfirm();
   }
+  
 
   async function rejectPendingRequest(data) {
     removeFromPR(data);
@@ -218,7 +272,7 @@ const walletManagment = withAdminAuth(() => {
             astrologerPrivateDetailView={astrologerPrivateDetailView}
             data={pendingRequests}
             ItemsPerPage={itemsPerPage}
-            approvePendingRequest={approvePendingRequest}
+            approvePendingRequest={approvePendingRequestView}
             rejectPendingRequest={rejectPendingRequest}
           ></PendingRequestWallet>
         </div>
