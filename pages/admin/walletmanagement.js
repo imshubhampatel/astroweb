@@ -31,6 +31,8 @@ import {
 } from "../../dbObjects/AstrologerPrivateInfo";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../config";
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -39,10 +41,16 @@ const walletManagment = withAdminAuth(() => {
   const [history, setHistory] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(2);
+  const [currentUser,setCurrentUser] = useState("")
   
 
   useEffect(() => {
     getWalletInformation();
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        setCurrentUser(userAuth.uid);
+      }
+    })
   }, []);
 
   async function getWalletInformation() {
@@ -64,6 +72,7 @@ const walletManagment = withAdminAuth(() => {
     data = querySnapshot.docs.map((doc) => {
       return new WalletWithdrawal({ id: doc.id, ...doc.data() });
     });
+
     setHistory(data);
   }
   const approvePendingRequestView = (data) => {
@@ -77,7 +86,6 @@ const walletManagment = withAdminAuth(() => {
                type="checkbox"
                name="type"
                id="type"
-               required
              />
              <br />
              <label htmlFor="type">Approved Amount </label>
@@ -204,6 +212,7 @@ const walletManagment = withAdminAuth(() => {
       );
       return;
     }
+    data.approvedBy = currentUser ;
     data.status = WalletWithdrawalStatus.APPROVED;
     data.approvedAmount = parseInt(e.target.approvedAmount.value);
     data.transactionId = e.target.transactionId.value;
