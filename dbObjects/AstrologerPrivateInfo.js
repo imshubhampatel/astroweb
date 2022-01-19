@@ -7,6 +7,8 @@ class AstrologerPrivateData {
     this.verificationIdBack = data.verificationIdBack ? data.verificationIdBack: "";
     this.certificationUrl = data.certificationUrl ? data.certificationUrl:""; 
     this.pancardNumber = data.pancardNumber;
+    this.walletBalance = data.walletBalance;
+    this.earnings = data.earnings;
     this.pancardLink = data.pancardLink;
     this.razorpayId = data.razorpayId ? data.razorpayId : null;
     this.accountInfo = data.accountInfo ? data.accountInfo : {accountNo : "",bank:"",branch:"",ISFC :"",holderName:""};
@@ -25,13 +27,15 @@ const astrologerPrivateDataConverter = {
       id: data.id,
       pancardLink: data.pancardLink,
       phoneNumber: data.phoneNumber,
-      certificationUrl : data.certificationUrl,
-      alternativePhoneNumber : data.alternativePhoneNumber,
+      certificationUrl: data.certificationUrl,
+      alternativePhoneNumber: data.alternativePhoneNumber,
       verificationIdFront: data.verificationIdFront,
       verificationIdBack: data.verificationIdBack,
       pancardNumber: data.pancardNumber,
       accountInfo: data.accountInfo,
-      razorpayId : data.razorpayId,
+      razorpayId: data.razorpayId,
+      walletBalance: data.walletBalance,
+      earnings: data.earnings,
     };
   },
   fromFirestore: (snapshot, options) => {

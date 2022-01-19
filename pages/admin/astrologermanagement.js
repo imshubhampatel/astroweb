@@ -10,6 +10,7 @@ import {
   doc,
   getDoc,
   getFirestore,
+  setDoc,
 } from "firebase/firestore";
 import { firebase } from "../../config";
 import Link from "next/link";
@@ -17,6 +18,8 @@ import {EmployeePermissions} from  '../../dbObjects/Employee'
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import {Astrologer, astrologerStatus} from '../../dbObjects/Astrologer'
+import { pricingCategory, pricingCategoryConverter } from "../../dbObjects/PricingCategory";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -29,11 +32,11 @@ const astrologermanagement = withAdminAuth(() => {
   const [paginationData, setpaginationData] = useState([]);
   const [totalAstrologers, settotalAstrologers] = useState(0);
   const ItemsPerPage = 10;
-  const [isVerfiedFilter, setIsVerfiedFilter] = useState(false);
   const [totalPages, settotalPages] = useState(2);
   const [firstItemNum, setfirstItemNum] = useState(0);
   const [lastItemNum, setlastItemNum] = useState(ItemsPerPage);
-  const [search, setSearch] = useState("");
+  const [pricingList, setPricingList] = useState([]);
+  const [selectedPricingCategory, setSelectedPricingCategory] = useState("");
   const [filterDetails, setFilterDetails] = useState({ enabled:0,profileComplete:0,verified:0});
 
   useEffect(() => {
@@ -43,7 +46,7 @@ const astrologermanagement = withAdminAuth(() => {
    
  async function getAppDetails() {
    const astros = collection(db, "app_details");
-   const querySnapshot = await getDoc(
+   var querySnapshot = await getDoc(
      doc(astros, "astrologerDetails")
      // .withConverter(UserConverter)
    );
@@ -52,6 +55,16 @@ const astrologermanagement = withAdminAuth(() => {
    } else {
      // console.log("no")
    }
+   querySnapshot = await getDocs(
+    collection(astros, "astrologerDetails/pricing_categories")
+     // .withConverter(UserConverter)
+   );
+    let data = querySnapshot.docs.map((doc) => {
+      return new pricingCategory({ id: doc.id, ...doc.data() });
+    });
+   setPricingList(data);
+   setSelectedPricingCategory(data.length>0?data[0].name:{})
+
  }
   function initializePaginationData(data) {
     setpaginationData(data);
@@ -180,6 +193,131 @@ const astrologermanagement = withAdminAuth(() => {
       ),
     });
   };
+
+  async function editPricingCategoryHandler(e) {
+    e.preventDefault();
+    let data = new pricingCategory({
+      id: e.target.name.value,
+      name: e.target.name.value,
+      priceChat: e.target.priceChat.value,
+      priceVideo: e.target.priceVideo.value,
+      priceVoice: e.target.priceVoice.value,
+      lastUpdateTimestamp : new Date(),
+    });
+    setPricingList([...pricingList.filter((x) => {
+      return x.id != data.id
+    }),data]);
+    const astros = doc(collection(
+      collection(db, "app_details"),
+      "astrologerDetails/pricing_categories"
+    ),data.id).withConverter(pricingCategoryConverter);
+    setDoc(astros, data);
+    MySwal.clickConfirm();
+
+  }
+
+    const editPricingCategoryView = () => {
+      MySwal.fire({
+        showConfirmButton: false,
+        html: (
+          <div className="container">
+            <div className="row">
+              <h4>Add pricing Category</h4>
+              <form onSubmit={editPricingCategoryHandler}>
+                <label htmlFor="name">Name {"  "} </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="enter name of the new category"
+                ></input>{" "}
+                <br />
+                <label htmlFor="name">Price Chat</label>
+                <input
+                  type="number"
+                  name="priceChat"
+                  id="priceChat"
+                  placeholder="enter priceChat"
+                ></input>{" "}
+                <br />
+                <label htmlFor="name">Price Voice</label>
+                <input
+                  type="number"
+                  name="priceVideo"
+                  id="priceVideo"
+                  placeholder="enter priceVideo"
+                ></input>
+                <br />
+                <label htmlFor="name">Price Video</label>
+                <input
+                  type="number"
+                  name="priceVoice"
+                  id="priceVoice"
+                  placeholder="enter priceVoice"
+                ></input>
+                <div className="text-end mt-4">
+                  <button className={"btn btn-success"} type="submit">
+                    Add
+                  </button>
+                </div>
+              </form>
+              <br />
+              <hr />
+            </div>
+            <div className="row">
+              <h4>Edit Existing Pricing Categories</h4>
+              <form onSubmit={editPricingCategoryHandler}>
+                <label htmlFor="name">Name {"  "} </label>
+                <select
+                  name="name"
+                  id="name"
+                  className="btn btn-secondary dropdown-toggle"
+                  onChange={(e) => {
+                    setSelectedPricingCategory(e.target.value)
+                  }}
+                  defaultValue={selectedPricingCategory}
+                >
+                  {pricingList.map((e) => (
+                    <option key={ e.name}value={e.name}> {e.name +  " chat :"+ e.priceChat+" voice : "+e.priceVoice  +" Video : " + e.priceVideo}</option>
+                  ))}
+                </select>
+                <br />
+                <h5>Enter New Values</h5>
+                <label htmlFor="name">Price Chat</label>
+                <input
+                  type="number"
+                  name="priceChat"
+                  id="priceChat"
+                  placeholder="enter priceChat"
+                  value={selectedPricingCategory.priceChat}
+                ></input>{" "}
+                <br />
+                <label htmlFor="name">Price Voice</label>
+                <input
+                  type="number"
+                  name="priceVideo"
+                  id="priceVideo"
+                  placeholder="enter priceVideo"
+                ></input>
+                <br />
+                <label htmlFor="name">Price Video</label>
+                <input
+                  type="number"
+                  name="priceVoice"
+                  id="priceVoice"
+                  placeholder="enter priceVoice"
+                ></input>
+                <div className="text-end mt-4">
+                  <button className={"btn btn-success"} type="submit">
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        ),
+      });
+    };
   
   function searchHandler(event) {
     let val = event.target.value.toLowerCase();
@@ -190,7 +328,8 @@ const astrologermanagement = withAdminAuth(() => {
           e?.secondName?.toLowerCase().includes(val) ||
           e?.email?.toLowerCase().includes(val) ||
           e?.phoneNumber?.toLowerCase().includes(val) ||
-          e?.profileComplete?.toString().toLowerCase().includes(val)
+          e?.profileComplete?.toString().toLowerCase().includes(val) ||
+          e?.pricingCategory ?.toString().toLowerCase().includes(val)
         )
           return true;
         else return false;
@@ -230,6 +369,12 @@ const astrologermanagement = withAdminAuth(() => {
               >
                 Get Astrologers
               </button>
+              <button
+                className={`${styles.getButton} ${styles.button}`}
+                onClick={editPricingCategoryView}
+              >
+                Edit Pricings
+              </button>
               <Link href="/admin/questionset">
                 <a className={`${styles.getButton} ${styles.button}`}>
                   Manage Question
@@ -259,9 +404,7 @@ const astrologermanagement = withAdminAuth(() => {
                     <td className={`${styles.tableData}`}>
                       {e.rating == "0" ? "Not rated" : e.rating}
                     </td>
-                    <td className={`${styles.tableData}`}>
-                      {e.phoneNumber}
-                    </td>
+                    <td className={`${styles.tableData}`}>{e.phoneNumber}</td>
                     <td className={`${styles.tableData}`}>
                       {e.profileComplete ? "True" : "false"}
                     </td>

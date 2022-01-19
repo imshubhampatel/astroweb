@@ -17,9 +17,10 @@ class Astrologer {
     
     this.profileComplete = data.profileComplete ? data.profileComplete : false;
     // // Meeting Pricing
-    this.priceChat = data.priceChat ?  data.priceChat : 0
-    this.priceVideo = data.priceVideo ?data.priceVideo:0
-    this.priceVoice = data.priceVoice? data.priceVoice: 0
+    this.pricingCategory = data.pricingCategory ? data.pricingCategory : "base";
+    this.priceChat = data.priceChat ?  data.priceChat : null
+    this.priceVideo = data.priceVideo ?data.priceVideo:null
+    this.priceVoice = data.priceVoice? data.priceVoice: null
     
     // // Meeting History
     this.chatSeconds = data.chatSeconds ? data.chatSeconds :0
@@ -66,6 +67,7 @@ const astrologerConverter = {
       phoneNumber : data.phoneNumber,
       profileComplete: data.profileComplete ? data.profileComplete: false ,
       // Meeting Pricing
+      pricingCategory : data.pricingCategory,
       priceChat: data.priceChat,
       priceVideo: data.priceVideo,
       priceVoice: data.priceVoice,

@@ -14,7 +14,7 @@ import {
   setDoc,
   getDoc,
 } from "firebase/firestore";
-import { firebase } from "../../config";
+import { firebase,auth } from "../../config";
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import {
@@ -31,6 +31,7 @@ import {
 } from "../../dbObjects/AstrologerPrivateInfo";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { onAuthStateChanged } from "firebase/auth";
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -39,9 +40,16 @@ const walletManagment = withAdminAuth(() => {
   const [history, setHistory] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(2);
+  const [currentUser,setCurrentUser] = useState("")
+  
 
   useEffect(() => {
     getWalletInformation();
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        setCurrentUser(userAuth.uid);
+      }
+    })
   }, []);
 
   async function getWalletInformation() {
@@ -63,8 +71,54 @@ const walletManagment = withAdminAuth(() => {
     data = querySnapshot.docs.map((doc) => {
       return new WalletWithdrawal({ id: doc.id, ...doc.data() });
     });
+
     setHistory(data);
   }
+  const approvePendingRequestView = (data) => {
+     MySwal.fire({
+       showConfirmButton: false,
+       html: (
+         <div>
+           <form onSubmit={(e) => approvePendingRequest(data, e)}>
+             <label htmlFor="type">Automate it ? </label>
+             <input
+               type="checkbox"
+               name="type"
+               id="type"
+             />
+             <br />
+             <label htmlFor="type">Approved Amount </label>
+             <input
+               className="form-control"
+               placeholder="Amount to be approved "
+               name="approvedAmount"
+               id="approvedAmount"
+               type="number"
+               max={data.amount}
+               required
+             />
+             <label htmlFor="type">Please Fill transactionId (If want to do manually)</label>
+             <input
+               className="form-control"
+               placeholder="transactionId "
+               name="transactionId"
+               id="transactionId"
+             />
+
+             <div className="text-end mt-4">
+               <button
+                 className={"btn btn-primary"}
+                 type="submit"
+               >
+                 Approve
+               </button>
+             </div>
+           </form>
+         </div>
+       ),
+       preConfirm: () => {},
+     });
+   };
 
   async function astrologerPrivateDetailView(requestData) {
     getPrivateData(requestData.astrologer).then((data) =>
@@ -148,7 +202,8 @@ const walletManagment = withAdminAuth(() => {
     return querySnapshot.data();
   }
 
-  async function approvePendingRequest(data) {
+  async function approvePendingRequest(data,e) {
+    e.preventDefault();
     let private_data = await getPrivateData(data.astrologer);
     if (private_data.razorpayId == null || private_data.razorpayId == "") {
       alert(
@@ -156,14 +211,21 @@ const walletManagment = withAdminAuth(() => {
       );
       return;
     }
+    data.approvedBy = currentUser ;
     data.status = WalletWithdrawalStatus.APPROVED;
+    data.approvedAmount = parseInt(e.target.approvedAmount.value);
+    data.transactionId = e.target.transactionId.value;
+    data.type = e.target.type.checked ? "automated" : "manual"
+
     const ref = doc(db, "wallet_withdrawal", data.id).withConverter(
       walletWithdrawalConverter
     );
     await setDoc(ref, data);
     removeFromPR(data);
     setHistory([...history, data]);
+    MySwal.clickConfirm();
   }
+  
 
   async function rejectPendingRequest(data) {
     removeFromPR(data);
@@ -218,7 +280,7 @@ const walletManagment = withAdminAuth(() => {
             astrologerPrivateDetailView={astrologerPrivateDetailView}
             data={pendingRequests}
             ItemsPerPage={itemsPerPage}
-            approvePendingRequest={approvePendingRequest}
+            approvePendingRequest={approvePendingRequestView}
             rejectPendingRequest={rejectPendingRequest}
           ></PendingRequestWallet>
         </div>
