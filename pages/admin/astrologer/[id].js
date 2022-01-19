@@ -574,7 +574,7 @@ const astrologer = withAdminAuth(() => {
                 defaultValue={selectedPricingCategory}
               >
                 {pricingList.map((e) => (
-                  <option value={e.name}>
+                  <option key={e.name} value={e.name}>
                     {" "}
                     {e.name +
                       " chat :" +
@@ -772,7 +772,7 @@ const astrologer = withAdminAuth(() => {
 
           <p>{astro.about}</p>
         </div>
-        {/* Accomplishments Container  */}''
+        {/* Accomplishments Container  */}
         <div className={`row  justify-content-center`}>
           <div className="col-2  ">
             <h5> Accomplishments </h5>

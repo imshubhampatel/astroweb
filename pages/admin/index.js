@@ -98,7 +98,7 @@ const Home = withAdminAuth(() => {
         <div className="container">
           <h4>Add pricing Category</h4>
           <form onSubmit={changeCommissionHandler}>
-            <label for="name">Name</label>
+            <label htmlFor="name">Name</label>
             <input
               type="text"
               name="name"
@@ -106,7 +106,7 @@ const Home = withAdminAuth(() => {
               placeholder="enter name of the new category"
             ></input>{" "}
             <br />
-            <label for="name">Price Chat</label>
+            <label htmlFor="name">Price Chat</label>
             <input
               type="number"
               name="priceChat"
@@ -114,7 +114,7 @@ const Home = withAdminAuth(() => {
               placeholder="enter priceChat"
             ></input>{" "}
             <br />
-            <label for="name">Price Voice</label>
+            <label htmlFor="name">Price Voice</label>
             <input
               type="number"
               name="priceVideo"
@@ -122,7 +122,7 @@ const Home = withAdminAuth(() => {
               placeholder="enter priceVideo"
             ></input>
             <br />
-            <label for="name">Price Video</label>
+            <label htmlFor="name">Price Video</label>
             <input
               type="number"
               name="priceVoice"
