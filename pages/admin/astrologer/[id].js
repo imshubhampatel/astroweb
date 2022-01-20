@@ -217,7 +217,7 @@ const astrologer = withAdminAuth(() => {
                       <p>Total Earnings</p>
                       <div style={{ fontSize: "32px", color: "#896C06" }}>
                         {" "}
-                        $10,1000
+                        Rs. {astrologerPrivateData.earnings}
                       </div>
                     </div>
                     <div
@@ -236,7 +236,7 @@ const astrologer = withAdminAuth(() => {
                       <p>Current Balance</p>
                       <div style={{ fontSize: "32px", color: "#896C06" }}>
                         {" "}
-                        $10,1000
+                        Rs. {astrologerPrivateData.walletBalance}
                       </div>
                     </div>
                     <div
@@ -255,7 +255,7 @@ const astrologer = withAdminAuth(() => {
                       <p>Commision</p>
                       <div style={{ fontSize: "32px", color: "#896C06" }}>
                         {" "}
-                        12%
+                        30 %
                       </div>
                     </div>
                     <div
