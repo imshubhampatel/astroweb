@@ -7,8 +7,8 @@ class AstrologerPrivateData {
     this.verificationIdBack = data.verificationIdBack ? data.verificationIdBack: "";
     this.certificationUrl = data.certificationUrl ? data.certificationUrl:""; 
     this.pancardNumber = data.pancardNumber;
-    this.walletBalance = data.walletBalance ? data.walletBalance : 0;
-    this.earnings = data.earnings ? data.walletBalance : 0;
+    this.walletBalance = data.walletBalance ?  data.walletBalance:0;
+    this.earnings = data.earnings ? data.earnings :0;
     this.pancardLink = data.pancardLink;
     this.razorpayId = data.razorpayId ? data.razorpayId : null;
     this.accountInfo = data.accountInfo ? data.accountInfo : {accountNo : "",bank:"",branch:"",ISFC :"",holderName:""};

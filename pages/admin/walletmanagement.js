@@ -306,29 +306,3 @@ walletManagment.getLayout = function getLayout(page) {
 };
 
 export default walletManagment;
-
-{
-  /* <div className="container">
-<div className="row">
-  <h3>Wallet Management</h3>
-</div>
-<div className="row">
-  <div className="col">
-    <PendingRequestWallet 
-      astrologerPrivateDetailView={astrologerPrivateDetailView}
-      data={pendingRequests}
-      ItemsPerPage={itemsPerPage}
-      approvePendingRequest={approvePendingRequest}
-      rejectPendingRequest={rejectPendingRequest}
-    ></PendingRequestWallet>
-  </div>
-  <div className="col">
-    <WalletHistory
-      astrologerPrivateDetailView={astrologerPrivateDetailView}
-      data={history}
-      ItemsPerPage={itemsPerPage}
-    ></WalletHistory>
-  </div>
-</div>
-</div> */
-}
