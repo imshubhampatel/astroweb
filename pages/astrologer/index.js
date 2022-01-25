@@ -170,6 +170,10 @@ class Astrohome extends Component {
       profilePic: "astrologer/" + this.state.user.uid + "/profilePic.png",
       tnc: e.target.tnc.checked,
       workingwithother: e.target.work.value,
+      status : {
+        state : "unverified",
+        remark : "None"
+      }
     };
     let privateInfo = {
       id: this.state.user.uid,
