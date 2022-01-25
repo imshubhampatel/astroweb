@@ -23,6 +23,7 @@ function RegistrationForm(props) {
   const [formPage, setFormPage] = useState(1);
   const [expertisedropdown,setExpertisedropdown] = useState(true);
   const [languagesdropdown,setlanguagesdropdown] = useState(true);
+  const [rejectedPage,sethardRegister] = useState(true);
   // console.log(user)
 
   const firetoast = (name) =>{
@@ -124,6 +125,9 @@ function RegistrationForm(props) {
 
     setFormPage(formPage === 1 ? 2 : 1);
   };
+  function rendeRegister() {
+    sethardRegister(false);
+  }
 
 
   function getDate() {
@@ -162,6 +166,34 @@ function RegistrationForm(props) {
                 className={`${styles.endingBlueText} mx-auto text-center my-5 `}
               >
                 Hope to see you onboard!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (props.rejected === true &&  rejectedPage) {
+    return (
+      <div className={`${styles.baseContainer}`}>
+        <div className="container-fluid bg-white">
+          <div className={`row`}>
+            <div className="col-sm" style={{background:"#FBE5AD"}}>
+              <div className={`${styles.imageContainer}`} />
+            </div>
+
+            <div className="col-sm-8 my-4  ">
+              <p className="mx-sm-auto text-sm-center">
+                <h5>Your application was rejected ! please refill the form.</h5> <br></br>
+               <b> Reason :</b> {props.reason}
+              </p>
+
+              <div
+                className={`${styles.endingBlueText} mx-auto text-center my-5 `}
+              >
+                Hope to see you onboard!
+                <br></br>
+                <button className="btn btn-success" onClick={rendeRegister}> Click to refill </button>
               </div>
             </div>
           </div>
