@@ -32,7 +32,7 @@ import {
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../config";
+import { auth } from "../../config";
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -307,29 +307,3 @@ walletManagment.getLayout = function getLayout(page) {
 };
 
 export default walletManagment;
-
-{
-  /* <div className="container">
-<div className="row">
-  <h3>Wallet Management</h3>
-</div>
-<div className="row">
-  <div className="col">
-    <PendingRequestWallet 
-      astrologerPrivateDetailView={astrologerPrivateDetailView}
-      data={pendingRequests}
-      ItemsPerPage={itemsPerPage}
-      approvePendingRequest={approvePendingRequest}
-      rejectPendingRequest={rejectPendingRequest}
-    ></PendingRequestWallet>
-  </div>
-  <div className="col">
-    <WalletHistory
-      astrologerPrivateDetailView={astrologerPrivateDetailView}
-      data={history}
-      ItemsPerPage={itemsPerPage}
-    ></WalletHistory>
-  </div>
-</div>
-</div> */
-}
