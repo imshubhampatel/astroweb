@@ -78,7 +78,7 @@ const itemManagement = withAdminAuth(()=> {
                     </div>
                 </div>
                 <form onSubmit={(e)=>editCouponHandler(e,couponInfo)}>
-                <label for="title">Title</label>
+                <label htmlFor="title">Title</label>
              <input
                className="form-control"
                placeholder="Coupon Title "
@@ -88,7 +88,7 @@ const itemManagement = withAdminAuth(()=> {
                required
              />
            
-             <label for="endDate">endDate</label>
+             <label htmlFor="endDate">endDate</label>
 
              <input
                className="form-control"
@@ -98,7 +98,7 @@ const itemManagement = withAdminAuth(()=> {
                defaultValue={couponInfo.endDate.toDate().toDateString()}
                required
              />
-               <label for="discountType">discountType</label>
+               <label htmlFor="discountType">discountType</label>
 
              <select className="form-control" id="discountType" defaultValue={couponInfo.discountType} required>
                { Object.keys(discountType).map((e) => (
@@ -107,7 +107,7 @@ const itemManagement = withAdminAuth(()=> {
                  </option>
                ))}
              </select>
-             <label for="discount"> discount</label>
+             <label htmlFor="discount"> discount</label>
              <input
                className="form-check"
                name="discount"
@@ -116,7 +116,7 @@ const itemManagement = withAdminAuth(()=> {
                defaultValue={couponInfo.discount}
                type="number"
              />
-             <label for="subType">subType</label>
+             <label htmlFor="subType">subType</label>
               <select className="form-control" id="subType" defaultValue={couponInfo.subType} required>
               { Object.keys(couponSubtype).map((e) => (
                  <option value={couponSubtype[e]} key={e}>
@@ -124,7 +124,7 @@ const itemManagement = withAdminAuth(()=> {
                  </option>
                ))}
               </select>
-             <label for="maxDiscount">maxDiscount</label>
+             <label htmlFor="maxDiscount">maxDiscount</label>
 
              <input
                className="form-control"
@@ -135,7 +135,7 @@ const itemManagement = withAdminAuth(()=> {
                defaultValue={couponInfo.maxDiscount}
                required
              />
-             <label for="minPurchase">minPurchase</label>
+             <label htmlFor="minPurchase">minPurchase</label>
 
              <input
                className="form-control"
@@ -146,7 +146,7 @@ const itemManagement = withAdminAuth(()=> {
                defaultValue={couponInfo.minPurchase}
                required
              />
-              <label for="limit"> limit</label>
+              <label htmlFor="limit"> limit</label>
              <input
                className="form-check"
                name="limit"

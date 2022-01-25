@@ -253,7 +253,7 @@ const storemanagement = withAdminAuth(() => {
        html: (
          <div>
            <form onSubmit={addCouponHandler}>
-             <label for="title">Title</label>
+             <label htmlFor="title">Title</label>
              <input
                className="form-control"
                placeholder="Coupon Title "
@@ -261,7 +261,7 @@ const storemanagement = withAdminAuth(() => {
                id="title"
                required
              />
-                          <label for="code">code</label>
+                          <label htmlFor="code">code</label>
 
              <input
                className="form-control"
@@ -270,7 +270,7 @@ const storemanagement = withAdminAuth(() => {
                id="code"
                required
              />
-              <label for="startDate">startDate</label>
+              <label htmlFor="startDate">startDate</label>
 
              <input
              type="date"
@@ -279,7 +279,7 @@ const storemanagement = withAdminAuth(() => {
                id="startDate"
                required
              />
-             <label for="endDate">endDate</label>
+             <label htmlFor="endDate">endDate</label>
 
              <input
                className="form-control"
@@ -288,7 +288,7 @@ const storemanagement = withAdminAuth(() => {
                id="endDate"
                required
              />
-               <label for="discountType">discountType</label>
+               <label htmlFor="discountType">discountType</label>
 
              <select className="form-control" id="discountType" required>
                { Object.keys(discountType).map((e) => (
@@ -297,7 +297,7 @@ const storemanagement = withAdminAuth(() => {
                  </option>
                ))}
              </select>
-             <label for="discount"> discount</label>
+             <label htmlFor="discount"> discount</label>
              <input
                className="form-check"
                name="discount"
@@ -306,7 +306,7 @@ const storemanagement = withAdminAuth(() => {
                id="discount"
                type="number"
              />
-             <label for="subType">subType</label>
+             <label htmlFor="subType">subType</label>
 
               <select className="form-control" id="subType" required>
               { Object.keys(couponSubtype).map((e) => (
@@ -315,7 +315,7 @@ const storemanagement = withAdminAuth(() => {
                  </option>
                ))}
               </select>
-             <label for="maxDiscount">maxDiscount</label>
+             <label htmlFor="maxDiscount">maxDiscount</label>
 
              <input
                className="form-control"
@@ -325,7 +325,7 @@ const storemanagement = withAdminAuth(() => {
                id="maxDiscount"
                required
              />
-             <label for="minPurchase">minPurchase</label>
+             <label htmlFor="minPurchase">minPurchase</label>
 
              <input
                className="form-control"
@@ -335,7 +335,7 @@ const storemanagement = withAdminAuth(() => {
                id="minPurchase"
                required
              />
-              <label for="limit"> limit</label>
+              <label htmlFor="limit"> limit</label>
              <input
                className="form-check"
                name="limit"
