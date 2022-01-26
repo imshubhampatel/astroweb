@@ -67,7 +67,7 @@ const blog = withAdminAuth(() => {
   }, [pid]);
 
 
-console.log(astro.description);
+console.log(astro);
   return (
     <div className="container">
       <div className="row  my-3">
