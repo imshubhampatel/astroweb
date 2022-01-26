@@ -91,6 +91,54 @@ const Home = withAdminAuth(() => {
       ),
     });
   };
+  const addPricingCategoryView = () => {
+    MySwal.fire({
+      showConfirmButton: false,
+      html: (
+        <div className="container">
+          <h4>Add pricing Category</h4>
+          <form onSubmit={changeCommissionHandler}>
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="enter name of the new category"
+            ></input>{" "}
+            <br />
+            <label for="name">Price Chat</label>
+            <input
+              type="number"
+              name="priceChat"
+              id="priceChat"
+              placeholder="enter priceChat"
+            ></input>{" "}
+            <br />
+            <label for="name">Price Voice</label>
+            <input
+              type="number"
+              name="priceVideo"
+              id="priceVideo"
+              placeholder="enter priceVideo"
+            ></input>
+            <br />
+            <label for="name">Price Video</label>
+            <input
+              type="number"
+              name="priceVoice"
+              id="priceVoice"
+              placeholder="enter priceVoice"
+            ></input>
+            <div className="text-end mt-4">
+              <button className={"btn btn-success"} type="submit">
+                Add
+              </button>
+            </div>
+          </form>
+        </div>
+      ),
+    });
+  };
   return (
     <>
       <div className="">
@@ -105,6 +153,8 @@ const Home = withAdminAuth(() => {
             <button onClick={filterView} className="btn btn-primary">
               Change Commission
             </button>
+            <br/><br/>
+           
           </div>
 
           <p className="">

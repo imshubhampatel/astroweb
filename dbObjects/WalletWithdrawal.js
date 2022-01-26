@@ -7,6 +7,9 @@ class WalletWithdrawal {
     this.time = data.time;
     this.approvedBy = data.approvedBy ? data.approvedBy : "";
     this.remark = data.remark;
+     this.approvedAmount= data.approvedAmount;
+      this.type = data.type;
+      this.transactionId = data.transactionId;
    
   }
   toString() {
@@ -21,6 +24,9 @@ const walletWithdrawalConverter = {
       astrologer: data.astrologer,
       status: data.status,
       amount: data.amount,
+      approvedAmount: data.approvedAmount,
+      type: data.type,
+      transactionId : data.transactionId,
       approvedBy: data.approvedBy,
       time: data.time,
       remark : data.remark,

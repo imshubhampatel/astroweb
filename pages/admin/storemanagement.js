@@ -21,13 +21,13 @@ import {
 } from "firebase/firestore";
 import { firebase } from "../../config";
 import Link from "next/link";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { uploadDocToStorage } from "../../utilities/utils";
 import { EmployeePermissions } from "../../dbObjects/Employee";
+import { couponConverter, Coupon, discountType,couponSubtype, couponStatus} from '../../dbObjects/Coupon'
 
 const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
@@ -81,6 +81,33 @@ const storemanagement = withAdminAuth(() => {
     console.log(item);
     const ref = doc(db, "items", uid);
     await setDoc(ref, item);
+    Swal.clickConfirm();
+  }
+
+  async function addCouponHandler(e) {
+    e.preventDefault();
+    let uid = uuidv4();
+    let coupon = {
+      id: uid,
+      code: e.target.code.value,
+      createdAt: new Date().toDateString(),
+      maxDiscount: e.target.maxDiscount.value,
+      minPurchase: e.target.minPurchase.value,
+      // time: e.target.time.value,
+      endDate: new Date(Date.parse(e.target.endDate.value)),
+      startDate: new Date(Date.parse(e.target.startDate.value)),
+      status: couponStatus.CREATED,
+      title: e.target.title.value,
+      totalUses: 0,
+      discountType: e.target.discountType.value,
+      discount: e.target.discount.value,
+      limit: e.target.limit.value,
+      subType: e.target.subType.value,
+      updatedAt : new Date(),
+      categoryType : "all"
+    };
+    const ref = doc(db, "coupon", uid).withConverter(couponConverter);
+    await setDoc(ref, new Coupon(coupon));
     Swal.clickConfirm();
   }
   async function getAllCategories() {
@@ -225,68 +252,99 @@ const storemanagement = withAdminAuth(() => {
        showConfirmButton: false,
        html: (
          <div>
-           <form onSubmit={addItemHandler}>
+           <form onSubmit={addCouponHandler}>
+             <label for="title">Title</label>
              <input
                className="form-control"
-               placeholder="Product Name "
+               placeholder="Coupon Title "
                name="reason-text"
-               id="name"
+               id="title"
                required
              />
+                          <label for="code">code</label>
+
              <input
                className="form-control"
-               placeholder="Product Description "
+               placeholder="coupon code "
                name="reason-text"
-               id="description"
+               id="code"
                required
              />
+              <label for="startDate">startDate</label>
+
              <input
+             type="date"
                className="form-control"
-               placeholder="Product Headline "
                name="reason-text"
-               id="headline"
+               id="startDate"
                required
              />
+             <label for="endDate">endDate</label>
+
              <input
                className="form-control"
-               type="file"
-               multiple
-               name="photos"
-               id="photos"
-               placeholder="Choose photos for product"
+               type="date"
+               name="endDate"
+               id="endDate"
                required
              />
-             <select className="form-control" id="category" required>
-               {categories.map((e) => (
-                 <option value={e.id} key={e.id}>
-                   {e.name}
+               <label for="discountType">discountType</label>
+
+             <select className="form-control" id="discountType" required>
+               { Object.keys(discountType).map((e) => (
+                 <option value={discountType[e]} key={e}>
+                   {discountType[e]}
                  </option>
                ))}
              </select>
-             <input
-               className="form-control"
-               placeholder="please enter MRP"
-               name="mrp"
-               type="number"
-               id="mrp"
-               required
-             />
-
-             <input
-               className="form-control"
-               placeholder="please enter Selling Price"
-               name="sp"
-               type="number"
-               id="sellingPrice"
-               required
-             />
+             <label for="discount"> discount</label>
              <input
                className="form-check"
-               name="visible"
-               id="visible"
-               type="checkbox"
-             />
+               name="discount"
+               placeholder="please enter discount Amount"
 
+               id="discount"
+               type="number"
+             />
+             <label for="subType">subType</label>
+
+              <select className="form-control" id="subType" required>
+              { Object.keys(couponSubtype).map((e) => (
+                 <option value={couponSubtype[e]} key={e}>
+                   {couponSubtype[e]}
+                 </option>
+               ))}
+              </select>
+             <label for="maxDiscount">maxDiscount</label>
+
+             <input
+               className="form-control"
+               placeholder="please enter maxDiscount"
+               name="maxDiscount"
+               type="number"
+               id="maxDiscount"
+               required
+             />
+             <label for="minPurchase">minPurchase</label>
+
+             <input
+               className="form-control"
+               placeholder="please enter minPurchase"
+               name="minPurchase"
+               type="number"
+               id="minPurchase"
+               required
+             />
+              <label for="limit"> limit</label>
+             <input
+               className="form-check"
+               name="limit"
+               placeholder="please enter max usage limit "
+
+               id="limit"
+               type="number"
+             />
+           
              <div className="text-end mt-4">
                <button
                  className={`${styles.astroVerifyButton} ${styles.astroButton}`}
@@ -344,7 +402,7 @@ const storemanagement = withAdminAuth(() => {
           </button>
           <button
             className="btn btn-primary"
-            onClick={() => router.push("/admin/store/order")}
+            onClick={() => router.push("/admin/store/coupon")}
           >
             {" "}
             Manage Coupons

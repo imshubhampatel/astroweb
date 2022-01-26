@@ -47,7 +47,7 @@ class Astrohome extends Component {
       user: null,
       registerStatus: false,
       testStatus: false,
-      astrologerProfileInfo: null,
+      astrologerProfileInfo: {},
       questions: [],
       numQues: 5,
       formOptionData : {
@@ -170,6 +170,10 @@ class Astrohome extends Component {
       profilePic: "astrologer/" + this.state.user.uid + "/profilePic.png",
       tnc: e.target.tnc.checked,
       workingwithother: e.target.work.value,
+      status : {
+        state : "unverified",
+        remark : "None"
+      }
     };
     let privateInfo = {
       id: this.state.user.uid,
@@ -180,6 +184,8 @@ class Astrohome extends Component {
       certificationUrl: "astrologer/" + profileData.id + "/certification.png",
       pancardNumber:"",
       phoneNumber: e.target.phoneNumber.value,
+      walletBalance : 0,
+      earnings : 0,
     };
 
     let profilePic = e.target.profilePicture.files[0];
@@ -290,7 +296,7 @@ class Astrohome extends Component {
 
   render() {
     if (this.state.user) {
-      if (this.state.registerStatus)
+      if (this.state.registerStatus )
         return (
           <div>
             <RegistrationForm
@@ -301,6 +307,21 @@ class Astrohome extends Component {
             />
           </div>
         );
+      else if( this.state.astrologerProfileInfo?.status?.state == "rejected")
+      {
+        return <>
+          <RegistrationForm  
+              registerFormHandler={this.registerformhandler}
+              questions={this.state.questions}
+              data = {this.state.formOptionData}
+              user={this.state.user} 
+              rejected={true}
+              reason={this.state.astrologerProfileInfo.status.remark}
+              
+              />
+
+        </>
+      }
       else if (this.state.astrologerProfileInfo ) {
         return <RegistrationForm completed="true" />;
       }
