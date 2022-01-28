@@ -1,0 +1,56 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.button_container{
+    display: flex;
+    overflow: auto;
+    gap: 8px;
+    padding-bottom: 20px;
+
+}
+
+.button_container .button{
+/* min-width: 193px; */
+padding: 20px;
+height: 49px;
+
+font-size: 15.625px;
+line-height: 17px;
+
+white-space: nowrap;
+
+background: rgba(128, 128, 128, 0.5);
+border-radius: 26.6293px;
+cursor: pointer;
+
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+@media (min-width: 768px) { 
+
+    .button_container .button{
+        font-size: 20px;
+        line-height: 22px;
+        padding: 25px;
+    }
+
+}
+
+.button_container .button.active{
+
+    background: #FC8C07;
+    color: #fff;
+
+}
+
+.faq_container{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
