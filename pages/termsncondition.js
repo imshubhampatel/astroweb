@@ -5,7 +5,7 @@ function termsncondition() {
         <div className='container'>
             <h2><strong>Terms and Conditions</strong></h2>
 
-<p>Welcome to Dreshkan!</p>
+<p>Welcome to Dreshkan (A product of Astrochrcha)!</p>
 
 <p>These terms and conditions outline the rules and regulations for the use of Astrochrcha Pvt ltd.`&apos;`s Website, located at dreshkan.com.</p>
 

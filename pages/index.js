@@ -47,7 +47,7 @@ export default function Home() {
               <p
                 className={`mb-1 text-center text-md-start ${styles.mainText} `}
               >
-                Dreshkan is an all-in-one solution for astrology and horoscopic
+                Dreshkan is product by Astrochrcha and it is an all-in-one solution for astrology and horoscopic
                 needs. Get ready to join us on our journey in world of
                 astrology. We will be providing plethora of services from live
                 consultation to match making reports. Do not worry about your
