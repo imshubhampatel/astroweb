@@ -29,7 +29,7 @@ function Navbar() {
       <div className={styles.NavBar} >
   
         <div className={styles.logoContainer} >
-        <Link href="/"><a><Image src="/images/logo_tranparent.png" width="80" height="80" /></a></Link>
+        <Link href="/"><a><Image src="/images/logo_transparent.png" width="80" height="80" /></a></Link>
         </div>
         <Navigation/>
         <MobileNavigation/>
