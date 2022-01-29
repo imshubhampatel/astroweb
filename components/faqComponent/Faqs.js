@@ -44,59 +44,53 @@ export function Faqs() {
             <>
               <FaqCard
                 question="Can I cancel the appointment?"
-                answer="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the"
+                answer="Yes, you can cancel appointment till it is accepted."
               />
               <FaqCard
                 question="How can I download this app?"
-                answer="Lorem Ipsum is simply 
-            dummy text of the printing and 
-            typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the"
+                answer="It will be soon available on playstore."
               />
               <FaqCard
                 question="Can I register on the app as a Astrologer?"
-                answer="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the"
+                answer="Press on join as an astrologer button on top."
               />
               <FaqCard
                 question="What is the medium of instruction and communication?"
-                answer="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the"
+                answer="Every Astrologer is fluent in his own languages , you will be able to choose from the languages provided by astrologer."
               />
             </>
           )}
 
           {currentTab == 1 && (
             <>
-              <FaqCard
+              {/* <FaqCard
                 question="Question on Misc Details "
                 answer="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the"
+              /> */}
+               <FaqCard
+                question="Where are your terms and conditions ?"
+                answer="Look in the footer of this website."
               />
-              <FaqCard
-                question="How can I download this app?"
-                answer="Lorem Ipsum is simply 
-            dummy text of the printing and 
-            typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the"
-              />
-              <FaqCard
+              {/* <FaqCard
                 question="Can I register on the app as a Astrologer?"
                 answer="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the"
-              />
+              /> */}
             </>
           )}
 
           {currentTab == 2 && (
             <>
-              <FaqCard
-                question="Question on Other details"
-                answer="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the"
+             <FaqCard
+                question="How can I download this app?"
+                answer="It will be soon available on playstore."
               />
-              <FaqCard
+              {/* <FaqCard
                 question="How can I download this app?"
                 answer="Lorem Ipsum is simply 
             dummy text of the printing and 
             typesetting industry. 
             Lorem Ipsum has been the industry's standard dummy text ever since the"
-              />
+              /> */}
             </>
           )}
         </div>
