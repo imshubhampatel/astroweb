@@ -50,7 +50,7 @@ function Footer() {
               All Rights Reserved. Use of this website signifies your agreement
               to the <Link href="/termsncondition">
               <a className="text-decoration-underline" >Terms {"&"} Conditions</a>
-            </Link> and Dreshkan (a Astrochrchas' Product){" "}   
+            </Link> and Dreshkan (a Astrochrcha Product){" "}   
               <Link href="/privacypolicy">
               <a className="text-decoration-underline" >Privacy Policy</a>
             </Link> .
