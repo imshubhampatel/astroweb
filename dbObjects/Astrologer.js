@@ -6,10 +6,12 @@ class Astrologer {
     this.secondName = data.secondName
     this.dob = data.dob
     this.address = data.address 
+    this.currentStatus = data.currentStatus 
     this.gender = data.gender
     this.experience = data.experience ? Number(data.experience) : 0;
     this.dailyHours = data.dailyHours ? Number(data.dailyHours):0;
     this.profilePic = data.profilePic
+    this.profilePicLink = data.profilePicLink
     this.about = data.about ? data.about : "Please add some line about you" 
     this.phoneNumber = data.phoneNumber 
 
@@ -38,8 +40,10 @@ class Astrologer {
     // //Rating & Reviews
     this.rating = data.rating ? data.rating : 0
     this.ratingCount = data.ratingCount ? data.ratingCount : 0
+    this.enabled = data.enabled ? data.enabled : false
 
     // Enabled / Disabled 
+
     this.status = data.status ? data.status : { state : astrologerStatus.UNVERIFIED , remark : "None" }
 
   }
@@ -62,7 +66,9 @@ const astrologerConverter = {
       experience: data.experience,
       dailyHours : data.dailyHours,
       profilePic: data.profilePic,
+      profilePicLink: data.profilePicLink,
       about : data.about,
+      currentStatus : data.currentStatus,
       workingwithother : data.workingwithother,
       phoneNumber : data.phoneNumber,
       profileComplete: data.profileComplete ? data.profileComplete: false ,
@@ -82,6 +88,7 @@ const astrologerConverter = {
 
       //Rating & Reviews
       rating: data.rating,
+      enabled: data.enabled,
       ratingCount: data.ratingCount,
       // verification
       status: data.status,
