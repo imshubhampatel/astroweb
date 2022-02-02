@@ -568,10 +568,10 @@ function RegistrationForm(props) {
                       required
                     />
                     <label className="form-check-label" htmlFor="tnc">
-                      Agree to <Link href="/astrologer/termsncondition"><a>Terms and conditions</a></Link>
+                      Agree to <Link href="/astrologer/termsncondition"><a ><u>Terms and conditions</u></a></Link>
                     </label>
                     <div id="tnc" className="invalid-feedback">
-                      You must agree before submitting.
+                      You must agree before submitting. Please read all the terms and conditions carefully before submitting *
                     </div>
                   </div>
                 </div>

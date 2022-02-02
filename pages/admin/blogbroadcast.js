@@ -159,32 +159,4 @@ Blogbroadcast.getLayout = function getLayout(page) {
 };
 export default Blogbroadcast;
 
-{
-  /* <div className="container">
-<div className="row">
-  <div className="row">
-    <ul className="nav nav-pills">
-      <li className="nav-item">
-        <button
-          className={`nav-link ${activeState == 1 ? "active" : ""}`}
-          aria-current="page"
-          onClick={() => setActiveState(1)}
-        >
-          Blogs
-        </button>
-      </li>
-      <li className="nav-item">
-        <button
-          className={`nav-link ${activeState == 2 ? "active" : ""}`}
-          onClick={() => setActiveState(2)}
-        >
-          Broadcast
-        </button>
-      </li>
-    </ul>
-  </div>
-  <hr></hr>
-  <div className="row">{getData()}</div>
-</div>
-</div> */
-}
+

@@ -199,9 +199,9 @@ const astrologermanagement = withAdminAuth(() => {
     let data = new pricingCategory({
       id: e.target.name.value,
       name: e.target.name.value,
-      priceChat: e.target.priceChat.value,
-      priceVideo: e.target.priceVideo.value,
-      priceVoice: e.target.priceVoice.value,
+      priceChat:  parseInt(e.target.priceChat.value),
+      priceVideo: parseInt(e.target.priceVideo.value),
+      priceVoice: parseInt(e.target.priceVoice.value),
       lastUpdateTimestamp : new Date(),
     });
     setPricingList([...pricingList.filter((x) => {

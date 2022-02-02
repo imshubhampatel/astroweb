@@ -15,14 +15,14 @@ class Astrologer {
     this.about = data.about ? data.about : "Please add some line about you" 
     this.phoneNumber = data.phoneNumber 
 
-    this.workingwithother = data.workingwithother ? data.workingwithother : "No"
+    this.workingwithother = data.workingwithother ? data.workingwithother : false
     
     this.profileComplete = data.profileComplete ? data.profileComplete : false;
     // // Meeting Pricing
     this.pricingCategory = data.pricingCategory ? data.pricingCategory : "base";
-    this.priceChat = data.priceChat ?  data.priceChat : null
-    this.priceVideo = data.priceVideo ?data.priceVideo:null
-    this.priceVoice = data.priceVoice? data.priceVoice: null
+    this.priceChat = data.priceChat ?  parseInt(data.priceChat)  : null
+    this.priceVideo = data.priceVideo ?  parseInt(data.priceVideo):null
+    this.priceVoice = data.priceVoice?  parseInt(data.priceVoice): null
     
     // // Meeting History
     this.chatSeconds = data.chatSeconds ? data.chatSeconds :0

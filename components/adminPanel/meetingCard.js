@@ -14,13 +14,13 @@ export default function MeetingCard( {props,type} ) {
         {/* Order Status  */}
         <div className={`flex-grow-1  `} style={{height: "100%"}}> 
 
-          <h6>{props?.type} Call with {type=="astrologer"?props.user:props.astrologerUid}</h6>
+          <h6>{props?.type} Call with {type=="astrologer"?props?.user:props?.astrologerUid}</h6>
 
-          <div className={`${styles.orderDetailText}`} >Order id: {props.id} <br/>
+          <div className={`${styles.orderDetailText}`} >Order id: {props?.id} <br/>
 
           {props?.scheduledTime.toDate().toDateString()}</div>
 
-          <div className={`${styles.orderStatus}  ${styles.orderStatusSuccess} `} >{props.status}</div>
+          <div className={`${styles.orderStatus}  ${styles.orderStatusSuccess} `} >{props?.status}</div>
 
         </div>
 
@@ -34,22 +34,25 @@ export default function MeetingCard( {props,type} ) {
         <div className={`row  ${styles.orderDetailText}`} >
 
           <div className={`col`}>Consult Rate</div>
-          <div className={`col text-end`}>Rs&nbsp;{props.rate}/5 minute</div>
+          <div className={`col text-end`}>Rs&nbsp;{props?.consultationRate}/5 minute</div>
 
         </div>
 
         <div className={`row  ${styles.orderDetailText}`} >
 
           <div className={`col`}>Duration</div>
-          <div className={`col text-end`}>{props.duration} minutes</div>
+          <div className={`col text-end`}>{props?.totalDuration} minutes</div>
 
         </div>
 
         <div className={`row  ${styles.orderDetailText}`} >
 
           <div className={`col`}>Total cost:</div>
-  <div className={`col text-end`}>Rs {props.amount}</div>
+          <div className={`col text-end`}>Rs {props?.totalAmount}</div>
 
+
+          <div className={`col`}>Total Earnings:</div>
+          <div className={`col text-end`}>Rs {props?.astrologerAmount}</div>
         </div>
 
 

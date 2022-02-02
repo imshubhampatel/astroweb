@@ -172,7 +172,7 @@ class Astrohome extends Component {
       profilePicLink:'',
       tnc: e.target.tnc.checked,
       enabled : false,
-      workingwithother: e.target.work.value,
+      workingwithother: e.target.work.value == "yes" ? true: false,
       status : {
         state : "unverified",
         remark : "None"

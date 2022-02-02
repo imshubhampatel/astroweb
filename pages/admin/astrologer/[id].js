@@ -258,7 +258,7 @@ const astrologer = withAdminAuth(() => {
                       <p>Commision</p>
                       <div style={{ fontSize: "32px", color: "#896C06" }}>
                         {" "}
-                        30 %
+                        40 %
                       </div>
                     </div>
                     <div
