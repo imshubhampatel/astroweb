@@ -7,9 +7,11 @@ import { useEffect, useState } from "react";
 import HeroImage from "../public/images/mascot.png";
 import Logo from "../public/images/logo_transparent.png";
 import IphoneMockup from "../public/images/iphone_mockup.svg";
-import GooglePlayBadge from "../public/images/google-play-badge.png"
+import GooglePlayBadge from "../public/images/google-play-badge.png";
 
 import { Faqs } from "../components/faqComponent/Faqs";
+import LaunchSoonSubscribe from "../components/LaunchSoonSubscribe"
+
 
 import { BsChatSquareDots, BsBarChart } from "react-icons/bs";
 import { FiPhone, FiShoppingCart } from "react-icons/fi";
@@ -47,23 +49,21 @@ export default function Home() {
               <p
                 className={`mb-1 text-center text-md-start ${styles.mainText} `}
               >
-                Dreshkan is product by Astrochrcha and it is an all-in-one solution for astrology and horoscopic
-                needs. Get ready to join us on our journey in world of
-                astrology. We will be providing plethora of services from live
-                consultation to match making reports. Do not worry about your
-                future as we are here to accompany you...
-
-
-                
-
+                Dreshkan is product by Astrochrcha and it is an all-in-one
+                solution for astrology and horoscopic needs. Get ready to join
+                us on our journey in world of astrology. We will be providing
+                plethora of services from live consultation to match making
+                reports. Do not worry about your future as we are here to
+                accompany you...
               </p>
 
-
-              <div className={styles.badge_container}>
+              {/* <div className={styles.badge_container}>
     <Image src={GooglePlayBadge} />
-    </div>
+        </div> */}
 
-
+              <div className="my-3 ">
+                <LaunchSoonSubscribe />
+              </div>
 
             </div>
           </div>
@@ -258,14 +258,12 @@ export default function Home() {
 
               {/* Paragraph  */}
               <div className={styles.para}>
-               This app will soon be available on Play store.
- 
+                This app will soon be available on Play store.
               </div>
 
               <div className={styles.badge_container}>
-    <Image src={GooglePlayBadge} />
-    </div>
-
+                <Image src={GooglePlayBadge} />
+              </div>
             </div>
           </div>
         </div>
