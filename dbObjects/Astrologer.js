@@ -20,9 +20,9 @@ class Astrologer {
     this.profileComplete = data.profileComplete ? data.profileComplete : false;
     // // Meeting Pricing
     this.pricingCategory = data.pricingCategory ? data.pricingCategory : "base";
-    this.priceChat = data.priceChat ?  parseInt(data.priceChat)  : null
-    this.priceVideo = data.priceVideo ?  parseInt(data.priceVideo):null
-    this.priceVoice = data.priceVoice?  parseInt(data.priceVoice): null
+    this.priceChat = data.priceChat ?  parseInt(data.priceChat)  : 0
+    this.priceVideo = data.priceVideo ?  parseInt(data.priceVideo):0
+    this.priceVoice = data.priceVoice?  parseInt(data.priceVoice): 0
     
     // // Meeting History
     this.chatSeconds = data.chatSeconds ? data.chatSeconds :0
