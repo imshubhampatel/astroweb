@@ -21,6 +21,7 @@ import {
   walletWithdrawalConverter,
   WalletWithdrawal,
   WalletWithdrawalStatus,
+  WalletWithdrawalType
 } from "../../dbObjects/WalletWithdrawal";
 import PendingRequestWallet from "../../components/adminPanel/pendingRequestsWallet";
 import WalletHistory from "../../components/adminPanel/walletHistory";
@@ -205,17 +206,20 @@ const walletManagment = withAdminAuth(() => {
   async function approvePendingRequest(data,e) {
     e.preventDefault();
     let private_data = await getPrivateData(data.astrologer);
+    if(e.target.type.checked)
+    {
     if (private_data.razorpayId == null || private_data.razorpayId == "") {
       alert(
         "please Update Razorpay Id of this astrologer , cannot proceed this request"
       );
       return;
     }
+  }
     data.approvedBy = currentUser ;
     data.status = WalletWithdrawalStatus.APPROVED;
     data.approvedAmount = parseInt(e.target.approvedAmount.value);
     data.transactionId = e.target.transactionId.value;
-    data.type = e.target.type.checked ? "automated" : "manual"
+    data.type = e.target.type.checked ? WalletWithdrawalType.automated : WalletWithdrawalType.manual;
 
     const ref = doc(db, "wallet_withdrawal", data.id).withConverter(
       walletWithdrawalConverter

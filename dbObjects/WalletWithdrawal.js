@@ -46,4 +46,8 @@ const WalletWithdrawalStatus = {
   COMPLETED: "completed",
   FAILED : "failed",
 };
-export { walletWithdrawalConverter, WalletWithdrawal, WalletWithdrawalStatus };
+const WalletWithdrawalType = {
+  manual: "manual",
+  automated: "automated",
+ };
+export { walletWithdrawalConverter, WalletWithdrawal, WalletWithdrawalStatus ,WalletWithdrawalType};
