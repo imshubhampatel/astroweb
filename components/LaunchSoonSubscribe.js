@@ -6,21 +6,27 @@ export default function LaunchSoonSubscribe(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputVal);
+    await props.markInterested(inputVal);
+    setInputVal("");
+    alert("Thanks for showing interest .")
   };
 
   return (
     <div className={styles.container}>
+      <form onSubmit={handleSubmit}>
       <input
         value={inputVal}
         onChange={(e) => setInputVal(e.target.value)}
         className={styles.input_field}
         placeholder="Enter Email"
+        type="email"
       />
-      <button onClick={handleSubmit} className={styles.submit_button}>
+      
+      <button type="submit" className={styles.submit_button}>
         {" "}
         Interested
       </button>
+      </form>
     </div>
   );
 }

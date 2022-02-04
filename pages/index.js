@@ -11,15 +11,30 @@ import GooglePlayBadge from "../public/images/google-play-badge.png";
 
 import { Faqs } from "../components/faqComponent/Faqs";
 import LaunchSoonSubscribe from "../components/LaunchSoonSubscribe"
-
-
 import { BsChatSquareDots, BsBarChart } from "react-icons/bs";
 import { FiPhone, FiShoppingCart } from "react-icons/fi";
 import { MdOndemandVideo } from "react-icons/md";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { BiPlanet } from "react-icons/bi";
+import {
+  collection,
+  doc,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore";
+import { firebase } from "../config";
+
+const db = getFirestore(firebase);
 
 export default function Home() {
+  async function markInterested(email) {
+    const astros = doc(collection(db,"interested"));
+    await setDoc(astros, {
+      email:email,
+      timestamp : new Date()
+    });
+  }
+
   return (
     <>
       <Head>
@@ -62,7 +77,7 @@ export default function Home() {
         </div> */}
 
               <div className="my-3 ">
-                <LaunchSoonSubscribe />
+                <LaunchSoonSubscribe markInterested={markInterested}/>
               </div>
 
             </div>
