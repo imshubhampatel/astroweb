@@ -665,9 +665,9 @@ const astrologer = withAdminAuth(() => {
             </div>
           </form>
 
-
-        <div className="my-3"><EditAccountDetails/></div>
-
+          <div className="my-3">
+            <EditAccountDetails handleSubmit={() => MySwal.clickConfirm()} />
+          </div>
         </div>
       ),
     });
