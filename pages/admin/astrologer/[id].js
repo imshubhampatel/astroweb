@@ -1,6 +1,7 @@
 import styles from "../../../styles/pages/admin/astrologer/[id].module.css";
 import RatingBox from "../../../components/ratingBox";
 import FireImage from "../../../components/FireImage";
+import EditAccountDetails from "../../../components/EditAccountDetails";
 import Link from "next/link";
 import { MdOutlineMessage } from "react-icons/md";
 import { FiPhoneCall, FiEdit } from "react-icons/fi";
@@ -313,7 +314,7 @@ const astrologer = withAdminAuth(() => {
                 // height: "800px",
                 width: "100%",
                 position: "relative",
-                display: "block"
+                display: "block",
               }}
             >
               <FireImage
@@ -323,26 +324,25 @@ const astrologer = withAdminAuth(() => {
                 width="500"
                 height="500"
               />
-            
             </div>
-            <br/>
+            <br />
             <div
               style={{
                 // border: "1px solid red",
                 // height: "800px",
                 width: "100%",
                 position: "relative",
-                display:"block"
+                display: "block",
               }}
             >
-            <FireImage
-              src={astrologerPrivateData.verificationIdBack}
-              // layout="responsive"
-              width="500"
-              height="500"
-            />
+              <FireImage
+                src={astrologerPrivateData.verificationIdBack}
+                // layout="responsive"
+                width="500"
+                height="500"
+              />
             </div>
-            
+
             <br />
             <Link href={pdf}>
               <a target="_blank">Certification</a>
@@ -664,6 +664,10 @@ const astrologer = withAdminAuth(() => {
               </button>
             </div>
           </form>
+
+
+        <div className="my-3"><EditAccountDetails/></div>
+
         </div>
       ),
     });
