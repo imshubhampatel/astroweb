@@ -369,12 +369,12 @@ const astrologer = withAdminAuth(() => {
                 <div className="col font-weight-bold"> IFSC Code </div>
                 <div className="col">
                   {" "}
-                  {astrologerPrivateData.accountInfo.ISFC}{" "}
+                  {astrologerPrivateData.accountInfo.IFSC}{" "}
                 </div>
               </div>
 
               <div className="row">
-                <div className="col font-weight-bold"> Branch </div>
+                <div className="col font-weight-bold"> Bank Branch </div>
                 <div className="col">
                   {" "}
                   {astrologerPrivateData.accountInfo.bank +
@@ -640,6 +640,19 @@ const astrologer = withAdminAuth(() => {
     await updateDoc(astros, { ...astro_temp });
     MySwal.clickConfirm();
   }
+  async function editBankDetails(e) {
+    const astros = doc(db, "astrologer/" + pid + "/privateInfo/" + pid);
+    let astro_temp = astrologerPrivateData;
+    astro_temp.accountInfo.accountNo = e.accountNo;
+    astro_temp.accountInfo.bank = e.bank;
+    astro_temp.accountInfo.IFSC = e.IFSC;
+    astro_temp.accountInfo.branch = e.branch;
+    astro_temp.accountInfo.holderName = e.holderName;
+    console.log(astro_temp)
+    setAstrologerPrivateData({ ...astro_temp });
+    await updateDoc(astros, { ...astro_temp });
+    MySwal.clickConfirm();
+  }
 
   const editRazorpayId = () => {
     MySwal.fire({
@@ -666,7 +679,7 @@ const astrologer = withAdminAuth(() => {
           </form>
 
           <div className="my-3">
-            <EditAccountDetails handleSubmit={() => MySwal.clickConfirm()} />
+            <EditAccountDetails handleSubmit={editBankDetails} />
           </div>
         </div>
       ),
@@ -694,7 +707,7 @@ const astrologer = withAdminAuth(() => {
         <div className={`${styles.mainInfoContainer}`}>
           <div className={`${styles.astroPhoto}`} style={{ display: "block" }}>
             <Image
-              src={profilePicUrl}
+              src={astro?.profilePicLink ?astro.profilePicLink : profilePicUrl}
               height="100"
               width="100"
               layout="responsive"

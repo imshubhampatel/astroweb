@@ -7,19 +7,15 @@ const formReducer = (state, event) => {
   };
 };
 
-function EditAccountDetails({handleSubmit = () => {}}) {
+function EditAccountDetails({handleSubmit}) {
   const [formData, setFormData] = useReducer(formReducer, {});
   const [submitting, setSumitting] = useState(false);
 
   const handleSubmitFinal = (event) => {
     event.preventDefault();
     setSumitting(true);
-
-
-
     // Make Call to submit data; 
-
-    handleSubmit(); 
+    handleSubmit(formData); 
 
   };
 
@@ -75,12 +71,12 @@ function EditAccountDetails({handleSubmit = () => {}}) {
             <div className="form-group my-2 ">
               <input
                 type="text"
-                name="ifsc"
-                id="ifsc"
+                name="IFSC"
+                id="IFSC"
                 className="form-control"
                 placeholder="IFSC"
                 onChange={handleChange}
-                value={formData.ifsc || ""}
+                value={formData.IFSC || ""}
               />
             </div>
 

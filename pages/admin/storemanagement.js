@@ -111,7 +111,7 @@ const storemanagement = withAdminAuth(() => {
       alert("Invalid Discount");
       return;
     }
-    const ref = doc(db, "coupon", uid).withConverter(couponConverter);
+    const ref = doc(db, "coupon", coupon.id).withConverter(couponConverter);
     await setDoc(ref, new Coupon(coupon));
     Swal.clickConfirm();
   }

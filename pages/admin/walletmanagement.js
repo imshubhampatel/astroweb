@@ -164,11 +164,11 @@ const walletManagment = withAdminAuth(() => {
 
                 <div className="row">
                   <div className="col font-weight-bold"> IFSC Code </div>
-                  <div className="col"> {data.accountInfo.ISFC} </div>
+                  <div className="col"> {data.accountInfo.IFSC} </div>
                 </div>
 
                 <div className="row">
-                  <div className="col font-weight-bold"> Branch </div>
+                  <div className="col font-weight-bold"> Bank Branch </div>
                   <div className="col">
                     {" "}
                     {data.accountInfo.bank + " " + data.accountInfo.branch}{" "}
