@@ -429,7 +429,7 @@ const astrologer = withAdminAuth(() => {
                     }}
                     defaultValue={astro.priceChat}
                   />
-                  / 5 min
+                  /  min
                 </div>
               </div>
 
@@ -451,7 +451,7 @@ const astrologer = withAdminAuth(() => {
                     }}
                     defaultValue={astro.priceVoice}
                   />
-                  / 5 min
+                  /  min
                 </div>
               </div>
 
@@ -473,7 +473,7 @@ const astrologer = withAdminAuth(() => {
                     }}
                     defaultValue={astro.priceVideo}
                   />
-                  / 5 min
+                  /  min
                 </div>
               </div>
             </div>
@@ -839,19 +839,19 @@ const astrologer = withAdminAuth(() => {
         {/* Pricing Container  */}
         <div className={`row  justify-content-center my-3`}>
           <div className="col-2  ">
-            <h5> Price/ 5 minute </h5>
+            <h5> Price/  minute </h5>
           </div>
 
           <div className="col-2  border-end text-center">
-            <MdOutlineMessage /> ₹{astro.priceChat} /5 mins
+            <MdOutlineMessage /> ₹{astro.priceChat} / mins
           </div>
 
           <div className="col-2  text-center">
-            <FiPhoneCall /> ₹{astro.priceVoice} /5 mins
+            <FiPhoneCall /> ₹{astro.priceVoice} / mins
           </div>
 
           <div className="col-2 border-start text-center">
-            <BiVideoPlus /> ₹{astro.priceVideo} /5 mins
+            <BiVideoPlus /> ₹{astro.priceVideo} / mins
           </div>
 
           <div
