@@ -6,6 +6,7 @@ class Coupon {
     this.code = data.code;
     this.createdAt = data.createdAt;
     this.maxDiscount = data.maxDiscount;
+    this.maxTotalDiscount = data.maxTotalDiscount;
     this.minPurchase = data.minPurchase;
     // this.time = new Timestamp(data.time).toDate();
     this.startDate = data.startDate;
@@ -33,6 +34,7 @@ const couponConverter = {
       code: data.code,
       createdAt: data.createdAt,
       maxDiscount: data.maxDiscount,
+      maxTotalDiscount: data.maxTotalDiscount,
       minPurchase: data.minPurchase,
       // time: data.time,
       endDate: data.endDate,
