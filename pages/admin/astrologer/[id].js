@@ -473,7 +473,7 @@ const astrologer = withAdminAuth(() => {
                     }}
                     defaultValue={astro.priceVideo}
                   />
-                  /  min
+                  /min
                 </div>
               </div>
             </div>

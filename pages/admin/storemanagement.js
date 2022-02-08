@@ -89,7 +89,7 @@ const storemanagement = withAdminAuth(() => {
     let coupon = {
       id: e.target.code.value,
       code: e.target.code.value,
-      createdAt: new Date().toDateString(),
+      createdAt: new Date(),
       maxDiscount: parseInt(e.target.maxDiscount.value),
       maxTotalDiscount: parseInt(e.target.maxTotalDiscount.value),
       minPurchase: parseInt(e.target.minPurchase.value),
@@ -100,9 +100,9 @@ const storemanagement = withAdminAuth(() => {
       title: e.target.title.value,
       totalUses: 0,
       discountType: e.target.discountType.value,
-      discount: parseInt(e.target.discount.value),
+      discount: (e.target.discount.value),
       limit: parseInt(e.target.limit.value),
-      subType: e.target.subType.value,
+      subtype: e.target.subtype.value,
       updatedAt : new Date(),
       categoryType : "all"
     };
@@ -311,9 +311,9 @@ const storemanagement = withAdminAuth(() => {
                id="discount"
                type="number"
              />
-             <label htmlFor="subType">subType</label>
+             <label htmlFor="subtype">subtype</label>
 
-              <select className="form-control" id="subType" required>
+              <select className="form-control" id="subtype" required>
               { Object.keys(couponSubtype).map((e) => (
                  <option value={couponSubtype[e]} key={e}>
                    {couponSubtype[e]}
