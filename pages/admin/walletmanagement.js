@@ -40,7 +40,7 @@ const MySwal = withReactContent(Swal);
 const walletManagment = withAdminAuth(() => {
   const [history, setHistory] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
-  const [itemsPerPage, setItemsPerPage] = useState(2);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentUser,setCurrentUser] = useState("")
   
 

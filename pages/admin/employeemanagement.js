@@ -25,7 +25,7 @@ const employeemanagement = withAdminAuth(() => {
   const [employeesList, setemployeesList] = useState([]);
   const [paginationData, setpaginationData] = useState([]);
   const [totalemployees, settotalemployees] = useState(0);
-  const ItemsPerPage = 3;
+  const ItemsPerPage = 10;
   const [totalPages, settotalPages] = useState(2);
   const [firstItemNum, setfirstItemNum] = useState(0);
   const [lastItemNum, setlastItemNum] = useState(3);
@@ -156,7 +156,7 @@ const employeemanagement = withAdminAuth(() => {
                     </Link>
                   </td>
                   <td className={`${styles.tableData}  `}>
-                    {e.verified ? "Enabled" : "Disabled"}
+                    {e.enabled ? "Enabled" : "Disabled"}
                   </td>
                 </tr>
               ))}

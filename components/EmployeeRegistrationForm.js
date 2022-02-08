@@ -135,6 +135,16 @@ function EmployeeRegistrationForm(props) {
                   required
                 />
               </div>
+              <label htmlFor="password"> Please enter Password</label>
+              <div className="input-group mb-3">
+                <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  id="password"
+                  required
+                />
+              </div>
 
               <button type="submit" className="btn btn-primary">
                 Submit

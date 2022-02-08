@@ -18,9 +18,8 @@ import {
 import {setSubadminPerm} from "../../../auth/utils";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Employee, employeeConverter ,EmployeePermissions} from "../../../dbObjects/Employee";
-import { data } from "autoprefixer";
 
-const storage = getStorage(firebase, "gs://astrochrchafirebase.appspot.com");
+const storage = getStorage(firebase);
 const db = getFirestore(firebase);
 const auth = getAuth(adminfirebase);
 
@@ -42,9 +41,9 @@ const register = withAdminAuth(() => {
       gender: e.target.gender.value,
       dob: Date(e.target.dob.value),
       address: e.target.address.value,
-      profilePic: "testing/profile_" + uid + ".png",
-      verificationId: "testing/aadhar_" + uid + ".png",
-      pancardLink: "testing/pancard_" + uid + ".png",
+      profilePic: "employee/"+uid+"/profile.png",
+      verificationId: "employee/"+uid+"/verificationId.png",
+      pancardLink: "employee/"+uid+"/pancard.png",
       pancardNumber: e.target.pancardNumber.value,
       phoneNumber: e.target.phoneNumber.value,
     };
@@ -75,7 +74,7 @@ const register = withAdminAuth(() => {
 
   async function registerformhandler(e) {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, e.target.email.value, "Windows8").then((user) => {
+    createUserWithEmailAndPassword(auth, e.target.email.value, e.target.password.value).then((user) => {
       createEmployee({uid:user.user.uid,e: e});
       signOut(auth);
     }).catch((error) => {
