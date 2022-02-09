@@ -54,7 +54,7 @@ const MobileNavigation = () => {
         <FiMenu
           className={styles.HamBurger}
           size="40px"
-          color="white"
+          color="black"
           onClick={() => setOpen(!open)}
         />
       </div>

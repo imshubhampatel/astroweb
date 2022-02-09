@@ -14,7 +14,7 @@ import {
   setDoc,
   getDoc,
 } from "firebase/firestore";
-import { firebase } from "../../config";
+import { firebase,auth } from "../../config";
 import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import {
@@ -32,7 +32,6 @@ import {
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../config";
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);

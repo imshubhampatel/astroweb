@@ -4,7 +4,7 @@ import Footer from './Footer'
 
 const Layout = ({children}) => {
         return (
-          <div className="vh-100 d-flex flex-column   ">
+          <div className="vh-100 d-flex flex-column" >
             <Navbar />
 
             <div className="flex-fill" >

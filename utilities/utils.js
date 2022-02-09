@@ -1,7 +1,7 @@
 import { firebase } from '../config'
-import { getStorage, ref, uploadBytes ,deleteObject, getDownloadURL } from "firebase/storage";
-
-const storage = getStorage(firebase, "gs://testastrochrcha.appspot.com");
+import { getStorage, ref, uploadBytes , getDownloadURL } from "firebase/storage";
+let id = process.env.NEXT_PUBLIC_STORAGE_BUCKET;
+const storage = getStorage(firebase,id);
 
 async function uploadDocToStorage({ path, file }) {
     const storageRef = ref(storage, path);

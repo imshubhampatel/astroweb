@@ -1,5 +1,5 @@
 .NavBar {
-  background: linear-gradient(0deg, #061528, #061528), #000000;;
+  background: #fff;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -30,7 +30,7 @@
 
 .NavBar nav ul li a {
   text-decoration: none;
-  color: #ffffff !important;
+  color: #000 !important;
 }
 
 .NavBar .MobileNavigation {
@@ -91,7 +91,7 @@
     top: 55px;
     right: 0;
     /* border: solid red; */
-    background: #061528;
+    background: #fff;
     height: 100vh;
     height: -webkit-fill-available;
     width: 60vw;

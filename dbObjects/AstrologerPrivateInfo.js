@@ -11,7 +11,7 @@ class AstrologerPrivateData {
     this.earnings = data.earnings ? data.earnings :0;
     this.pancardLink = data.pancardLink;
     this.razorpayId = data.razorpayId ? data.razorpayId : null;
-    this.accountInfo = data.accountInfo ? data.accountInfo : {accountNo : "",bank:"",branch:"",ISFC :"",holderName:""};
+    this.accountInfo = data.accountInfo ? data.accountInfo : {accountNo : "",bank:"",branch:"",IFSC :"",holderName:""};
 
 
   }

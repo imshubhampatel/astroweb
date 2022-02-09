@@ -21,7 +21,7 @@ import {
   AstrologerPrivateData,
 } from "../../dbObjects/AstrologerPrivateInfo";
 import { questionConverter, Question } from "../../dbObjects/Question";
-import { uploadDocToStorage } from "../../utilities/utils";
+import { uploadDocToStorage,getFile } from "../../utilities/utils";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -165,11 +165,14 @@ class Astrohome extends Component {
       phoneNumber: e.target.phoneNumber.value,
       experience: Number(e.target.experience.value),
       dailyHours: Number(e.target.dailyHours.value),
+      currentStatus : "Offline",
       expertise: expertiseData,
       languages: languageData,
       profilePic: "astrologer/" + this.state.user.uid + "/profilePic.png",
+      profilePicLink:'',
       tnc: e.target.tnc.checked,
-      workingwithother: e.target.work.value,
+      enabled : false,
+      workingwithother: e.target.work.value == "yes" ? true: false,
       status : {
         state : "unverified",
         remark : "None"
@@ -198,6 +201,7 @@ class Astrohome extends Component {
       file: certification,
     });
     uploadDocToStorage({ path: profileData.profilePic, file: profilePic });
+    profileData.profilePicLink = await getFile(profileData.profilePic);
     uploadDocToStorage({
       path: privateInfo.verificationIdFront,
       file: verificationIdFront,
@@ -206,6 +210,7 @@ class Astrohome extends Component {
       path: privateInfo.verificationIdBack,
       file: verificationIdBack,
     });
+    console.log(profileData,privateInfo)
     const ref = doc(db, "astrologer", String(profileData.id)).withConverter(
       astrologerConverter
     );

@@ -45,12 +45,12 @@ function Footer() {
 
           {/* Bottom text   */}
           <div className="text-center">
-            Copyright © 2021 Dreshkan.
+            Copyright © 2021 Astrochrcha.
             <p className="mt-2">
               All Rights Reserved. Use of this website signifies your agreement
               to the <Link href="/termsncondition">
               <a className="text-decoration-underline" >Terms {"&"} Conditions</a>
-            </Link> and Dreshkan{" "}   
+            </Link> and Dreshkan (a Astrochrcha Product){" "}   
               <Link href="/privacypolicy">
               <a className="text-decoration-underline" >Privacy Policy</a>
             </Link> .

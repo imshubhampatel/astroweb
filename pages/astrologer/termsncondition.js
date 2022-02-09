@@ -1,4 +1,4 @@
-import React from 'react'
+import React from  'react';
 
 function termsncondition() {
     return (
@@ -607,4 +607,4 @@ function termsncondition() {
     );
 }
 
-export default termsncondition
+export default termsncondition;

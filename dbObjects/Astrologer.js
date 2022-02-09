@@ -6,21 +6,23 @@ class Astrologer {
     this.secondName = data.secondName
     this.dob = data.dob
     this.address = data.address 
+    this.currentStatus = data.currentStatus 
     this.gender = data.gender
     this.experience = data.experience ? Number(data.experience) : 0;
     this.dailyHours = data.dailyHours ? Number(data.dailyHours):0;
     this.profilePic = data.profilePic
+    this.profilePicLink = data.profilePicLink
     this.about = data.about ? data.about : "Please add some line about you" 
     this.phoneNumber = data.phoneNumber 
 
-    this.workingwithother = data.workingwithother ? data.workingwithother : "No"
+    this.workingwithother = data.workingwithother ? data.workingwithother : false
     
     this.profileComplete = data.profileComplete ? data.profileComplete : false;
     // // Meeting Pricing
     this.pricingCategory = data.pricingCategory ? data.pricingCategory : "base";
-    this.priceChat = data.priceChat ?  data.priceChat : null
-    this.priceVideo = data.priceVideo ?data.priceVideo:null
-    this.priceVoice = data.priceVoice? data.priceVoice: null
+    this.priceChat = data.priceChat ?  parseInt(data.priceChat)  : null
+    this.priceVideo = data.priceVideo ?  parseInt(data.priceVideo):null
+    this.priceVoice = data.priceVoice?  parseInt(data.priceVoice): null
     
     // // Meeting History
     this.chatSeconds = data.chatSeconds ? data.chatSeconds :0
@@ -29,9 +31,6 @@ class Astrologer {
     
     // // Expertise 
     this.expertise = data.expertise ? data.expertise : {}
-    this.reviews = data.reviews ?{
-      ...data.reviews
-    } : {}
     
     this.languages = data.languages ? {
       ...data.languages
@@ -41,8 +40,10 @@ class Astrologer {
     // //Rating & Reviews
     this.rating = data.rating ? data.rating : 0
     this.ratingCount = data.ratingCount ? data.ratingCount : 0
+    this.enabled = data.enabled ? data.enabled : false
 
     // Enabled / Disabled 
+
     this.status = data.status ? data.status : { state : astrologerStatus.UNVERIFIED , remark : "None" }
 
   }
@@ -65,7 +66,9 @@ const astrologerConverter = {
       experience: data.experience,
       dailyHours : data.dailyHours,
       profilePic: data.profilePic,
+      profilePicLink: data.profilePicLink,
       about : data.about,
+      currentStatus : data.currentStatus,
       workingwithother : data.workingwithother,
       phoneNumber : data.phoneNumber,
       profileComplete: data.profileComplete ? data.profileComplete: false ,
@@ -85,14 +88,11 @@ const astrologerConverter = {
 
       //Rating & Reviews
       rating: data.rating,
+      enabled: data.enabled,
       ratingCount: data.ratingCount,
-
       // verification
       status: data.status,
-      
-
       // Reviews 
-      reviews: data.reviews,
       languages: data.languages,    
       tnc : data.tnc,
     };

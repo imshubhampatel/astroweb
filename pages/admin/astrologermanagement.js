@@ -199,9 +199,9 @@ const astrologermanagement = withAdminAuth(() => {
     let data = new pricingCategory({
       id: e.target.name.value,
       name: e.target.name.value,
-      priceChat: e.target.priceChat.value,
-      priceVideo: e.target.priceVideo.value,
-      priceVoice: e.target.priceVoice.value,
+      priceChat:  parseInt(e.target.priceChat.value),
+      priceVideo: parseInt(e.target.priceVideo.value),
+      priceVoice: parseInt(e.target.priceVoice.value),
       lastUpdateTimestamp : new Date(),
     });
     setPricingList([...pricingList.filter((x) => {
@@ -224,7 +224,7 @@ const astrologermanagement = withAdminAuth(() => {
             <div className="row">
               <h4>Add pricing Category</h4>
               <form onSubmit={editPricingCategoryHandler}>
-                <label for="name">Name {"  "} </label>
+                <label htmlFor="name">Name {"  "} </label>
                 <input
                   type="text"
                   name="name"
@@ -232,7 +232,7 @@ const astrologermanagement = withAdminAuth(() => {
                   placeholder="enter name of the new category"
                 ></input>{" "}
                 <br />
-                <label for="name">Price Chat</label>
+                <label htmlFor="name">Price Chat</label>
                 <input
                   type="number"
                   name="priceChat"
@@ -240,7 +240,7 @@ const astrologermanagement = withAdminAuth(() => {
                   placeholder="enter priceChat"
                 ></input>{" "}
                 <br />
-                <label for="name">Price Voice</label>
+                <label htmlFor="name">Price Voice</label>
                 <input
                   type="number"
                   name="priceVideo"
@@ -248,7 +248,7 @@ const astrologermanagement = withAdminAuth(() => {
                   placeholder="enter priceVideo"
                 ></input>
                 <br />
-                <label for="name">Price Video</label>
+                <label htmlFor="name">Price Video</label>
                 <input
                   type="number"
                   name="priceVoice"
@@ -267,7 +267,7 @@ const astrologermanagement = withAdminAuth(() => {
             <div className="row">
               <h4>Edit Existing Pricing Categories</h4>
               <form onSubmit={editPricingCategoryHandler}>
-                <label for="name">Name {"  "} </label>
+                <label htmlFor="name">Name {"  "} </label>
                 <select
                   name="name"
                   id="name"
@@ -278,12 +278,12 @@ const astrologermanagement = withAdminAuth(() => {
                   defaultValue={selectedPricingCategory}
                 >
                   {pricingList.map((e) => (
-                    <option value={e.name}> {e.name +  " chat :"+ e.priceChat+" voice : "+e.priceVoice  +" Video : " + e.priceVideo}</option>
+                    <option key={ e.name}value={e.name}> {e.name +  " chat :"+ e.priceChat+" voice : "+e.priceVoice  +" Video : " + e.priceVideo}</option>
                   ))}
                 </select>
                 <br />
                 <h5>Enter New Values</h5>
-                <label for="name">Price Chat</label>
+                <label htmlFor="name">Price Chat</label>
                 <input
                   type="number"
                   name="priceChat"
@@ -292,7 +292,7 @@ const astrologermanagement = withAdminAuth(() => {
                   value={selectedPricingCategory.priceChat}
                 ></input>{" "}
                 <br />
-                <label for="name">Price Voice</label>
+                <label htmlFor="name">Price Voice</label>
                 <input
                   type="number"
                   name="priceVideo"
@@ -300,7 +300,7 @@ const astrologermanagement = withAdminAuth(() => {
                   placeholder="enter priceVideo"
                 ></input>
                 <br />
-                <label for="name">Price Video</label>
+                <label htmlFor="name">Price Video</label>
                 <input
                   type="number"
                   name="priceVoice"
