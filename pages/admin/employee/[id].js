@@ -31,7 +31,6 @@ const db = getFirestore(firebase);
 
 const employee = withAdminAuth(() => {
 
-// const employee = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});

@@ -17,10 +17,12 @@ function Footer() {
             </div>
             </a></Link>
          
-
+            <Link href="https://www.facebook.com/Officialdreshkan"><a>
             <div style={{ fontSize: "21px" }}>
-              <BsFacebook />
-            </div>
+            <BsFacebook />
+          </div>
+            </a></Link>
+           
           <Link href="https://www.youtube.com/channel/UCiwoSk0-TK-hY2Ox98V2TsA"><a>
           <div style={{ fontSize: "22px" }}>
               <AiFillYoutube />

@@ -1,6 +1,7 @@
 import styles from "../../../styles/pages/admin/astrologer/[id].module.css";
 import RatingBox from "../../../components/ratingBox";
 import FireImage from "../../../components/FireImage";
+import EditAccountDetails from "../../../components/EditAccountDetails";
 import Link from "next/link";
 import { MdOutlineMessage } from "react-icons/md";
 import { FiPhoneCall, FiEdit } from "react-icons/fi";
@@ -313,7 +314,7 @@ const astrologer = withAdminAuth(() => {
                 // height: "800px",
                 width: "100%",
                 position: "relative",
-                display: "block"
+                display: "block",
               }}
             >
               <FireImage
@@ -323,26 +324,25 @@ const astrologer = withAdminAuth(() => {
                 width="500"
                 height="500"
               />
-            
             </div>
-            <br/>
+            <br />
             <div
               style={{
                 // border: "1px solid red",
                 // height: "800px",
                 width: "100%",
                 position: "relative",
-                display:"block"
+                display: "block",
               }}
             >
-            <FireImage
-              src={astrologerPrivateData.verificationIdBack}
-              // layout="responsive"
-              width="500"
-              height="500"
-            />
+              <FireImage
+                src={astrologerPrivateData.verificationIdBack}
+                // layout="responsive"
+                width="500"
+                height="500"
+              />
             </div>
-            
+
             <br />
             <Link href={pdf}>
               <a target="_blank">Certification</a>
@@ -369,12 +369,12 @@ const astrologer = withAdminAuth(() => {
                 <div className="col font-weight-bold"> IFSC Code </div>
                 <div className="col">
                   {" "}
-                  {astrologerPrivateData.accountInfo.ISFC}{" "}
+                  {astrologerPrivateData.accountInfo.IFSC}{" "}
                 </div>
               </div>
 
               <div className="row">
-                <div className="col font-weight-bold"> Branch </div>
+                <div className="col font-weight-bold"> Bank Branch </div>
                 <div className="col">
                   {" "}
                   {astrologerPrivateData.accountInfo.bank +
@@ -429,7 +429,7 @@ const astrologer = withAdminAuth(() => {
                     }}
                     defaultValue={astro.priceChat}
                   />
-                  / 5 min
+                  /  min
                 </div>
               </div>
 
@@ -451,7 +451,7 @@ const astrologer = withAdminAuth(() => {
                     }}
                     defaultValue={astro.priceVoice}
                   />
-                  / 5 min
+                  /  min
                 </div>
               </div>
 
@@ -473,7 +473,7 @@ const astrologer = withAdminAuth(() => {
                     }}
                     defaultValue={astro.priceVideo}
                   />
-                  / 5 min
+                  /min
                 </div>
               </div>
             </div>
@@ -640,6 +640,19 @@ const astrologer = withAdminAuth(() => {
     await updateDoc(astros, { ...astro_temp });
     MySwal.clickConfirm();
   }
+  async function editBankDetails(e) {
+    const astros = doc(db, "astrologer/" + pid + "/privateInfo/" + pid);
+    let astro_temp = astrologerPrivateData;
+    astro_temp.accountInfo.accountNo = e.accountNo;
+    astro_temp.accountInfo.bank = e.bank;
+    astro_temp.accountInfo.IFSC = e.IFSC;
+    astro_temp.accountInfo.branch = e.branch;
+    astro_temp.accountInfo.holderName = e.holderName;
+    console.log(astro_temp)
+    setAstrologerPrivateData({ ...astro_temp });
+    await updateDoc(astros, { ...astro_temp });
+    MySwal.clickConfirm();
+  }
 
   const editRazorpayId = () => {
     MySwal.fire({
@@ -664,6 +677,10 @@ const astrologer = withAdminAuth(() => {
               </button>
             </div>
           </form>
+
+          <div className="my-3">
+            <EditAccountDetails handleSubmit={editBankDetails} />
+          </div>
         </div>
       ),
     });
@@ -690,7 +707,7 @@ const astrologer = withAdminAuth(() => {
         <div className={`${styles.mainInfoContainer}`}>
           <div className={`${styles.astroPhoto}`} style={{ display: "block" }}>
             <Image
-              src={profilePicUrl}
+              src={astro?.profilePicLink ?astro.profilePicLink : profilePicUrl}
               height="100"
               width="100"
               layout="responsive"
@@ -822,19 +839,19 @@ const astrologer = withAdminAuth(() => {
         {/* Pricing Container  */}
         <div className={`row  justify-content-center my-3`}>
           <div className="col-2  ">
-            <h5> Price/ 5 minute </h5>
+            <h5> Price/  minute </h5>
           </div>
 
           <div className="col-2  border-end text-center">
-            <MdOutlineMessage /> ₹{astro.priceChat} /5 mins
+            <MdOutlineMessage /> ₹{astro.priceChat} / mins
           </div>
 
           <div className="col-2  text-center">
-            <FiPhoneCall /> ₹{astro.priceVoice} /5 mins
+            <FiPhoneCall /> ₹{astro.priceVoice} / mins
           </div>
 
           <div className="col-2 border-start text-center">
-            <BiVideoPlus /> ₹{astro.priceVideo} /5 mins
+            <BiVideoPlus /> ₹{astro.priceVideo} / mins
           </div>
 
           <div

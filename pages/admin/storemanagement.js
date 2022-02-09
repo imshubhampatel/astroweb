@@ -86,13 +86,13 @@ const storemanagement = withAdminAuth(() => {
 
   async function addCouponHandler(e) {
     e.preventDefault();
-    let uid = uuidv4();
     let coupon = {
-      id: uid,
+      id: e.target.code.value,
       code: e.target.code.value,
-      createdAt: new Date().toDateString(),
-      maxDiscount: e.target.maxDiscount.value,
-      minPurchase: e.target.minPurchase.value,
+      createdAt: new Date(),
+      maxDiscount: parseInt(e.target.maxDiscount.value),
+      maxTotalDiscount: parseInt(e.target.maxTotalDiscount.value),
+      minPurchase: parseInt(e.target.minPurchase.value),
       // time: e.target.time.value,
       endDate: new Date(Date.parse(e.target.endDate.value)),
       startDate: new Date(Date.parse(e.target.startDate.value)),
@@ -100,13 +100,18 @@ const storemanagement = withAdminAuth(() => {
       title: e.target.title.value,
       totalUses: 0,
       discountType: e.target.discountType.value,
-      discount: e.target.discount.value,
-      limit: e.target.limit.value,
-      subType: e.target.subType.value,
+      discount: (e.target.discount.value),
+      limit: parseInt(e.target.limit.value),
+      subtype: e.target.subtype.value,
       updatedAt : new Date(),
       categoryType : "all"
     };
-    const ref = doc(db, "coupon", uid).withConverter(couponConverter);
+
+    if(coupon.discountType==discountType.PERCENTAGE && coupon.discount>100) {
+      alert("Invalid Discount");
+      return;
+    }
+    const ref = doc(db, "coupon", coupon.id).withConverter(couponConverter);
     await setDoc(ref, new Coupon(coupon));
     Swal.clickConfirm();
   }
@@ -306,9 +311,9 @@ const storemanagement = withAdminAuth(() => {
                id="discount"
                type="number"
              />
-             <label htmlFor="subType">subType</label>
+             <label htmlFor="subtype">subtype</label>
 
-              <select className="form-control" id="subType" required>
+              <select className="form-control" id="subtype" required>
               { Object.keys(couponSubtype).map((e) => (
                  <option value={couponSubtype[e]} key={e}>
                    {couponSubtype[e]}
@@ -325,6 +330,16 @@ const storemanagement = withAdminAuth(() => {
                id="maxDiscount"
                required
              />
+                <label htmlFor="maxTotalDiscount">maxTotalDiscount</label>
+
+              <input
+                className="form-control"
+                placeholder="please enter maxTotalDiscount"
+                name="maxTotalDiscount"
+                type="number"
+                id="maxTotalDiscount"
+                required
+              />
              <label htmlFor="minPurchase">minPurchase</label>
 
              <input

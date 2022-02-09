@@ -25,7 +25,7 @@ class Employee {
     this.pancardLink = data.pancardLink;
 
     // Enabled / Disabled
-      this.verified = data.verified ? data.verified : false;
+      this.enabled = data.enabled ? data.enabled : false;
       
       // Permissions
   }
@@ -48,7 +48,7 @@ const employeeConverter = {
       profilePic: data.profilePic,
 
       // verification
-      verified: data.verified,
+      enabled: data.enabled,
       permissions : data.permissions,
 
       pancardLink: data.pancardLink,

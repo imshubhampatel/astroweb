@@ -7,8 +7,7 @@ const FireImageLoader = ({ src, layout, width, height, alt, objectFit="contain" 
   const [imgUrl, setImageUrl] = useState("/images/loading.svg");
 
   useEffect(() => {
-    getFile(src).then((url) => setImageUrl(url))
-    .catch((error) => {});      
+    getFile(src).then((url) => setImageUrl(url)).catch((error) => {});      
   }, [src]);
 
   if (layout === "fill") {

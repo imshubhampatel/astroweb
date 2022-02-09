@@ -11,13 +11,13 @@ async function uploadDocToStorage({ path, file }) {
 
 async function getFile(path) {
   const storageRef = ref(storage, path);
-  let url = "";
+  let url = "/images/loading.svg";
   try {
    url = await getDownloadURL(storageRef);
   }
   catch {
+    url = "/images/loading.svg";
   }
-
   return url;
   };
 

@@ -21,6 +21,7 @@ import {
   walletWithdrawalConverter,
   WalletWithdrawal,
   WalletWithdrawalStatus,
+  WalletWithdrawalType
 } from "../../dbObjects/WalletWithdrawal";
 import PendingRequestWallet from "../../components/adminPanel/pendingRequestsWallet";
 import WalletHistory from "../../components/adminPanel/walletHistory";
@@ -39,7 +40,7 @@ const MySwal = withReactContent(Swal);
 const walletManagment = withAdminAuth(() => {
   const [history, setHistory] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
-  const [itemsPerPage, setItemsPerPage] = useState(2);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentUser,setCurrentUser] = useState("")
   
 
@@ -163,11 +164,11 @@ const walletManagment = withAdminAuth(() => {
 
                 <div className="row">
                   <div className="col font-weight-bold"> IFSC Code </div>
-                  <div className="col"> {data.accountInfo.ISFC} </div>
+                  <div className="col"> {data.accountInfo.IFSC} </div>
                 </div>
 
                 <div className="row">
-                  <div className="col font-weight-bold"> Branch </div>
+                  <div className="col font-weight-bold"> Bank Branch </div>
                   <div className="col">
                     {" "}
                     {data.accountInfo.bank + " " + data.accountInfo.branch}{" "}
@@ -205,17 +206,20 @@ const walletManagment = withAdminAuth(() => {
   async function approvePendingRequest(data,e) {
     e.preventDefault();
     let private_data = await getPrivateData(data.astrologer);
+    if(e.target.type.checked)
+    {
     if (private_data.razorpayId == null || private_data.razorpayId == "") {
       alert(
         "please Update Razorpay Id of this astrologer , cannot proceed this request"
       );
       return;
     }
+  }
     data.approvedBy = currentUser ;
     data.status = WalletWithdrawalStatus.APPROVED;
     data.approvedAmount = parseInt(e.target.approvedAmount.value);
     data.transactionId = e.target.transactionId.value;
-    data.type = e.target.type.checked ? "automated" : "manual"
+    data.type = e.target.type.checked ? WalletWithdrawalType.automated : WalletWithdrawalType.manual;
 
     const ref = doc(db, "wallet_withdrawal", data.id).withConverter(
       walletWithdrawalConverter

@@ -3,7 +3,7 @@ import React from 'react'
 function privacypolicy() {
     return (
         <div className="container">
-            <h1>Privacy Policy for Astrochrcha Pvt ltd.</h1>
+            <h1>Privacy Policy for Dreshkan ( By Astrochrcha) .</h1>
 
         <p>At dreshkan, accessible from dreshkan.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by dreshkan and how we use it.</p>
 
@@ -42,8 +42,6 @@ function privacypolicy() {
         <h2>Cookies and Web Beacons</h2>
 
         <p>Like any other website, dreshkan uses &apos;cookies&apos;. These cookies are used to store information including visitors&apos; preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users&apos; experience by customizing our web page content based on visitors&apos; browser type and/or other information.</p>
-
-        <p>For more general information on cookies, please read <a href="https://www.cookieconsent.com/">more on the Cookie Consent website</a>.</p>
 
 
 

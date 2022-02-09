@@ -29,14 +29,14 @@ const db = getFirestore(firebase);
 const userManagement = withAdminAuth(() => {
   const [usersList, setusersList] = useState([]);
   const [totalusers, settotalusers] = useState(0);
-  const ItemsPerPage = 2;
+  const ItemsPerPage = 10;
   const [totalPages, settotalPages] = useState(2);
   const [search, setsearch] = useState("");
 
   useEffect(() => {
     getAppDetails();
     if (search == "") {
-      initializePaginationData(90);
+      initializePaginationData(totalusers);
       getAllusers(0, ItemsPerPage);
     }
   }, [search]);
@@ -57,7 +57,7 @@ const userManagement = withAdminAuth(() => {
     settotalPages(dataSize / ItemsPerPage);
   }
   async function refresh() {
-    initializePaginationData(90);
+    initializePaginationData(totalusers);
     getAllusers(0, ItemsPerPage);
   }
 
@@ -98,7 +98,6 @@ const userManagement = withAdminAuth(() => {
         query(astros, where("phoneNumber", "==", String(search)))
       );
       querySnapshot.docs.map((doc) => data.add(doc.data()));
-      console.log(data);
       setusersList(Array.from(data));
     }
   }

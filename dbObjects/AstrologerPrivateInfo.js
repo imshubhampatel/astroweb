@@ -2,21 +2,27 @@ class AstrologerPrivateData {
   constructor(data) {
     this.id = data.id;
     this.phoneNumber = data.phoneNumber;
-    this.alternativePhoneNumber = data.alternativePhoneNumber?data.alternativePhoneNumber:"";
-    this.verificationIdFront = data.verificationIdFront ? data.verificationIdFront  :"";
-    this.verificationIdBack = data.verificationIdBack ? data.verificationIdBack: "";
-    this.certificationUrl = data.certificationUrl ? data.certificationUrl:""; 
+    this.alternativePhoneNumber = data.alternativePhoneNumber
+      ? data.alternativePhoneNumber
+      : "";
+    this.verificationIdFront = data.verificationIdFront
+      ? data.verificationIdFront
+      : "";
+    this.verificationIdBack = data.verificationIdBack
+      ? data.verificationIdBack
+      : "";
+    this.certificationUrl = data.certificationUrl ? data.certificationUrl : "";
     this.pancardNumber = data.pancardNumber;
-    this.walletBalance = data.walletBalance ?  data.walletBalance:0;
-    this.earnings = data.earnings ? data.earnings :0;
+    this.walletBalance = data.walletBalance ? data.walletBalance : 0;
+    this.earnings = data.earnings ? data.earnings : 0;
     this.pancardLink = data.pancardLink;
     this.razorpayId = data.razorpayId ? data.razorpayId : null;
-    this.accountInfo = data.accountInfo ? data.accountInfo : {accountNo : "",bank:"",branch:"",IFSC :"",holderName:""};
-
-
+    this.accountInfo = data.accountInfo
+      ? data.accountInfo
+      : { accountNo: "", bank: "", branch: "", IFSC: "", holderName: "" };
   }
   toString() {
-      return this.pancardNumber;
+    return this.pancardNumber;
   }
 }
 
