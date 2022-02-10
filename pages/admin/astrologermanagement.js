@@ -240,7 +240,7 @@ const astrologermanagement = withAdminAuth(() => {
                   placeholder="enter priceChat"
                 ></input>{" "}
                 <br />
-                <label htmlFor="name">Price Voice</label>
+                <label htmlFor="name">Price Video</label>
                 <input
                   type="number"
                   name="priceVideo"
@@ -248,7 +248,7 @@ const astrologermanagement = withAdminAuth(() => {
                   placeholder="enter priceVideo"
                 ></input>
                 <br />
-                <label htmlFor="name">Price Video</label>
+                <label htmlFor="name">Price Voice</label>
                 <input
                   type="number"
                   name="priceVoice"

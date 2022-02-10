@@ -730,7 +730,7 @@ const astrologer = withAdminAuth(() => {
 
               <div className={`ms-2`}>{astro.phoneNumber}</div>
             </div>
-            <i> Razorpay Id : {astrologerPrivateData?.razorpayId}</i>
+            <i> Paytm Id : {astrologerPrivateData?.razorpayId}</i>
             <br />
 
             <i>
@@ -804,7 +804,7 @@ const astrologer = withAdminAuth(() => {
               className={`ms-auto  ${styles.textButton}`}
               onClick={() => editRazorpayId()}
             >
-              Razorpay
+              Edit Account Details or Paytm Id
             </div>
             <div
               className={`ms-auto  ${styles.textButton}`}
