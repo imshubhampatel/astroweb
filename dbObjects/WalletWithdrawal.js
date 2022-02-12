@@ -7,7 +7,7 @@ class WalletWithdrawal {
     this.time = data.time;
     this.approvedBy = data.approvedBy ? data.approvedBy : "";
     this.remark = data.remark;
-     this.approvedAmount= data.approvedAmount;
+     this.approvedAmount= data.approvedAmount ?  data.approvedAmount : 0;
       this.type = data.type;
       this.transactionId = data.transactionId;
    

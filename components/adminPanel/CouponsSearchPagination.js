@@ -69,7 +69,7 @@ const CouponsSearchPagination = (props) => {
                 <th scope="col"> Start Date</th>
                 <th scope="col"> Discount Type</th>
                 <th scope="col"> Total Uses</th>
-                <th scope="col"> Status </th>
+                <th scope="col"> Is active ? </th>
                 <th scope="col"> Edit Coupon Details</th>
               </tr>
             </thead>
@@ -81,7 +81,7 @@ const CouponsSearchPagination = (props) => {
                   <td>{e?.startDate?.toDate()?.toDateString()}</td>
                   <td>{e.discountType}</td>
                   <td>{e.totalUses}</td>
-                  <td>{e.status}</td>
+                  <td>{e.live ? "YES" :"No"}</td>
                   <td>
                     {" "}
                    <button className="btn btn-primary" onClick={()=>props.editCouponView(e.id)}>Edit</button>

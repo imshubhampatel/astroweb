@@ -96,6 +96,7 @@ const walletManagment = withAdminAuth(() => {
                name="approvedAmount"
                id="approvedAmount"
                type="number"
+               defaultValue={0}
                max={data.amount}
                required
              />

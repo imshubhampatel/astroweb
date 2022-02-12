@@ -14,10 +14,6 @@ import {
   doc,
   getFirestore,
   query,
-  orderBy,
-  limit,
-  endAt,
-  startAt,
 } from "firebase/firestore";
 import { firebase } from "../../config";
 import Link from "next/link";
@@ -104,7 +100,8 @@ const storemanagement = withAdminAuth(() => {
       limit: parseInt(e.target.limit.value),
       subtype: e.target.subtype.value,
       updatedAt : new Date(),
-      categoryType : "all"
+      categoryType : "all",
+      live : true
     };
 
     if(coupon.discountType==discountType.PERCENTAGE && coupon.discount>100) {
