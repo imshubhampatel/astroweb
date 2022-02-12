@@ -81,12 +81,13 @@ const walletManagment = withAdminAuth(() => {
        html: (
          <div>
            <form onSubmit={(e) => approvePendingRequest(data, e)}>
-             <label htmlFor="type">Automate it ? </label>
+             {/* <label htmlFor="type">Automate it ? </label>
              <input
                type="checkbox"
                name="type"
                id="type"
-             />
+               readOnly
+             /> */}
              <br />
              <label htmlFor="type">Approved Amount </label>
              <input
@@ -219,7 +220,8 @@ const walletManagment = withAdminAuth(() => {
     data.status = WalletWithdrawalStatus.APPROVED;
     data.approvedAmount = parseInt(e.target.approvedAmount.value);
     data.transactionId = e.target.transactionId.value;
-    data.type = e.target.type.checked ? WalletWithdrawalType.automated : WalletWithdrawalType.manual;
+    // data.type = e.target.type.checked ? WalletWithdrawalType.automated : WalletWithdrawalType.manual;
+    data.type = WalletWithdrawalType.manual;
 
     const ref = doc(db, "wallet_withdrawal", data.id).withConverter(
       walletWithdrawalConverter
