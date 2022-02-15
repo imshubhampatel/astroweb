@@ -84,7 +84,7 @@ const CouponsSearchPagination = (props) => {
                   <td>{e.live ? "YES" :"No"}</td>
                   <td>
                     {" "}
-                   <button className="btn btn-primary" onClick={()=>props.editCouponView(e.id)}>Edit</button>
+                   <button className="btn btn-primary" onClick={()=>props.editCouponView(e.code)}>Edit</button>
                   </td>
                 </tr>
               ))}

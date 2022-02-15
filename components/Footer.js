@@ -43,6 +43,9 @@ function Footer() {
             <Link href="/termsncondition">
               <a>Terms and Conditions</a>
             </Link>
+            <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+              <a> Link to the App </a>
+            </Link>
           </div>
 
           {/* Bottom text   */}
