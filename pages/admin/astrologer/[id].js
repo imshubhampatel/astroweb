@@ -130,6 +130,14 @@ const astrologer = withAdminAuth(() => {
       response = await removeAstrologerPerm(uid);
     }
     // console.log(response);
+    const ref = doc(db, "astrologer", String(pid)).withConverter(
+      astrologerConverter
+    );
+    let astro_temp = astro;
+    astro_temp.enabled = !enabled;
+    setastro({ ...astro_temp });
+    await updateDoc(ref, { enabled:!enabled });
+    
     setenabled(!enabled);
   }
   async function updateAstrologer(uid) {

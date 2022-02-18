@@ -7,6 +7,7 @@ import {
   query,
   where,
   getDocs,
+  orderBy,
   doc,
   getDoc,
   getFirestore,
@@ -31,6 +32,7 @@ const astrologermanagement = withAdminAuth(() => {
   const [astrologersList, setastrologersList] = useState([]);
   const [paginationData, setpaginationData] = useState([]);
   const [totalAstrologers, settotalAstrologers] = useState(0);
+  const [totalCount, settotalCount] = useState(0);
   const ItemsPerPage = 10;
   const [totalPages, settotalPages] = useState(2);
   const [firstItemNum, setfirstItemNum] = useState(0);
@@ -51,7 +53,7 @@ const astrologermanagement = withAdminAuth(() => {
      // .withConverter(UserConverter)
    );
    if (querySnapshot.exists()) {
-     settotalAstrologers(querySnapshot.data().astrologerCount);
+    settotalCount(querySnapshot.data().astrologerCount);
    } else {
      // console.log("no")
    }
@@ -75,7 +77,7 @@ const astrologermanagement = withAdminAuth(() => {
   }
 
   async function getAllAstrologers() {
-    const astros = query(collection(db, "astrologer"));
+    const astros = query(collection(db, "astrologer"),orderBy("firstName"));
     const querySnapshot = await getDocs(astros);
     let data = querySnapshot.docs.map((doc) =>
     { return new Astrologer({id:doc.id, ...doc.data()})});
@@ -345,7 +347,7 @@ const astrologermanagement = withAdminAuth(() => {
             Astrologer Management System
           </h2>
           <div className="container">
-            <b>Total astrologer :</b> {totalAstrologers}
+            <b>Total astrologer :</b> {totalCount}
           </div>
 
           <div className={`${styles.topSearchContainer}`}>
