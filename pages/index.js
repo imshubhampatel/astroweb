@@ -72,13 +72,15 @@ export default function Home() {
                 accompany you...
               </p>
 
-              {/* <div className={styles.badge_container}>
-    <Image src={GooglePlayBadge} />
-        </div> */}
+              <div className={styles.badge_container}>
+                <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
+                <Image src={GooglePlayBadge} />
+                </a></Link> 
+        </div>
 
-              <div className="my-3 ">
+              {/* <div className="my-3 ">
                 <LaunchSoonSubscribe markInterested={markInterested}/>
-              </div>
+              </div> */}
 
             </div>
           </div>
@@ -92,6 +94,7 @@ export default function Home() {
 
           {/* Cards */}
           <div className={styles.cards_container}>
+          <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
             <div className={`${styles.card} ${styles.chat_card}`}>
               {/* Icon  */}
               <div className={styles.icon}>
@@ -106,6 +109,9 @@ export default function Home() {
                 Chat with re-knowned astrologers at minimial fees.
               </div>
             </div>
+          </a>
+          </Link>
+          <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
 
             <div className={`${styles.card} ${styles.call_card}`}>
               {/* Icon  */}
@@ -121,6 +127,9 @@ export default function Home() {
                 Connect with astrologers on video and voice call{" "}
               </div>
             </div>
+            </a>
+          </Link>
+          <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
 
             <div className={`${styles.card} ${styles.read_card}`}>
               {/* Icon  */}
@@ -136,6 +145,9 @@ export default function Home() {
                 Stay updated to what{"'"}s happening in astrology world.
               </div>
             </div>
+            </a>
+          </Link>
+          <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
 
             <div className={`${styles.card} ${styles.shop_card}`}>
               {/* Icon  */}
@@ -151,6 +163,9 @@ export default function Home() {
                 Buy any astrological item and book poojas using shop.
               </div>
             </div>
+            </a>
+          </Link>
+          <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
 
             <div className={`${styles.card} ${styles.report_card}`}>
               {/* Icon  */}
@@ -166,6 +181,9 @@ export default function Home() {
                 Detailed Reports on basis of your Kundali.
               </div>
             </div>
+            </a>
+          </Link>
+          <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
 
             <div className={`${styles.card} ${styles.live_card}`}>
               {/* Icon  */}
@@ -181,6 +199,9 @@ export default function Home() {
                 Connect on Live Broadcast and ask your concerns.
               </div>
             </div>
+            </a>
+          </Link>
+          <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
 
             <div className={`${styles.card} ${styles.daily_card}`}>
               {/* Icon  */}
@@ -196,6 +217,8 @@ export default function Home() {
                 Read about how will your day go based on your zodiac sign.{" "}
               </div>
             </div>
+          </a>
+          </Link>
           </div>
         </div>
 
@@ -273,11 +296,12 @@ export default function Home() {
 
               {/* Paragraph  */}
               <div className={styles.para}>
-                This app will soon be available on Play store.
-              </div>
-
-              <div className={styles.badge_container}>
+                App is now available on playstore. Download Now !
+                <div className={styles.badge_container}>
+                <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
                 <Image src={GooglePlayBadge} />
+                </a></Link> 
+                </div>
               </div>
             </div>
           </div>
