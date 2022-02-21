@@ -26,7 +26,7 @@ import TransactionCard from "../../../components/adminPanel/transactionCard";
 import OrderCard from "../../../components/adminPanel/OrderCard";
 import { EmployeePermissions } from "../../../dbObjects/Employee";
 import FireImage from "../../../components/FireImage";
-
+import Image from 'next/image'
 import { isUser, setUserPerm, removeUserPerm } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
 import { UserConverter, User } from "../../../dbObjects/User";
@@ -161,7 +161,7 @@ const user = withAdminAuth(() => {
             {astro.profilePhotoLink ? (
               <>
                 <Image
-                  src={astro.profilePhoto}
+                  src={astro.profilePhotoLink}
                   layout="responsive"
                   width="400"
                   height="400"

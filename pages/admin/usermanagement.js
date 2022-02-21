@@ -32,6 +32,7 @@ const userManagement = withAdminAuth(() => {
   const ItemsPerPage = 10;
   const [totalPages, settotalPages] = useState(2);
   const [search, setsearch] = useState("");
+  const [firstNum, setFirstNum] = useState(0);
 
   useEffect(() => {
     getAppDetails();
@@ -74,14 +75,13 @@ const userManagement = withAdminAuth(() => {
     );
     let data = querySnapshot.docs.map((doc) => {
       return {id : doc.id, ...doc.data()}});
-    console.log(data.length)
-
     setusersList(data);
   }
 
   function handlePageChange({ selected }) {
     let last = (selected + 1) * ItemsPerPage;
     let first = last - ItemsPerPage;
+    setFirstNum(first);
     getAllusers(first, ItemsPerPage);
   }
 
@@ -127,9 +127,9 @@ const userManagement = withAdminAuth(() => {
             <tbody>
               {usersList.map((e, idx) => (
                 <tr key={e.phoneNumber + idx}>
-                  <td className={`${styles.tableData}  `}> {idx + 1} </td>
+                  <td className={`${styles.tableData}  `}> {idx + firstNum + 1} </td>
                   <td className={`${styles.tableData}  `}>
-                    {e.firstName + " " + e.lastName}
+                    {e.firstName + " " + e.lastName }
                   </td>
                   <td className={`${styles.tableData}  `}>{e.phoneNumber}</td>
                   <td className={`${styles.tableData}  `}>{e.email}</td>
