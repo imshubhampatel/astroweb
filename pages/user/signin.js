@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import styles from "../../styles/components/RegistrationForm2.module.css";
 
-function signIn() {
+function SignIn() {
     useEffect(() => {
         onAuthStateChanged(auth_2, (Authuser) => {
           if (Authuser) router.replace("/user");
@@ -56,4 +56,4 @@ function signIn() {
         </div>)
 }
 
-export default signIn;
+export default SignIn;

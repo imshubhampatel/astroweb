@@ -10,7 +10,7 @@ import { adminfirebase,auth_2  } from '../../AdminConfig'
 
 const db = getFirestore(adminfirebase);
 
-function index() {
+function Index() {
   const [isRegistered,setIsRegistered] = useState(null);
   const [isAstrologer,setIsAstrologer] = useState(false);
   const [userProfile, setUserProfile] = useState({});
@@ -70,4 +70,4 @@ function index() {
   return <UserRegistrationForm userProfile={userProfile} isRegistered={isRegistered} isAstrologer={isAstrologer} registerFormHandler={registerformhandler}></UserRegistrationForm>
 }
 
-export default withAuth(index,"user");
+export default withAuth(Index,"user");
