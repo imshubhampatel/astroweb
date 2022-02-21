@@ -33,7 +33,7 @@ const broadcastConverter = {
   },
 };
 const broadcastStatus = {
-  CREATED: "created",
+  SCHEDULED: "scheduled",
   ONGOING: "ongoing",
   CANCELLED: "cancelled",
   COMPLETED: "completed",
