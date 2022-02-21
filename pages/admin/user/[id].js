@@ -233,7 +233,9 @@ const user = withAdminAuth(() => {
           </button>
         </div>
 
-        <div className="d-flex my-3 gap-1">{getDataForAstroLists()}</div>
+        <div className="d-flex flex-column my-3 gap-1">
+          {getDataForAstroLists()}
+        </div>
       </div>
     </div>
   );
