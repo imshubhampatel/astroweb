@@ -241,14 +241,7 @@ const astrologermanagement = withAdminAuth(() => {
                   id="priceChat"
                   placeholder="enter priceChat"
                 ></input>{" "}
-                <br />
-                <label htmlFor="name">Price Video</label>
-                <input
-                  type="number"
-                  name="priceVideo"
-                  id="priceVideo"
-                  placeholder="enter priceVideo"
-                ></input>
+              
                 <br />
                 <label htmlFor="name">Price Voice</label>
                 <input
@@ -256,6 +249,14 @@ const astrologermanagement = withAdminAuth(() => {
                   name="priceVoice"
                   id="priceVoice"
                   placeholder="enter priceVoice"
+                ></input>
+                  <br />
+                <label htmlFor="name">Price Video</label>
+                <input
+                  type="number"
+                  name="priceVideo"
+                  id="priceVideo"
+                  placeholder="enter priceVideo"
                 ></input>
                 <div className="text-end mt-4">
                   <button className={"btn btn-success"} type="submit">

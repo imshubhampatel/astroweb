@@ -18,13 +18,15 @@ const logoutUser = () => {
 
 const Navigation = () => {
   const [user, setUser] = useState(null);
-  const [isCurrentUser, setIsCurrentUser] = useState(true);
+  const [isCurrentUser, setIsCurrentUser] = useState(false);
   const [isCurrentAstrologer, setIsCurrentAstrologer] = useState(false);
  
   useEffect(() => {
     onAuthStateChanged(adminAuth, Authuser => {
       if(Authuser) {
          setUser(Authuser);
+         setIsCurrentUser(true);
+         setIsCurrentAstrologer(false);
       }
       else {
         onAuthStateChanged(auth, User => {
