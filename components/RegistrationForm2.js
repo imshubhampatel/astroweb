@@ -265,7 +265,7 @@ function RegistrationForm(props) {
                     type="email"
                     className="form-control"
                     id="email"
-                    nam="email"
+                    name="email"
                     onChange={(e)=>setLocalState({...localState,email:e.target.value})}
                   />
                 </div>

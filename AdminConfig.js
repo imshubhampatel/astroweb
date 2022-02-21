@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword , GoogleAuthProvider} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -13,5 +13,9 @@ const firebaseConfig = {
 };
 
 const adminfirebase = initializeApp(firebaseConfig,"secondary");
+const db = getFirestore(adminfirebase);
+const auth_2 = getAuth(adminfirebase);
+var provider = new GoogleAuthProvider(); 
 
-export { adminfirebase };
+export { adminfirebase,db,auth_2 as auth_2 , provider };
+

@@ -1,4 +1,5 @@
 import { auth, firebase } from "../config";
+import { adminfirebase } from "../AdminConfig";
 import {
   getFirestore,
   collection,
@@ -10,6 +11,7 @@ import {
   doc,
 } from "firebase/firestore";
 const db = getFirestore(firebase)
+const userDb = getFirestore(adminfirebase)
 
 async function isAdmin(uid) {
   const docRef = doc(db, "security_groups/admin/admin/", uid);
@@ -57,6 +59,28 @@ async function isUser(uid) {
     return false;
   }
 }
+async function getCurrentAstrologer(uid) {
+  const docRef = doc(db, "astrologer/", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+async function getCurrentUser(uid) {
+  const docRef = doc(userDb, "user/", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    return null;
+  }
+}
+
 
 async function setAstrologerPerm(uid) {
     const docRef = doc(db, "security_groups/astrologer/astrologer/", uid);
@@ -112,5 +136,7 @@ export {
   isUser,
   setUserPerm,
   removeUserPerm,
-  getEmp
+  getEmp,
+  getCurrentUser as isCurrentUser,
+  getCurrentAstrologer
 };

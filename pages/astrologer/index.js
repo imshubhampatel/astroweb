@@ -99,6 +99,11 @@ class Astrohome extends Component {
       if (!authUser) {
         router.replace("/signin");
       } else {
+        if(authUser.phoneNumber == null)
+        {
+          alert("Invalid User")
+          router.replace("/user");
+        }
         this.getRegisterInfo(authUser);
         this.setState({ user: authUser });
         this.getAstrologerInfo(authUser.uid);
@@ -210,7 +215,6 @@ class Astrohome extends Component {
       path: privateInfo.verificationIdBack,
       file: verificationIdBack,
     });
-    console.log(profileData,privateInfo)
     const ref = doc(db, "astrologer", String(profileData.id)).withConverter(
       astrologerConverter
     );
@@ -337,4 +341,4 @@ class Astrohome extends Component {
   }
 }
 
-export default withAuth(Astrohome);
+export default withAuth(Astrohome,"astrologer");

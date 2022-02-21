@@ -11,20 +11,8 @@ import Navigation from "./NavBar/Navigation";
 
 import styles from "../styles/components/Navbar.module.css"
 
-const auth = getAuth(firebase)
-const logout = () => {
-  signOut(auth).then(console.log("logiout"));
-};
+
 function Navbar() {
-
-  const [user, setUser] = useState();
-  useEffect(() => {
-    onAuthStateChanged(auth, Authuser => {
-     setUser(Authuser);
-    },[user])
-    
-  },[user])
-
     return (
       <div className={styles.NavBar} >
   

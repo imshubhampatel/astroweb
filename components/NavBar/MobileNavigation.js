@@ -3,14 +3,18 @@ import styles from "../../styles/components/Navbar.module.css";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { firebase } from "../../config";
 import { useEffect, useRef, useState } from "react";
-
+import { adminfirebase } from "../../AdminConfig";
 import { FiMenu } from "react-icons/fi";
+const auth = getAuth(firebase);
+const adminAuth = getAuth(adminfirebase);
 
 const logout = () => {
   signOut(auth).then(console.log("logout"));
+}
+const logoutUser = () => {
+  signOut(adminAuth).then(console.log("logout")).catch();
 };
 
-const auth = getAuth(firebase);
 
 const MobileNavigation = () => {
   const [open, setOpen] = useState(false);
