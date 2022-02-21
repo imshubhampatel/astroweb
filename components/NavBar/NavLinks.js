@@ -18,7 +18,7 @@ const NavLinks = (props) => {
           <a>Home</a>
         </Link>
       </motion.li>
-      {props.isCurrentUser ? (
+      {props.isCurrentUser == true ? (
       <motion.li
         initial={animateFrom}
         animate={animateTo}

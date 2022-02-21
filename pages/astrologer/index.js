@@ -101,7 +101,7 @@ class Astrohome extends Component {
       } else {
         if(authUser.phoneNumber == null)
         {
-          alert("Invalid User")
+          alert("Invalid Astrologer")
           router.replace("/user");
         }
         this.getRegisterInfo(authUser);
@@ -332,7 +332,7 @@ class Astrohome extends Component {
         </>
       }
       else if (this.state.astrologerProfileInfo ) {
-        return <RegistrationForm completed="true" />;
+        return <RegistrationForm completed="true" astrologerProfileInfo={this.state.astrologerProfileInfo} />;
       }
       else return <div>Loading</div>;
     }

@@ -10,26 +10,32 @@ const adminAuth = getAuth(adminfirebase);
 
 const logout = () => {
   signOut(auth).then(console.log("logout"));
-}
+};
 const logoutUser = () => {
   signOut(adminAuth).then(console.log("logout")).catch();
 };
-
 
 const MobileNavigation = () => {
   const [open, setOpen] = useState(false);
 
   const closeMenu = () => setOpen(false);
   const [user, setUser] = useState(null);
+  const [isCurrentUser, setIsCurrentUser] = useState(true);
+  const [isCurrentAstrologer, setIsCurrentAstrologer] = useState(false);
+  
   useEffect(() => {
-    onAuthStateChanged(
-      auth,
-      (Authuser) => {
+    onAuthStateChanged(adminAuth, (Authuser) => {
+      if (Authuser) {
         setUser(Authuser);
-      },
-      [user]
-    );
-  }, [user]);
+      } else {
+        onAuthStateChanged(auth, (User) => {
+          setUser(User);
+          setIsCurrentUser(false);
+          setIsCurrentAstrologer(true);
+        });
+      }
+    });
+  }, []);
 
   const ref = useRef();
   const refMenuButton = useRef();
@@ -65,8 +71,10 @@ const MobileNavigation = () => {
       {open && (
         <div ref={ref}>
           <NavLinks
-            user={user}
-            signOut={logout}
+              user = {user}
+            isCurrentUser={isCurrentUser}
+            isCurrentAstrologer={isCurrentAstrologer}
+            signOut={isCurrentUser ? logoutUser : logout}
             isMobile={true}
             closeMobileMenu={closeMenu}
           />
