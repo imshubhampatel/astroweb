@@ -158,9 +158,9 @@ const user = withAdminAuth(() => {
 
         <div className={`${styles.mainInfoContainer}`}>
           <div className={`${styles.astroPhoto}`} style={{ display: "block" }}>
-            {astro.profilePhoto ? (
+            {astro.profilePhotoLink ? (
               <>
-                <FireImage
+                <Image
                   src={astro.profilePhoto}
                   layout="responsive"
                   width="400"

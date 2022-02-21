@@ -40,6 +40,11 @@ const userManagement = withAdminAuth(() => {
       getAllusers(0, ItemsPerPage);
     }
   }, [search]);
+  useEffect(() => {
+
+      initializePaginationData(totalusers);
+    
+  }, [totalusers]);
    async function getAppDetails() {
      const astros = collection(db, "app_details");
      const querySnapshot = await getDoc(
@@ -48,6 +53,7 @@ const userManagement = withAdminAuth(() => {
      );
      if (querySnapshot.exists()) {
        settotalusers(querySnapshot.data().userCount);
+       
      } else {
        // console.log("no")
      }
@@ -66,14 +72,16 @@ const userManagement = withAdminAuth(() => {
     const querySnapshot = await getDocs(
       query(astros, orderBy("counter"), startAt(first), limit(numItems))
     );
-    let data = querySnapshot.docs.map((doc) => doc.data());
+    let data = querySnapshot.docs.map((doc) => {
+      return {id : doc.id, ...doc.data()}});
+    console.log(data.length)
+
     setusersList(data);
   }
 
   function handlePageChange({ selected }) {
     let last = (selected + 1) * ItemsPerPage;
     let first = last - ItemsPerPage;
-
     getAllusers(first, ItemsPerPage);
   }
 
@@ -121,7 +129,7 @@ const userManagement = withAdminAuth(() => {
                 <tr key={e.phoneNumber + idx}>
                   <td className={`${styles.tableData}  `}> {idx + 1} </td>
                   <td className={`${styles.tableData}  `}>
-                    {e.firstName + e.secondName}
+                    {e.firstName + " " + e.lastName}
                   </td>
                   <td className={`${styles.tableData}  `}>{e.phoneNumber}</td>
                   <td className={`${styles.tableData}  `}>{e.email}</td>
