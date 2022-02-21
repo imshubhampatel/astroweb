@@ -70,7 +70,7 @@ function UserRegistrationForm(props) {
                 <div className="col"></div>
                 <div className="col">
 
-{ isAstrologer ? <button className="btn btn-warning" onClick={()=>{ router.push("/astrologer")}}>Go to Astrologer Dashboard</button> : null}
+{/* { isAstrologer ? <button className="btn btn-warning" onClick={()=>{ router.push("/astrologer")}}>Go to Astrologer Dashboard</button> : null} */}
               </div></div>
               <br></br>
               <br></br>
