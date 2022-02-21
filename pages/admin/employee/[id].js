@@ -77,14 +77,7 @@ const employee = withAdminAuth(() => {
   async function permissionChangeHandler(astro_temp_perm) {
     const emp = {
       ...astro,
-      permissions: {
-        astro_management: astro_temp_perm.astro_management,
-        emp_management: astro_temp_perm.emp_management,
-        wallet_management: astro_temp_perm.wallet_management,
-        user_management: astro_temp_perm.user_management,
-        broadcast_management: astro_temp_perm.broadcast_management,
-        store: astro_temp_perm.store,
-      },
+      permissions: astro_temp_perm
     };
 
     const ref = doc(db, "employee", String(pid)).withConverter(
@@ -92,8 +85,9 @@ const employee = withAdminAuth(() => {
     );
     setDoc(ref, new Employee(emp)).then(() => {
       alert("Permissions Updated");
+      setastro(emp);
     });
-    setastro(emp);
+  
   }
   return (
     <div className={` ${layoutStyles.base_container} `}>

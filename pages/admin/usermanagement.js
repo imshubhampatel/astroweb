@@ -32,6 +32,7 @@ const userManagement = withAdminAuth(() => {
   const ItemsPerPage = 10;
   const [totalPages, settotalPages] = useState(2);
   const [search, setsearch] = useState("");
+  const [firstNum, setFirstNum] = useState(0);
 
   useEffect(() => {
     getAppDetails();
@@ -40,6 +41,11 @@ const userManagement = withAdminAuth(() => {
       getAllusers(0, ItemsPerPage);
     }
   }, [search]);
+  useEffect(() => {
+
+      initializePaginationData(totalusers);
+    
+  }, [totalusers]);
    async function getAppDetails() {
      const astros = collection(db, "app_details");
      const querySnapshot = await getDoc(
@@ -48,6 +54,7 @@ const userManagement = withAdminAuth(() => {
      );
      if (querySnapshot.exists()) {
        settotalusers(querySnapshot.data().userCount);
+       
      } else {
        // console.log("no")
      }
@@ -66,14 +73,15 @@ const userManagement = withAdminAuth(() => {
     const querySnapshot = await getDocs(
       query(astros, orderBy("counter"), startAt(first), limit(numItems))
     );
-    let data = querySnapshot.docs.map((doc) => doc.data());
+    let data = querySnapshot.docs.map((doc) => {
+      return {id : doc.id, ...doc.data()}});
     setusersList(data);
   }
 
   function handlePageChange({ selected }) {
     let last = (selected + 1) * ItemsPerPage;
     let first = last - ItemsPerPage;
-
+    setFirstNum(first);
     getAllusers(first, ItemsPerPage);
   }
 
@@ -119,9 +127,9 @@ const userManagement = withAdminAuth(() => {
             <tbody>
               {usersList.map((e, idx) => (
                 <tr key={e.phoneNumber + idx}>
-                  <td className={`${styles.tableData}  `}> {idx + 1} </td>
+                  <td className={`${styles.tableData}  `}> {idx + firstNum + 1} </td>
                   <td className={`${styles.tableData}  `}>
-                    {e.firstName + e.secondName}
+                    {e.firstName + " " + e.lastName }
                   </td>
                   <td className={`${styles.tableData}  `}>{e.phoneNumber}</td>
                   <td className={`${styles.tableData}  `}>{e.email}</td>
