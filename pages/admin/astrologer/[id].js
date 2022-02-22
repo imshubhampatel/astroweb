@@ -69,7 +69,7 @@ const astrologer = withAdminAuth(() => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
-  const [enabled, setenabled] = useState(true);
+  // const [enabled, setenabled] = useState(true);
   const [profilePicUrl, setprofilePicUrl] = useState(
     "/astrochrchaweb/public/astrochrchalogo.png"
   );
@@ -122,9 +122,9 @@ const astrologer = withAdminAuth(() => {
     }
   }
 
-  async function toggleEnable(uid) {
+  async function toggleEnable(astrologerProfile,uid) {
     var response;
-    if (!enabled) {
+    if (!astrologerProfile.enabled) {
       response = await setAstrologerPerm(uid);
     } else {
       response = await removeAstrologerPerm(uid);
@@ -134,11 +134,10 @@ const astrologer = withAdminAuth(() => {
       astrologerConverter
     );
     let astro_temp = astro;
-    astro_temp.enabled = !enabled;
+    astro_temp.enabled = !astro_temp.enabled;
     setastro({ ...astro_temp });
-    await updateDoc(ref, { enabled:!enabled });
-    
-    setenabled(!enabled);
+    await updateDoc(ref, { enabled:astro_temp.enabled });
+    // setenabled(astro_temp.enabled);
   }
   async function updateAstrologer(uid) {
     const ref = doc(db, "astrologer", String(uid));
@@ -162,8 +161,10 @@ const astrologer = withAdminAuth(() => {
     );
     let astro_temp = astro;
     astro_temp.status.state = astrologerStatus.VERIFIED;
+    astro_temp.enabled = true;
     setastro({ ...astro_temp });
     await updateDoc(ref, { ...astro_temp });
+    await setAstrologerPerm(uid);
   }
   const deleteReview = async (reviewId) => {
     const review = doc(
@@ -699,11 +700,11 @@ const astrologer = withAdminAuth(() => {
   useEffect(() => {
     getAstrologerInfo(pid);
     getAppDetails().then((data) => setPricingList(data));
-    if (pid)
-      isAstrologer(pid).then((e) => {
-        if (e) setenabled(true);
-        else setenabled(false);
-      });
+    // if (pid)
+    //   isAstrologer(pid).then((e) => {
+    //     if (e) setenabled(true);
+    //     else setenabled(false);
+    //   });
   }, [pid]);
 
   return (
@@ -789,9 +790,9 @@ const astrologer = withAdminAuth(() => {
               <>
                 <button
                   className={"btn btn-primary"}
-                  onClick={() => toggleEnable(pid)}
+                  onClick={() => toggleEnable(astro,pid)}
                 >
-                  Enabled : {enabled ? "   On  " : "  off   "}
+                  Enabled : {astro.enabled ? "   On  " : "  off   "}
                 </button>
                 <button
                   className={`${styles.astroDiscardButton}  ${styles.astroButton}`}

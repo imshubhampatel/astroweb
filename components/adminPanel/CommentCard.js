@@ -2,6 +2,10 @@ import React,{useState} from 'react'
 
 function CommentCard(props) {
   const [present, setPresent] = useState(true);
+
+
+  console.log(props)
+
     return (
       <div className="card bg-light mb-3 row">
         {/* <div className="card-header">Time : {props.data.time}</div> */}

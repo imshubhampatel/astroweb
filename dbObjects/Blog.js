@@ -11,6 +11,7 @@ class Blog {
     this.title = data.title;
     this.visible = data.visible;
     this.comment = data.comment ? data.comment : [];
+    this.photos = data.photos; 
   }
   toString() {
     return this.commentCount + ", " + this.description + ", " + this.author;
@@ -29,6 +30,7 @@ const blogConverter = {
       time: data.time,
       visible: data.visible,
       title: data.title,
+      photos: data.photos
     };
   },
   fromFirestore: (snapshot, options) => {

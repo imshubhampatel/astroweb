@@ -1,0 +1,49 @@
+.title_container{
+display: flex;
+}
+
+.title_container .title{
+    font-weight: 600;
+font-size: 32px;
+line-height: 48px;
+}
+
+.title_container .button_container{
+margin-left: auto;
+}
+
+.author{
+    font-weight: 500;
+font-size: 14px;
+line-height: 26px;
+/* identical to box height, or 189% */
+color: #979797;
+}
+
+
+.main_content_container{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.photo_container{
+    width: 100%;
+    height: 700px;
+    position: relative;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* border: 1px solid red; */
+}
+
+.comments_container{
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.comments_container .heading{
+    font-weight: 500;
+font-size: 20px;
+line-height: 110%;
+}

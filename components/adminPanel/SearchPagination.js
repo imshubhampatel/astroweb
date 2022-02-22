@@ -31,7 +31,7 @@ const SearchPagination = (props) => {
               {props.usersList.slice(firstItemNum, lastItemNum).map((e) => (
                 <tr key={e.phoneNumber}>
                   <td> 1 </td>
-                  <td>{e.firstName + e.secondName}</td>
+                  <td>{e.firstName + " " + e.lastName}</td>
                   <td>{e.phoneNumber}</td>
                   <td>{e.email}</td>
                   <td>
