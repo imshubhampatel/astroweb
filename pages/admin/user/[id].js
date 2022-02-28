@@ -35,11 +35,10 @@ const db = getFirestore(firebase);
 
 const user = withAdminAuth(() => {
 
-// const user = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [astro, setastro] = useState({});
-  var [enabled, setenabled] = useState(true);
+  // var [enabled, setenabled] = useState(true);
   const [meetings, setMeetings] = useState([]);
   const [walletTransactions, setWalletTransactions] = useState([]);
   const [activeState, setActiveState] = useState(0);
@@ -88,24 +87,29 @@ const user = withAdminAuth(() => {
     return data;
   }
 
-  async function toggleEnable(uid) {
+  async function toggleEnable(userProfile,uid) {
     var response;
-    if (!enabled) {
+    if (!userProfile.enabled) {
       response = await setUserPerm(uid);
     } else {
       response = await removeUserPerm(uid);
     }
     // console.log(response);
-    setenabled(!enabled);
+    const ref = doc(db, "user", String(pid));
+    let astro_temp = userProfile;
+    astro_temp.enabled = !astro_temp.enabled;
+    setastro({ ...astro_temp });
+    await updateDoc(ref, { enabled: astro_temp.enabled });
+    // setenabled(!enabled);
   }
 
   useEffect(() => {
     getUserInfo(pid);
-    if (pid)
-      isUser(pid).then((e) => {
-        if (e) setenabled(true);
-        else setenabled(false);
-      });
+    // if (pid)
+    //   isUser(pid).then((e) => {
+    //     if (e) setenabled(true);
+    //     else setenabled(false);
+    //   });
   }, [pid]);
 
   const getDataForAstroLists = () => {
@@ -195,9 +199,9 @@ const user = withAdminAuth(() => {
             Enabled{" "}
             <ToggleButton
               size="32"
-              initialState={enabled}
+              initialState={astro.enabled}
               clickHandler={() => {
-                toggleEnable(pid);
+                toggleEnable(astro,pid);
               }}
             />
           </div>
