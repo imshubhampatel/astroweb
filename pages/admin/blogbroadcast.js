@@ -74,6 +74,7 @@ const Blogbroadcast = withAdminAuth(() => {
     const querySnapshot = await getDocs(
       astros,
       where("status", "in", [broadcastStatus.ONGOING, broadcastStatus.SCHEDULED])
+     , orderBy("scheduledTime")
     );
     let data = querySnapshot.docs.map((doc) => {
       return { ...doc.data(), id: doc.id };
