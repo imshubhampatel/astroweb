@@ -1,7 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import styles from "../styles/components/RegistrationForm2.module.css";
 import Link from "next/link";
+import Image from 'next/image'
 import Swal from "sweetalert2";
+import GooglePlayBadge from "../public/images/google-play-badge.png";
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
 
@@ -159,8 +161,20 @@ function RegistrationForm(props) {
             <div className="col-sm-8 my-4  ">
               <p className="mx-sm-auto text-sm-center">
                 Thanks For filling out your details. We will verify your
-                details and get back to you!                            
+                details and get back to you!   <br>
+                </br>
+                <br/>
+                <br/>
+                For more details and working with us , please download our Astrologer app from playstore.
+                <center>
+                  <div className={styles.badge_container}>
+                  <Link href="https://play.google.com/store/apps/details?id=com.astrologer.dreshkan.astrologer_dreshkan"><a>
+                    <Image src={GooglePlayBadge} /> </a>
+                  </Link> 
+                  </div>
+                </center>                           
               </p>
+
 
               <div
                 className={`${styles.endingBlueText} mx-auto text-center my-5 `}
@@ -265,7 +279,7 @@ function RegistrationForm(props) {
                     type="email"
                     className="form-control"
                     id="email"
-                    nam="email"
+                    name="email"
                     onChange={(e)=>setLocalState({...localState,email:e.target.value})}
                   />
                 </div>

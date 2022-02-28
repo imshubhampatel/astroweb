@@ -1,5 +1,5 @@
 .container {
-  background: #fef2db;
+  background: #FEF2DB;
 }
 
 .heroContainer {
@@ -35,7 +35,7 @@
   font-size: 28px;
   line-height: 42px;
   /* identical to box height */
-  color: #fc8c07;
+  color: #ff9513;
 }
 
 @media (min-width: 992px) {
@@ -51,7 +51,7 @@
   line-height: 140%;
   /* or 25px */
 
-  color: #3a3a3c;
+  color: #2c2b2b;
 
   opacity: 0.8;
 }
@@ -317,7 +317,7 @@ line-height: 53px;
 
  .getItOn_container{
    /* border: 1px solid red;  */
-   background: #FEF2DB;
+   background: #FDD036;
    padding-top: 80px;
    padding-bottom: 80px;
  }
@@ -341,7 +341,7 @@ gap: 5px;
   line-height: 72px;
   /* identical to box height */
   
-  color: #FC8C07;
+  color: #995400;
  }
 
 

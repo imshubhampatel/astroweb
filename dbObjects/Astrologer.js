@@ -6,12 +6,12 @@ class Astrologer {
     this.secondName = data.secondName
     this.dob = data.dob
     this.address = data.address 
-    this.currentStatus = data.currentStatus 
+    this.currentStatus = data.currentStatus ? data.currentStatus : "Offline" 
     this.gender = data.gender
     this.experience = data.experience ? Number(data.experience) : 0;
     this.dailyHours = data.dailyHours ? Number(data.dailyHours):0;
     this.profilePic = data.profilePic
-    this.profilePicLink = data.profilePicLink
+    this.profilePicLink = data.profilePicLink ? data.profilePicLink: ""
     this.about = data.about ? data.about : "Please add some line about you" 
     this.phoneNumber = data.phoneNumber 
 

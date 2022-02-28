@@ -79,13 +79,10 @@ const FirebaseAuth = () => {
       })
       .catch((err) => {
         // alert(err);
-        
         Toast.fire({
           icon: "error",
           title: err,
         });
-
-
         window.location.reload();
       });
   };

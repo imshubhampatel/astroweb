@@ -17,6 +17,7 @@ class Coupon {
     this.totalUses = data.totalUses ;
     this.title = data.title ;
     this.status = data.status ;
+    this.live = data.live ?data.live:true;
     this.subtype = data.subtype ;
     this.categoryType = data.categoryType ;
     this.updatedAt = data.updatedAt;
@@ -37,6 +38,7 @@ const couponConverter = {
       maxTotalDiscount: data.maxTotalDiscount,
       minPurchase: data.minPurchase,
       // time: data.time,
+      live: data.live,
       endDate: data.endDate,
       startDate: data.startDate,
       status: data.status,

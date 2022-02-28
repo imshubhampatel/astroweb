@@ -68,6 +68,7 @@ const itemManagement = withAdminAuth(()=> {
                     <div>
                     <p>Title : {couponInfo.title}</p>
                     <p>Code : {couponInfo.code}</p>
+                    <p> Is coupon active  : {couponInfo.live?"YES":"NO"} </p>
                         <p>Current max use limit : {couponInfo.limit}</p>
                         <p>end Date : {couponInfo.endDate.toDate().toDateString()}</p>
                         <p>min Purchase : {couponInfo.minPurchase}</p>
@@ -117,7 +118,7 @@ const itemManagement = withAdminAuth(()=> {
                type="number"
              />
              <label htmlFor="subType">subType</label>
-              <select className="form-control" id="subType" defaultValue={couponInfo.subType} required>
+              <select className="form-control" id="subtype" defaultValue={couponInfo.subtype} required>
               { Object.keys(couponSubtype).map((e) => (
                  <option value={couponSubtype[e]} key={e}>
                    {couponSubtype[e]}
@@ -154,6 +155,13 @@ const itemManagement = withAdminAuth(()=> {
                id="limit"
                defaultValue={couponInfo.limit}
                type="number"
+             />
+               <label htmlFor="live"> Activate </label>
+             <input
+               className="form-check"
+               name="live"
+                id="live"
+               type="checkbox"
              />
             <div className="text-end mt-4">
               <button

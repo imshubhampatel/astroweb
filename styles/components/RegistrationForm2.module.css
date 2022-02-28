@@ -5,6 +5,11 @@
 }
 
 
+.badge_container{
+    width: 205px;
+    /* border: 1px solid red;  */
+  }
+ 
 
 @media (min-width: 576px) { 
 

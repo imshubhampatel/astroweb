@@ -13,9 +13,14 @@ function Contactus() {
                 <b>Email : </b> dreshkan@gmail.com
             </p>
             <p>
-                Mail on this email ID for any of your queries !
+                <b>Contact Number : </b> +91 7517513412
             </p>
-
+            <p>
+                <b> Company Name  :</b>  Astrochrcha 
+            </p>
+            <p>
+                <b> Address :</b>   535, GURU RAMDAS NAGAR, LAXMI NAGAR, DELHI, PIN - 110092
+            </p>
             </div>
         </div>
     )

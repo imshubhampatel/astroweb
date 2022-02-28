@@ -10,28 +10,23 @@ import IphoneMockup from "../public/images/iphone_mockup.svg";
 import GooglePlayBadge from "../public/images/google-play-badge.png";
 
 import { Faqs } from "../components/faqComponent/Faqs";
-import LaunchSoonSubscribe from "../components/LaunchSoonSubscribe"
+import LaunchSoonSubscribe from "../components/LaunchSoonSubscribe";
 import { BsChatSquareDots, BsBarChart } from "react-icons/bs";
 import { FiPhone, FiShoppingCart } from "react-icons/fi";
 import { MdOndemandVideo } from "react-icons/md";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { BiPlanet } from "react-icons/bi";
-import {
-  collection,
-  doc,
-  getFirestore,
-  setDoc,
-} from "firebase/firestore";
+import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 import { firebase } from "../config";
 
 const db = getFirestore(firebase);
 
 export default function Home() {
   async function markInterested(email) {
-    const astros = doc(collection(db,"interested"));
+    const astros = doc(collection(db, "interested"));
     await setDoc(astros, {
-      email:email,
-      timestamp : new Date()
+      email: email,
+      timestamp: new Date(),
     });
   }
 
@@ -42,6 +37,22 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Dreshkan is an all-in-one
+                solution for astrology and horoscopic needs. Get ready to join
+                us on our journey in world of astrology. We will be providing
+                plethora of services from live consultation to match making
+                reports. Do not worry about your future as we are here to
+                accompany you..."
+        />
+        <meta
+          name="og:title"
+          property="og:title"
+          content="Dreshkan is an all-in-one
+                solution for astrology and horoscopic needs."
+        />
+        <link rel="canonical" href="https://www.dreshkan.com/" />
       </Head>
 
       <main>
@@ -57,9 +68,9 @@ export default function Home() {
             <div
               className={`col-12 col-md-7 p-md-5 order-md-first text-center text-md-start d-flex flex-column justify-content-center align-items-center justify-content-md-start align-items-md-start`}
             >
-              <div className={`${styles.launchingHeading} my-3`}>
+              <h1 className={`${styles.launchingHeading} my-3`}>
                 Connect with Astrologers!
-              </div>
+              </h1>
 
               <p
                 className={`mb-1 text-center text-md-start ${styles.mainText} `}
@@ -72,14 +83,17 @@ export default function Home() {
                 accompany you...
               </p>
 
-              {/* <div className={styles.badge_container}>
-    <Image src={GooglePlayBadge} />
-        </div> */}
-
-              <div className="my-3 ">
-                <LaunchSoonSubscribe markInterested={markInterested}/>
+              <div className={styles.badge_container}>
+                <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+                  <a>
+                    <Image src={GooglePlayBadge} />
+                  </a>
+                </Link>
               </div>
 
+              {/* <div className="my-3 ">
+                <LaunchSoonSubscribe markInterested={markInterested}/>
+              </div> */}
             </div>
           </div>
         </div>
@@ -88,121 +102,143 @@ export default function Home() {
 
         <div className={`${styles.services_container} `}>
           {/* Title Text  */}
-          <div className={styles.containerTitle}>Our Services</div>
+          <h2 className={styles.containerTitle}>Our Services</h2>
 
           {/* Cards */}
           <div className={styles.cards_container}>
-            <div className={`${styles.card} ${styles.chat_card}`}>
-              {/* Icon  */}
-              <div className={styles.icon}>
-                <BsChatSquareDots />
-              </div>
+            <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+              <a>
+                <div className={`${styles.card} ${styles.chat_card}`}>
+                  {/* Icon  */}
+                  <div className={styles.icon}>
+                    <BsChatSquareDots />
+                  </div>
 
-              {/* Title  */}
-              <div className={styles.title}>Chat With Astrologers</div>
+                  {/* Title  */}
+                  <h3 className={styles.title}>Chat With Astrologers</h3>
 
-              {/* Text  */}
-              <div className={styles.text}>
-                Chat with re-knowned astrologers at minimial fees.
-              </div>
-            </div>
+                  {/* Text  */}
+                  <p className={styles.text}>
+                    Chat with re-knowned astrologers at minimial fees.
+                  </p>
+                </div>
+              </a>
+            </Link>
+            <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+              <a>
+                <div className={`${styles.card} ${styles.call_card}`}>
+                  {/* Icon  */}
+                  <div className={styles.icon}>
+                    <FiPhone />
+                  </div>
 
-            <div className={`${styles.card} ${styles.call_card}`}>
-              {/* Icon  */}
-              <div className={styles.icon}>
-                <FiPhone />
-              </div>
+                  {/* Title  */}
+                  <h3 className={styles.title}>Talk to Astrologers</h3>
 
-              {/* Title  */}
-              <div className={styles.title}>Talk to Astrologers</div>
+                  {/* Text  */}
+                  <p className={styles.text}>
+                    Connect with astrologers on video and voice call{" "}
+                  </p>
+                </div>
+              </a>
+            </Link>
+            <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+              <a>
+                <div className={`${styles.card} ${styles.read_card}`}>
+                  {/* Icon  */}
+                  <div className={styles.icon}>
+                    <HiOutlineDocumentText />
+                  </div>
 
-              {/* Text  */}
-              <div className={styles.text}>
-                Connect with astrologers on video and voice call{" "}
-              </div>
-            </div>
+                  {/* Title  */}
+                  <h3 className={styles.title}>Read Astrology Blogs</h3>
 
-            <div className={`${styles.card} ${styles.read_card}`}>
-              {/* Icon  */}
-              <div className={styles.icon}>
-                <HiOutlineDocumentText />
-              </div>
+                  {/* Text  */}
+                  <p className={styles.text}>
+                    Stay updated to what{"'"}s happening in astrology world.
+                  </p>
+                </div>
+              </a>
+            </Link>
+            <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+              <a>
+                <div className={`${styles.card} ${styles.shop_card}`}>
+                  {/* Icon  */}
+                  <div className={styles.icon}>
+                    <FiShoppingCart />
+                  </div>
 
-              {/* Title  */}
-              <div className={styles.title}>Read Astrology Blogs</div>
+                  {/* Title  */}
+                  <h3 className={styles.title}>Shop on Dreshkan Shop</h3>
 
-              {/* Text  */}
-              <div className={styles.text}>
-                Stay updated to what{"'"}s happening in astrology world.
-              </div>
-            </div>
+                  {/* Text  */}
+                  <p className={styles.text}>
+                    Buy any astrological item and book poojas using shop.
+                  </p>
+                </div>
+              </a>
+            </Link>
+            <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+              <a>
+                <div className={`${styles.card} ${styles.report_card}`}>
+                  {/* Icon  */}
+                  <div className={styles.icon}>
+                    <BsBarChart />
+                  </div>
 
-            <div className={`${styles.card} ${styles.shop_card}`}>
-              {/* Icon  */}
-              <div className={styles.icon}>
-                <FiShoppingCart />
-              </div>
+                  {/* Title  */}
+                  <h3 className={styles.title}>Get Detailed Reports</h3>
 
-              {/* Title  */}
-              <div className={styles.title}>Shop on Dreshkan Shop</div>
+                  {/* Text  */}
+                  <p className={styles.text}>
+                    Detailed Reports on basis of your Kundali.
+                  </p>
+                </div>
+              </a>
+            </Link>
+            <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+              <a>
+                <div className={`${styles.card} ${styles.live_card}`}>
+                  {/* Icon  */}
+                  <div className={styles.icon}>
+                    <MdOndemandVideo />
+                  </div>
 
-              {/* Text  */}
-              <div className={styles.text}>
-                Buy any astrological item and book poojas using shop.
-              </div>
-            </div>
+                  {/* Title  */}
+                  <h3 className={styles.title}>Live Broadcast</h3>
 
-            <div className={`${styles.card} ${styles.report_card}`}>
-              {/* Icon  */}
-              <div className={styles.icon}>
-                <BsBarChart />
-              </div>
+                  {/* Text  */}
+                  <p className={styles.text}>
+                    Connect on Live Broadcast and ask your concerns.
+                  </p>
+                </div>
+              </a>
+            </Link>
+            <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+              <a>
+                <div className={`${styles.card} ${styles.daily_card}`}>
+                  {/* Icon  */}
+                  <div className={styles.icon}>
+                    <BiPlanet />
+                  </div>
 
-              {/* Title  */}
-              <div className={styles.title}>Get Detailed Reports</div>
+                  {/* Title  */}
+                  <h3 className={styles.title}>Daily Horoscope</h3>
 
-              {/* Text  */}
-              <div className={styles.text}>
-                Detailed Reports on basis of your Kundali.
-              </div>
-            </div>
-
-            <div className={`${styles.card} ${styles.live_card}`}>
-              {/* Icon  */}
-              <div className={styles.icon}>
-                <MdOndemandVideo />
-              </div>
-
-              {/* Title  */}
-              <div className={styles.title}>Live Broadcast</div>
-
-              {/* Text  */}
-              <div className={styles.text}>
-                Connect on Live Broadcast and ask your concerns.
-              </div>
-            </div>
-
-            <div className={`${styles.card} ${styles.daily_card}`}>
-              {/* Icon  */}
-              <div className={styles.icon}>
-                <BiPlanet />
-              </div>
-
-              {/* Title  */}
-              <div className={styles.title}>Daily Horoscope</div>
-
-              {/* Text  */}
-              <div className={styles.text}>
-                Read about how will your day go based on your zodiac sign.{" "}
-              </div>
-            </div>
+                  {/* Text  */}
+                  <p className={styles.text}>
+                    Read about how will your day go based on your zodiac sign.{" "}
+                  </p>
+                </div>
+              </a>
+            </Link>
           </div>
         </div>
 
         {/* About Container */}
         <div className={styles.about_container}>
           {/* container title */}
-          <div className={styles.container_title}>About Dreshkan</div>
+          <h2 className={styles.container_title}>About Dreshkan</h2>
 
           {/* Logo Text Container   */}
           <div className={`container-fluid  `}>
@@ -244,9 +280,7 @@ export default function Home() {
 
         {/* FAQ Container */}
         <div className={styles.faq_container}>
-          <div className={styles.container_title}>
-            Frequently Asked Questions
-          </div>
+          <h2 className={styles.container_title}>Frequently Asked Questions</h2>
 
           <div className=" ">
             <Faqs />
@@ -273,11 +307,14 @@ export default function Home() {
 
               {/* Paragraph  */}
               <div className={styles.para}>
-                This app will soon be available on Play store.
-              </div>
-
-              <div className={styles.badge_container}>
-                <Image src={GooglePlayBadge} />
+                App is now available on playstore. Download Now !
+                <div className={styles.badge_container}>
+                  <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+                    <a>
+                      <Image src={GooglePlayBadge} />
+                    </a>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

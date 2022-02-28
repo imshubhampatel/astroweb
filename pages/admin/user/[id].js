@@ -26,7 +26,7 @@ import TransactionCard from "../../../components/adminPanel/transactionCard";
 import OrderCard from "../../../components/adminPanel/OrderCard";
 import { EmployeePermissions } from "../../../dbObjects/Employee";
 import FireImage from "../../../components/FireImage";
-
+import Image from 'next/image'
 import { isUser, setUserPerm, removeUserPerm } from "../../../auth/utils";
 import withAdminAuth from "../../../auth/withAdminAuth";
 import { UserConverter, User } from "../../../dbObjects/User";
@@ -158,10 +158,10 @@ const user = withAdminAuth(() => {
 
         <div className={`${styles.mainInfoContainer}`}>
           <div className={`${styles.astroPhoto}`} style={{ display: "block" }}>
-            {astro.profilePhoto ? (
+            {astro.profilePhotoLink ? (
               <>
-                <FireImage
-                  src={astro.profilePhoto}
+                <Image
+                  src={astro.profilePhotoLink}
                   layout="responsive"
                   width="400"
                   height="400"
@@ -233,7 +233,9 @@ const user = withAdminAuth(() => {
           </button>
         </div>
 
-        <div className="d-flex my-3 gap-1">{getDataForAstroLists()}</div>
+        <div className="d-flex flex-column my-3 gap-1">
+          {getDataForAstroLists()}
+        </div>
       </div>
     </div>
   );

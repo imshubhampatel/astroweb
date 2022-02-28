@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiToggleFill, RiToggleLine } from "react-icons/ri";
 import {AiOutlineRedo} from "react-icons/ai"
 
@@ -7,11 +7,16 @@ export default function Button({ initialState, size, clickHandler }) {
   if (size) _size = size;
   const [currentState, setCurrentState] = useState(initialState);
 
+  useEffect(()=>{
+    setCurrentState(initialState)
+  },[initialState]);
+
+
+  
   if(typeof(initialState) != "boolean"){
     return <RiToggleFill size={_size} />
   }
 
-  
 
   let Button;
   Button = currentState ? RiToggleFill : RiToggleLine;
