@@ -70,11 +70,11 @@ const Blogbroadcast = withAdminAuth(() => {
     }
   }
   async function getAllBroadcasts() {
-    const astros = query(collection(db, "broadcasts"));
+    const astros = query(collection(db, "broadcasts"),
+    where("status", "in", [broadcastStatus.ONGOING, broadcastStatus.SCHEDULED])
+   , orderBy("scheduledTime"));
     const querySnapshot = await getDocs(
-      astros,
-      where("status", "in", [broadcastStatus.ONGOING, broadcastStatus.SCHEDULED])
-     , orderBy("scheduledTime")
+      astros
     );
     let data = querySnapshot.docs.map((doc) => {
       return { ...doc.data(), id: doc.id };

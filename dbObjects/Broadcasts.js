@@ -5,6 +5,7 @@ class Broadcast {
     this.commentCount = data.commentCount;
     this.description = data.description;
     this.readDuration = data.readDuration;
+    this.status = data.status;
     this.time = data.time;
     this.title = data.title;
     this.comment = data.comment ? data.comment : [];
@@ -21,6 +22,7 @@ const broadcastConverter = {
       id: data.id,
       author: data.author,
       commentCount: data.commentCount,
+      status: data.status,
       description: data.description,
       readDuration: data.readDuration,
       time: data.time,
