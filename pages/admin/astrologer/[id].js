@@ -724,7 +724,8 @@ const astrologer = withAdminAuth(() => {
           </div>
 
           <div className={`${styles.astroInfo}`}>
-            <h4>Astrologer {astro.firstName}</h4>
+            <h4>Astrologer {astro.firstName + " " + astro.secondName}</h4>
+            <h6> ID : {astro.id}</h6>
 
             <div className={`d-flex `}>
               <div className={`me-2`}>

@@ -83,7 +83,7 @@ const blog = withAdminAuth(() => {
             <div className={styles.title}>{astro.title}</div>
             {/* Remove button */}
             <div className={styles.button_container}>
-              <button className="btn btn-danger">Remove</button>
+              {astro.visible ?<button className="btn btn-danger" onClick={()=>removeBlog(pid)}>Remove</button>:"Removed"}
             </div>
           </div>
 
@@ -128,29 +128,6 @@ const blog = withAdminAuth(() => {
 }, EmployeePermissions.BROADCAST_MANAGEMENT);
 
 blog.getLayout = function getLayout(page) {
-  return <AdminLayout active_page="3">{page}</AdminLayout>;
+  return <AdminLayout active_page="1">{page}</AdminLayout>;
 };
 export default blog;
-
-{
-  /* <div className="container">
-<div className="row  my-3">
-  <h3>{astro.title }</h3>
-  <ReactMarkdown>
-    {astro.description}
-    </ReactMarkdown>
-</div>
-<div>
-  { astro.visible ?
-    <button className="btn btn-danger" onClick={() => removeBlog(pid)}> Remove</button> :
-    "Removed"}
-</div>
-<div className="row  my-3">
-  <h4>Comments </h4>
-
-  {comments.map(e => 
-    <CommentCard key={e.id} data={e} deleteComment={deleteComment}></CommentCard>
-)}
-</div>
-</div> */
-}

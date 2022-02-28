@@ -393,6 +393,7 @@ const astrologermanagement = withAdminAuth(() => {
                   <td>Name</td>
                   <td>Rating</td>
                   <td>Phone Number </td>
+                  <td>Enabled </td>
                   <td>Profile Complete</td>
                   <td>State </td>
                   <td>Query</td>
@@ -408,6 +409,7 @@ const astrologermanagement = withAdminAuth(() => {
                       {e.rating == "0" ? "Not rated" : e.rating}
                     </td>
                     <td className={`${styles.tableData}`}>{e.phoneNumber}</td>
+                    <td className={`${styles.tableData}`}>{e.enabled ? "True" : "False"}</td>
                     <td className={`${styles.tableData}`}>
                       {e.profileComplete ? "True" : "false"}
                     </td>
