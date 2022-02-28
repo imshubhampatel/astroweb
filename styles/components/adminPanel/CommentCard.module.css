@@ -1,0 +1,37 @@
+.container {
+}
+
+.top_part {
+}
+
+.top_part .photo_container {
+  height: 60px;
+  width: 60px;
+  border: 1px solid red;
+}
+
+.top_part .name_container {
+}
+
+.name_container .name {
+  font-size: 16px;
+  line-height: 108.1%;
+  /* or 17px */
+
+  text-align: center;
+
+  /* Font Colour */
+
+  color: #3a3a3c;
+}
+
+.name_container .time {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 110%;
+  /* or 15px */
+
+  color: #000000;
+
+  opacity: 0.5;
+}
