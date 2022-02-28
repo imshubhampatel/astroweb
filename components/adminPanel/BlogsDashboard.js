@@ -10,7 +10,7 @@ function BlogsDashboard(props) {
           return <BlogCard key={e.id} props={e} remove={props.remove}></BlogCard>;
         })}
       </div>
-        <button className='my-3 btn btn-primary' onClick={() => props.getAfterBlog()}> View More</button>
+      {props.isSearchActive ? null :  <button className='my-3 btn btn-primary' onClick={() => props.getAfterBlog()}> View More</button>}
 
         </>
     );

@@ -16,7 +16,7 @@ function BroadcastCard(props) {
         </div>
         <div className={styles.about}>
           {" "}
-          By Astrologer {props.data.astrologerName}{" "}
+          By Astrologer {props.data.astrologerName}{" and UID : "} {props.data.astrologerUid}
         </div>
         <div className={styles.status}>
           {" "}

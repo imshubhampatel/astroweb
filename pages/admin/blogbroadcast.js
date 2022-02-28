@@ -36,14 +36,21 @@ const db = getFirestore(firebase);
 
 const Blogbroadcast = withAdminAuth(() => {
   const [activeState, setActiveState] = useState(0);
+  const [searchText , setSearchText] = useState("");
   const [blogs, setBlogs] = useState([]);
+  const [isSearchActive, setisSearchActive] = useState(false);
   const [lastBlog, setLastBlog] = useState(null);
   const [broadcasts, setBroadcasts] = useState([]);
   const numItems = 3;
+
+
   useEffect(() => {
-    getAllBlogs();
-    getAllBroadcasts();
-  }, []);
+    if(!isSearchActive) 
+    {
+      getAllBlogs();
+      getAllBroadcasts();
+    }
+  }, [isSearchActive]);
 
   async function getAllBlogs() {
     const astros = query(collection(db, "blog"));
@@ -102,6 +109,7 @@ const Blogbroadcast = withAdminAuth(() => {
         }
         return (
           <BlogsDashboard
+            isSearchActive={isSearchActive}
             data={blogs}
             getAfterBlog={getAfterBlog}
             remove={removeBlog}
@@ -128,6 +136,33 @@ const Blogbroadcast = withAdminAuth(() => {
       }
     }
   }
+  async function searchHandler(search) {
+    if (search != "") {
+      setisSearchActive(true);
+      if(activeState == 2) {
+        const astros = collection(db, "broadcasts");
+        // searching broadcast
+        let querySnapshot = await getDocs(
+          query(astros, where("astrologerUid", "==", String(search)))
+        );
+        let data = new Set();
+        querySnapshot.docs.map((doc) => data.add(doc.data()));
+        setBroadcasts(Array.from(data));
+      }
+      else {
+        const astros = collection(db, "blog");
+        // searching broadcast
+        let querySnapshot = await getDocs(
+          query(astros, where("author", "==", String(search)))
+        );
+        let data = new Set();
+        querySnapshot.docs.map((doc) => data.add(doc.data()));
+        setBlogs(Array.from(data));
+      }
+     
+    }
+  }
+
 
   return (
     <div className={` ${layoutStyles.base_container} `}>
@@ -138,15 +173,45 @@ const Blogbroadcast = withAdminAuth(() => {
 
 
         <div className={styles.topButtonContainer}>
-          <div onClick={() => setActiveState(1)} className={`${styles.button} ${ activeState == 1 ? styles.buttonActive : "" }`}>
+          <div onClick={() => {
+            setisSearchActive(false);
+            setActiveState(1)}} className={`${styles.button} ${ activeState == 1 ? styles.buttonActive : "" }`}>
             {" "}
             Blogs{" "}
           </div>
-          <div onClick={() => setActiveState(2)} className={`${styles.button} ${ activeState == 2 ? styles.buttonActive : "" } `}>
+          <div onClick={() => {
+            setisSearchActive(false);
+            setActiveState(2)}} className={`${styles.button} ${ activeState == 2 ? styles.buttonActive : "" } `}>
             {" "}
             Broadcasts{" "}
           </div>
           </div>
+          <div className={styles.topSearchContainer}>
+          <input
+            className={`${styles.searchBox}`}
+            type="text"
+            placeholder="Search by Astrologer ID"
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+
+          <div className={`${styles.buttonContainer}`}>
+            <button
+              className={`${styles.filterButton} ${styles.button} `}
+              onClick={()=>searchHandler(searchText)}
+            >
+              Search
+            </button>
+          </div>
+          {isSearchActive ?
+            <div className={`${styles.buttonContainer}`}>
+            <button
+              className={`${styles.filterButton} ${styles.button} `}
+              onClick={()=>setisSearchActive(false)}
+            >
+              Clear Search
+            </button>
+          </div>:null}
+        </div>
 
           <div className="my-3">{getData()}</div>
 

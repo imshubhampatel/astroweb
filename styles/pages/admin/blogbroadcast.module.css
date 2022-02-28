@@ -26,3 +26,42 @@ border-radius: 4px;
     color: #fff;
 
 }
+.topSearchContainer{
+    /* border: solid red; */
+    padding: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+
+  .searchBox {
+    max-width: 472px;
+    flex-grow: 2;
+    height: 48px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px; 
+    padding-bottom: 12px;
+  }
+  .buttonContainer{
+    margin-left: auto;
+    display: flex;
+    gap: 25px;
+  }
+  
+  .button{
+    padding: 12px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+  
+  }
+
+  .filterButton{
+    border: 1.6px solid #41df5b;
+    color: #4edf41;
+    
+    border-radius: 8px;
+  
+  }
