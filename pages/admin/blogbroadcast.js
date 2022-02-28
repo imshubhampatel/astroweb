@@ -59,7 +59,7 @@ const Blogbroadcast = withAdminAuth(() => {
   async function getAfterBlog() {
     const astros = query(collection(db, "blog"));
     const querySnapshot = await getDocs(
-      query(astros, orderBy("time"), startAfter(lastBlog), limit(numItems))
+      query(astros, orderBy("time","desc"), startAfter(lastBlog), limit(numItems))
     );
     let data = querySnapshot.docs.map((doc) => {
       return { ...doc.data(), id: doc.id };
