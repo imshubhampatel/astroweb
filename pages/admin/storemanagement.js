@@ -23,7 +23,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { uploadDocToStorage } from "../../utilities/utils";
 import { EmployeePermissions } from "../../dbObjects/Employee";
-import { couponConverter, Coupon, discountType,couponSubtype, couponStatus} from '../../dbObjects/Coupon'
+import { couponConverter, Coupon, discountType,couponSubtype, couponStatus , meetingTypes} from '../../dbObjects/Coupon'
 
 const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
@@ -82,6 +82,12 @@ const storemanagement = withAdminAuth(() => {
 
   async function addCouponHandler(e) {
     e.preventDefault();
+    let mainCategories = []
+    if( e.target.RightNow.checked)
+      mainCategories.push("Right Now")
+      if( e.target.Scheduled.checked)
+      mainCategories.push("Scheduled")
+   
     let coupon = {
       id: e.target.code.value,
       code: e.target.code.value,
@@ -90,6 +96,7 @@ const storemanagement = withAdminAuth(() => {
       maxTotalDiscount: parseInt(e.target.maxTotalDiscount.value),
       minPurchase: parseInt(e.target.minPurchase.value),
       // time: e.target.time.value,
+      mainCategory : mainCategories,
       endDate: new Date(Date.parse(e.target.endDate.value)),
       startDate: new Date(Date.parse(e.target.startDate.value)),
       status: couponStatus.CREATED,
@@ -100,7 +107,7 @@ const storemanagement = withAdminAuth(() => {
       limit: parseInt(e.target.limit.value),
       subtype: e.target.subtype.value,
       updatedAt : new Date(),
-      categoryType : "all",
+      categoryType : e.target.categoryType.value,
       live : true
     };
 
@@ -308,7 +315,16 @@ const storemanagement = withAdminAuth(() => {
                id="discount"
                type="number"
              />
-             <label htmlFor="subtype">subtype</label>
+             <label htmlFor="categoryType">categoryType</label>
+
+              <select className="form-control" id="categoryType" required>
+              { Object.keys(meetingTypes).map((e) => (
+                 <option value={meetingTypes[e]} key={e}>
+                   {meetingTypes[e]}
+                 </option>
+               ))}
+              </select>
+              <label htmlFor="subtype">subtype</label>
 
               <select className="form-control" id="subtype" required>
               { Object.keys(couponSubtype).map((e) => (
@@ -327,6 +343,26 @@ const storemanagement = withAdminAuth(() => {
                id="maxDiscount"
                required
              />
+            <label htmlFor="mainCategory">select Main Categories</label><br/>
+            <label htmlFor="RightNow"> Right Now
+            <input
+              className="form-checkbox" 
+              type="checkbox"             
+              name="RightNow"
+              id="RightNow"
+              
+            />
+            </label>
+            <label htmlFor="Scheduled"> Scheduled
+            <input
+              className="form-checkbox"              
+              name="Scheduled"
+              id="Scheduled"
+              type="checkbox"             
+            />
+  
+            </label>
+            <br/>
                 <label htmlFor="maxTotalDiscount">maxTotalDiscount</label>
 
               <input

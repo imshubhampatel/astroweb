@@ -8,6 +8,7 @@ class Coupon {
     this.maxDiscount = data.maxDiscount;
     this.maxTotalDiscount = data.maxTotalDiscount;
     this.minPurchase = data.minPurchase;
+    this.mainCategory = data.mainCategory;
     // this.time = new Timestamp(data.time).toDate();
     this.startDate = data.startDate;
     this.endDate = data.endDate;
@@ -34,6 +35,7 @@ const couponConverter = {
       id: data.id,
       code: data.code,
       createdAt: data.createdAt,
+      mainCategory: data.mainCategory,
       maxDiscount: data.maxDiscount,
       maxTotalDiscount: data.maxTotalDiscount,
       minPurchase: data.minPurchase,
@@ -69,8 +71,15 @@ const couponSubtype = {
   ITEM : "item"
 };
 
+const meetingTypes = {
+  voice : "voice",
+  chat : "chat",
+  video : "video",
+  all : "all",
+};
+
 const discountType = {
   AMOUNT : "amount",
   PERCENTAGE :"percent"
 };
-export { couponConverter, Coupon ,couponSubtype ,discountType  , couponStatus};
+export { couponConverter, Coupon ,couponSubtype ,discountType  , couponStatus ,meetingTypes};
