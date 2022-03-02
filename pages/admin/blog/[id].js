@@ -1,6 +1,6 @@
 import styles from "../../../styles/pages/admin/blog/[id].module.css";
 import layoutStyles from "../../../styles/pages/admin/BaseLayout.module.css";
-
+import { getFile, uploadDocToStorage } from "../../../utilities/utils";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
@@ -17,31 +17,34 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { EmployeePermissions } from "../../../dbObjects/Employee";
-
+import EditBlog from "../../../components/EditBlog";
 import { firebase } from "../../../config";
 import AdminLayout from "../../../components/adminPanel/layout";
 import withAdminAuth from "../../../auth/withAdminAuth";
 import { blogConverter, Blog, blogStatus } from "../../../dbObjects/Blog";
 import CommentCard from "../../../components/adminPanel/CommentCard";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 const db = getFirestore(firebase);
 
 const blog = withAdminAuth(() => {
   const router = useRouter();
   const { pid } = router.query;
-  const [astro, setastro] = useState({});
+  const [blog, setBlog] = useState({});
   const [comments, setComments] = useState([]);
 
   async function getblogInfo(pid) {
     if (!pid) {
       return;
     }
-
     const astros = collection(db, "blog");
     let querySnapshot = await getDoc(
-      doc(astros, String(pid)).withConverter(blogConverter)
+      doc(astros, String(pid))
     );
     if (querySnapshot.exists()) {
-      setastro(querySnapshot.data());
+      setBlog({id : querySnapshot.id , ...querySnapshot.data()});
     } else {
       // console.log("no")
     }
@@ -56,7 +59,7 @@ const blog = withAdminAuth(() => {
 
   async function removeBlog(pid) {
     const blog = doc(db, "blog", String(pid));
-    setastro({ ...astro, visible: false });
+    setBlog({ ...blog, visible: false });
     await updateDoc(blog, {
       visible: false,
     });
@@ -68,36 +71,78 @@ const blog = withAdminAuth(() => {
     );
     await deleteDoc(comment);
   }
+  const editBlogView = () => {
+    MySwal.fire({
+      showConfirmButton: false,
+      html: (
+        <div>
+          <div className="my-3">
+            <EditBlog handleSubmit={editBlogHandler} data={blog} />
+          </div>
+        </div>
+      ),
+    });
+  };
+  async function editBlogHandler(e) {
+    const astros = doc(db, "blog/" + pid );
+ 
+    let tempblog = blog;
+    tempblog.title = e.title;
+    tempblog.description = e.description;
+    let temp_paths = []
 
+    for (let i = 0; i < e.photos.length; i++) {
+      let path = "blog/" + blog.id + "/" + i + temp_paths.length;
+      await uploadDocToStorage({
+        path: path,
+        file: e.photos[i],
+      })
+
+      tempblog.photoPaths.push(path);
+      temp_paths.push(path)
+
+    }
+    for (let i = 0; i < temp_paths.length; i++) {
+      let url = await getFile(temp_paths[i]);
+      console.log(temp_paths[i],url)
+      tempblog.photos.push(url);
+    }
+
+    setBlog({ ...tempblog });
+    // await updateDoc(astros, { ...tempblog });
+    MySwal.clickConfirm();
+  }
   useEffect(() => {
     getblogInfo(pid);
   }, [pid]);
 
-  console.log(astro);
+  console.log(blog);
   return (
     <>
       <div className={` ${layoutStyles.base_container} `}>
         <div className={`${layoutStyles.main_container}`}>
           <div className={styles.title_container}>
             {/* Title  */}
-            <div className={styles.title}>{astro.title}</div>
+            <div className={styles.title}>{blog.title}</div>
             {/* Remove button */}
             <div className={styles.button_container}>
-              {astro.visible ?<button className="btn btn-danger" onClick={()=>removeBlog(pid)}>Remove</button>:"Removed"}
+              {blog.visible ?<button className="btn btn-danger" onClick={()=>removeBlog(pid)}>Remove</button>:"Removed"}
+              {" "}
+              {blog.visible ?<button className="btn btn-success" onClick={()=>editBlogView(blog)}>Edit</button>:null}
             </div>
           </div>
 
-          <div className={styles.author}>By {astro.author}</div>
+          <div className={styles.author}>By {blog.author}</div>
 
           {/* Main Content */}
           <div className={styles.main_content_container}>
-            <ReactMarkdown>{astro.description}</ReactMarkdown>
+            <ReactMarkdown>{blog.description}</ReactMarkdown>
 
             {/* Photo */}
-            {astro.photos && astro.photos[0] && (
+            {blog.photos && blog.photos[0] && (
               <div className={styles.photo_container}>
                 <Image
-                  src={astro.photos[0]}
+                  src={blog.photos[0]}
                   layout="fill"
                   objectFit="contain"
                 />

@@ -657,7 +657,6 @@ const astrologer = withAdminAuth(() => {
     astro_temp.accountInfo.IFSC = e.IFSC;
     astro_temp.accountInfo.branch = e.branch;
     astro_temp.accountInfo.holderName = e.holderName;
-    console.log(astro_temp)
     setAstrologerPrivateData({ ...astro_temp });
     await updateDoc(astros, { ...astro_temp });
     MySwal.clickConfirm();

@@ -28,7 +28,11 @@ class Astrologer {
     this.chatSeconds = data.chatSeconds ? data.chatSeconds :0
     this.videoSeconds = data.videoSeconds ?data.videoSeconds:0
     this.voiceSeconds = data.voiceSeconds  ?data.voiceSeconds : 0
-    
+   // // accept perm
+   this.acceptChat = data.acceptChat ? data.acceptChat :true
+   this.acceptVoice = data.acceptVoice ?data.acceptVoice:true
+   this.acceptVideo = data.acceptVideo  ?data.acceptVideo : true
+   
     // // Expertise 
     this.expertise = data.expertise ? data.expertise : {}
     
