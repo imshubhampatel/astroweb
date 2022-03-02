@@ -15,7 +15,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { testResultConverter, TestResult } from "../../dbObjects/TestResult";
-import { astrologerConverter, Astrologer } from "../../dbObjects/Astrologer";
+import { astrologerConverter, Astrologer, astrologerStatus } from "../../dbObjects/Astrologer";
 import {
   astrologerPrivateDataConverter,
   AstrologerPrivateData,
@@ -24,6 +24,7 @@ import { questionConverter, Question } from "../../dbObjects/Question";
 import { uploadDocToStorage,getFile } from "../../utilities/utils";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import AstrologerProfile from "../../components/astrologerProfile";
 
 const MySwal = withReactContent(Swal);
 const Toast = MySwal.mixin({
@@ -316,7 +317,7 @@ class Astrohome extends Component {
             />
           </div>
         );
-      else if( this.state.astrologerProfileInfo?.status?.state == "rejected")
+      else if( this.state.astrologerProfileInfo?.status?.state == astrologerStatus.REJECTED)
       {
         return <>
           <RegistrationForm  
@@ -325,14 +326,18 @@ class Astrohome extends Component {
               data = {this.state.formOptionData}
               user={this.state.user} 
               rejected={true}
-              reason={this.state.astrologerProfileInfo.status.remark}
-              
+              reason={this.state.astrologerProfileInfo.status.remark}        
               />
 
         </>
       }
-      else if (this.state.astrologerProfileInfo ) {
+      else if( this.state.astrologerProfileInfo?.status?.state == astrologerStatus.UNVERIFIED) {
         return <RegistrationForm completed="true" astrologerProfileInfo={this.state.astrologerProfileInfo} />;
+      }
+      else if( this.state.astrologerProfileInfo?.status?.state == astrologerStatus.VERIFIED)
+      {
+        return <AstrologerProfile userProfile={this.state.astrologerProfileInfo}></AstrologerProfile>
+        
       }
       else return <div>Loading</div>;
     }

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styles from "../styles/components/RegistrationForm2.module.css";
 import Link from "next/link";
-import Image from 'next/image'
+import Image from "next/image";
 import Swal from "sweetalert2";
 import GooglePlayBadge from "../public/images/google-play-badge.png";
 import withReactContent from "sweetalert2-react-content";
@@ -20,30 +20,41 @@ const Toast = MySwal.mixin({
 });
 function RegistrationForm(props) {
   const user = props.user;
-  const [localState,setLocalState] = useState({firstName:"",secondName:"",email:"",dob:"",address:"",gender:"",expertise:0,languages:0});
+  const [localState, setLocalState] = useState({
+    firstName: "",
+    secondName: "",
+    email: "",
+    dob: "",
+    address: "",
+    gender: "",
+    expertise: 0,
+    languages: 0,
+  });
   const [date, setDate] = useState(getDate());
   const [formPage, setFormPage] = useState(1);
-  const [expertisedropdown,setExpertisedropdown] = useState(true);
-  const [languagesdropdown,setlanguagesdropdown] = useState(true);
-  const [rejectedPage,sethardRegister] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [expertisedropdown, setExpertisedropdown] = useState(true);
+  const [languagesdropdown, setlanguagesdropdown] = useState(true);
+  const [rejectedPage, sethardRegister] = useState(true);
   // console.log(user)
 
-  const firetoast = (name) =>{
+  const firetoast = (name) => {
     Toast.fire({
       icon: "error",
-      title: "Please fill "+name+" !",
+      title: "Please fill " + name + " !",
     });
-  }
-  
-  const langDropdownRef = useRef(); 
-  const langDropdownButtonRef = useRef(); 
+  };
+
+  const langDropdownRef = useRef();
+  const langDropdownButtonRef = useRef();
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
-      if (!languagesdropdown && langDropdownRef.current && 
-        
+      if (
+        !languagesdropdown &&
+        langDropdownRef.current &&
         !langDropdownButtonRef.current.contains(e.target) &&
-        
-        !langDropdownRef.current.contains(e.target)) {
+        !langDropdownRef.current.contains(e.target)
+      ) {
         setlanguagesdropdown(true);
       }
     };
@@ -56,17 +67,20 @@ function RegistrationForm(props) {
   }, [languagesdropdown]);
 
   const validateEmail = (email) => {
-    return       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    .test(String(email)
-      .toLowerCase());
-      }; 
-  const expDropdownRef = useRef(); 
+    return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      String(email).toLowerCase()
+    );
+  };
+  const expDropdownRef = useRef();
   const expDropdownButtonRef = useRef();
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
-      if (!expertisedropdown && expDropdownRef.current 
-         && !expDropdownButtonRef.current.contains(e.target)
-        && !expDropdownRef.current.contains(e.target)) {
+      if (
+        !expertisedropdown &&
+        expDropdownRef.current &&
+        !expDropdownButtonRef.current.contains(e.target) &&
+        !expDropdownRef.current.contains(e.target)
+      ) {
         setExpertisedropdown(true);
       }
     };
@@ -78,51 +92,33 @@ function RegistrationForm(props) {
     };
   }, [expertisedropdown]);
 
-
   const toggleFormPage = () => {
-    if(formPage==1) {
-      if (localState.firstName == "" )
-       {
-         firetoast("first name")
-         return false;
-       }
-       else if( localState.secondName == "" )
-       {
-        firetoast("second name")
+    if (formPage == 1) {
+      if (localState.firstName == "") {
+        firetoast("first name");
+        return false;
+      } else if (localState.secondName == "") {
+        firetoast("second name");
+        return false;
+      } else if (localState.email == "" || !validateEmail(localState.email)) {
+        firetoast("correct email address");
+        return false;
+      } else if (localState.gender == "") {
+        firetoast("gender");
+        return false;
+      } else if (localState.dob == "") {
+        firetoast("Date of birth");
+        return false;
+      } else if (localState.address == "") {
+        firetoast("address");
+        return false;
+      } else if (localState.expertise == 0) {
+        firetoast("Expertise");
+        return false;
+      } else if (localState.languages == 0) {
+        firetoast("Languages");
         return false;
       }
-       else if (localState.email == "" || !validateEmail(localState.email))
-       {
-        firetoast("correct email address")
-        return false;
-      }
-       else if(
-        localState.gender == "")
-        {
-          firetoast("gender")
-          return false;
-        }
-        else if(
-          localState.dob == "" )
-          {
-            firetoast("Date of birth")
-            return false;
-          }
-        else if(localState.address == "")
-          {
-            firetoast("address")
-            return false;
-          }
-          else if(localState.expertise == 0)
-          {
-            firetoast("Expertise")
-            return false;
-          }
-          else if(localState.languages == 0)
-          {
-            firetoast("Languages")
-            return false;
-          }
     }
 
     setFormPage(formPage === 1 ? 2 : 1);
@@ -130,7 +126,6 @@ function RegistrationForm(props) {
   function rendeRegister() {
     sethardRegister(false);
   }
-
 
   function getDate() {
     var today = new Date();
@@ -148,33 +143,34 @@ function RegistrationForm(props) {
     // console.log(today);
     return today;
   }
-  // Return Form Completion Page 
+  // Return Form Completion Page
   if (props.completed === "true") {
     return (
       <div className={`${styles.baseContainer}`}>
         <div className="container-fluid bg-white">
           <div className={`row`}>
-            <div className="col-sm" style={{background:"#FBE5AD"}}>
+            <div className="col-sm" style={{ background: "#FBE5AD" }}>
               <div className={`${styles.imageContainer}`} />
             </div>
 
             <div className="col-sm-8 my-4  ">
               <p className="mx-sm-auto text-sm-center">
-                Thanks For filling out your details. We will verify your
-                details and get back to you!   <br>
-                </br>
-                <br/>
-                <br/>
-                For more details and working with us , please download our Astrologer app from playstore.
+                Thanks For filling out your details. We will verify your details
+                and get back to you! <br></br>
+                <br />
+                <br />
+                For more details and working with us , please download our
+                Astrologer app from playstore.
                 <center>
                   <div className={styles.badge_container}>
-                  <Link href="https://play.google.com/store/apps/details?id=com.astrologer.dreshkan.astrologer_dreshkan"><a>
-                    <Image src={GooglePlayBadge} /> </a>
-                  </Link> 
+                    <Link href="https://play.google.com/store/apps/details?id=com.astrologer.dreshkan.astrologer_dreshkan">
+                      <a>
+                        <Image src={GooglePlayBadge} />{" "}
+                      </a>
+                    </Link>
                   </div>
-                </center>                           
+                </center>
               </p>
-
 
               <div
                 className={`${styles.endingBlueText} mx-auto text-center my-5 `}
@@ -187,19 +183,20 @@ function RegistrationForm(props) {
       </div>
     );
   }
-  if (props.rejected === true &&  rejectedPage) {
+  if (props.rejected === true && rejectedPage) {
     return (
       <div className={`${styles.baseContainer}`}>
         <div className="container-fluid bg-white">
           <div className={`row`}>
-            <div className="col-sm" style={{background:"#FBE5AD"}}>
+            <div className="col-sm" style={{ background: "#FBE5AD" }}>
               <div className={`${styles.imageContainer}`} />
             </div>
 
             <div className="col-sm-8 my-4  ">
               <p className="mx-sm-auto text-sm-center">
-                <h5>Your application was rejected ! please refill the form.</h5> <br></br>
-               <b> Reason :</b> {props.reason}
+                <h5>Your application was rejected ! please refill the form.</h5>{" "}
+                <br></br>
+                <b> Reason :</b> {props.reason}
               </p>
 
               <div
@@ -207,7 +204,10 @@ function RegistrationForm(props) {
               >
                 Hope to see you onboard!
                 <br></br>
-                <button className="btn btn-success" onClick={rendeRegister}> Click to refill </button>
+                <button className="btn btn-success" onClick={rendeRegister}>
+                  {" "}
+                  Click to refill{" "}
+                </button>
               </div>
             </div>
           </div>
@@ -215,13 +215,12 @@ function RegistrationForm(props) {
       </div>
     );
   }
- 
 
   return (
     <div className={`${styles.baseContainer}`}>
       <div className="container-fluid bg-white">
         <div className={`row`}>
-          <div className="col-sm" style={{background:"#FBE5AD"}}>
+          <div className="col-sm" style={{ background: "#FBE5AD" }}>
             <div className={`${styles.imageContainer}`} />
           </div>
 
@@ -232,21 +231,29 @@ function RegistrationForm(props) {
                 Astrologer Registration Form
               </h3>
 
-              <form className={`row g-3 needs-validation`} onSubmit={props.registerFormHandler}>
+              <form
+                className={`row g-3 needs-validation`}
+                onSubmit={props.registerFormHandler}
+              >
                 {/* Form Part one  */}
                 <div
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-xs-12 col-md-6`}
                 >
                   <label htmlFor="firstName" className="form-label">
-                    First Name <span style={{color:"red"}}>*</span>
+                    First Name <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="firstName"
                     name="firstName"
-                    onChange={(e)=>setLocalState({...localState,firstName:e.target.value})}
+                    onChange={(e) =>
+                      setLocalState({
+                        ...localState,
+                        firstName: e.target.value,
+                      })
+                    }
                     required
                   />
                 </div>
@@ -256,15 +263,19 @@ function RegistrationForm(props) {
                   className={`col-xs-12 col-md-6`}
                 >
                   <label htmlFor="lastName" className="form-label">
-                    Last Name <span style={{color:"red"}}>*</span>
+                    Last Name <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="lastName"
                     name="secondName"
-                    onChange={(e)=>setLocalState({...localState,secondName:e.target.value})}
-
+                    onChange={(e) =>
+                      setLocalState({
+                        ...localState,
+                        secondName: e.target.value,
+                      })
+                    }
                   />
                 </div>
 
@@ -273,14 +284,16 @@ function RegistrationForm(props) {
                   className={`col-12 `}
                 >
                   <label htmlFor="email" className="form-label">
-                    Email <span style={{color:"red"}}>*</span>
+                    Email <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="email"
                     className="form-control"
                     id="email"
                     name="email"
-                    onChange={(e)=>setLocalState({...localState,email:e.target.value})}
+                    onChange={(e) =>
+                      setLocalState({ ...localState, email: e.target.value })
+                    }
                   />
                 </div>
 
@@ -289,7 +302,7 @@ function RegistrationForm(props) {
                   className={`col-12 `}
                 >
                   <label htmlFor="dob" className="form-label">
-                    Date of Birth  <span style={{color:"red"}}>*</span>
+                    Date of Birth <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="date"
@@ -297,7 +310,9 @@ function RegistrationForm(props) {
                     id="dob"
                     name="dob"
                     max={date}
-                    onChange={(e)=>setLocalState({...localState,dob:e.target.value})}
+                    onChange={(e) =>
+                      setLocalState({ ...localState, dob: e.target.value })
+                    }
                   />
                 </div>
 
@@ -306,14 +321,16 @@ function RegistrationForm(props) {
                   className={`col-12 `}
                 >
                   <label htmlFor="address" className="form-label">
-                    Current Address <span style={{color:"red"}}>*</span>
+                    Current Address <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="address"
                     name="address"
-                    onChange={(e)=>setLocalState({...localState,address:e.target.value})}
+                    onChange={(e) =>
+                      setLocalState({ ...localState, address: e.target.value })
+                    }
                   />
                 </div>
 
@@ -322,7 +339,8 @@ function RegistrationForm(props) {
                   className={`col-12 col-md-6`}
                 >
                   <label htmlFor="phone" className="form-label">
-                    Your main Phone Number <span style={{color:"red"}}>*</span>
+                    Your main Phone Number{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="tel"
@@ -330,7 +348,7 @@ function RegistrationForm(props) {
                     id="phone"
                     name="phoneNumber"
                     defaultValue={user.phoneNumber}
-                    readOnly={user.phoneNumber ? true:false}
+                    readOnly={user.phoneNumber ? true : false}
                   />
                 </div>
 
@@ -342,30 +360,58 @@ function RegistrationForm(props) {
                     htmlFor="alternativePhoneNumber"
                     className="form-label"
                   >
-                    Alternate Phone Number 
+                    Alternate Phone Number
                   </label>
                   <input
                     type="tel"
                     className="form-control"
                     id="alternativePhoneNumber"
                     name="alternativePhoneNumber"
-                    
                   />
                 </div>
                 <div
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-12 col-md-6`}
                 >
-                 <div style={{position:"relative"}} >
-                    <button  ref={expDropdownButtonRef} className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown" onClick={()=>setExpertisedropdown((e) => !e)}>Choose Expertise
-                    <span className="caret"></span></button>
-                    <div ref={expDropdownRef}  style={expertisedropdown ? { display: "none"} : {}} className={`${styles.listDropdownContainer} form-check shadow `}> 
-                    <ul style={{listStyle: "none"}} >
-                      {props.data.expertises.map(e => <li key={e} ><input type="checkbox" onChange={e=>{
-                        let val = e.target.checked==true ? 1 : -1;
-                        val = localState.expertise + val;
-                        setLocalState({...localState,expertise:val}); }} className="form-check-input" id={e} /> <label className="form-check-label" htmlFor={e}> {e} </label> </li> )}
-                    </ul>
+                  <div style={{ position: "relative" }}>
+                    <button
+                      ref={expDropdownButtonRef}
+                      className="btn btn-warning dropdown-toggle"
+                      type="button"
+                      data-toggle="dropdown"
+                      onClick={() => setExpertisedropdown((e) => !e)}
+                    >
+                      Choose Expertise
+                      <span className="caret"></span>
+                    </button>
+                    <div
+                      ref={expDropdownRef}
+                      style={expertisedropdown ? { display: "none" } : {}}
+                      className={`${styles.listDropdownContainer} form-check shadow `}
+                    >
+                      <ul style={{ listStyle: "none" }}>
+                        {props.data.expertises.map((e) => (
+                          <li key={e}>
+                            <input
+                              type="checkbox"
+                              onChange={(e) => {
+                                let val = e.target.checked == true ? 1 : -1;
+                                val = localState.expertise + val;
+                                setLocalState({
+                                  ...localState,
+                                  expertise: val,
+                                });
+                              }}
+                              className="form-check-input"
+                              id={e}
+                            />{" "}
+                            <label className="form-check-label" htmlFor={e}>
+                              {" "}
+                              {e}{" "}
+                            </label>{" "}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -374,20 +420,46 @@ function RegistrationForm(props) {
                   style={formPage === 2 ? { display: "none" } : {}}
                   className={`col-12 col-md-6`}
                 >
-                 <div style={{position:"relative"}} >
-                    <button ref={langDropdownButtonRef} className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown" onClick={()=>setlanguagesdropdown(!languagesdropdown)}>Choose languages
-                    <span className="caret"/>
+                  <div style={{ position: "relative" }}>
+                    <button
+                      ref={langDropdownButtonRef}
+                      className="btn btn-warning dropdown-toggle"
+                      type="button"
+                      data-toggle="dropdown"
+                      onClick={() => setlanguagesdropdown(!languagesdropdown)}
+                    >
+                      Choose languages
+                      <span className="caret" />
                     </button>
-                    <div ref={langDropdownRef}  style={languagesdropdown ? { display: "none"} : {}} className={`${styles.listDropdownContainer} form-check shadow `}> 
-                    <ul style={{listStyle: "none"}} >
-                      {props.data.languages.map(e => <li key={e}><input type="checkbox" onChange={e=>{
-                        let val = e.target.checked==true ? 1 : -1;
-                        val = localState.languages + val;
-                        setLocalState({...localState,languages:val}); }} className="form-check-input" id={e} />   <label className="form-check-label" htmlFor={e}> {e} </label>   </li> )}
-                    </ul>
-
-                    </div> 
-                    
+                    <div
+                      ref={langDropdownRef}
+                      style={languagesdropdown ? { display: "none" } : {}}
+                      className={`${styles.listDropdownContainer} form-check shadow `}
+                    >
+                      <ul style={{ listStyle: "none" }}>
+                        {props.data.languages.map((e) => (
+                          <li key={e}>
+                            <input
+                              type="checkbox"
+                              onChange={(e) => {
+                                let val = e.target.checked == true ? 1 : -1;
+                                val = localState.languages + val;
+                                setLocalState({
+                                  ...localState,
+                                  languages: val,
+                                });
+                              }}
+                              className="form-check-input"
+                              id={e}
+                            />{" "}
+                            <label className="form-check-label" htmlFor={e}>
+                              {" "}
+                              {e}{" "}
+                            </label>{" "}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
 
@@ -397,7 +469,7 @@ function RegistrationForm(props) {
                 >
                   <div>
                     <label className="form-label" htmlFor="maleOption">
-                      Gender <span style={{color:"red"}}>*</span>
+                      Gender <span style={{ color: "red" }}>*</span>
                     </label>
                   </div>
                   <div className={`d-flex justify-content-between flex-wrap`}>
@@ -408,15 +480,16 @@ function RegistrationForm(props) {
                       value="male"
                       id="maleOption"
                       autoComplete="off"
-                      onChange={(e)=>setLocalState({...localState,gender:e.target.value})}
-
+                      onChange={(e) =>
+                        setLocalState({ ...localState, gender: e.target.value })
+                      }
                     />
                     <label
                       className="btn btn-outline-warning"
                       htmlFor="maleOption"
                     >
                       Male
-                    </label> 
+                    </label>
 
                     <input
                       type="radio"
@@ -425,8 +498,9 @@ function RegistrationForm(props) {
                       value="female"
                       id="femaleOption"
                       autoComplete="off"
-                      onChange={(e)=>setLocalState({...localState,gender:e.target.value})}
-
+                      onChange={(e) =>
+                        setLocalState({ ...localState, gender: e.target.value })
+                      }
                     />
                     <label
                       className={`btn btn-outline-warning `}
@@ -442,7 +516,9 @@ function RegistrationForm(props) {
                       value="other"
                       id="other"
                       autoComplete="off"
-                      onChange={(e)=>setLocalState({...localState,gender:e.target.value})}
+                      onChange={(e) =>
+                        setLocalState({ ...localState, gender: e.target.value })
+                      }
                     />
                     <label
                       className={`btn btn-outline-warning `}
@@ -460,7 +536,7 @@ function RegistrationForm(props) {
                   className={`col-12 col-md-6 `}
                 >
                   <label htmlFor="verificationIdFront" className="form-label">
-                    (Aadhar/DL) Front <span style={{color:"red"}}>*</span>
+                    (Aadhar/DL) Front <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="file"
@@ -477,7 +553,7 @@ function RegistrationForm(props) {
                   className={`col-12 col-md-6 `}
                 >
                   <label htmlFor="verificationIdBack" className="form-label">
-                    (Aadhar/DL) Back <span style={{color:"red"}}>*</span>
+                    (Aadhar/DL) Back <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="file"
@@ -494,7 +570,8 @@ function RegistrationForm(props) {
                   className={`col-12 `}
                 >
                   <label htmlFor="profilePicture" className="form-label">
-                    Recent Profile Picture <span style={{color:"red"}}>*</span>
+                    Recent Profile Picture{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="file"
@@ -511,7 +588,8 @@ function RegistrationForm(props) {
                   className={`col-12 `}
                 >
                   <label htmlFor="certification" className="form-label">
-                   Astrology Degree and Certification (in PDF format Only) <span style={{color:"red"}}>*</span>
+                    Astrology Degree and Certification (in PDF format Only){" "}
+                    <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="file"
@@ -529,7 +607,11 @@ function RegistrationForm(props) {
                   <label htmlFor="work" className="form-label">
                     Are you working with any other similar platform ?
                   </label>
-                  <select id="work" className="form-select" aria-label="Default select example">
+                  <select
+                    id="work"
+                    className="form-select"
+                    aria-label="Default select example"
+                  >
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
@@ -539,7 +621,8 @@ function RegistrationForm(props) {
                   className={`col-12 col-md-4`}
                 >
                   <label htmlFor="experience" className="form-label">
-                    Experience (in years) <span style={{color:"red"}}>*</span>
+                    Experience (in years){" "}
+                    <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="number"
@@ -554,7 +637,8 @@ function RegistrationForm(props) {
                   className={`col-12 col-md-8`}
                 >
                   <label htmlFor="dailyHours" className="form-label">
-                    How many hours you can contribute daily ? <span style={{color:"red"}}>*</span>
+                    How many hours you can contribute daily ?{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="number"
@@ -566,7 +650,6 @@ function RegistrationForm(props) {
                     required
                   />
                 </div>
-          
 
                 <div
                   style={formPage === 1 ? { display: "none" } : {}}
@@ -582,10 +665,16 @@ function RegistrationForm(props) {
                       required
                     />
                     <label className="form-check-label" htmlFor="tnc">
-                      Agree to <Link href="/astrologer/termsncondition"><a ><u>Terms and conditions</u></a></Link>
+                      Agree to{" "}
+                      <Link href="/astrologer/termsncondition">
+                        <a>
+                          <u>Terms and conditions</u>
+                        </a>
+                      </Link>
                     </label>
                     <div id="tnc" className="invalid-feedback">
-                      You must agree before submitting. Please read all the terms and conditions carefully before submitting *
+                      You must agree before submitting. Please read all the
+                      terms and conditions carefully before submitting *
                     </div>
                   </div>
                 </div>

@@ -15,8 +15,8 @@ async function getFile(path) {
   try {
    url = await getDownloadURL(storageRef);
   }
-  catch {
-    url = "/images/loading.svg";
+  catch (e){
+    console.log(e)
   }
   return url;
   };

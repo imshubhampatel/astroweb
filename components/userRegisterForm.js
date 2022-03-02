@@ -24,7 +24,7 @@ function UserRegistrationForm(props) {
   let user = props.userProfile;
   let isRegistered = props.isRegistered;
   const [date, setDate] = useState(getDate());
-  const [currentTab, setCurrentTab] = useState(1);
+  const [currentTab, setCurrentTab] = useState(0);
   const [rejectedPage, sethardRegister] = useState(true);
   // console.log(user)
 
@@ -65,9 +65,10 @@ function UserRegistrationForm(props) {
 
               <div className="col-sm-8 my-4  ">
                 <div className="row mt-10">
-                  <div className="col"></div>
                   <div className="col">
-                    <button className="btn btn-success" onClick={()=>setCurrentTab(1)}>Profile</button>
+                  <button className="btn btn-success" onClick={()=>setCurrentTab(1)}>Profile</button>
+                  </div>
+                  <div className="col">
                   </div>
                 </div>
                 <br></br>
@@ -120,20 +121,24 @@ function UserRegistrationForm(props) {
                 <br></br>
                 <div className="row">
                   <center>
-                  <div className="card text-white bg-warning border-light mb-3 m-3" >
-                    <div className="card-body">
+                  <h3> Profile</h3>
+
+                  <div className={"card text-black border-warning mb-3 m-3 "+`${styles.profileCard}`} >
+                    <div className="card-body border-warning">
                     <Image src={user?.profilePhotoLink ? user?.profilePhotoLink : "/images/loading.svg"} width="200" height="200" />
                     </div>
                   <div className="card-body">
                     <h5 className="card-title">{user.firstName + " " + user.lastName}</h5>
-                    <p className="card-text">{user.placeOfBirth}<br/> {user?.dob?.toDate()?.toDateString()}</p>
+                    <p className="card-text"><b>Place of Birth : </b>{user.placeOfBirth}<br/><b> DOB : </b>{user?.dob?.toDate()?.toDateString()}</p>
                   </div>
-                  <ul className="list-group list-group-flush">
-                    <li className="list-group-item"> Email : {user?.email}</li>
-                    <li className="list-group-item">Phone number : {user?.phoneNumber ? user?.phoneNumber : "Please fill this !"}</li>
+                  <ul className="list-group border-warning list-group-flush">
+                    <li className="list-group-item border-warning"> Email : {user?.email}</li>
+                    <li className="list-group-item border-warning">Phone number : {user?.phoneNumber ? user?.phoneNumber : "Please fill this !"}</li>
                   </ul>
-                  <div className="card-body">
-                
+                  <div className="card-body bg-warning">
+                    <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
+                    Download our app now on Playstore !
+                  </a></Link>
                   </div>
                 </div>
                   </center>

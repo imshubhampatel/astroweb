@@ -98,14 +98,13 @@ const blog = withAdminAuth(() => {
         file: e.photos[i],
       })
 
-      // tempblog.photoPaths.push(path);
+      tempblog.photoPaths.push(path);
       temp_paths.push(path)
 
     }
     for (let i = 0; i < temp_paths.length; i++) {
       let url = await getFile(temp_paths[i]);
-      console.log(temp_paths[i],url)
-      // tempblog.photos.push(url);
+      tempblog.photos.push(url);
     }
 
     setBlog({ ...tempblog });
@@ -116,7 +115,6 @@ const blog = withAdminAuth(() => {
     getblogInfo(pid);
   }, [pid]);
 
-  console.log(blog);
   return (
     <>
       <div className={` ${layoutStyles.base_container} `}>
