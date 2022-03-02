@@ -24,7 +24,7 @@ function UserRegistrationForm(props) {
   let user = props.userProfile;
   let isRegistered = props.isRegistered;
   const [date, setDate] = useState(getDate());
-  const [currentTab, setCurrentTab] = useState(1);
+  const [currentTab, setCurrentTab] = useState(0);
   const [rejectedPage, sethardRegister] = useState(true);
   // console.log(user)
 
