@@ -41,7 +41,7 @@ const Blogbroadcast = withAdminAuth(() => {
   const [isSearchActive, setisSearchActive] = useState(false);
   const [lastBlog, setLastBlog] = useState(null);
   const [broadcasts, setBroadcasts] = useState([]);
-  const numItems = 3;
+  const numItems = 10;
 
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const Blogbroadcast = withAdminAuth(() => {
   async function getAllBlogs() {
     const astros = query(collection(db, "blog"));
     const querySnapshot = await getDocs(
-      query(astros, orderBy("time"), limit(numItems))
+      query(astros, orderBy("time","desc"), limit(numItems))
     );
     let data = querySnapshot.docs.map((doc) => {
       return { ...doc.data(), id: doc.id };
