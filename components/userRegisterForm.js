@@ -21,7 +21,7 @@ const Toast = MySwal.mixin({
   },
 });
 function UserRegistrationForm(props) {
-  let user = props.userProfile;
+  const [user,setUser] = useState(props.userProfile);
   let isRegistered = props.isRegistered;
   const [date, setDate] = useState(getDate());
   const [currentTab, setCurrentTab] = useState(0);
@@ -34,7 +34,9 @@ function UserRegistrationForm(props) {
       title: "Please fill " + name + " !",
     });
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setUser(props.userProfile)
+  }, [props.userProfile]);
 
   function getDate() {
     var today = new Date();
@@ -125,7 +127,7 @@ function UserRegistrationForm(props) {
 
                   <div className={"card text-black border-warning mb-3 m-3 "+`${styles.profileCard}`} >
                     <div className="card-body border-warning">
-                    <Image src={user?.profilePhotoLink ? user?.profilePhotoLink : "/images/loading.svg"} width="200" height="200" />
+                    <Image src={user?.profilePhotoLink ? user?.profilePhotoLink : "/images/logo_transparent.png"} width="200" height="200" />
                     </div>
                   <div className="card-body">
                     <h5 className="card-title">{user.firstName + " " + user.lastName}</h5>

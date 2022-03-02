@@ -8,7 +8,7 @@ class User {
       this.lastName = data.lastName? data.lastName : ""
       this.dob = data.dob
       this.placeOfBirth = data.placeOfBirth 
-      this.profilePhotoLink = data.profilePhotoLink ? data.profilePhotoLink : "" 
+      this.profilePhotoLink = data.profilePhotoLink ? data.profilePhotoLink : "https://firebasestorage.googleapis.com/v0/b/astrochrchafirebase.appspot.com/o/temp.png?alt=media&token=dec5ee57-3380-4eec-8edf-daf343214023" 
       this.walletBalance = data.walletBalance ? data.walletBalance : 0
       this.profilePic = data.profilePic? data.profilePic : "" 
       this.phoneNumber = data.phoneNumber 

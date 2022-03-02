@@ -1,7 +1,7 @@
 import UserRegistrationForm from "../../components/userRegisterForm";
 import withAuth from "../../auth/withAuth";
 import React, { useState, useEffect } from "react";
-import {isCurrentUser , getCurrentAstrologer} from '../../auth/utils'
+import {isCurrentUser , getCurrentAstrologer } from '../../auth/utils'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import router from "next/router";
 import { User,UserConverter} from '../../dbObjects/User'
@@ -18,12 +18,11 @@ function Index() {
   useEffect(()=>{
     onAuthStateChanged(auth_2,(user)=>{
       if(user) {
-        if(user.email == null) {
-          alert("Invalid User");
-          router.replace("/astrologer")
-          return;
-        }
-        
+        // if(user.email == null) {
+        //   alert("Invalid User");
+        //   router.replace("/astrologer")
+        //   return;
+        // }
         isCurrentUser(user.uid).then((res)=>{
           
           if(res!=null) {
@@ -39,7 +38,6 @@ function Index() {
       }
       else router.replace("/")
 
-      console.log("yes")
     })
   },[]);
 
@@ -61,6 +59,7 @@ function Index() {
     );
     await setDoc(ref, new User(profileData));
     setIsRegistered(true);
+    isCurrentUser(profileData.uid).then((e)=>setUserProfile(e)).catch();
   }
 
   if(isRegistered == null)
