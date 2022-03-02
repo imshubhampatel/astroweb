@@ -98,18 +98,18 @@ const blog = withAdminAuth(() => {
         file: e.photos[i],
       })
 
-      tempblog.photoPaths.push(path);
+      // tempblog.photoPaths.push(path);
       temp_paths.push(path)
 
     }
     for (let i = 0; i < temp_paths.length; i++) {
       let url = await getFile(temp_paths[i]);
       console.log(temp_paths[i],url)
-      tempblog.photos.push(url);
+      // tempblog.photos.push(url);
     }
 
     setBlog({ ...tempblog });
-    // await updateDoc(astros, { ...tempblog });
+    await updateDoc(astros, { ...tempblog });
     MySwal.clickConfirm();
   }
   useEffect(() => {
