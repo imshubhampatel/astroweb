@@ -208,7 +208,7 @@ function UserRegistrationForm(props) {
                       id="email"
                       name="email"
                       value={user.email}
-                      readOnly
+                      readOnly={user.email ? true : false}
                     />
                   </div>
 
@@ -247,6 +247,8 @@ function UserRegistrationForm(props) {
                       className="form-control"
                       id="phone"
                       name="phoneNumber"
+                      value={user.phoneNumber}
+                      readOnly={user.phoneNumber ? true : false}
                       required
                     />
                   </div>
