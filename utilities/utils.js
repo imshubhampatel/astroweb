@@ -5,12 +5,19 @@ const storage = getStorage(firebase,id);
 
 async function uploadDocToStorage({ path, file }) {
     const storageRef = ref(storage, path);
+    await uploadBytes(storageRef, file).then(e=>{
+
+    }).catch(e=>{
+
+    });
+
+  }
+  async function uploadDocToStorageWithUrl({ path, file }) {
+    const storageRef = ref(storage, path);
     let url = ""
     await uploadBytes(storageRef, file);
     url = await getDownloadURL(storageRef)
-    console.log(url)
     return url;
-
   }
 
 async function getFile(path) {
@@ -32,4 +39,4 @@ async function deleteDataFromStorage(path) {
 
 }
 
-export {uploadDocToStorage , getFile, deleteDataFromStorage};
+export {uploadDocToStorage , getFile, deleteDataFromStorage,uploadDocToStorageWithUrl};

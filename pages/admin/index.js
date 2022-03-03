@@ -23,7 +23,7 @@ import { firebase } from "../../config";
 import EditBanner from "../../components/editBanner";
 import { setDoc } from "firebase/firestore/lite";
 import { v4 as uuidv4 } from "uuid";
-import { getFile, uploadDocToStorage } from "../../utilities/utils";
+import { getFile, uploadDocToStorageWithUrl } from "../../utilities/utils";
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -118,7 +118,7 @@ const Home = withAdminAuth(() => {
   async function editBannerHandler(e) {
     let uid = uuidv4();
     let path = "banners/" + uid ;
-    let url = await uploadDocToStorage({
+    let url = await uploadDocToStorageWithUrl({
       path: path,
       file: e.photos[0],
     })
