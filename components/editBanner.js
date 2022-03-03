@@ -63,7 +63,7 @@ function EditBanner({handleSubmit, data ,removeBanner}) {
       <div className="row">
           <>
       {data.map((e)=>{
-          return <div className="card border-warning mb-3">
+          return <div  key={e.id}className="card border-warning mb-3">
           <Image className="card-img-top" src={e.imageUrl} height={200} width={350}/>
           <div className="card-body">
             <h5 className="card-title">Banner</h5>
