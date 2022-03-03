@@ -16,18 +16,34 @@ import {
   getDoc,
   getFirestore,
   updateDoc,
+  deleteDoc,
+  addDoc,
 } from "firebase/firestore";
 import { firebase } from "../../config";
+import EditBanner from "../../components/editBanner";
+import { setDoc } from "firebase/firestore/lite";
+import { v4 as uuidv4 } from "uuid";
+import { getFile, uploadDocToStorage } from "../../utilities/utils";
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
+
 
 const Home = withAdminAuth(() => {
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalAstrologers, setTotalAstrologers] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [commission, setCommission] = useState(0);
+  const [banners, setBanners] = useState([]);
   const [adminWalletBalance, setadminWalletBalance] = useState(0);
+
+  async function getBanners() {
+    const astros = collection(db, "banners");
+    var querySnapshot = await getDocs(astros);
+    return querySnapshot.docs.map((e)=>{
+      return {...e.data(),id:e.id}})
+ 
+  }
 
   async function getAppDetails() {
    const astros = collection(db, "app_details");
@@ -91,54 +107,42 @@ const Home = withAdminAuth(() => {
       ),
     });
   };
-  const addPricingCategoryView = () => {
-    MySwal.fire({
-      showConfirmButton: false,
-      html: (
-        <div className="container">
-          <h4>Add pricing Category</h4>
-          <form onSubmit={changeCommissionHandler}>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="enter name of the new category"
-            ></input>{" "}
-            <br />
-            <label htmlFor="name">Price Chat</label>
-            <input
-              type="number"
-              name="priceChat"
-              id="priceChat"
-              placeholder="enter priceChat"
-            ></input>{" "}
-            <br />
-            <label htmlFor="name">Price Voice</label>
-            <input
-              type="number"
-              name="priceVideo"
-              id="priceVideo"
-              placeholder="enter priceVideo"
-            ></input>
-            <br />
-            <label htmlFor="name">Price Video</label>
-            <input
-              type="number"
-              name="priceVoice"
-              id="priceVoice"
-              placeholder="enter priceVoice"
-            ></input>
-            <div className="text-end mt-4">
-              <button className={"btn btn-success"} type="submit">
-                Add
-              </button>
-            </div>
-          </form>
-        </div>
-      ),
+  async function changeCommissionHandler(e) {
+    setCommission(e.target.commission.value);
+    updateDoc(doc(collection(db, "app_details"), "money"), {
+      commission:  parseInt(e.target.commission.value),
     });
+    MySwal.clickConfirm();
+
+  }
+  async function editBannerHandler(e) {
+    let uid = uuidv4();
+    let path = "banners/" + uid ;
+    let url = await uploadDocToStorage({
+      path: path,
+      file: e.photos[0],
+    })
+    addDoc(collection(db, "banners"), {
+    imageUrl: url,
+  });
+    MySwal.clickConfirm();
+  }
+  async function removeBanner(id) {
+    deleteDoc(doc(db, "banners/"+id));
+    MySwal.clickConfirm();
+  }
+  const editBlogView = async () => {
+    getBanners().then(e=>{
+      MySwal.fire({
+        showConfirmButton: false,
+        html: (
+          <EditBanner handleSubmit={editBannerHandler} data={e} removeBanner={removeBanner}></EditBanner>
+        ),
+      });
+    });
+   
   };
+ 
   return (
     <>
       <div className="">
@@ -149,13 +153,20 @@ const Home = withAdminAuth(() => {
         </Head>
         <main className={styles.main}>
           <h1 className={styles.title}>Admin Home</h1>
-          <div className="container">
+          <div className="container row">
+            <div className="col-3">
             <button onClick={filterView} className="btn btn-primary">
               Change Commission
             </button>
-            <br/><br/>
+            <br/>
+            <br/>
+            <button onClick={editBlogView} className="btn btn-primary">
+              Edit Banners
+            </button>
+            <br/>
+            </div>
+            <div className="col-9">
            
-          </div>
 
           <p className="">
             Total Users : {totalUsers} <br />
@@ -164,6 +175,9 @@ const Home = withAdminAuth(() => {
             Current Commission for Astrologers :{commission} <br />
             Wallet Balance : {adminWalletBalance}
           </p>
+          </div>
+          </div>
+
         </main>
       </div>
     </>

@@ -5,8 +5,12 @@ const storage = getStorage(firebase,id);
 
 async function uploadDocToStorage({ path, file }) {
     const storageRef = ref(storage, path);
-    uploadBytes(storageRef, file).then((snapshot) => {
-    }).catch(e => {});
+    let url = ""
+    await uploadBytes(storageRef, file);
+    url = await getDownloadURL(storageRef)
+    console.log(url)
+    return url;
+
   }
 
 async function getFile(path) {
