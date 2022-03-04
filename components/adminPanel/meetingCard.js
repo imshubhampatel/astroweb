@@ -1,6 +1,6 @@
 import styles from "../../styles/components/adminPanel/meetingCard.module.css"
 
-
+import Image from 'next/image'
 export default function MeetingCard( {data,type} ) {
 
 
@@ -8,13 +8,18 @@ export default function MeetingCard( {data,type} ) {
     <div className={`${styles.container}  d-flex gap-2 `}>
 
         {/* Photo  */} 
-        <div className={`${styles.photoContainer}`}>  </div>
-
-
+        <div className={`${styles.photoContainer}`}> 
+        <Image
+              src={type == "astrologer" ? data?.userImage : data?.astrologerImage}
+              height="100"
+              width="100"
+              layout="responsive"
+            />
+         </div>
         {/* Order Status  */}
         <div className={`flex-grow-1  `} style={{height: "100%"}}> 
 
-          <h6>{data?.type} Call with {type=="astrologer"?data?.user:data?.astrologerUid}</h6>
+          <h6>{data?.type} Call with {type=="astrologer"?data?.userUid:data?.astrologerUid}</h6>
 
           <div className={`${styles.orderDetailText}`} >Order id: {data?.id} <br/>
 
@@ -34,7 +39,7 @@ export default function MeetingCard( {data,type} ) {
         <div className={`row  ${styles.orderDetailText}`} >
 
           <div className={`col`}>Consult Rate</div>
-          <div className={`col text-end`}>Rs&nbsp;{data?.consultationRate}/5 minute</div>
+          <div className={`col text-end`}>Rs &nbsp;{data?.consultationRate}/minute</div>
 
         </div>
 
@@ -51,7 +56,7 @@ export default function MeetingCard( {data,type} ) {
           <div className={`col text-end`}>Rs {data?.totalAmount}</div>
 
 
-          <div className={`col`}>Total Earnings:</div>
+          <div className={`col`}>Total Astrologer Earnings:</div>
           <div className={`col text-end`}>Rs {data?.astrologerAmount}</div>
         </div>
 

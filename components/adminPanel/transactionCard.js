@@ -1,7 +1,6 @@
 import styles from "../../styles/components/adminPanel/transactionCard.module.css";
 
 export default function TransactionCard({props}) {
-  console.log(props)
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
