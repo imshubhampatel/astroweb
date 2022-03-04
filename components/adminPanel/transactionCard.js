@@ -1,41 +1,37 @@
 import styles from "../../styles/components/adminPanel/transactionCard.module.css";
 
-export default function TransactionCard({ props }) {
+export default function TransactionCard({props}) {
+  const date = props.date
+    ? new Date(props.date.seconds).toLocaleDateString(undefined, {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      })
+    : "Invalid Time";
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
         <div className={styles.mainText}>
           {" "}
-          Voice Call with Astrologer Aarti{" "}
+          {"Transaction Type : " + props.subtype}{" "}   
+
         </div>
 
         <div className={styles.status}> Status: Successful </div>
 
-        <div className={styles.subText}> Order Id: #0009999999999 </div>
-        <div className={styles.subText}> 12th July 2021 09:30PM </div>
+        <div className={styles.subText}> Concerned Related Id: {props.subtypeId} </div>
+        <div className={styles.subText}> {props.date.toDate().toDateString()} </div>
       </div>
       <div className={styles.rightContainer}>
         <div className={styles.gridContainer}>
-          <div className={`${styles.gridItem}  `}> Deduction Details: </div>
-          <div className={`${styles.gridItem}  `}> -Rs 25 </div>
-          <div className={`${styles.gridItem}  `}> Consult Rate </div>
-          <div className={`${styles.gridItem}  `}> Rs 5/minute </div>
-          <div className={`${styles.gridItem}  `}> Duration </div>
-          <div className={`${styles.gridItem}  `}> 5 minutes </div>
-          <div className={`${styles.gridItem}  `}> Total cost: </div>
-          <div className={`${styles.gridItem}  `}> Rs 25.00 </div>
+        <div className={`${styles.gridItem}  `}> Transaction ID : {props?.id} </div>
+        </div>
+        <div className={styles.gridContainer}>
+          <div className={`${styles.gridItem}  `}> Total cost: {props?.amount} </div>
         </div>
       </div>
+      
     </div>
   );
 }
 
-{
-  /* <div className="card bg-light mb-3">
-      <div className="card-header"> Detail : {props.subtype}  OrderId : {props.subtypeId}</div>
-      <div className="card-body">
-        <p className="card-text">Amount : {props.amount}</p>
-        <p className="card-text">Type : {props.type}</p>
-      </div>
-    </div> */
-}

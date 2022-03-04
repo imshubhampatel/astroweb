@@ -133,7 +133,7 @@ const user = withAdminAuth(() => {
         return (
           <>
             {meetings.map((e) => {
-              return <MeetingCard key={e.id} props={e} type="user"></MeetingCard>;
+              return <MeetingCard key={e.id} data={e} type="user"></MeetingCard>;
             })}
           </>
         );

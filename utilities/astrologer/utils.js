@@ -27,7 +27,7 @@ const db = getFirestore(firebase);
  }
  async function getAllWalletTransactions(uuid) {
    const astros = query(
-     collection(db, "astrologer", uuid, "astrologer_wallet_transactions")
+     collection(db, "astrologer", uuid, "astologer_wallet_transaction")
    );
    const querySnapshot = await getDocs(astros);
    let data = querySnapshot.docs.map((doc) => {
