@@ -2,6 +2,7 @@ import styles from "../../styles/components/adminPanel/meetingCard.module.css"
 
 import Image from 'next/image'
 export default function MeetingCard( {data,type} ) {
+  console.log(data);
 
 
   return (
@@ -10,7 +11,7 @@ export default function MeetingCard( {data,type} ) {
         {/* Photo  */} 
         <div className={`${styles.photoContainer}`}> 
         <Image
-              src={type == "astrologer" ? data?.userImage : data?.astrologerImage}
+              src={type == "astrologer" ? data.userImage ?data?.userImage : "/images/loading.svg": data?.astrologerImage ?data?.astrologerImage : "/images/loading.svg"}
               height="100"
               width="100"
               layout="responsive"
