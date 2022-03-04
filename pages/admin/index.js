@@ -172,7 +172,7 @@ const Home = withAdminAuth(() => {
             Total Users : {totalUsers} <br />
             Total Astrologers :{totalAstrologers} <br />
             Total Orders :{totalOrders} <br />
-            Current Commission for Astrologers :{commission} <br />
+            Current Commission for Astrologers :{100 - commission} <br />
             Wallet Balance : {adminWalletBalance}
           </p>
           </div>
