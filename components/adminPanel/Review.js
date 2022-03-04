@@ -1,7 +1,7 @@
 import styles from "../../styles/components/adminPanel/Review.module.css";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
+import Image from 'next/image'
 const MySwal = withReactContent(Swal)
 
 
