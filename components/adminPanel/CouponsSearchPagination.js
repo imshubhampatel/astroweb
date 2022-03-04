@@ -67,6 +67,7 @@ const CouponsSearchPagination = (props) => {
                 <th scope="col">#</th>
                 <th scope="col"> Code</th>
                 <th scope="col"> Start Date</th>
+                <th scope="col"> End Date</th>
                 <th scope="col"> Discount Type</th>
                 <th scope="col"> Total Uses</th>
                 <th scope="col"> Is active ? </th>
@@ -79,6 +80,7 @@ const CouponsSearchPagination = (props) => {
                   <td> 1 </td>
                   <td>{e.code}</td>
                   <td>{e?.startDate?.toDate()?.toDateString()}</td>
+                  <td>{e?.endDate?.toDate()?.toDateString()}</td>
                   <td>{e.discountType}</td>
                   <td>{e.totalUses}</td>
                   <td>{e.live ? "YES" :"No"}</td>

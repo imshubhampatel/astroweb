@@ -14,6 +14,7 @@ import {
   doc,
   getFirestore,
   query,
+  getDoc,
 } from "firebase/firestore";
 import { firebase } from "../../config";
 import Link from "next/link";
@@ -30,9 +31,11 @@ const db = getFirestore(firebase);
 
 const storemanagement = withAdminAuth(() => {
   const [categories, setCategories] = useState([]);
+  const [totalOrders, setTotalOrders] = useState(0);
 
   useEffect(() => {
     getAllCategories().then((data) => setCategories(data));
+    getAppDetails().then().catch();
   }, []);
 
   async function addCategoryHandler(e) {
@@ -119,6 +122,19 @@ const storemanagement = withAdminAuth(() => {
     await setDoc(ref, new Coupon(coupon));
     Swal.clickConfirm();
   }
+
+  async function getAppDetails() {
+    const astros = collection(db, "app_details");
+  
+    var querySnapshot = await getDoc(doc(astros, "store"));
+ 
+     if (querySnapshot.exists()) {
+       setTotalOrders(querySnapshot.data().orderCount);
+     } else {
+       // console.log("no")
+     }
+  }
+
   async function getAllCategories() {
     const ref = query(collection(db, "app_details/store/categories"));
     const querySnapshot = await getDocs(ref);
@@ -415,8 +431,7 @@ const storemanagement = withAdminAuth(() => {
         </div>
       </div>
       <div className="row">
-        <h4>Total Orders : 100</h4>
-        <h4>Total Items : 100</h4>
+        <h4>Total Orders : {totalOrders}</h4>
       </div>
       <div className="row">
         <div className="col">
@@ -424,10 +439,15 @@ const storemanagement = withAdminAuth(() => {
             {" "}
             Add Category
           </button>
+          <br/>          <br/>
+
           <button className="btn btn-primary" onClick={addItemView}>
             {" "}
             Add Item
           </button>
+          <br/>          <br/>
+
+
           <button className="btn btn-primary" onClick={addCouponView}>
             {" "}
             Add Coupon
@@ -441,6 +461,9 @@ const storemanagement = withAdminAuth(() => {
             {" "}
             Manage Items
           </button>
+          <br/>          <br/>
+
+
           <button
             className="btn btn-primary"
             onClick={() => router.push("/admin/store/order")}
@@ -448,6 +471,9 @@ const storemanagement = withAdminAuth(() => {
             {" "}
             Manage Orders
           </button>
+          <br/>          <br/>
+
+
           <button
             className="btn btn-primary"
             onClick={() => router.push("/admin/store/coupon")}

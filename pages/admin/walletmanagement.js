@@ -126,7 +126,7 @@ const walletManagment = withAdminAuth(() => {
   async function astrologerPrivateDetailView(requestData) {
     getPrivateData(requestData.astrologer).then((data) =>
       MySwal.fire({
-        title: `Astrologer ${data.astrologer}`,
+        title: `Astrologer ${data.firstName + " " + data.secondName}`,
         html: (
           <>
             <div className={`contianer text-start `}>

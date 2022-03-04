@@ -42,13 +42,15 @@ const itemManagement = withAdminAuth(()=> {
       couponInfo.endDate = new Date(Date.parse(e.target.endDate.value));
       couponInfo.discountType = e.target.discountType.value;
       couponInfo.limit = e.target.limit.value;
-      couponInfo.subType = e.target.subType.value;
+      couponInfo.subtype = e.target.subtype.value;
       couponInfo.discount = e.target.discount.value;
       couponInfo.updatedAt = new Date();
       couponInfo.title = e.target.title.value;
       const ref = doc(db, "coupon", couponInfo.id);
-      await updateDoc(ref, couponInfo);
+      console.log(couponInfo)
+      await updateDoc(ref, {...couponInfo});
       Swal.clickConfirm();
+      await getAllCoupons();
     }
 
     async function getCouponInfo(couponId) {
@@ -70,12 +72,14 @@ const itemManagement = withAdminAuth(()=> {
                     <p>Code : {couponInfo.code}</p>
                     <p> Is coupon active  : {couponInfo.live?"YES":"NO"} </p>
                         <p>Current max use limit : {couponInfo.limit}</p>
+                        <p>start Date : {couponInfo.startDate.toDate().toDateString()}</p>
                         <p>end Date : {couponInfo.endDate.toDate().toDateString()}</p>
                         <p>min Purchase : {couponInfo.minPurchase}</p>
                         <p> Discount : {couponInfo.discount}</p>
                         <p> Discount Type: {couponInfo.discountType}</p>
-                        <p> Applicable on  : {couponInfo.subType}</p>
+                        <p> Applicable on  : {couponInfo.subtype}</p>
                         <p>max Discount : {couponInfo.maxDiscount}</p>
+                        <p> Main Categories : {couponInfo.mainCategory.map(e => <>{e + " "}</>)}</p>
                     </div>
                 </div>
                 <form onSubmit={(e)=>editCouponHandler(e,couponInfo)}>
@@ -117,7 +121,7 @@ const itemManagement = withAdminAuth(()=> {
                defaultValue={couponInfo.discount}
                type="number"
              />
-             <label htmlFor="subType">subType</label>
+             <label htmlFor="subtype">subtype</label>
               <select className="form-control" id="subtype" defaultValue={couponInfo.subtype} required>
               { Object.keys(couponSubtype).map((e) => (
                  <option value={couponSubtype[e]} key={e}>
@@ -162,6 +166,7 @@ const itemManagement = withAdminAuth(()=> {
                name="live"
                 id="live"
                type="checkbox"
+               defaultChecked
              />
             <div className="text-end mt-4">
               <button
@@ -184,7 +189,7 @@ const itemManagement = withAdminAuth(()=> {
         const ref = query(collection(db, "coupon"));
         const querySnapshot = await getDocs(ref);
         let data = querySnapshot.docs.map((doc) => {
-          return doc.data();
+          return {id: doc.id,...doc.data()};
         });        
         setCoupons(data);
     }
