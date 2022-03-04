@@ -63,8 +63,8 @@ const Review = ( {props,deleteReviewHandler} ) => {
     
   }
 
-  const date = props.time
-    ? new Date(props.time.seconds).toLocaleDateString(undefined, {
+  const date = props.date
+    ? new Date(props.date.seconds).toLocaleDateString(undefined, {
         month: "short",
         day: "2-digit",
         year: "numeric",
@@ -81,7 +81,13 @@ const Review = ( {props,deleteReviewHandler} ) => {
       {/* TOP PART */}
       <div className={`d-flex gap-1`}>
         {/* Photo */}
-        <div className={`${styles.photoContainer}`}></div>
+        <div className={`${styles.photoContainer}`}>
+        <Image
+              src={props.user.profilePhoto}
+              height="100"
+              width="100"
+              layout="responsive"
+            />        </div>
 
         {/* User and Review info */}
         <div className={` flex-grow-1`}>

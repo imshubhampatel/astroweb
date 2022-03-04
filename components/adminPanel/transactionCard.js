@@ -1,29 +1,27 @@
 import styles from "../../styles/components/adminPanel/transactionCard.module.css";
 
-export default function TransactionCard({ props }) {
+export default function TransactionCard({props}) {
+  console.log(props)
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
         <div className={styles.mainText}>
           {" "}
-          Voice Call with Astrologer Aarti{" "}
+          {"Transaction Type : " + props.subtype}{" "}
         </div>
 
         <div className={styles.status}> Status: Successful </div>
 
-        <div className={styles.subText}> Order Id: #0009999999999 </div>
-        <div className={styles.subText}> 12th July 2021 09:30PM </div>
+        <div className={styles.subText}> Concerned Related Id: {props.subtypeId} </div>
+        <div className={styles.subText}> {props?.date?.toDate()} </div>
       </div>
       <div className={styles.rightContainer}>
         <div className={styles.gridContainer}>
-          <div className={`${styles.gridItem}  `}> Deduction Details: </div>
-          <div className={`${styles.gridItem}  `}> -Rs 25 </div>
-          <div className={`${styles.gridItem}  `}> Consult Rate </div>
-          <div className={`${styles.gridItem}  `}> Rs 5/minute </div>
-          <div className={`${styles.gridItem}  `}> Duration </div>
-          <div className={`${styles.gridItem}  `}> 5 minutes </div>
+        <div className={`${styles.gridItem}  `}> Transaction ID : {props?.id} </div>
+          <div className={`${styles.gridItem}  `}> {props?.type} Details: </div>
+          <div className={`${styles.gridItem}  `}>  {props?.amount} </div>
           <div className={`${styles.gridItem}  `}> Total cost: </div>
-          <div className={`${styles.gridItem}  `}> Rs 25.00 </div>
+          <div className={`${styles.gridItem}  `}> {props?.amount} </div>
         </div>
       </div>
     </div>
