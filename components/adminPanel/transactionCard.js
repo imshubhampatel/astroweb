@@ -20,7 +20,7 @@ export default function TransactionCard({props}) {
         <div className={styles.status}> Status: Successful </div>
 
         <div className={styles.subText}> Concerned Related Id: {props.subtypeId} </div>
-        <div className={styles.subText}> {date} </div>
+        <div className={styles.subText}> {props.date.toDate().toDateString()} </div>
       </div>
       <div className={styles.rightContainer}>
         <div className={styles.gridContainer}>
