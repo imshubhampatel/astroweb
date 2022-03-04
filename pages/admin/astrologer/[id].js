@@ -832,15 +832,15 @@ const astrologer = withAdminAuth(() => {
           </div>
 
           <div className="col-2 border-end  text-center">
-            <MdOutlineMessage /> {astro.chatSeconds} mins
+            <MdOutlineMessage /> {astro.chatSeconds/60} mins
           </div>
 
           <div className="col-2   text-center">
-            <FiPhoneCall /> {astro.voiceSeconds} mins
+            <FiPhoneCall /> {astro.voiceSeconds/60} mins
           </div>
 
           <div className="col-2 border-start  text-center">
-            <BiVideoPlus /> {astro.videoSeconds} mins
+            <BiVideoPlus /> {astro.videoSeconds/60} mins
           </div>
 
           <div className="col  "></div>
