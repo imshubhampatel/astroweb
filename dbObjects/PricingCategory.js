@@ -7,6 +7,7 @@ class pricingCategory {
     this.priceChat = data.priceChat;
     this.priceVoice = data.priceVoice;
     this.priceVideo = data.priceVideo;
+    this.currentDiscount = data.currentDiscount ? data.currentDiscount : 0;
     this.lastUpdateTimestamp = data.lastUpdateTimestamp;
     
   }
@@ -24,6 +25,7 @@ const pricingCategoryConverter = {
       priceChat: data.priceChat,
       priceVoice: data.priceVoice,
       priceVideo: data.priceVideo,
+      currentDiscount : data.currentDiscount,
       lastUpdateTimestamp: data.lastUpdateTimestamp,
     };
   },

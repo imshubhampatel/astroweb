@@ -794,11 +794,12 @@ const astrologer = withAdminAuth(() => {
                 >
                   Enabled : {astro.enabled ? "   On  " : "  off   "}
                 </button>
+               
                 <button
-                  className={`${styles.astroDiscardButton}  ${styles.astroButton}`}
+                  className={`btn btn-danger`}
                   onClick={editPricingCategory}
                 >
-                  {astro.pricingCategory}
+                 Pricing Category : {astro.pricingCategory}
                 </button>
               </>
             )}

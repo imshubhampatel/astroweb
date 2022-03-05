@@ -23,6 +23,7 @@ import { pricingCategory, pricingCategoryConverter } from "../../dbObjects/Prici
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { parse } from "postcss";
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -204,6 +205,7 @@ const astrologermanagement = withAdminAuth(() => {
       priceChat:  parseInt(e.target.priceChat.value),
       priceVideo: parseInt(e.target.priceVideo.value),
       priceVoice: parseInt(e.target.priceVoice.value),
+      currentDiscount : parseInt(e.target.currentDiscount.value),
       lastUpdateTimestamp : new Date(),
     });
     setPricingList([...pricingList.filter((x) => {
@@ -258,6 +260,13 @@ const astrologermanagement = withAdminAuth(() => {
                   id="priceVideo"
                   placeholder="enter priceVideo"
                 ></input>
+                  <label htmlFor="name">Current Discount</label>
+                <input
+                  type="number"
+                  name="currentDiscount"
+                  id="currentDiscount"
+                  placeholder="enter current Discount"
+                ></input>
                 <div className="text-end mt-4">
                   <button className={"btn btn-success"} type="submit">
                     Add
@@ -281,7 +290,7 @@ const astrologermanagement = withAdminAuth(() => {
                   defaultValue={selectedPricingCategory}
                 >
                   {pricingList.map((e) => (
-                    <option key={ e.name}value={e.name}> {e.name +  " chat :"+ e.priceChat+" voice : "+e.priceVoice  +" Video : " + e.priceVideo}</option>
+                    <option key={ e.name}value={e.name}> {e.name +  " chat :"+ e.priceChat+" voice : "+e.priceVoice  +" Video : " + e.priceVideo + " Discount : " + e?.currentDiscount}</option>
                   ))}
                 </select>
                 <br />
@@ -309,6 +318,13 @@ const astrologermanagement = withAdminAuth(() => {
                   name="priceVoice"
                   id="priceVoice"
                   placeholder="enter priceVoice"
+                ></input>
+                  <label htmlFor="name">Current Discount</label>
+                <input
+                  type="number"
+                  name="currentDiscount"
+                  id="currentDiscount"
+                  placeholder="enter current Discount"
                 ></input>
                 <div className="text-end mt-4">
                   <button className={"btn btn-success"} type="submit">
