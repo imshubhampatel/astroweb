@@ -37,13 +37,13 @@ const itemManagement = withAdminAuth(()=> {
 
     async function editCouponHandler(e,couponInfo) {
       e.preventDefault();
-      couponInfo.maxDiscount = e.target.maxDiscount.value;
-      couponInfo.minPurchase =  e.target.minPurchase.value;
+      couponInfo.maxDiscount = parseInt(e.target.maxDiscount.value);
+      couponInfo.minPurchase =  parseInt(e.target.minPurchase.value);
       couponInfo.endDate = new Date(Date.parse(e.target.endDate.value));
       couponInfo.discountType = e.target.discountType.value;
-      couponInfo.limit = e.target.limit.value;
+      couponInfo.limit = parseInt(e.target.limit.value);
       couponInfo.subtype = e.target.subtype.value;
-      couponInfo.discount = e.target.discount.value;
+      couponInfo.discount = (e.target.discount.value);
       couponInfo.updatedAt = new Date();
       couponInfo.title = e.target.title.value;
       const ref = doc(db, "coupon", couponInfo.id);
@@ -129,7 +129,7 @@ const itemManagement = withAdminAuth(()=> {
                  </option>
                ))}
               </select>
-             <label htmlFor="maxDiscount">maxDiscount</label>
+             <label htmlFor="maxDiscount">Maximum Discount</label>
 
              <input
                className="form-control"
@@ -140,7 +140,7 @@ const itemManagement = withAdminAuth(()=> {
                defaultValue={couponInfo.maxDiscount}
                required
              />
-             <label htmlFor="minPurchase">minPurchase</label>
+             <label htmlFor="minPurchase">Minimum Purchase</label>
 
              <input
                className="form-control"
@@ -151,7 +151,7 @@ const itemManagement = withAdminAuth(()=> {
                defaultValue={couponInfo.minPurchase}
                required
              />
-              <label htmlFor="limit"> limit</label>
+              <label htmlFor="limit"> Max number of uses per user</label>
              <input
                className="form-check"
                name="limit"

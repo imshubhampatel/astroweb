@@ -59,6 +59,7 @@ import {
   changePricingCategory,
 } from "../../../utilities/astrologer/utils";
 import { EmployeePermissions } from "../../../dbObjects/Employee";
+import EditAstrologerDetails from "../../../components/adminPanel/EditAstrologerDetails";
 
 const db = getFirestore(firebase);
 const MySwal = withReactContent(Swal);
@@ -68,7 +69,7 @@ const astrologer = withAdminAuth(() => {
   // const astrologer = () => {
   const router = useRouter();
   const { pid } = router.query;
-  const [astro, setastro] = useState({});
+  const [astro, setAstrologerProfileData] = useState({});
   // const [enabled, setenabled] = useState(true);
   const [profilePicUrl, setprofilePicUrl] = useState(
     "/astrochrchaweb/public/astrochrchalogo.png"
@@ -105,7 +106,7 @@ const astrologer = withAdminAuth(() => {
         id: querySnapshot.id,
         ...querySnapshot.data(),
       });
-      setastro(astro_temp);
+      setAstrologerProfileData(astro_temp);
       setSelectedPricingCategory(astro_temp.pricingCategory);
       getPrivateData(pid).then((e) => {
         setAstrologerPrivateData(e);
@@ -135,7 +136,7 @@ const astrologer = withAdminAuth(() => {
     );
     let astro_temp = astro;
     astro_temp.enabled = !astro_temp.enabled;
-    setastro({ ...astro_temp });
+    setAstrologerProfileData({ ...astro_temp });
     await updateDoc(ref, { enabled:astro_temp.enabled });
     // setenabled(astro_temp.enabled);
   }
@@ -151,7 +152,7 @@ const astrologer = withAdminAuth(() => {
     let astro_temp = astro;
     astro_temp.status.state = astrologerStatus.REJECTED;
     astro_temp.status.remark = e.target.remark.value;
-    setastro({ ...astro_temp });
+    setAstrologerProfileData({ ...astro_temp });
     await updateDoc(ref, { ...astro_temp });
     Swal.clickConfirm();
   }
@@ -162,7 +163,7 @@ const astrologer = withAdminAuth(() => {
     let astro_temp = astro;
     astro_temp.status.state = astrologerStatus.VERIFIED;
     astro_temp.enabled = true;
-    setastro({ ...astro_temp });
+    setAstrologerProfileData({ ...astro_temp });
     await updateDoc(ref, { ...astro_temp });
     await setAstrologerPerm(uid);
   }
@@ -434,7 +435,7 @@ const astrologer = withAdminAuth(() => {
                       // Call function to update values hook kere
                       let astro_temp = astro;
                       astro_temp.priceChat = e.target.value;
-                      setastro({ ...astro_temp });
+                      setAstrologerProfileData({ ...astro_temp });
                     }}
                     defaultValue={astro.priceChat}
                   />
@@ -456,7 +457,7 @@ const astrologer = withAdminAuth(() => {
                       // Call function to update values hook kere
                       let astro_temp = astro;
                       astro_temp.priceVoice = e.target.value;
-                      setastro({ ...astro_temp });
+                      setAstrologerProfileData({ ...astro_temp });
                     }}
                     defaultValue={astro.priceVoice}
                   />
@@ -478,7 +479,7 @@ const astrologer = withAdminAuth(() => {
                       // Call function to update values hook kere
                       let astro_temp = astro;
                       astro_temp.priceVideo = e.target.value;
-                      setastro({ ...astro_temp });
+                      setAstrologerProfileData({ ...astro_temp });
                     }}
                     defaultValue={astro.priceVideo}
                   />
@@ -603,7 +604,7 @@ const astrologer = withAdminAuth(() => {
             className="btn btn-secondary dropdown-toggle"
             onChange={(e) => {
               setSelectedPricingCategory(e.target.value);
-              setastro({ ...astro, pricingCategory: e.target.value });
+              setAstrologerProfileData({ ...astro, pricingCategory: e.target.value });
               changePricingCategory(pid, e.target.value);
               alert(
                 "Pricing Category Updated , Please reload page to refresh data !"
@@ -661,8 +662,18 @@ const astrologer = withAdminAuth(() => {
     await updateDoc(astros, { ...astro_temp });
     MySwal.clickConfirm();
   }
+  async function editProfileDetails(e) {
+    const astros = doc(db, "astrologer/" + pid);
+    let astro_temp = astro;
+    astro_temp.firstName = e.firstName;
+    astro_temp.secondName = e.secondName;
+    astro_temp.about = e.about;
+    setAstrologerProfileData({ ...astro_temp });
+    await updateDoc(astros, { firstName : e.firstName , secondName: e.secondName, about: e.about });
+    MySwal.clickConfirm();
+  }
 
-  const editRazorpayId = () => {
+  const editDetailsView = () => {
     MySwal.fire({
       showConfirmButton: false,
       html: (
@@ -688,6 +699,9 @@ const astrologer = withAdminAuth(() => {
 
           <div className="my-3">
             <EditAccountDetails handleSubmit={editBankDetails} />
+          </div>
+          <div className="my-3">
+            <EditAstrologerDetails handleSubmit={editProfileDetails} data={astro} />
           </div>
         </div>
       ),
@@ -812,9 +826,9 @@ const astrologer = withAdminAuth(() => {
             <RatingBox rating={astro.rating} />
             <div
               className={`ms-auto  ${styles.textButton}`}
-              onClick={() => editRazorpayId()}
+              onClick={() => editDetailsView()}
             >
-              Edit Account Details or Paytm Id
+              Edit All Details
             </div>
             <div
               className={`ms-auto  ${styles.textButton}`}
