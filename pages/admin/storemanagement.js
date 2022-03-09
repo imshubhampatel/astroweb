@@ -114,7 +114,7 @@ const storemanagement = withAdminAuth(() => {
       live : true
     };
 
-    if(coupon.discountType==discountType.PERCENTAGE && coupon.discount>100) {
+    if(coupon.discountType==discountType.PERCENTAGE && (coupon.discount>100 || coupon.discount<0)) {
       alert("Invalid Discount");
       return;
     }
@@ -286,7 +286,7 @@ const storemanagement = withAdminAuth(() => {
                id="title"
                required
              />
-                          <label htmlFor="code">code</label>
+          <label htmlFor="code">code</label>
 
              <input
                className="form-control"
@@ -327,7 +327,7 @@ const storemanagement = withAdminAuth(() => {
                className="form-check"
                name="discount"
                placeholder="please enter discount Amount"
-
+               min={0}
                id="discount"
                type="number"
              />
@@ -356,6 +356,7 @@ const storemanagement = withAdminAuth(() => {
                placeholder="please enter maxDiscount"
                name="maxDiscount"
                type="number"
+               min={0}
                id="maxDiscount"
                required
              />
@@ -387,6 +388,7 @@ const storemanagement = withAdminAuth(() => {
                 name="maxTotalDiscount"
                 type="number"
                 id="maxTotalDiscount"
+                min={0}
                 required
               />
              <label htmlFor="minPurchase">minPurchase</label>
@@ -397,6 +399,7 @@ const storemanagement = withAdminAuth(() => {
                name="minPurchase"
                type="number"
                id="minPurchase"
+               min={0}
                required
              />
               <label htmlFor="limit"> limit</label>
@@ -404,7 +407,7 @@ const storemanagement = withAdminAuth(() => {
                className="form-check"
                name="limit"
                placeholder="please enter max usage limit "
-
+               min={0}
                id="limit"
                type="number"
              />
