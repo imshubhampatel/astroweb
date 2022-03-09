@@ -46,8 +46,12 @@ const itemManagement = withAdminAuth(()=> {
       couponInfo.discount = (e.target.discount.value);
       couponInfo.updatedAt = new Date();
       couponInfo.title = e.target.title.value;
+      couponInfo.live = e.target.live.checked;
+      if(couponInfo.discountType==discountType.PERCENTAGE && (couponInfo.discount>100 || couponInfo.discount<0)) {
+        alert("Invalid Discount");
+        return;
+      }
       const ref = doc(db, "coupon", couponInfo.id);
-      console.log(couponInfo)
       await updateDoc(ref, {...couponInfo});
       Swal.clickConfirm();
       await getAllCoupons();
@@ -119,6 +123,7 @@ const itemManagement = withAdminAuth(()=> {
                placeholder="please enter discount Amount"
                id="discount"
                defaultValue={couponInfo.discount}
+               min={0}
                type="number"
              />
              <label htmlFor="subtype">subtype</label>
@@ -137,6 +142,7 @@ const itemManagement = withAdminAuth(()=> {
                name="maxDiscount"
                type="number"
                id="maxDiscount"
+               min={0}
                defaultValue={couponInfo.maxDiscount}
                required
              />
@@ -148,6 +154,7 @@ const itemManagement = withAdminAuth(()=> {
                name="minPurchase"
                type="number"
                id="minPurchase"
+               min={0}
                defaultValue={couponInfo.minPurchase}
                required
              />
@@ -157,6 +164,7 @@ const itemManagement = withAdminAuth(()=> {
                name="limit"
                placeholder="please enter max usage limit "
                id="limit"
+               min={0}
                defaultValue={couponInfo.limit}
                type="number"
              />
