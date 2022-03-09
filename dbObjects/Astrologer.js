@@ -23,6 +23,7 @@ class Astrologer {
     this.priceChat = data.priceChat ?  parseInt(data.priceChat)  : 0
     this.priceVideo = data.priceVideo ?  parseInt(data.priceVideo):0
     this.priceVoice = data.priceVoice?  parseInt(data.priceVoice): 0
+    this.currentDiscount = data.currentDiscount?  parseInt(data.currentDiscount): 0
     
     // // Meeting History
     this.chatSeconds = data.chatSeconds ? data.chatSeconds :0
@@ -40,6 +41,7 @@ class Astrologer {
       ...data.languages
     } : {}
     this.tnc = data.tnc ? data.tnc : true
+    this.shareLink = data.shareLink ? data.shareLink : ""
     
     // //Rating & Reviews
     this.rating = data.rating ? data.rating : 0
@@ -81,6 +83,7 @@ const astrologerConverter = {
       priceChat: data.priceChat,
       priceVideo: data.priceVideo,
       priceVoice: data.priceVoice,
+      currentDiscount: data.currentDiscount,
 
       // Meeting History
       chatSeconds: data.chatSeconds,
@@ -99,6 +102,7 @@ const astrologerConverter = {
       // Reviews 
       languages: data.languages,    
       tnc : data.tnc,
+      shareLink : data.shareLink,
     };
   },
   fromFirestore: (snapshot, options) => {
