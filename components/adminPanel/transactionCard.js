@@ -29,6 +29,10 @@ export default function TransactionCard({props}) {
         <div className={styles.gridContainer}>
           <div className={`${styles.gridItem}  `}> Total cost: {props?.amount} </div>
         </div>
+        <br/>
+        <div className={styles.gridContainer}>
+          <div className={`${styles.gridItem}  `}> <b>{props?.type}</b>  </div>
+        </div>
       </div>
       
     </div>

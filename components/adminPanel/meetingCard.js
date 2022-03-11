@@ -2,8 +2,6 @@ import styles from "../../styles/components/adminPanel/meetingCard.module.css"
 
 import Image from 'next/image'
 export default function MeetingCard( {data,type} ) {
-  console.log(data);
-
 
   return (
     <div className={`${styles.container}  d-flex gap-2 `}>
@@ -20,8 +18,8 @@ export default function MeetingCard( {data,type} ) {
         {/* Order Status  */}
         <div className={`flex-grow-1  `} style={{height: "100%"}}> 
 
-          <h6>{data?.type} Call with {type=="astrologer"?data?.userUid:data?.astrologerUid}</h6>
-
+          <h6>{data?.type} Call with {type=="astrologer"?data?.userName:data?.astrologerName}</h6>
+          <div className={`${styles.orderDetailText}`} >Astrologer Id: {type=="astrologer"?data?.userUid:data?.astrologerUid} <br/></div>
           <div className={`${styles.orderDetailText}`} >Order id: {data?.id} <br/>
 
           {data?.scheduledTime.toDate().toDateString()}</div>
