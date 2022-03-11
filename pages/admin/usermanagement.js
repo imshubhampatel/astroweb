@@ -93,19 +93,19 @@ const userManagement = withAdminAuth(() => {
         query(astros, where("email", "==", String(search)))
       );
       let data = new Set();
-      querySnapshot.docs.map((doc) => data.add(doc.data()));
+      querySnapshot.docs.map((doc) => data.add({id:doc.id,...doc.data()}));
 
       // first Name
       querySnapshot = await getDocs(
         query(astros, where("firstName", "==", String(search)))
       );
-      querySnapshot.docs.map((doc) => data.add(doc.data()));
+      querySnapshot.docs.map((doc) => data.add({id:doc.id,...doc.data()}));
 
       // Phone Number
       querySnapshot = await getDocs(
         query(astros, where("phoneNumber", "==", String(search)))
       );
-      querySnapshot.docs.map((doc) => data.add(doc.data()));
+      querySnapshot.docs.map((doc) => data.add({id:doc.id,...doc.data()}));
       setusersList(Array.from(data));
     }
   }
