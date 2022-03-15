@@ -19,7 +19,7 @@ const db = getFirestore(firebase);
  async function getAllMeeting(uuid) {
    const astros = collection(db, "meetings");
    const querySnapshot = await getDocs(
-     query(astros, where("astrologerUid", "==", uuid),orderBy("date","desc"))
+     query(astros, where("astrologerUid", "==", uuid),orderBy("scheduledTime","desc"))
    );
    let data = querySnapshot.docs.map((doc) => {
      return { id: doc.id, data: doc.data() };
