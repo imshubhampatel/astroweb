@@ -87,7 +87,8 @@ const Review = ( {props,deleteReviewHandler} ) => {
               height="100"
               width="100"
               layout="responsive"
-            />        </div>
+            />    
+                </div>
 
         {/* User and Review info */}
         <div className={` flex-grow-1`}>

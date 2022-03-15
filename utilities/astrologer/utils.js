@@ -23,6 +23,9 @@ const db = getFirestore(firebase);
    let data = querySnapshot.docs.map((doc) => {
      return { id: doc.id, data: doc.data() };
    });
+   data.sort(function(x,y) {
+    return x.date - y.date;
+  })
    return data;
  }
  async function getAllWalletTransactions(uuid) {
@@ -33,6 +36,9 @@ const db = getFirestore(firebase);
    let data = querySnapshot.docs.map((doc) => {
      return { id: doc.id, data: doc.data() };
    });
+   data.sort(function(x,y) {
+    return x.date - y.date;
+  })
    return data;
  }
   async function getAllReviews(uuid) {
@@ -43,6 +49,9 @@ const db = getFirestore(firebase);
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, data: doc.data() };
     });
+    data.sort(function(x,y) {
+      return x.date - y.date;
+    })
     return data;
   }
   async function getAppDetails() {
@@ -53,6 +62,7 @@ const db = getFirestore(firebase);
     let data = querySnapshot.docs.map((doc) => {
       return new pricingCategory({ id: doc.id, ...doc.data() });
     });
+
     return data;
   }
 async function changePricingCategory(uid, PricingCategory) {
