@@ -8,6 +8,7 @@ import {
     setDoc,
   updateDoc,
   addDoc,
+  orderBy,
 } from "firebase/firestore";
 import { firebase, auth } from "../../config";
 import { pricingCategory} from '../../dbObjects/PricingCategory'
@@ -30,15 +31,12 @@ const db = getFirestore(firebase);
  }
  async function getAllWalletTransactions(uuid) {
    const astros = query(
-     collection(db, "astrologer", uuid, "astologer_wallet_transaction")
+     collection(db, "astrologer", uuid, "astologer_wallet_transaction"),orderBy("date","desc")
    );
    const querySnapshot = await getDocs(astros);
    let data = querySnapshot.docs.map((doc) => {
      return { id: doc.id, data: doc.data() };
    });
-   data.sort(function(x,y) {
-    return x.date - y.date;
-  })
    return data;
  }
   async function getAllReviews(uuid) {
