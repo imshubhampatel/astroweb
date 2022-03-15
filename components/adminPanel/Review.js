@@ -99,7 +99,7 @@ const Review = ( {props,deleteReviewHandler} ) => {
               <RatingStars rating={props.rating} />
             </span>
 
-            <span className="ms-1" style={{color: "rgba(128, 128, 128, 1)"}} >{date}</span>
+            <span className="ms-1" style={{color: "rgba(128, 128, 128, 1)"}} >{props.date.toDate().toDateString()}</span>
           </div>
         </div>
 

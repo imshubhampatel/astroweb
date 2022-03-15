@@ -19,14 +19,12 @@ const db = getFirestore(firebase);
  async function getAllMeeting(uuid) {
    const astros = collection(db, "meetings");
    const querySnapshot = await getDocs(
-     query(astros, where("astrologerUid", "==", uuid))
+     query(astros, where("astrologerUid", "==", uuid),orderBy("date","desc"))
    );
    let data = querySnapshot.docs.map((doc) => {
      return { id: doc.id, data: doc.data() };
    });
-   data.sort(function(x,y) {
-    return x.date - y.date;
-  })
+ 
    return data;
  }
  async function getAllWalletTransactions(uuid) {
@@ -42,14 +40,12 @@ const db = getFirestore(firebase);
   async function getAllReviews(uuid) {
     const astros = query(
       collection(db, "astrologer", uuid, "astrologer_reviews")
-    );
+      ,orderBy("date","desc"));
     const querySnapshot = await getDocs(astros);
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, data: doc.data() };
     });
-    data.sort(function(x,y) {
-      return x.date - y.date;
-    })
+
     return data;
   }
   async function getAppDetails() {
