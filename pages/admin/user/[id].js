@@ -71,7 +71,7 @@ const user = withAdminAuth(() => {
   async function getAllMeeting(uuid) {
     const astros = collection(db, "meetings");
     const querySnapshot = await getDocs(
-      query(astros, where("userUid", "==", uuid),orderBy("scheduledTime","desc"))
+      query(astros, where("userUid", "==", uuid))
     );
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
@@ -79,7 +79,7 @@ const user = withAdminAuth(() => {
     setMeetings(data);
   }
   async function getAllWalletTransactions(uuid) {
-    const astros = query(collection(db, "user", uuid, "wallet_transaction"),orderBy("date","desc"));
+    const astros = query(collection(db, "user", uuid, "wallet_transaction"));
     const querySnapshot = await getDocs(astros);
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
