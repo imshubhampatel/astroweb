@@ -71,6 +71,7 @@ const astrologermanagement = withAdminAuth(() => {
  }
   function initializePaginationData(data) {
     setpaginationData(data);
+    settotalCount(data.length)
     settotalAstrologers(data.length);
     settotalPages(data.length / ItemsPerPage);
     setfirstItemNum(0);
@@ -85,6 +86,7 @@ const astrologermanagement = withAdminAuth(() => {
     setastrologersList(data);
     settotalAstrologers(data.length);
     initializePaginationData(data);
+
   }
 
   function handlePageChange({ selected }) {
