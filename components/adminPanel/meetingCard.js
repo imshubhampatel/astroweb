@@ -1,5 +1,5 @@
 import styles from "../../styles/components/adminPanel/meetingCard.module.css";
-
+import Link from "next/link";
 import Image from "next/image";
 export default function MeetingCard({ data, type }) {
   return (
@@ -28,8 +28,28 @@ export default function MeetingCard({ data, type }) {
           {type == "astrologer" ? data?.userName : data?.astrologerName}
         </h6>
         <div className={`${styles.orderDetailText}`}>
-          {type == "astrologer" ? "User" : "Astrologer"} Id:{" "}
-          {type == "astrologer" ? data?.userUid : data?.astrologerUid} <br />
+          {type == "astrologer" ? <Link
+            href={{
+              pathname: `/admin/user/${data?.userUid}`,
+              query: { pid: data?.userUid },
+            }}
+          >
+            <a target="_blank">
+             User ID : {data?.userUid}
+            </a>
+          </Link>:<Link
+            href={{
+              pathname: `/admin/astrologer/${data?.astrologerUid}`,
+              query: { pid: data?.astrologerUid },
+            }}
+          >
+            <a target="_blank">
+              Astrologer Id: {data?.astrologerUid}
+            </a>
+          </Link> }
+          
+
+          <br />
         </div>
         <div className={`${styles.orderDetailText}`}>
           Order id: {data?.id} <br />
