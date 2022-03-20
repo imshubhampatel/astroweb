@@ -5,125 +5,241 @@ function termsncondition() {
         <div className='container'>
             <h2><strong>Terms and Conditions</strong></h2>
 
-<p>Welcome to Dreshkan (A product of Astrochrcha)!</p>
+<p>Welcome to Dreshkan (A product of Astrochrcha)!  
+</p><p>These terms and conditions outline the rules and regulations for the use of Website,  located at dreshkan.com.  
+</p><p>By accessing this website we assume you accept these terms and conditions. Do not  continue to use Dreshkan if you do not agree to take all of the terms and conditions  stated on this page.  
+</p><p>The following terminology applies to these Terms and Conditions, Privacy Statement  and Disclaimer Notice and all Agreements: `&quot;`Client`&quot;`, `&quot;`You`&quot;` and `&quot;`Your`&quot;` refers to  you, the person log on this website and compliant to the Company’s terms and  conditions. `&quot;`The Company`&quot;`, `&quot;`ourselves`&quot;`, `&quot;`we`&quot;`, `&quot;`our`&quot;` and `&quot;`us`&quot;`, refers to  our Company. `&quot;`Party`&quot;`, `&quot;`Parties`&quot;`, or `&quot;`us`&quot;`, refers to both the Client and  ourselves. All terms refer to the offer, acceptance and consideration of payment  necessary to undertake the process of our assistance to the Client in the most  appropriate manner for the express purpose of meeting the Client’s needs in respect  of provision of the Company’s stated services, in accordance with and subject to,  prevailing law of Netherlands. Any use of the above terminology or other words in  the singular, plural, capitalization and/or he/she or they, are taken as interchangeable  and therefore as referring to same.  
+</p><p><h4>Cookies </h4>
+</p><p>* We employ the use of cookies. By accessing Dreshkan, you agreed to use  cookies in agreement Privacy Policy.  
+</p><p>* Most interactive websites use cookies to let us retrieve the user’s details for  each visit. Cookies are used by our website to enable the functionality of  certain areas to make it easier for people visiting our website. Some of our  affiliate/advertising partners may also use cookies.  
+</p><p>License 
+</p><p>* Unless otherwise stated its licensors own the intellectual property rights for all  material on Dreshkan. All intellectual property rights are reserved. You may  access this from Dreshkan for your own personal use subjected to restrictions  set in these terms and conditions.  
+</p><p> You must not:  
+</p><p>* Republish material from Dreshkan  
+</p><p>* Sell, rent or sub-license material from Dreshkan  
+</p><p>* Reproduce, duplicate or copy material from Dreshkan  
+</p><p>* Redistribute content from Dreshkan 
+</p><p>* Parts of this website offer an opportunity for users to post and exchange  opinions and information in certain areas of the website. does not filter, edit,  publish or review Comments prior to their presence on the website.  Comments do not reflect the views and opinions of Dreshkan., its agents  and/or affiliates. Comments reflect the views and opinions of the person who  post their views and opinions. To the extent permitted by applicable laws,  Dreshkan shall not be liable for the Comments or for any liability, damages or  expenses caused and/or suffered as a result of any use of and/or posting of  and/or appearance of the Comments on this website.  
+</p><p>* Dreshkan reserves the right to monitor all Comments and to remove any  Comments which can be considered inappropriate, offensive or causes breach  of these Terms and Conditions.  
+</p><p>* You warrant and represent that:  
+</p><p>* You are entitled to post the Comments on our website and have all necessary  licenses and consents to do so;  
+</p><p>* The Comments do not invade any intellectual property right, including without  limitation copyright, patent or trademark of any third party;  
+</p><p>* The Comments do not contain any defamatory, libellous, offensive, indecent  or otherwise unlawful material which is an invasion of privacy  
+</p><p>* The Comments will not be used to solicit or promote business or custom or  present commercial activities or unlawful activity.  
+</p><p>* You hereby grant Dreshkan. a non-exclusive license to use, reproduce, edit  and authorize others to use, reproduce and edit any of your Comments in any  and all forms, formats or media.  
+</p><p> <h4>Hyperlinking to our Content </h4>
+</p><p>* The following organizations may link to our Website without prior written  approval:  
+</p><p>* Government agencies;  
+</p><p>* Search engines;  
+</p><p>* News organizations;  
+</p><p>* Online directory distributors may link to our Website in the same manner as  they hyperlink to the Websites of other listed businesses; and  
+</p><p>* System wide Accredited Businesses except soliciting non-profit organizations,  charity shopping malls, and charity fundraising groups which may not  hyperlink to our Web site.  
+</p><p>* These organizations may link to our home page, to publications or to other  Website information so long as the link: (a) is not in any way deceptive; (b)  does not falsely imply sponsorship, endorsement or approval of the linking  party and its products and/or services; and (c) fits within the context of the  linking party’s site. 
+</p><p>* We may consider and approve other link requests from the following types of  organizations:  
+</p><p>* commonly-known consumer and/or business information sources;  * dot.com community sites;  
+</p><p>* associations or other groups representing charities;  
+</p><p>* online directory distributors;  
+</p><p>* internet portals;  
+</p><p>* accounting, law and consulting firms; and  
+</p><p>* Educational institutions and trade associations.  
+</p><p>* We will approve link requests from these organizations if we decide that: (a)  the link would not make us look unfavourably to ourselves or to our  accredited businesses; (b) the organization does not have any negative  records with us; (c) the benefit to us from the visibility of the hyperlink  compensates the absence of Dreshkan; and (d) the link is in the context of  general resource information.  
+</p><p>* These organizations may link to our home page so long as the link: (a) is not  in any way deceptive; (b) does not falsely imply sponsorship, endorsement or  approval of the linking party and its products or services; and (c) fits within the  context of the linking party’s site.  
+</p><p>* If you are one of the organizations listed in paragraph 2 above and are  interested in linking to our website, you must inform us by sending an e-mail  to Dreshkan... Please include your name, your organization name, contact  information as well as the URL of your site, a list of any URLs from which you  intend to link to our Website, and a list of the URLs on our site to which you  would like to link. Wait 2-3 weeks for a response.  
+</p><p>* Approved organizations may hyperlink to our Website as follows:  * By use of our corporate name; or  
+</p><p>* By use of the uniform resource locator being linked to; or  
+</p><p>* By use of any other description of our Website being linked to that makes  sense within the context and format of content on the linking party’s site.  * No use of Dreshkan`&apos;`s logo or other artwork will be allowed for linking absent  a trademark license agreement.  
+</p><p><h4>iFrames </h4>
+</p><p>* Without prior approval and written permission, you may not create frames  around our Webpages that alter in any way the visual presentation or  appearance of our Website.  
+</p><p>Content Liability 
+</p><p>* We shall not be hold responsible for any content that appears on your  Website. You agree to protect and defend us against all claims that is rising on  your Website. No link(s) should appear on any Website that may be 
+</p><p>interpreted as libellous, obscene or criminal, or which infringes, otherwise  violates, or advocates the infringement or other violation of, any third party  rights.  
+</p><p>* The User shall not post or transmit through this Website any material which  violates or infringes in any way upon the rights of others, or any material which  is unlawful, abusive, defamatory, invasive of privacy, vulgar, obscene, profane  or otherwise objectionable, which encourages conduct that would constitute a  criminal offence, give rise to civil liability or otherwise violate any law.  
+</p><p>* The Website shall have a right to suspend or terminate access by such User or  terminate the User’s registration and such User shall not gain access to the  Website.  
+</p><p>* The Website reserves the right to terminate the access or to change or  discontinue any aspect or feature of the Website including, but not limited to,  content, graphics, deals, offers, settings, etc.  
+</p><p>* Any information other the guidance and advice, received directly from the Third Party Service Provider, the educational, graphics, research sources and other  incidental information on the Site, the content, should not be considered as  medical advice.  
+</p><p>* The Website does not take guarantee regarding the medical advice, if provided,  by the third-party service provider inclusive of registered astrologers with the  site. The User should always talk to an appropriately qualified health care  professional for diagnosis and treatment including information regarding which  medications or treatment may be appropriate for the User. None of the Content  represents or warrants that any particular medication or treatment is safe,  appropriate, or effective for you. Dreshkan does not endorse any specific tests,  medications, products or procedures.  
+</p><p>* The Website does not take guarantee of any untoward incident that may happen  with the User after seeking the Service. The Website or the Service Provider  providing the advice is not liable and does not guarantee any results as  expected by the User and accessing the Website in such scenario is purely at  the risk of the User.  
+</p><p>* By using the Site, Application or Services, User hereby agrees that any legal  remedy or liability that you seek to obtain for actions or omissions of other  Members inclusive of the service provider registered with the Website or other  third parties linked with the Website, shall be limited to claim against such  particular party who may have caused any harm. You agree not to attempt to  impose liability on or seek any legal remedy from the Website with respect to  such actions or omissions.  
+</p><p><h4>Privacy Policy for Dreshkan (By Astrochrcha).  </h4>
+</p><p>* At dreshkan, accessible from dreshkan.com, one of our main priorities is the  privacy of our visitors. This Privacy Policy document contains types of  information that is collected and recorded by dreshkan and how we use it.  
+</p><p>* If you have additional questions or require more information about our  Privacy Policy, do not hesitate to contact us.  
+</p><p>* This Privacy Policy applies only to our online activities and is valid for visitors  to our website with regards to the information that they shared and/or collect  in dreshkan. This policy is not applicable to any information collected offline  or via channels other than this website. 
+</p><p>Waiver  
+</p><p>* You hereby authorize and give consent to the Company to send you, either through  itself or through any third party service provider, from time to time various  information / alerts / SMS / other messages or calls or commercial communication,  and other services on the telephone numbers provided by you, whether these  numbers are registered with National Do Not Call Registry / listed in National  Customer Preference Register or not. I also confirm that by sending of any such  messages / calls, I will not hold the Company or its third party service providers liable  / institute complaint under the Telecom Commercial Communications Customer  Preference (TRAI) Regulations, 2010 or such applicable regulations including any  amendment thereof, as may be applicable from time to time. In case you wish to  stop this service, you may contact the Company by accessing the in-app customer  support, or by writing an email at support@dreshkan.com, until which time this  waiver shall continue to remain in effect. 
+</p><p> <h4>Consent </h4> 
+</p><p>* By using our website, you hereby consent to our Privacy Policy and agree to  its terms.  
+</p><p>* The User hereby consents, expresses and agrees that the User has read and  fully understand the Privacy Policy of the Website. The User further consents  that the terms and contents of such Privacy policy is acceptable to the User  inclusive of any update/alteration/change made and duly displayed on the  Website.  
+</p><p>* During the provision of Services, including while accessing Dreshkan Mobile  Application, the Company may collect, process and store your data, including  your personal information. The Company’s policy regarding its practices, type  of data or information collected, purpose of collection and usage, disclosure  and security practices and procedures adopted by it may be accessed at  [privacy policy]. You may not access or avail the Services in the event you do  not agree with the said policy.  
+</p><p>* Without prejudice to consent granted under the said policy, you hereby  expressly consent to the Company sharing your data or personal information  with statutory authorities and third parties, in the event of an accident or  complaint involving you or an Astrologer Partner.  
+</p><p>Information we collect  
+</p><p>* The personal information that you are asked to provide, and the reasons why  you are asked to provide it, will be made clear to you at the point we ask you  to provide your personal information.  
+</p><p>* If you contact us directly, we may receive additional information about you  such as your name, e mail address, phone number, and the contents of the 
+</p><p>message and/or attachments you may send us, and any other information you  may choose to provide.  
+</p><p>* When you register for an Account, we may ask for your contact information,  including items such as name, company name, address, email address, and  telephone number.  
+</p><p>How we use your information  
+</p><p>* We use the information we collect in various ways, including to:  * Provide, operate, and maintain our website  
+</p><p>* Improve, personalize, and expand our website  
+</p><p>* Understand and analyse how you use our website  
+</p><p>* Develop new products, services, features, and functionality  
+</p><p>* Communicate with you, either directly or through one of our partners, including for  customer service, to provide you with updates and other information relating to the  website, and for marketing and promotional purposes  
+</p><p>* Send you emails  
+</p><p>* Find and prevent fraud  
+</p><p><h4>Log Files </h4> 
+</p><p>* Dreshkan follows a standard procedure of using log files. These files log  visitors when they visit websites. All hosting companies do this and a part of  hosting services`&apos;` analytics. The information collected by log files include  internet protocol (IP) addresses, browser type, Internet Service Provider (ISP),  date and time stamp, referring/exit pages, and possibly the number of clicks.  These are not linked to any information that is personally identifiable. The  purpose of the information is for analysing trends, administering the site,  tracking users`&apos;` movement on the website, and gathering demographic  information.  
+</p><p>Cookies and Web Beacons  
+</p><p>* Like any other website, dreshkan uses `&apos;`cookies`&apos;`. These cookies are used to  store information including visitors`&apos;` preferences, and the pages on the website  that the visitor accessed or visited. The information is used to optimize the  users`&apos;` experience by customizing our web page content based on visitors`&apos;`  browser type and/or other information.  
+</p><p>Advertising Partners Privacy Policies  
+</p><p>* You may consult this list to find the Privacy Policy for each of the advertising  partners of dreshkan.  
+</p><p>* Third-party ad servers or ad networks uses technologies like cookies,  JavaScript, or Web Beacons that are used in their respective advertisements  and links that appear on dreshkan, which are sent directly to users`&apos;` browser. 
+</p><p>They automatically receive your IP address when this occurs. These  technologies are used to measure the effectiveness of their advertising  campaigns and/or to personalize the advertising content that you see on  websites that you visit.  
+</p><p>* Note that dreshkan has no access to or control over these cookies that are  used by third-party advertisers.  
+</p><p>Third Party Privacy Policies  
+</p><p>* Dreshkan’s Privacy Policy does not apply to other advertisers or websites.  Thus, we are advising you to consult the respective Privacy Policies of these  third-party ad servers for more detailed information. It may include their  practices and instructions about how to opt-out of certain options.  
+</p><p>* You can choose to disable cookies through your individual browser options.  To know more detailed information about cookie management with specific  web browsers, it can be found at the browsers`&apos;` respective websites.  
+</p><p>CCPA Privacy Rights (Do Not Sell My Personal Information)  * Under the CCPA, among other rights, California consumers have the right to:  * Request that a business that collects a consumer`&apos;`s personal data disclose the  
+</p><p>categories and specific pieces of personal data that a business has collected  about consumers.  
+</p><p>* Request that a business delete any personal data about the consumer that a  business has collected.  
+</p><p>* Request that a business that sells a consumer`&apos;`s personal data, not sell the  consumer`&apos;`s personal data.  
+</p><p>* If you make a request, we have one month to respond to you. If you would  like to exercise any of these rights, please contact us.  
+</p><p>GDPR Data Protection Rights  
+</p><p>* We would like to make sure you are fully aware of all of your data protection  rights. Every user is entitled to the following:  
+</p><p>* The right to access – You have the right to request copies of your personal  data. We may charge you a small fee for this service.  
+</p><p>* The right to rectification – You have the right to request that we correct any  information you believe is inaccurate. You also have the right to request that  we complete the information you believe is incomplete.  
+</p><p>* The right to erasure – You have the right to request that we erase your  personal data, under certain conditions.  
+</p><p>* The right to restrict processing – You have the right to request that we restrict  the processing of your personal data, under certain conditions. 
+</p><p>* The right to object to processing – You have the right to object to our  processing of your personal data, under certain conditions.  
+</p><p>* The right to data portability – You have the right to request that we transfer  the data that we have collected to another organization, or directly to you,  under certain conditions.  
+</p><p>* If you make a request, we have one month to respond to you. If you would  like to exercise any of these rights, please contact us.  
+</p><p><h4>Refund and Cancellation Policy </h4>
+</p><p>* Dreshkan (A product of Astrochrcha) is not responsible for any issues created by 3rd  party payment service. Even if that happens we expect you to keep your patience and  wait for appropriate refund or action by payment Service Company.  
+</p><p>* In case of any queries visit our contact page.  
+</p><p>* No refund shall be processed on the order of any reports under any  circumstances if the order has reached the “processing” (Assigned to an  Astrologer) stage. The risk and liability of placing order in a haste and careless  manner totally lies with the User and the Website is not responsible for any  refund once the processing stage has started.  
+</p><p>* No refund shall be processed once the Order has been placed and executed.  However, if the User intends to cancel a successfully placed order before  execution, the User is required to contact the customer care team within 1 (one)  hour of making the payment, where after it is totally at the discretion of the  Website whether to issue refund.  
+</p><p>* Any technical delay or glitch reported in the Website during the processing of  the request which includes generating reports by the service provider i.e.  Astrologer shall not be eligible for claiming refund. The User agrees that the  timelines are approximate and all essentials steps would be taken to adhere to  the timelines as displayed.  
+</p><p>* No refund shall be processed for the reason that in-correct information or data  has been provided by you. The User agrees to be careful while providing any  information to the Website and must re-check the information filled before  clicking on “Submit”. The User can request for change in the in-correct  information or data entered provided, the request for such change has been  made with the customer care within 1 (one hour) of execution of the service  rendered by the service provider.  
+</p><p>* No refund shall be processed for return of any damaged product. The User  undertakes and agrees that by ordering any product as displayed on the  Website, the Registered User shall be fully responsible for any damaged  caused to the product, post its delivery. For orders made via “Cash on Delivery”  method of payment, the User shall be charged for the cost of the product as  displayed by the Website and the shipping/custom/courier charges as  applicable, if the product is returned.  
+</p><p>* Refund on pro-rata basis may be considered for any delay in the activation of  the subscription services and any damage that may be caused to the product  while in transit shall be dealt by the Website and its agencies.  
+</p><p>* You agree that the display picture for the products listed for purchase by the  User are for reference purpose only and the Website will try to deliver the  product ordered in an as-is condition as displayed on the Website. The User is  advised to exercise discretion in such case and no refund shall be issued on  such grounds.  
+</p><p>* The services offered and the products sold are strictly not meant to replace any  philosophical, emotional or medical treatment. The Website holds no 
+</p><p>responsibility or liability about the reality or reliability of the astrological effects  on the human physiology, by the gems represented and sold on the Website.  The placing of order for buying such products or taking the services is solely on  the discretion and will of the User and the Website does not have any  responsibility upon the products sold. The User is advised to exercise discretion  in such case and no refund shall be issued on such grounds.  
+</p><p>* No refund shall be processed for providing a wrong contact number for the  purpose of availing the “Call with Astrologer” feature. The User once opted for  this feature is advised to keep the Contact Number in full coverage area and  must answer the call when received. No refund shall be processed for any call  which gets connected.  
+</p><p>* The refunds, if any, shall be processed after deduction of the transaction  charges levied by the Bank and/or the Payment Gateway, to & fro cost of the  shipping and/or courier charges (With regard to purchase of a product listed on  the Website), customs duty (if levied) and/or any other charges that may have  been incurred by the Website during processing and/or delivering the service,  as applicable.  
+</p><p>* In case the Website or Payment gateway’s webpage, that is linked to the  Website, is experiencing any server related issues like ‘slow down’ or ‘failure’ or  ‘session timeout’, the User shall, before initiating the second payment, check  whether his/her Bank Account has been debited or not and accordingly resort to  one of the following options:  
+</p><p>o In case the Bank Account appears to be debited, ensure that you do not  make the payment twice and immediately thereafter contact the Website  via customer care to confirm payment.  
+</p><p>o In case the Bank Account is not debited, the User may initiate a fresh  transaction to make payment.  
+</p><p>* However, refund for multiple payment, if any, even after the above precaution  against the same order shall be refunded in full without deduction of the  transaction charges as mentioned above. The Website shall only retain the cost  of one single order as intended to be placed by the User.  
+</p><p>* If there are orders that the Website is unable to accept and must cancel, the  Website at its sole discretion, reserves the right to refuse or cancel any order  for any reason whatsoever. Some situations may result in the order being  cancelled and include, without limitation, non-availability of the service,  inaccuracy, error in pricing information or other problems as identified. If the  User’s order is cancelled after charges being paid against the said service, the  said amount paid for booking shall be refunded.  
+</p><p>* By requesting for refund, user is agreeing to provide Dreshkan quality audit  team permission to access the chat/call recording of the consultation for which  refund has been requested, in order to determine whether the case is eligible  for refund or not.  
+</p><p>* Dreshkan quality audit team, at best effort basis, provide partial/full refunds to  the users in their Dreshkan wallet wherever consultant’s quality parameters are  not satisfied. It can take up to 72 hours to analyse and refund the amount back  to Dreshkan wallet  
+</p><p>* Note: All refunds will be credited to user’s Dreshkan wallet.  o Refunds will only be considered in the following cases:  
+</p><p>* Network issue due to which chat/call was affected in between or  there was a weak signal, background noise, inaudible consultant  etc. during the video/normal call sessions  
+</p><p>* Consultant is unable to respond fluently in the language  mentioned in their profile  
+</p><p>* Consultant is taking inordinately long enough to respond back to  the user 
+</p><p>* Consultant has responded back in irrelevant or inappropriate  response to the query asked by the user  
+</p><p> <h5>Please Note:</h5> No refund will be given in case of lack of accuracy of any consultation.  Dreshkan takes no responsibility for factual accuracy on any consultations 
+</p><p><h4>Disclaimer </h4>
+</p><p>* To the maximum extent permitted by applicable law, we exclude all  representations, warranties and conditions relating to our website and the use  of this website. Nothing in this disclaimer will:  
+</p><p>* limit or exclude our or your liability for death or personal injury;  * limit or exclude our or your liability for fraud or fraudulent misrepresentation;  * limit any of our or your liabilities in any way that is not permitted under  applicable law; or  
+</p><p>* Exclude any of our or your liabilities that may not be excluded under  applicable law.  
+</p><p>* The limitations and prohibitions of liability set in this Section and elsewhere in  this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all  liabilities arising under the disclaimer, including liabilities arising in contract, in  tort and for breach of statutory duty.  
+</p><p>* As long as the website and the information and services on the website are  provided free of charge, we will not be liable for any loss or damage of any  nature  
+</p><p> <h4>Registration And Eligibility  </h4>
+</p><p>* Another part of our priority is adding protection for children while using the  internet. We encourage parents and guardians to observe, participate in,  and/or monitor and guide their online activity. 
+</p><p>* Dreshkan does not knowingly collect any Personal Identifiable Information  from children under the age of 13. If you think that your child provided this  kind of information on our website, we strongly encourage you to contact us  immediately and we will do our best efforts to promptly remove such  information from our records 
+</p><p>* The User of the Website must be a person who can form legally binding  contracts under Indian Contract Act, 1872. A minor under the age of eighteen  (18) in most jurisdictions, are not permitted to avail the services provided on the  Website without a legal guardian in accordance with the applicable laws. The  Website would not be held responsible for any misuse that may occur by virtue  of any person including a minor using the services provided through the  Website.  
+</p><p>* For the User to avail the services, the User will be directed to Register as a  Member on the Website whereby You (User) agree to provide update, current  and accurate information while filling up the sign-in form. All information that  you fill and provide to the Website and all updates thereto are referred to in  these Terms of Usage as `&quot;`Registration Data.`&quot;`  
+</p><p>* An account could be created by you through the Website ID (Your Phone  Number) and password (OTP) or other log - in ID and password which can  include a Facebook, Gmail or any other valid email ID. The User while 
+</p><p>creating an account hereby represents and warrants that all the information  provided by the User is current, accurate and complete and that the User will  maintain the accuracy and keep the information updated from time to time. Use  of another User’s account information for availing the services is expressly  prohibited. If in case it is found that the information so supplied on the Website  is inaccurate, incomplete, untrue and not current, the Website has the right to  suspend or terminate the User’s account and restrict/refuse the use of the  Website by such User in future.  
+</p><p>* The right to use this Website is personal to the User and is not transferable to  any other person or entity. The User would be responsible for protecting the  confidentiality of User’s passwords and other information required for the  purposes of registration. The User would be fully responsible for all the  activities that occur under the User’s account with the Website. The Website  cannot and will not be liable for any loss or damage arising from the User’s  failure to maintain secrecy and confidentiality. The User shall notify the Website  immediately if they become aware of any unauthorized use of their Account(s)  or breach of any security. The User must log out from its account at the end of  the session.  
+</p><p>* The User while availing any service shall be informed whether the service so  rendered is personal to the Website or is available from a Third party. The  Website shall have no control or monitoring on the information disseminated to  any third party via the Website.  
+</p><p>* The User agrees, understands and confirms that his/ her personal data  including without limitation to details relating to debit card/ credit card  transmitted over the Internet may be susceptible to misuse, hacking, theft and/  or fraud and that the Website or the Payment Service Provider(s) have no  control over such matters.  
+</p><p>* The Website does not permit the use of the Services by any User under the  following conditions: -  
+</p><p>o If the User is a resident of any jurisdiction that may prohibit the use of  the Services rendered by the Website.  
+</p><p>o If the User is a resident of any State/Country that prohibits by way of  law, regulation, treaty or administrative act for entering into trade  relations or/and  
+</p><p>o Due to any religious practices.  
+</p><p>o If the User has created multiple accounts using various mobile numbers.  The User may not have more than one active account with the Website.  
+</p><p> <h4>USER ACCOUNT ACCESS  </h4>
+</p><p>* The Website shall have access to the account and the information created by  the User for ensuring and maintaining the high-quality services provided by the  Website and for addressing the need of the customer in the most effective  manner.  
+</p><p>* User hereby consents for the unconditional access of the account by the  Website, its employees, agents and other appointed person in such regard. For  the purpose of addressing the complaints (if any received) and any suspected  abuse reported, the Website shall investigate on case-to-case basis from the  records available.  
+</p><p>* The User is directed to read the terms provided in the Privacy Policy as regards  such records 
+</p><p><h4>BANK ACCOUNT INFORMATION  </h4>
+</p><p>* The User is under an obligation to provide his banking information as and when  required. For that purpose, the obligations of the User are:-  
+</p><p>* The User agrees that the debit/credit card details provided by him/ her for use  of the aforesaid Service(s) must be correct and accurate and that the User shall  not use a debit/ credit card, that is not lawfully owned by him/ her or the use of  which is not authorized by the lawful owner thereof. The User further agrees  and undertakes to provide correct and valid debit/credit card details.  
+</p><p>* The User may pay the fees required, to the Website by using a debit/credit card  or through online banking account. The User warrants, agrees and confirms that  when he/ she initiates a payment transaction and/or issues an online payment  instruction and provides his/ her card / bank details:  
+</p><p>* The User is fully and lawfully entitled to use such credit / debit card, bank  account for such transactions;  
+</p><p>* The User is responsible to ensure that the card/ bank account details provided  by him/ her are accurate;  
+</p><p>* The User is responsible to ensure sufficient credit is available on the nominated  card/ bank account at the time of making the payment to permit the payment of  the dues payable or the bill(s) selected by the User inclusive of the applicable  Fee.  
+</p><p><br/>The User further agrees that if any part of these Terms of Usage are determined to be  invalid or unenforceable pursuant to applicable law including, but not limited to, the  warranty disclaimers and liability limitations set forth herein, then the invalid or  unenforceable provision will be deemed superseded by a valid, enforceable provision  that most closely matches the intent of the original provision and the remainder of  these Terms of Usage shall continue in effect.  
+</p><p>DISCLAIMER / LIMITATION OF LIABILITY / WARRANTY  The User expressly understands and agree that, to the maximum extent permitted by  applicable law, the Website does not provide warranties for the service. Astrological  counselling provided through the Website is based on cumulative or individual  knowledge, experience and interpretations of astrologers and as such, it may vary from  one astrologer to another.  
+</p><p>* The Website is offering services through a diverse panel of Astrologers duly  verified by the Website and such Service Provider (Astrologer) may from time to  time make recommendations of using mantras, jantras, gemstones or other  astrological remedies to be used by User. Such recommendations are being  made in good faith by the astrologers and the Website and its subsidiaries,  affiliates, officers, employees, agents, partners, and licensors make no warranty  that:  
+</p><p>* the service will meet your requirements  
+</p><p>* the service will be uninterrupted, timely, secure or error - free  
+</p><p>* the results that may be obtained from the use of the service will be accurate or  reliable  
+</p><p>* The quality of any products, services, information or other material purchased  or obtained by you through the service will meet your expectations and  * Any errors in the software will be corrected. You are required to make full  disclosure about the emotional, mental and physical state of the person seeking  advice from the panel of astrologers of Website so that the astrologers make an  informed judgment about giving advice.  
+</p><p>* The Website, services and other materials are provided by the Website on an  `&quot;`as is`&quot;` basis without warranty of any kind, express, implied, statutory or  otherwise, including the implied warranties of title, non-infringement,  merchantability or fitness for a particular purpose. without limiting the foregoing,  the Website makes no warranty that 
+</p><p>* he Website or the services will meet your requirements or your  use of the Website or the services will be uninterrupted,  timely, secure or error-free  
+</p><p>* The results that may be obtained from the use of the Website,  services or materials will be effective, accurate or reliable;  
+</p><p>* The quality of the Website, services or other materials will  meet your expectations; or that  
+</p><p>* Any errors or defects in the Website, services or other  materials will be corrected. no advice or information, whether  oral or written, obtained by the User from the Website or  through or from use of the services shall create any warranty  not expressly stated in the terms of use.  
+</p><p>* To the maximum extent permitted by applicable law, the Website will have no  liability related to User content arising under intellectual property rights, libel,  privacy, publicity, obscenity or other laws. The Website also disclaims all  liability with respect to the misuse, loss, modification or unavailability of any  User content.  
+</p><p>* The Website will not be liable for any loss that the User may incur as a  consequence of unauthorized use of their account or account information in  connection with the Website or any services or materials, either with or without  the User’s knowledge. The Website has endeavoured to ensure that all the  information on the Website is correct, but the Website neither warrants nor  makes any representations regarding the quality, accuracy or completeness of  any data, information, product or service. The Website shall not be responsible  for the delay or inability to use the Website or related functionalities, the  provision of or failure to provide functionalities, or for any information, software,  products, functionalities and related graphics obtained through the Website, or  otherwise arising out of the use of the Website, whether based on contract, tort,  negligence, strict liability or otherwise. further, the Website shall not be held  responsible for non-availability of the Website during periodic maintenance  operations or any unplanned suspension of access to the Website that may  occur due to technical reasons or for any reason beyond the Website`&apos;`s control.  
+</p><p>* The User understands and agrees that any material or data downloaded or  otherwise obtained through the Website is done entirely at their own discretion  and risk and they will be solely responsible for any damage to their computer  systems or loss of data that results from the download of such material or data.  The Website is not responsible for any typographical error leading to an invalid  coupon. The Website accepts no liability for any errors or omissions, with  respect to any information provided to you whether on behalf of itself or third  parties.  
+</p><p>* The Services provided by the Website are for entertainment purposes only and  the Website on behalf of itself and its suppliers, disclaims all warranties of any  kind, express or implied, including without limitation any warranty of  merchantability, fitness for a particular purpose, title, non-infringement and it  makes no warranty or representation regarding the results that may be obtained  from the use of content or services, the accuracy or reliability of any content  obtained through the Services, any goods or services purchased or obtained  through the Website, and makes no warranty that the services will meet your  requirements, be uninterrupted, timely, secure or error-free. No advice or  information, whether oral or written, obtained by you from the Website shall  create any warranty.  
+</p><p>* The services may consist of the following, without limitation: Astrological  content, Reports, Tarot readings, fortunes, numerology, predictions, live  telephone consultations, email consultations or products sold through Dreshkan  Shop. Dreshkan charges for the chat/call service offered on this platform on per  minute basis and holds no responsibility or liability about the reality or reliability  of the astrological effects on the human physiology, by the gems, any other 
+</p><p>products or services represented and sold on the website. No advice or  information, whether oral or written, obtained by you shall create any warranty.  * The advisors/consultants/astrologers are also members of the site and not  employees of the Website or the company. However, the Website verifies the  degrees, qualifications, credentials, and background of the  advisors/consultants/astrologers but does not refer, endorse, recommend,  verify, evaluate or guarantee any advice, information or other services provided  by the advisors/consultants/astrologers or by the company, nor does it warrant  the validity, accuracy, completeness, safety, legality, quality, or applicability of  the content, anything said or written by, or any advice provided by the  advisors/consultants/astrologers. 
+</p><p>* The website is not a suicide helpline platform. If you are considering or  contemplating suicide or feel that you are a danger to yourself or to others, you  may discontinue use of the services immediately at your discretion and please  notify appropriate police or emergency medical personnel. If you are thinking  about suicide, immediately call a suicide prevention helpline such as  
+</p><p>(91-7517513412).  
+</p><p>* The Website shall not be liable for any inaccuracy, error or delay in, or omission  of  
+</p><p>(a) Any data, information or message,  
+</p><p>(b) The transmission or delivery of any such data, information or message; or  (c) Any loss or damage arising from or occasioned by any such inaccuracy,  error, delay or omission, non-performance or interruption in any such data,  information or message. Under no circumstances shall the Website and/or the  payment service providers, its employees, directors, and its third party agents  involved in processing, delivering or managing the services, be liable for any  direct, indirect, incidental, special or consequential damages, or any damages  whatsoever, including punitive or exemplary arising out of or in any way  connected with the provision of or any inadequacy or deficiency in the provision  of the services or resulting from unauthorized access or alteration of  transmissions of data or arising from suspension or termination of the services.  
+</p><p>* Notwithstanding anything to the contrary contained herein, Dreshkan liability to  you for any cause whatsoever, and regardless of the form of the action, will at  all times be limited to the amount paid, if any, by you to the Website, for the  service during the term of membership.  
+</p><p>INDEMNIFICATION  
+</p><p>The User shall indemnify, defend and hold harmless the Website and its parent,  subsidiaries, affiliates, officers, directors, employees, suppliers, consultants and  agents from any and all third party claims, liability, damages and/or costs (including,  but not limited to, attorney’s fees) arising from Your use of the Services, Your violation  of the Privacy Policy or these Terms of Service, or Your violation of any third party`&apos;`s  rights, including without limitation, infringement by You or any other user of Your  account of any intellectual property or other right of any person or entity. These Terms  of Service will inure to the benefit of Website’s successors, assigns, and licensees.  
+</p><p><h4>PROPRIETARY RIGHTS TO CONTENT </h4> 
+</p><p>The User acknowledges that the Content, including but not limited to text, software,  music, sound, photographs, video, graphics or other material contained in sponsor  advertisements or distributed via email, commercially produced information presented  to Member by the Website, its suppliers, and/or advertisers, is protected by copyrights,  trademarks, service marks, patents and/or other proprietary rights and laws. The User  is not permitted to copy, use, reproduce, distribute, perform, display, or create  derivative works from the Content unless expressly authorized by the Website, its  suppliers, or advertisers. Moreover, the content such as images, text, designs, etc. on 
+</p><p>all of the portals of the Website are taken from various online portals such as Google  Images. Dreshkan is not liable for any copyrights of that content or data.  
+</p><p><h4>GOVERNING LAW AND JURISDICTION  </h4>
+</p><p>* Any dispute, claim or controversy arising out of or relating to this Terms of  Usage including the determination of the scope or applicability of this Terms of  Usage to arbitrate, or your use of the Application or information to which it gives  access, shall be determined by arbitration in India, before a sole arbitrator  mutually appointed by Members and Website. Arbitration shall be conducted in  accordance with the Arbitration and Conciliation Act, 1996. The seat of such  arbitration shall be New Delhi. All proceedings of such arbitration, including,  without limitation, any awards, shall be in the English language. The award  shall be final and binding on the parties to the dispute.  
+</p><p>* Notwithstanding the foregoing, either party has the right to seek any interim or  preliminary relief from a court of competent jurisdiction in New Delhi in order to  protect the rights of such party pending the completion of any arbitration  hereunder, and both parties agree to submit to the exclusive jurisdiction of the  courts of India and venue in New Delhi for any such proceeding. If either party  files an action contrary to this provision, the other party may recover attorneys`&apos;`  fees and costs up to One Lakh Rupees INR.  
+</p><p>* These Terms of Usage shall be governed by and construed in accordance with  the laws of India without giving effect to any choice of law and principles that  would require the application of the laws of a different state. If for any reason a  court of competent jurisdiction finds any provision or portion of these Terms of  Usage or Privacy Policy to be unenforceable or invalid, such provision shall be  changed and interpreted so as to best accomplish the objectives of such  unenforceable or invalid provision within the limits of applicable law, and the  remainder of the Terms of Usage or Privacy Policy, as applicable, will continue  in full force and effect. Headings are for reference purposes only and in no way  define, limit, construe, or describe the scope or extent of such section. Any  waiver of any provision of the Terms of Usage shall be effective only if in writing  and signed by Dreshkan. These Terms of Usage constitute the entire  agreement between the parties with respect to the subject matter hereof and  supersedes and replaces all prior or contemporaneous understandings or  agreements, written or oral, regarding such subject matter.  
+</p><p>* These Terms of Usage and your use of the Services will be interpreted in  accordance with the laws of India excluding its rules on conflicts of laws. The  parties agree to submit any dispute arising under these Terms of Usage to the  jurisdiction of a court located in New Delhi for any actions for which the parties  retain the right to seek injunctive or other equitable relief in a court of  competent jurisdiction to prevent the actual or threatened infringement,  misappropriation or violation of a party`&apos;`s copyrights, trademarks, trade secrets,  patents, or other intellectual property rights.  
+</p><p> <h4>USER OBLIGATION  </h4>
+</p><p>The User (inclusive of the astrologer and the Member Customer) under an obligation  not to violate the privacy policy, terms and conditions and any other terms as defined  on the Website. The User represents that he is an individual and not a corporation or  other legal business entity. The rights to use the Website’s services are personal to  the User. The User shall while using the Website and engaged in any form of  communication on any of the forums inclusive of the products listed on the Website  shall not violate the terms and conditions which are inclusive of:-  
+</p><p>* The User shall not Post, publish or transmit any messages that is false,  misleading, defamatory, harmful, threatening, abusive, harassing, defamatory,  invades another`&apos;`s privacy, offensive, promotes racism, hatred or harm against 
+</p><p>any individual or group or religion or caste, infringes another`&apos;`s rights including  any intellectual property rights or copyright or trademark, violates or  encourages any conduct that would violate any applicable law or regulation or  would give rise to civil liability.  
+</p><p>* The User shall not upload or post or otherwise make available any content that  User does not have a right to make available, under any law or under  contractual or fiduciary relationships.  
+</p><p>* The User shall not upload or post or otherwise make available any content that  infringes any patent, trademark, trade secret, copyright or other proprietary  rights of any party. The User may, however, post excerpts of copyrighted  material so long as they adhere to Fair Use guidelines.  
+</p><p>* The User shall not collect screen names and email addresses of members who  are registered on the Website for purposes of advertisement, solicitation or  spam.  
+</p><p>* The User shall not send unsolicited email, junk mail, spam, or chain letters, or  promotions or advertisements for products or services.  
+</p><p>* The User shall not upload or distribute files that contain viruses, corrupted files,  or any other similar software or programs that may damage the operation of the  Website or another’s computer.  
+</p><p>* The User shall not engage in any activity that interferes with or disrupts access  to the Website  
+</p><p>* The User shall not attempt to gain unauthorized access to any portion or feature  of the Website, any other systems or networks connected to the Website, to any  of the services offered on or through the Website, by hacking, password mining  or any other illegitimate means.  
+</p><p>* The User shall not violate any applicable laws or regulations for the time being  in force within or outside India. The use and continuous use of the Website is  subject to but not limited to using the services for personal use.  
+</p><p>* The User shall not resell or make any commercial use of the Services without  the express written consent from the Website.  
+</p><p>* The User shall not violate these Terms of Usage including but not limited to any  applicable Additional terms of the Website contained herein or elsewhere.  * The User shall not Reverse engineer, modify, copy, distribute, transmit, display,  perform, reproduce, publish, license, create derivative works from, transfer, or  sell any information or software obtained from the Website.  
+</p><p>* The User by becoming a Registered member of the Website agrees to the  following situations, which list is not exhaustive and may include services  incidental to the below mentioned: -  
+</p><p>* The User agrees to receive certain specific emails and SMS alongwith calls  from the Website.  
+</p><p>* The User agrees not to transmit via the Website any unlawful, harassing,  libellous, abusive, threatening, harmful, vulgar, obscene or otherwise  objectionable material of any kind or nature.  
+</p><p>* The User not to transmit any material that encourages conduct that could  constitute a criminal offense, give rise to civil liability, or otherwise violate any  applicable local, state, national or international law or regulation. Attempts to  gain unauthorized access to other computer systems are prohibited.  
+</p><p>* The User shall not interfere with any other members`&apos;` use or enjoyment of the  Website or Services.  
+</p><p>* The User is under an obligation to report any misuse or abuse of the Site. If you  notice any abuse or misuse of the Site or anything which is in violation of this  Agreement, you shall forthwith report such violation to Website by writing to  support@dreshkan.com. On receipt of such complaint, Website may investigate  such complaint and if necessary, may terminate the membership of the Member  responsible for such violation abuse or misuse without any refund of the  subscription fee. 
+</p><p>* Any false complaint made by a Member shall make such Member liable for  termination of his / her membership without any refund of the subscription fee.  * The Website reserves the right to withdraw its services to any customer who is  found to be unreasonable or abusive during their conversation with the Service  Provider inclusive of astrologer regardless of any reason.  
+</p><p>While the Website shall take all steps to resolve any situation that is in violation of the  above obligations arises, however if the situation is not controllable, the Website  reserves its right to send a written warning henceforth. Such violations, if repeated by  the User, shall lead to a total ban for transacting on the platform by such User. If any  balance is present in the wallet of the User, the same shall be refunded subject to the  other charges that may be applicable for such violations.  
+</p><p>FEATURE “CALL WITH ASTROLOGER”  
+</p><p>The Website is providing certain service which is available through the medium of  telecommunication with the Astrologer listed and enrolled with the Website. By  agreeing to the present Terms of Usage, you are also giving your unconditional  consent to the Website to arrange a call with you on your mobile number even though  your number is on DND service provided by your mobile service provider.  
+</p><p><h4>WEBSITE CONTENT  </h4>
+</p><p>* The Website and any individual Websites which may be available through  external hyperlinks with the Website are private property.  
+</p><p>* All interaction on this Website inclusive of the guidance and advice received  directly from the Licensed Provider must comply with these Terms of Usage.  * The User shall not post or transmit through this Website any material which  
+</p><p>violates or infringes in any way upon the rights of others, or any material which  is unlawful, abusive, defamatory, invasive of privacy, vulgar, obscene, profane  or otherwise objectionable, which encourages conduct that would constitute a  criminal offence, give rise to civil liability or otherwise violate any law.  
+</p><p>* The Website shall have a right to suspend or terminate access by such User or  terminate the User’s registration and such User shall not gain access to the  Website.  
+</p><p>* The Website reserves the right to terminate the access or to change or  discontinue any aspect or feature of the Website including, but not limited to,  content, graphics, deals, offers, settings, etc.  
+</p><p>* Any information other the guidance and advice, received directly from the Third Party Service Provider, the educational, graphics, research sources and other  incidental information on the Site, the content, should not be considered as  medical advice.  
+</p><p>* The Website does not take guarantee regarding the medical advice, if provided,  by the third-party service provider inclusive of registered astrologers with the  site. The User should always talk to an appropriately qualified health care  professional for diagnosis and treatment including information regarding which  medications or treatment may be appropriate for the User. None of the Content  represents or warrants that any particular medication or treatment is safe,  appropriate, or effective for you. Dreshkan does not endorse any specific tests,  medications, products or procedures.  
+</p><p>* The Website does not take guarantee of any untoward incident that may happen  with the User after seeking the Service. The Website or the Service Provider  providing the advice is not liable and does not guarantee any results as  expected by the User and accessing the Website in such scenario is purely at  the risk of the User.  
+</p><p>* By using the Site, Application or Services, User hereby agrees that any legal  remedy or liability that you seek to obtain for actions or omissions of other  Members inclusive of the service provider registered with the Website or other 
+</p><p>third parties linked with the Website, shall be limited to claim against such  particular party who may have caused any harm. You agree not to attempt to  impose liability on or seek any legal remedy from the Website with respect to  such actions or omissions. 
 
-<p>These terms and conditions outline the rules and regulations for the use of Astrochrcha Pvt ltd.`&apos;`s Website, located at dreshkan.com.</p>
-
-<p>By accessing this website we assume you accept these terms and conditions. Do not continue to use Dreshkan if you do not agree to take all of the terms and conditions stated on this page.</p>
-
-<p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: `&quot;`Client`&quot;`, `&quot;`You`&quot;` and `&quot;`Your`&quot;` refers to you, the person log on this website and compliant to the Company’s terms and conditions. `&quot;`The Company`&quot;`, `&quot;`Ourselves`&quot;`, `&quot;`We`&quot;`, `&quot;`Our`&quot;` and `&quot;`Us`&quot;`, refers to our Company. `&quot;`Party`&quot;`, `&quot;`Parties`&quot;`, or `&quot;`Us`&quot;`, refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services, in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.</p>
-
-<h3><strong>Cookies</strong></h3>
-
-<p>We employ the use of cookies. By accessing Dreshkan, you agreed to use cookies in agreement with the Astrochrcha Pvt ltd.`&apos;`s Privacy Policy. </p>
-
-<p>Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.</p>
-
-<h3><strong>License</strong></h3>
-
-<p>Unless otherwise stated, Astrochrcha Pvt ltd. and/or its licensors own the intellectual property rights for all material on Dreshkan. All intellectual property rights are reserved. You may access this from Dreshkan for your own personal use subjected to restrictions set in these terms and conditions.</p>
-
-<p>You must not:</p>
-<ul>
-    <li>Republish material from Dreshkan</li>
-    <li>Sell, rent or sub-license material from Dreshkan</li>
-    <li>Reproduce, duplicate or copy material from Dreshkan</li>
-    <li>Redistribute content from Dreshkan</li>
-</ul>
-<p>Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Astrochrcha Pvt ltd. does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Astrochrcha Pvt ltd.,its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws, Astrochrcha Pvt ltd. shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.</p>
-
-<p>Astrochrcha Pvt ltd. reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.</p>
-
-<p>You warrant and represent that:</p>
-
-<ul>
-    <li>You are entitled to post the Comments on our website and have all necessary licenses and consents to do so;</li>
-    <li>The Comments do not invade any intellectual property right, including without limitation copyright, patent or trademark of any third party;</li>
-    <li>The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material which is an invasion of privacy</li>
-    <li>The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.</li>
-</ul>
-
-<p>You hereby grant Astrochrcha Pvt ltd. a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.</p>
-
-<h3><strong>Hyperlinking to our Content</strong></h3>
-
-<p>The following organizations may link to our Website without prior written approval:</p>
-
-<ul>
-    <li>Government agencies;</li>
-    <li>Search engines;</li>
-    <li>News organizations;</li>
-    <li>Online directory distributors may link to our Website in the same manner as they hyperlink to the Websites of other listed businesses; and</li>
-    <li>System wide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups which may not hyperlink to our Web site.</li>
-</ul>
-
-<p>These organizations may link to our home page, to publications or to other Website information so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products and/or services; and (c) fits within the context of the linking party’s site.</p>
-
-<p>We may consider and approve other link requests from the following types of organizations:</p>
-
-<ul>
-    <li>commonly-known consumer and/or business information sources;</li>
-    <li>dot.com community sites;</li>
-    <li>associations or other groups representing charities;</li>
-    <li>online directory distributors;</li>
-    <li>internet portals;</li>
-    <li>accounting, law and consulting firms; and</li>
-    <li>educational institutions and trade associations.</li>
-</ul>
-
-<p>We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of Astrochrcha Pvt ltd.; and (d) the link is in the context of general resource information.</p>
-
-<p>These organizations may link to our home page so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products or services; and (c) fits within the context of the linking party’s site.</p>
-
-<p>If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to Astrochrcha Pvt ltd.. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.</p>
-
-<p>Approved organizations may hyperlink to our Website as follows:</p>
-
-<ul>
-    <li>By use of our corporate name; or</li>
-    <li>By use of the uniform resource locator being linked to; or</li>
-    <li>By use of any other description of our Website being linked to that makes sense within the context and format of content on the linking party’s site.</li>
-</ul>
-
-<p>No use of Astrochrcha Pvt ltd.`&apos;`s logo or other artwork will be allowed for linking absent a trademark license agreement.</p>
-
-<h3><strong>iFrames</strong></h3>
-
-<p>Without prior approval and written permission, you may not create frames around our Webpages that alter in any way the visual presentation or appearance of our Website.</p>
-
-<h3><strong>Content Liability</strong></h3>
-
-<p>We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights.</p>
-
-<h3><strong>Your Privacy</strong></h3>
-
-<p>Please read Privacy Policy</p>
-
-<h3><strong>Reservation of Rights</strong></h3>
-
-<p>We reserve the right to request that you remove all links or any particular link to our Website. You approve to immediately remove all links to our Website upon request. We also reserve the right to amen these terms and conditions and it’s linking policy at any time. By continuously linking to our Website, you agree to be bound to and follow these linking terms and conditions.</p>
-
-<h3><strong>Removal of links from our website</strong></h3>
-
-<p>If you find any link on our Website that is offensive for any reason, you are free to contact and inform us any moment. We will consider requests to remove links but we are not obligated to or so or to respond to you directly.</p>
-
-<p>We do not ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we promise to ensure that the website remains available or that the material on the website is kept up to date.</p>
-
-<h3><strong>Disclaimer</strong></h3>
-
-<p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will:</p>
-
-<ul>
-    <li>limit or exclude our or your liability for death or personal injury;</li>
-    <li>limit or exclude our or your liability for fraud or fraudulent misrepresentation;</li>
-    <li>limit any of our or your liabilities in any way that is not permitted under applicable law; or</li>
-    <li>exclude any of our or your liabilities that may not be excluded under applicable law.</li>
-</ul>
-
-<p>The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.</p>
-
-<p>As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>
-            
+</p>   
         </div>
     )
 }
