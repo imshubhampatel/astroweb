@@ -154,7 +154,7 @@ const blog = withAdminAuth(() => {
             <div className={styles.heading}>Comments</div>
 
             {/* Comment Card */}
-            <div>
+            <div className="">
               {comments.map((e) => (
                 <CommentCard
                   key={e.id}
