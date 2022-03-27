@@ -51,16 +51,13 @@ const astrologermanagement = withAdminAuth(() => {
    const astros = collection(db, "app_details");
    var querySnapshot = await getDoc(
      doc(astros, "astrologerDetails")
-     // .withConverter(UserConverter)
    );
    if (querySnapshot.exists()) {
     settotalCount(querySnapshot.data().astrologerCount);
    } else {
-     // console.log("no")
    }
    querySnapshot = await getDocs(
     collection(astros, "astrologerDetails/pricing_categories")
-     // .withConverter(UserConverter)
    );
     let data = querySnapshot.docs.map((doc) => {
       return new pricingCategory({ id: doc.id, ...doc.data() });
