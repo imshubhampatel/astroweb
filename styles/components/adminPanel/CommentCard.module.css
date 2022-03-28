@@ -1,16 +1,22 @@
 .container {
+  /* border: 1px dotted blue;  */
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .top_part {
+  display: flex;
+  gap: 10px; 
 }
 
 .top_part .photo_container {
   height: 60px;
   width: 60px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .top_part .name_container {
+  /* border: 2px solid orange; */
 }
 
 .name_container .name {
@@ -18,7 +24,6 @@
   line-height: 108.1%;
   /* or 17px */
 
-  text-align: center;
 
   /* Font Colour */
 
@@ -34,4 +39,11 @@
   color: #000000;
 
   opacity: 0.5;
+}
+
+
+.top_part .delete_button_container{
+  margin-left: auto;
+  padding-right: 5px;
+  cursor: pointer;
 }
