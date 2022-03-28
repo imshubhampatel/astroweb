@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/pages/index.module.css";
 import Link from "next/link";
+// import Pixel from '../components/pixel'
 import { useEffect, useState } from "react";
 
 import HeroImage from "../public/images/mascot.png";
