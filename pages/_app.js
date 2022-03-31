@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import Layout from '../components/Layout'
 import 'bootstrap/dist/css/bootstrap.css'
+// import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
 import Head from 'next/head'
 import TagManager from 'react-gtm-module';
 import { useEffect } from 'react';
