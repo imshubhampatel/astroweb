@@ -44,7 +44,7 @@ function AstrologerListing() {
         // initializePaginationData(astrologersList.filter(myFilter));
       }, []);
       async function getAllAstrologers() {
-        const astros = query(collection(db, "astrologer"),orderBy("firstName"));
+        const astros = query(collection(db, "astrologer"),orderBy("firstName"),where("enabled",'==',true),where("status.state",'==','verified'));
         const querySnapshot = await getDocs(astros);
         let data = querySnapshot.docs.map((doc) =>
         { return new Astrologer({id:doc.id, ...doc.data()})});

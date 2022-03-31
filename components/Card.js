@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import Image from 'next/image'
+
 function Card(props) {
     let styles = props.cssmodule;
     let data = props.data;
@@ -19,6 +21,7 @@ function Card(props) {
                 <div className={styles.tagcontainer}>
                 {data.expertise
                 ? Object.keys(data.expertise).map((e) => {
+                    if(data.expertise[e])
                     return <span key={e} className={styles.tag}>{data.expertise[e] ? e + " " : ""}</span>;
                   })
                 : ""}{" "}
