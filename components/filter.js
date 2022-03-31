@@ -9,7 +9,7 @@ function Filter(props) {
         <nav>
             <ul className={styles.list}>
                 <li>
-                    <input type="checkbox" name="status" id="status1" onChange={} />
+                    <input type="checkbox" name="status" id="status1" />
                     <label for="status1">Online</label>
                 </li>
                 <li>

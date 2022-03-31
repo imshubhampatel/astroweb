@@ -11,7 +11,7 @@
 
     --scroll-bar-color: #c5c5c5;
 
-    position: absolute;
+    /* position: absolute;   */
     width: 100%;
     height: max-content;
     left: 0;
@@ -22,6 +22,13 @@
     vertical-align: middle;
     background-color: var(--body-bg-color);
 }
+
+.paginateContainer{
+    display: inline-block;
+    width: 100%;
+   
+}
+
 
 /* Works on Chrome, Edge, and Safari */
 .astrologerlist::-webkit-scrollbar {
@@ -36,6 +43,44 @@
     height: 75px;
     margin-bottom: 2%;
 }
+.paginationContainer {
+    /* border: dotted green ; */
+    margin-top: auto;
+    align-items: center;
+    margin-bottom: 5px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 150px;
+    /* margin-top: auto; */
+  }
+  
+  
+  .centerDivFlex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+  }
+
+/* .pagination li a {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    top: 10px;
+    border-radius: 50%;
+  }
+  
+.pagination li:first-child a {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    line-height: 5px;
+  }
+  
+.pagination li:last-child a {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    line-height: 5px;
+  } */
 
 /* BreadCrumb */
 /* .breadcrumb {
