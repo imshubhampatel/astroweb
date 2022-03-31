@@ -1,3 +1,4 @@
+import Link from 'next/link'
 function Card(props) {
     let styles = props.cssmodule;
     let data = props.data;
@@ -27,7 +28,11 @@ function Card(props) {
             <div className={styles.priceratetag}>
                 ₹{data.priceChat}<small>/min</small>
             </div>
-            <button className={styles.contactbutton}>Consult Now</button>
+            <button className={styles.contactbutton}>  <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+                  <a>
+                      Consult Now
+                  </a>
+                </Link></button>
         </div>
     </div>);
 }
