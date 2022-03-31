@@ -31,7 +31,7 @@ function Card(props) {
              <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
              <button className={styles.contactbutton}> 
 
-                      Consult Now
+                     {data.currentStatus=="Online"? "Consult Now":"Schedule"}
                       </button>
                 </Link>
                 </div>
