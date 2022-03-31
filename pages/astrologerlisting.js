@@ -107,7 +107,7 @@ function searchHandler(event) {
             <div className={styles.cardscontainer}>
                 <div className={styles.title} data-status-color="green">Astrologers online - 10</div>
                 <div className={styles.cards}>
-                    {paginationData.slice(firstItemNum, lastItemNum).map((e) => ( <Card cssmodule={styles} data={e} />))}
+                    {paginationData.slice(firstItemNum, lastItemNum).map((e) => ( <Card key={e.id}cssmodule={styles} data={e} />))}
                 </div>
             </div>
             </div>
