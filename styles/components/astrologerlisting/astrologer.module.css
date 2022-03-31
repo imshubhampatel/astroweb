@@ -532,6 +532,7 @@
 
 .card .tags .title {
     font-size: .9rem;
+    
     margin-bottom: 5px;
 }
 
@@ -541,7 +542,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    
+    justify-content:space-between;
 }
 
 .card .tags .tag {
@@ -594,7 +596,7 @@
 //////////////////////////////////////////////////////////////////////////////////// */
 
 
-@media only screen and (max-width: 1025px) {
+@media only screen and (max-width: 768px) {
 
 .pgtoolstitle {
     display: none;

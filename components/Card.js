@@ -23,6 +23,7 @@ function Card(props) {
                 ? Object.keys(data.expertise).map((e) => {
                     if(data.expertise[e])
                     return <span key={e} className={styles.tag}>{data.expertise[e] ? e + " " : ""}</span>;
+                    return null;
                   })
                 : ""}{" "}
                     
