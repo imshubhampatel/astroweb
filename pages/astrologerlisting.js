@@ -76,12 +76,12 @@ function searchHandler(event) {
       })
     );
   }
-  function filterHandler(event) {
-    let val = event.target.value.toLowerCase();
+  function filterHandler(state) {
+
     initializePaginationData(
       astrologersList.filter((e) => {
         if (
-          e?.currentStatus?.toLowerCase().includes(val) 
+          state[e?.currentStatus]
         )
           return true;
         else return false;
@@ -98,15 +98,15 @@ function searchHandler(event) {
             </div>
             <div className={styles.filtercontainer}>
                 <span className={styles.title}>Filter By</span>
-                <Filter cssmodule={styles} filterHandler={styles} />
+                <Filter cssmodule={styles} filterHandler={filterHandler} />
                 {/* <Filter cssmodule={styles} />
                 <Filter cssmodule={styles} />
                 <Filter cssmodule={styles} /> */}
             </div>
             <div className={styles.cardscontainer}>
-                <div className={styles.title} data-status-color="green">Astrologers online - 2331</div>
+                <div className={styles.title} data-status-color="green">Astrologers online - 10</div>
                 <div className={styles.cards}>
-                    {paginationData.slice(firstItemNum, lastItemNum).map((e) => ( <Card cssmodule={styles} data={e} />))}
+                    {paginationData.slice(firstItemNum, lastItemNum).map((e) => ( <Card key={e.id} cssmodule={styles} data={e} />))}
                     <div style={{}}>
             <ReactPaginate
               previousLabel={"← Previous"}

@@ -18,6 +18,16 @@ const NavLinks = (props) => {
           <a>Home</a>
         </Link>
       </motion.li>
+      <motion.li
+        initial={animateFrom}
+        animate={animateTo}
+        transition={{ delay: 0.05 }}
+        onClick={() => props.isMobile && props.closeMobileMenu()}
+      >
+        <Link href="/astrologerlisting">
+          <a>Our Astrologers</a>
+        </Link>
+      </motion.li>
       {props.isCurrentUser == true && props.user ? (
       <motion.li
         initial={animateFrom}

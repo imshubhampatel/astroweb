@@ -3,7 +3,7 @@ function Card(props) {
     let data = props.data;
     return (
     <div className={styles.card} id="card1">
-        <span className={styles.onlinestat} data-status-color="green">{data.currentStatus}</span>
+        <span className={styles.onlinestat} data-status-color={data.currentStatus=="Online"? "green": data.currentStatus=="Busy" ?"orange":"red"}>{data.currentStatus}</span>
         <img className={styles.astrologerimg} src={data.profilePicLink} alt="" />
         <div className={styles.infocontent}>
             <h2 className={styles.name}>Astro {data.firstName}</h2>
