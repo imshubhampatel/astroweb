@@ -18,7 +18,7 @@ function Card(props) {
                 <div className={styles.tagcontainer}>
                 {data.expertise
                 ? Object.keys(data.expertise).map((e) => {
-                    return <span className={styles.tag}>{data.expertise[e] ? e + " " : ""}</span>;
+                    return <span key={e} className={styles.tag}>{data.expertise[e] ? e + " " : ""}</span>;
                   })
                 : ""}{" "}
                     

@@ -96,6 +96,7 @@ function searchHandler(event) {
                  {/* <SortBy cssmodule={styles} />  */}
                 <SearchBar cssmodule={styles} searchHandler={searchHandler}/>
             </div>
+            <div>
             <div className={styles.filtercontainer}>
                 <span className={styles.title}>Filter By</span>
                 <Filter cssmodule={styles} filterHandler={filterHandler} />
@@ -106,25 +107,29 @@ function searchHandler(event) {
             <div className={styles.cardscontainer}>
                 <div className={styles.title} data-status-color="green">Astrologers online - 10</div>
                 <div className={styles.cards}>
-                    {paginationData.slice(firstItemNum, lastItemNum).map((e) => ( <Card key={e.id} cssmodule={styles} data={e} />))}
-                    <div style={{}}>
+                    {paginationData.slice(firstItemNum, lastItemNum).map((e) => ( <Card cssmodule={styles} data={e} />))}
+                </div>
+            </div>
+            </div>
+            
+            <div>
+            <div className={styles.paginateContainer}>
             <ReactPaginate
-              previousLabel={"← Previous"}
-              nextLabel={"Next →"}
+              previousLabel={"←"}
+              nextLabel={"→"}
               breakLabel={"..."}
               pageCount={totalPages}
               marginPagesDisplayed={2}
               onPageChange={(e) => handlePageChange(e)}
               containerClassName={`pagination ${styles.paginationContainer} ${styles.centerDivFlex}`}
-              previousLinkClassName={"page-link"}
-              pageClassName={"page-link"}
-              breakLinkClassName={"page-link"}
-              nextLinkClassName={"page-link"}
-              disabledClassName={"page-item disabled"}
+              previousLinkClassName={`pagination ${styles.paginationContainer} ${styles.centerDivFlex}`}
+              pageClassName={`pagination ${styles.paginationContainer} ${styles.centerDivFlex}`}
+              breakLinkClassName={`pagination ${styles.paginationContainer} ${styles.centerDivFlex}`}
+              nextLinkClassName={`pagination ${styles.paginationContainer} ${styles.centerDivFlex}`}
+              disabledClassName={`pagination ${styles.paginationContainer} ${styles.centerDivFlex}`}
               activeClassName={` page-link active`}
             />
-          </div>
-                </div>
+            </div>
             </div>
         </div>
     );
