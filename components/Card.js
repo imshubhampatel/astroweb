@@ -9,7 +9,7 @@ function Card(props) {
         <span className={styles.onlinestat} data-status-color={data.currentStatus=="Online"? "green": data.currentStatus=="Busy" ?"orange":"red"}>{data.currentStatus}</span>
         <img className={styles.astrologerimg} src={data.profilePicLink} alt="" />
         <div className={styles.infocontent}>
-            <h2 className={styles.name}>Astro {data.firstName + " " + data.secondName}</h2>
+            <h2 className={styles.name}> {data.firstName + " " + data.secondName}</h2>
             <span className={styles.starrating}><i className="fas fa-search"></i><b>{data.rating}</b>({data.ratingCount} ratings) | {data.experience} years</span>
             <span className={styles.lang}><i className="fas fa-search"></i> {data.languages
                 ? Object.keys(data.languages).map((e) => {
