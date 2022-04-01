@@ -836,7 +836,7 @@
     .card {
         width: 100%;
         margin-bottom: 20px;
-        /* height: 195px; */
+        min-height: 165px;
         border-radius: 15px;
     }
     
