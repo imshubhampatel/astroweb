@@ -53,7 +53,7 @@ export default function MeetingCard({ data, type }) {
         </div>
         <div className={`${styles.orderDetailText}`}>
           Order id: {data?.id} <br />
-          {data?.scheduledTime.toDate().toDateString()}
+          {data?.scheduledTime ? new Date(data?.scheduledTime.seconds).toLocaleTimeString("en-US"): null}
         </div>
 
         <div className={`${styles.orderStatus}  ${styles.orderStatusSuccess} `}>
