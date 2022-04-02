@@ -28,32 +28,34 @@ export default function MeetingCard({ data, type }) {
           {type == "astrologer" ? data?.userName : data?.astrologerName}
         </h6>
         <div className={`${styles.orderDetailText}`}>
-          {type == "astrologer" ? <Link
-            href={{
-              pathname: `/admin/user/${data?.userUid}`,
-              query: { pid: data?.userUid },
-            }}
-          >
-            <a target="_blank">
-             User ID : {data?.userUid}
-            </a>
-          </Link>:<Link
-            href={{
-              pathname: `/admin/astrologer/${data?.astrologerUid}`,
-              query: { pid: data?.astrologerUid },
-            }}
-          >
-            <a target="_blank">
-              Astrologer Id: {data?.astrologerUid}
-            </a>
-          </Link> }
-          
+          {type == "astrologer" ? (
+            <Link
+              href={{
+                pathname: `/admin/user/${data?.userUid}`,
+                query: { pid: data?.userUid },
+              }}
+            >
+              <a target="_blank">User ID : {data?.userUid}</a>
+            </Link>
+          ) : (
+            <Link
+              href={{
+                pathname: `/admin/astrologer/${data?.astrologerUid}`,
+                query: { pid: data?.astrologerUid },
+              }}
+            >
+              <a target="_blank">Astrologer Id: {data?.astrologerUid}</a>
+            </Link>
+          )}
 
           <br />
         </div>
         <div className={`${styles.orderDetailText}`}>
           Order id: {data?.id} <br />
-          {data?.scheduledTime.toDate().toDateString() + " "}{data?.scheduledTime ? new Date(data?.scheduledTime.seconds).toLocaleTimeString(): null}
+          {data?.scheduledTime.toDate().toDateString() + " "}
+          {data?.scheduledTime
+            ? new Date(data?.scheduledTime.seconds*1000).toLocaleTimeString()
+            : null}
         </div>
 
         <div className={`${styles.orderStatus}  ${styles.orderStatusSuccess} `}>
