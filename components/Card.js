@@ -1,9 +1,13 @@
+// import React from "react";
+// import reactDom from "react-dom";
+// import { Image } from reactDom;
+
 function Card(props) {
     let styles = props.cssmodule;
     let data = props.data;
     return (
     <div className={styles.card} id="card1">
-        <span className={styles.onlinestat} data-status-color="green">{data.currentStatus}</span>
+        <span className={styles.onlinestat} data-status={data.currentStatus}>{data.currentStatus}</span>
         <img className={styles.astrologerimg} src={data.profilePicLink} alt="" />
         <div className={styles.infocontent}>
             <h2 className={styles.name}>Astro {data.firstName}</h2>
@@ -12,7 +16,7 @@ function Card(props) {
                 ? Object.keys(data.languages).map((e) => {
                     return data.languages[e] ? e + " " : "";
                   })
-                : ""}{" "}</span>
+                : ""}{" "}</span>g
             <div className={styles.tags}>
                 <div className={styles.title}>Main Speciality</div>
                 <div className={styles.tagcontainer}>

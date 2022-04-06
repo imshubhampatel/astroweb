@@ -65,64 +65,7 @@
     gap: 3px;
   }
 
-/* .pagination li a {
-    width: 10px;
-    height: 10px;
-    padding: 0;
-    top: 10px;
-    border-radius: 50%;
-  }
-  
-.pagination li:first-child a {
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
-    line-height: 5px;
-  }
-  
-.pagination li:last-child a {
-    border-top-right-radius: 50%;
-    border-bottom-right-radius: 50%;
-    line-height: 5px;
-  } */
 
-/* BreadCrumb */
-/* .breadcrumb {
-    position: absolute;
-    left: 0;
-    top: 5px;
-    height: auto;
-    width: max-content;
-    font-family: Lato;
-    font-size: 15px;
-    font-weight: bolder;
-}
-
-.breadcrumb ol {
-    margin: 0;
-    padding-left: 0;
-    list-style: none;
-    user-select: none;
-}
-
-.breadcrumb li {
-    color: #000;
-    display: inline-block;
-}
-
-.breadcrumb li a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.breadcrumb li:not(:first-child):before {
-    display: inline-block;
-    content: "/";
-    vertical-align: bottom;
-}
-
-.breadcrumb li:last-child {
-    color: var(--primary-color);
-} */
 
 .pgtoolstitle {
     position: absolute;
@@ -409,7 +352,7 @@
 
 .card {
     position: relative;
-    width: 48%;
+    width: 96%;
     aspect-ratio: 7 / 3;
     margin-bottom: 40px;
     /* height: 195px; */
@@ -597,6 +540,22 @@
 .card .contactbutton:hover {
     color: var(--secondary-color);
     background-color: #fff;
+}
+
+.imagecontainer {
+    position: absolute;
+    top: -130%;
+    left: 50%;
+    transform: translate(-50%,50%);
+    border-radius: 50%;
+    border: 5px solid red;
+    overflow: hidden;
+    background-color: blue;
+}
+
+.imagebg {
+    width: 150px;
+    height: 150px;
 }
 
 /* ////////////////////////////////////////////////////////////////////////////////
@@ -794,6 +753,8 @@
     user-select: none;
     padding-left: 20px;
 }
+
+
 
 .dropdown input[type=checkbox] {
     display: none;

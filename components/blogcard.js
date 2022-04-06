@@ -1,4 +1,4 @@
-import styles from "../../styles/components/adminPanel/BlogCard.module.css";
+import styles from "../styles/components/adminPanel/BlogCard.module.css";
 import React, { useState,useEffect}from "react";
 import Link from "next/link";
 export default function BlogCard({ props ,remove}) {
@@ -34,13 +34,13 @@ export default function BlogCard({ props ,remove}) {
 
         <div className={styles.time}>Time: {props.time.toDate().toDateString()}</div>
 
-        {visible ? 
+        {/* {visible ? 
           <div onClick={() => {
             remove(props.id)
             setvisible(false)
           }} className={styles.deleteButton}>
           Remove
-        </div> : " Removed "}
+        </div> : " Removed "} */}
       </div>
     </div>
   );
