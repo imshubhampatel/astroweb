@@ -1,5 +1,7 @@
 import Link from 'next/link'
+
 import Image from 'next/image'
+
 
 function Card(props) {
     let styles = props.cssmodule;
