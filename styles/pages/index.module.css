@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
+
 .container {
   background: #FEF2DB;
 }
+
 
 .heroContainer {
   /* border: solid red; */
@@ -13,6 +17,76 @@
   padding: 25px;
   max-width: 350px;
 }
+.maincontainer {
+  position: relative;
+}
+
+.button{
+  align-items: right;
+}
+
+.close{
+  display: flex;
+}
+
+
+.imagecontainer {
+
+  position: absolute;
+  /* transform: translate(-50%,50%); */
+  top: -10%;
+  left: 30% ;
+  width: 173px;
+  height: 173px;
+  border-radius: 50%;
+  border: 5px solid #FFD200;
+  background-color: #FFF2BB;
+  padding: 47px;
+}
+
+.imagebg {
+  position: relative;
+  width: 80px !important;
+  height: 80px !important;
+}
+
+.heading {
+  font-size: 30px;
+  color: black;
+  font-family: Poppins;
+  font-weight: bold;
+  line-height: 54px;
+}
+
+.subheading {
+  font-size: 16px;
+  color: #5A5A5A;
+  font-family: Poppins;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+
+.subpartheading {
+  font-size: 8px;
+  color: #B8B8B8;
+  font-family: Poppins;
+  font-weight: 300;
+  line-height: 12px;
+}
+
+/* .badge{
+  width: 100%;
+} */
+
+.main.badge{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+
 
 @media (min-width: 768px) {
   .heroContainer {

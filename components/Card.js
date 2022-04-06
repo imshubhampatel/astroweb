@@ -15,7 +15,7 @@ function Card(props) {
                 ? Object.keys(data.languages).map((e) => {
                     return data.languages[e] ? e + " " : "";
                   })
-                : ""}{" "}</span>
+                : ""}{" "}</span>g
             <div className={styles.tags}>
                 <div className={styles.title}>Main Speciality</div>
                 <div className={styles.tagcontainer}>
