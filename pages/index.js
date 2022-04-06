@@ -68,7 +68,7 @@ export default function Home() {
               </Link>
               </div>
             </div>
-            <h6 className={styles.subpartheading}>DRESHKAN- A PRODUCT OF ASTROCHARCHA </h6>
+            <h6 className={styles.subpartheading}>DRESHKAN- A PRODUCT OF ASTROCHRCHA </h6>
         </div>
       ),
     });
