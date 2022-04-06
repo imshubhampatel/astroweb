@@ -4,10 +4,11 @@ import styles from "../styles/pages/index.module.css";
 import Link from "next/link";
 // import Pixel from '../components/pixel'
 import { useEffect, useState } from "react";
-
+import CloseIcon from '@mui/icons-material/Close';
 import HeroImage from "../public/images/mascot.png";
 import Logo from "../public/images/logo_transparent.png";
 import IphoneMockup from "../public/images/iphone_mockup.svg";
+import MainLogo from "../public/images/planet.png";
 import GooglePlayBadge from "../public/images/google-play-badge.png";
 
 import { Faqs } from "../components/faqComponent/Faqs";
@@ -19,10 +20,16 @@ import { HiOutlineDocumentText } from "react-icons/hi";
 import { BiPlanet } from "react-icons/bi";
 import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 import { firebase } from "../config";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const db = getFirestore(firebase);
+const MySwal = withReactContent(Swal);
 
 export default function Home() {
+      useEffect(() => {
+        openingAlertView();
+      }, []);
   async function markInterested(email) {
     const astros = doc(collection(db, "interested"));
     await setDoc(astros, {
@@ -30,6 +37,42 @@ export default function Home() {
       timestamp: new Date(),
     });
   }
+  const openingAlertView = () => {
+    MySwal.fire({
+      showConfirmButton: false,
+      customClass: {
+        htmlContainer: styles.maincontainer,
+      },
+      html: (
+        <div >
+          <div className={styles.close} > 
+          <CloseIcon style={{marginLeft: "auto"}}
+              onClick={() => {
+                Swal.clickConfirm();
+                }}/>
+            </div> 
+            
+            <div>
+              <Image height={140} width={140} src={Logo}  />
+              <h2 className={styles.heading}>GET MORE OF DRESHKAN </h2>
+            </div>    
+            <hr/>
+            <h4 className={styles.subheading}>A PLETHORA OF ASTROLOGY SERVICES IN THE APP </h4>
+            <hr/>
+            <div className={styles.mainbadge} >
+              <div className={styles.badge}>
+              <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+                <a>
+                  <Image  height={65} width={175}src={GooglePlayBadge} />
+                </a>
+              </Link>
+              </div>
+            </div>
+            <h6 className={styles.subpartheading}>DRESHKAN- A PRODUCT OF ASTROCHARCHA </h6>
+        </div>
+      ),
+    });
+  };
 
   return (
     <>
@@ -92,9 +135,6 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* <div className="my-3 ">
-                <LaunchSoonSubscribe markInterested={markInterested}/>
-              </div> */}
             </div>
           </div>
         </div>

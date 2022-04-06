@@ -1,5 +1,7 @@
 import Link from 'next/link'
+
 import Image from 'next/image'
+
 
 function Card(props) {
     let styles = props.cssmodule;
@@ -15,7 +17,7 @@ function Card(props) {
                 ? Object.keys(data.languages).map((e) => {
                     return data.languages[e] ? e + " " : "";
                   })
-                : ""}{" "}</span>
+                : ""}{" "}</span>g
             <div className={styles.tags}>
                 <div className={styles.title}>Main Speciality</div>
                 <div className={styles.tagcontainer}>
