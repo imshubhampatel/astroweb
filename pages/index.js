@@ -8,7 +8,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import HeroImage from "../public/images/mascot.png";
 import Logo from "../public/images/logo_transparent.png";
 import IphoneMockup from "../public/images/iphone_mockup.svg";
-import MainLogo from "../public/images/planet.png";
 import GooglePlayBadge from "../public/images/google-play-badge.png";
 
 import { Faqs } from "../components/faqComponent/Faqs";

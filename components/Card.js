@@ -1,21 +1,14 @@
-<<<<<<< HEAD
-// import React from "react";
-// import reactDom from "react-dom";
-// import { Image } from reactDom;
 
-=======
 import Link from 'next/link'
->>>>>>> 8ed938d9813c6dd27f7713785461f87a9c69ad73
 function Card(props) {
     let styles = props.cssmodule;
     let data = props.data;
     return (
     <div className={styles.card} id="card1">
-<<<<<<< HEAD
+
         <span className={styles.onlinestat} data-status={data.currentStatus}>{data.currentStatus}</span>
-=======
+
         <span className={styles.onlinestat} data-status-color={data.currentStatus=="Online"? "green": data.currentStatus=="Busy" ?"orange":"red"}>{data.currentStatus}</span>
->>>>>>> 8ed938d9813c6dd27f7713785461f87a9c69ad73
         <img className={styles.astrologerimg} src={data.profilePicLink} alt="" />
         <div className={styles.infocontent}>
             <h2 className={styles.name}>Astro {data.firstName}</h2>
