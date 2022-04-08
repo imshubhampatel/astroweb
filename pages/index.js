@@ -27,7 +27,7 @@ const MySwal = withReactContent(Swal);
 
 export default function Home() {
       useEffect(() => {
-        editPricingCategoryView();
+        openingAlertView();
       }, []);
   async function markInterested(email) {
     const astros = doc(collection(db, "interested"));
@@ -36,7 +36,7 @@ export default function Home() {
       timestamp: new Date(),
     });
   }
-  const editPricingCategoryView = () => {
+  const openingAlertView = () => {
     MySwal.fire({
       showConfirmButton: false,
       customClass: {
@@ -56,7 +56,7 @@ export default function Home() {
               <h2 className={styles.heading}>GET MORE OF DRESHKAN </h2>
             </div>    
             <hr/>
-            <h4 className={styles.subheading}>A PLETHORA OF SERVICES IN THE APP </h4>
+            <h4 className={styles.subheading}>Get in instant touch with Astrologers</h4>
             <hr/>
             <div className={styles.mainbadge} >
               <div className={styles.badge}>
@@ -67,7 +67,7 @@ export default function Home() {
               </Link>
               </div>
             </div>
-            <h6 className={styles.subpartheading}>DRESHKAN- A PRODUCT OF ASTROCHARCHA </h6>
+            <h6 className={styles.subpartheading}>DRESHKAN- A PRODUCT OF ASTROCHRCHA </h6>
         </div>
       ),
     });

@@ -25,9 +25,9 @@ import {
   broadcastConverter,
   Broadcast,
   broadcastStatus,
-} from "../dbObjects/Broadcasts";
+} from "../../dbObjects/Broadcasts";
 
-import AdminLayout from "../components/adminPanel/layout";
+import AdminLayout from "../../components/adminPanel/layout";
 import withAdminAuth from "../../auth/withAdminAuth";
 import BlogCard from "../../components/adminPanel/BlogCard";
 import BroadcastCard from "../../components/adminPanel/BroadcastCard";

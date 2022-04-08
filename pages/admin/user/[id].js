@@ -15,7 +15,7 @@ import {
   doc,
   getDocs,
   updateDoc,
-  setDoc,
+  orderBy,
   getDoc,
   getFirestore,
 } from "firebase/firestore";
@@ -70,7 +70,7 @@ const user = withAdminAuth(() => {
   async function getAllMeeting(uuid) {
     const astros = collection(db, "meetings");
     const querySnapshot = await getDocs(
-      query(astros, where("userUid", "==", uuid))
+      query(astros, where("userUid", "==", uuid),orderBy("scheduledTime","desc"))
     );
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
@@ -78,7 +78,7 @@ const user = withAdminAuth(() => {
     setMeetings(data);
   }
   async function getAllWalletTransactions(uuid) {
-    const astros = query(collection(db, "user", uuid, "wallet_transaction"));
+    const astros = query(collection(db, "user", uuid, "wallet_transaction"),orderBy("date","desc"));
     const querySnapshot = await getDocs(astros);
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };

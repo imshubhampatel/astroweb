@@ -51,16 +51,13 @@ const astrologermanagement = withAdminAuth(() => {
    const astros = collection(db, "app_details");
    var querySnapshot = await getDoc(
      doc(astros, "astrologerDetails")
-     // .withConverter(UserConverter)
    );
    if (querySnapshot.exists()) {
     settotalCount(querySnapshot.data().astrologerCount);
    } else {
-     // console.log("no")
    }
    querySnapshot = await getDocs(
     collection(astros, "astrologerDetails/pricing_categories")
-     // .withConverter(UserConverter)
    );
     let data = querySnapshot.docs.map((doc) => {
       return new pricingCategory({ id: doc.id, ...doc.data() });
@@ -71,6 +68,7 @@ const astrologermanagement = withAdminAuth(() => {
  }
   function initializePaginationData(data) {
     setpaginationData(data);
+    settotalCount(data.length)
     settotalAstrologers(data.length);
     settotalPages(data.length / ItemsPerPage);
     setfirstItemNum(0);
@@ -85,6 +83,7 @@ const astrologermanagement = withAdminAuth(() => {
     setastrologersList(data);
     settotalAstrologers(data.length);
     initializePaginationData(data);
+
   }
 
   function handlePageChange({ selected }) {

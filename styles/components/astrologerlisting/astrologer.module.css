@@ -398,7 +398,7 @@
 
 /* Card */
 .cards {
-    width: 100%;
+    max-width: 100%;
     padding-right: 10px;
     position: relative;
     display: flex;
@@ -410,7 +410,8 @@
 .card {
     position: relative;
     width: 48%;
-    aspect-ratio: 7 / 3;
+    /* max-height: 270px; */
+    aspect-ratio: 7/3;
     margin-bottom: 40px;
     /* height: 195px; */
     border-radius: 25px;
@@ -457,16 +458,16 @@
     top: 5px;
 }
 
-.card .onlinestat[data-status="online"]::before,
-.cardscontainer .title[data-status="online"]::after {
+.card .onlinestat[data-status="Online"]::before,
+.cardscontainer .title[data-status="Online"]::after {
     background-color: var(--online-indicator-color);
     box-shadow: 0 0 3px 1px var(--online-indicator-color);
 }
-.card .onlinestat[data-status="offline"]::before,
+.card .onlinestat[data-status="Offline"]::before,
 .cardscontainer .title[data-status="offline"]::after {
     background-color: var(--offline-indicator-color);
 }
-.card .onlinestat[data-status="busy"]::before,
+.card .onlinestat[data-status="Busy"]::before,
 .cardscontainer .title[data-status="busy"]::after {
     background-color: var(--busy-indicator-color);
 }
@@ -477,6 +478,7 @@
     width: 40%;
     height: 100%;
     display: inline-block;
+    
 }
 
 /* text content and buttons on the card */
@@ -542,6 +544,7 @@
 
 .card .tags .title {
     font-size: .9rem;
+    
     margin-bottom: 5px;
 }
 
@@ -551,7 +554,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    
+    justify-content:space-between;
 }
 
 .card .tags .tag {
@@ -589,7 +593,7 @@
     border-radius: 5px;
     color: #fff;
     background-color: var(--secondary-color);
-    font-size: x-small;
+    font-size: 12px;
     outline: none;
     cursor: pointer;
 }
@@ -604,7 +608,7 @@
 //////////////////////////////////////////////////////////////////////////////////// */
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
 
 .pgtoolstitle {
     display: none;
@@ -842,9 +846,12 @@
     }
 
     .card {
-        width: 100%;
+        max-width: 500px;
+        min-width: 320px;
         margin-bottom: 20px;
-        /* height: 195px; */
+        margin-left: auto;
+        margin-right: auto;
+        min-height: 165px;
         border-radius: 15px;
     }
     

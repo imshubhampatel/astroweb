@@ -106,6 +106,16 @@ const userManagement = withAdminAuth(() => {
         query(astros, where("phoneNumber", "==", String(search)))
       );
       querySnapshot.docs.map((doc) => data.add({id:doc.id,...doc.data()}));
+
+      querySnapshot = await getDoc(doc(astros,
+       search)
+      );
+      if(querySnapshot.exists()) {
+        data.add({
+          id:querySnapshot.id,
+          ...querySnapshot.data()
+        })
+      }
       setusersList(Array.from(data));
     }
   }
