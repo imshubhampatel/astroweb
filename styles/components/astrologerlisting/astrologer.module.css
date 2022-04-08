@@ -410,6 +410,7 @@
 .card {
     position: relative;
     width: 48%;
+    /* max-height: 270px; */
     aspect-ratio: 7/3;
     margin-bottom: 40px;
     /* height: 195px; */
@@ -457,16 +458,16 @@
     top: 5px;
 }
 
-.card .onlinestat[data-status="online"]::before,
-.cardscontainer .title[data-status="online"]::after {
+.card .onlinestat[data-status="Online"]::before,
+.cardscontainer .title[data-status="Online"]::after {
     background-color: var(--online-indicator-color);
     box-shadow: 0 0 3px 1px var(--online-indicator-color);
 }
-.card .onlinestat[data-status="offline"]::before,
+.card .onlinestat[data-status="Offline"]::before,
 .cardscontainer .title[data-status="offline"]::after {
     background-color: var(--offline-indicator-color);
 }
-.card .onlinestat[data-status="busy"]::before,
+.card .onlinestat[data-status="Busy"]::before,
 .cardscontainer .title[data-status="busy"]::after {
     background-color: var(--busy-indicator-color);
 }
@@ -607,7 +608,7 @@
 //////////////////////////////////////////////////////////////////////////////////// */
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
 
 .pgtoolstitle {
     display: none;
@@ -845,8 +846,11 @@
     }
 
     .card {
-        width: 100%;
+        max-width: 500px;
+        min-width: 320px;
         margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
         min-height: 165px;
         border-radius: 15px;
     }

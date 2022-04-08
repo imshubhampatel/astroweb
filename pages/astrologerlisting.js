@@ -105,7 +105,7 @@ function searchHandler(event) {
                 <Filter cssmodule={styles} /> */}
             </div>
             <div className={styles.cardscontainer}>
-                <div className={styles.title} data-status="green">Astrologers online - 2331</div>
+                <div className={styles.title} data-status="green">Astrologers online - 20</div>
                 <div className={styles.cards}>
                     {paginationData.slice(firstItemNum, lastItemNum).map((e) => ( <Card key={e.id}cssmodule={styles} data={e} />))}
                 </div>
