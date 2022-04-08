@@ -57,7 +57,7 @@ export default function Home() {
               <h2 className={styles.heading}>GET MORE OF DRESHKAN </h2>
             </div>    
             <hr/>
-            <h4 className={styles.subheading}>A PLETHORA OF ASTROLOGY SERVICES IN THE APP </h4>
+            <h4 className={styles.subheading}>Get in instant touch with Astrologers</h4>
             <hr/>
             <div className={styles.mainbadge} >
               <div className={styles.badge}>
