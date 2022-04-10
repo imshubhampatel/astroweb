@@ -75,7 +75,7 @@ function BlogListing() {
                             <h2 className={styles.pgtoolstitle}>Blogs and Articles</h2>                      
                             <SearchBar cssmodule={styles} searchHandler={searchHandler}/>
                         </div>
-                        <div className={styles.blogcontainer}>
+                        <div className={`${styles.blogcontainer} `}>
                           <div className={styles.filtercontainer}>
                               <span className={styles.title}>Categories</span>
                               <Filter cssmodule={styles} filterHandler={styles} heading='Vastu' />

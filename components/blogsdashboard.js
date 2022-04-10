@@ -4,6 +4,7 @@ import BlogCard from './blogcard'
 function BlogsDashboard(props) {
     return (
       <>
+      <div>
       <div className='d-flex flex-column gap-2'>
         {" "}
         {props.data.map((e) => {
@@ -14,6 +15,7 @@ function BlogsDashboard(props) {
       <div>
           {props.isSearchActive ? null :  
           <button  onClick={() => props.getAfterBlog()}> View More</button>}
+      </div>
       </div>
         </>
     );
