@@ -407,6 +407,7 @@ const astrologermanagement = withAdminAuth(() => {
                 <tr className={`${styles.tableHeading}`}>
                   <td>Name</td>
                   <td>Rating</td>
+                  <td>Total Meetings</td>
                   <td>Phone Number </td>
                   <td>Enabled </td>
                   <td>Profile Complete</td>
@@ -423,6 +424,7 @@ const astrologermanagement = withAdminAuth(() => {
                     <td className={`${styles.tableData}`}>
                       {e.rating == "0" ? "Not rated" : e.rating}
                     </td>
+                    <td className={`${styles.tableData}`}>{e.meetingCount}</td>
                     <td className={`${styles.tableData}`}>{e.phoneNumber}</td>
                     <td className={`${styles.tableData}`}>{e.enabled ? "True" : "False"}</td>
                     <td className={`${styles.tableData}`}>
