@@ -47,6 +47,7 @@ class Astrologer {
     this.rating = data.rating ? data.rating : 0
     this.ratingCount = data.ratingCount ? data.ratingCount : 0
     this.enabled = data.enabled ? data.enabled : false
+    this.meetingCount = data.meetingCount ? data.meetingCount : 0
 
     // Enabled / Disabled 
 
