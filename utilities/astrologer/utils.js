@@ -22,7 +22,7 @@ const db = getFirestore(firebase);
      query(astros, where("astrologerUid", "==", uuid),orderBy("scheduledTime","desc"))
    );
    let data = querySnapshot.docs.map((doc) => {
-     return { id: doc.id, data: doc.data() };
+     return { id: doc.id, ...doc.data() };
    });
  
    return data;
@@ -33,7 +33,7 @@ const db = getFirestore(firebase);
    );
    const querySnapshot = await getDocs(astros);
    let data = querySnapshot.docs.map((doc) => {
-     return { id: doc.id, data: doc.data() };
+     return { id: doc.id, ...doc.data() };
    });
    return data;
  }
@@ -43,7 +43,7 @@ const db = getFirestore(firebase);
       ,orderBy("date","desc"));
     const querySnapshot = await getDocs(astros);
     let data = querySnapshot.docs.map((doc) => {
-      return { id: doc.id, data: doc.data() };
+      return { id: doc.id, ...doc.data() };
     });
 
     return data;

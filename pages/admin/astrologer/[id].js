@@ -189,7 +189,7 @@ const astrologer = withAdminAuth(() => {
           return (
             <Review
               key={e.id}
-              props={e.data}
+              props={e}
               deleteReviewHandler={() => deleteReview(e.id)}
             ></Review>
           );
@@ -207,7 +207,7 @@ const astrologer = withAdminAuth(() => {
           return (
             <MeetingCard
               key={e.id}
-              data={e.data}
+              data={e}
               type="astrologer"
             ></MeetingCard>
           );
@@ -286,7 +286,7 @@ const astrologer = withAdminAuth(() => {
 
             {walletTransactions.map((e) => {
               return (
-                <TransactionCard key={e.id} props={e.data}></TransactionCard>
+                <TransactionCard key={e.id} props={e}></TransactionCard>
               );
             })}
           </>

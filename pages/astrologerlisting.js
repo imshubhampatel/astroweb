@@ -44,7 +44,7 @@ function AstrologerListing() {
         // initializePaginationData(astrologersList.filter(myFilter));
       }, []);
       async function getAllAstrologers() {
-        const astros = query(collection(db, "astrologer"),orderBy("firstName"));
+        const astros = query(collection(db, "astrologer"),orderBy("firstName"),where("enabled",'==',true),where("status.state",'==','verified'));
         const querySnapshot = await getDocs(astros);
         let data = querySnapshot.docs.map((doc) =>
         { return new Astrologer({id:doc.id, ...doc.data()})});
@@ -105,12 +105,16 @@ function searchHandler(event) {
                 <Filter cssmodule={styles} /> */}
             </div>
             <div className={styles.cardscontainer}>
+<<<<<<< HEAD
 
                 <div className={styles.title} data-status="green">Astrologers online - 2331</div>
 
                 <div className={styles.title} data-status-color="green">Astrologers online - 10</div>
+=======
+                <div className={styles.title} data-status="green">Astrologers online - 20</div>
+>>>>>>> eeecbbf26ddc0799b7a0df14c87038aaaf92c7b9
                 <div className={styles.cards}>
-                    {paginationData.slice(firstItemNum, lastItemNum).map((e) => ( <Card cssmodule={styles} data={e} />))}
+                    {paginationData.slice(firstItemNum, lastItemNum).map((e) => ( <Card key={e.id}cssmodule={styles} data={e} />))}
                 </div>
             </div>
             </div>
