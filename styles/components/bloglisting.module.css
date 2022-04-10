@@ -14,7 +14,7 @@
 
     --scroll-bar-color: #c5c5c5;
 
-    /* position: absolute;   */
+    position: absolute;   
     width: 100%;
     height: max-content;
     left: 0;
@@ -28,14 +28,29 @@
 
 .blogcontainer {
     display: flex;
+    flex-direction: row;
     /*align-items: center;*/
-    justify-content: center;
+    justify-content: left;
+    overflow: hidden;
 }
+
+@media screen and (max-width: 768px) {
+    .blogcontainer {
+        flex-direction: column;
+    }
+}
+@media screen and (max-width: 768px) {
+    .imagecontainer {
+        flex-direction: column;
+    }
+}
+    
+
 
 .container {
     float: right; 
     right: 0;
-    width: 953px;
+    /* width: 953px; */
     height: 247px;
 }
 .imagecontainer {
@@ -54,15 +69,16 @@
 
 
 .card {
-    width: 953px;
+    /* width: 953px; */
     height: 247px;
     border-radius: 20px;
-    border: 3px var(--card-border-color);
+    /* border: 3px var(--card-border-color); */
     offset: 0px 4px;
-    background-color: #F4850070;
     display: flex;
     align-items: center;
     justify-content: center;
+
+
 }
 
 .heading {
@@ -304,7 +320,8 @@
 /* Filter Container */
 .filtercontainer {
     display:flex;
-    flex: 3px;
+    flex: 2px;
+    max-width: 222px;
     flex-direction: column;
 }
 
@@ -381,60 +398,26 @@
     line-height: 15px;
 }
 
-/* cards container */
-/*  */
-
-
-/* Card */
-.cards {
-    width: 100%;
-    padding-right: 10px;
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px;
-}
 
 .card {
     position: relative;
     width: 96%;
-    aspect-ratio: 7 / 3;
     margin-bottom: 40px;
-    /* height: 195px; */
+    display: flex;
+    height: 195px;
     border-radius: 25px;
     border: 4px solid var(--card-border-color);
     background-color: rgb(255, 255, 255);
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     font-family: Lato;
     box-shadow: 1px 3px 10px 1px rgba(126, 126, 126, 0.2);
-}
+} 
 
 /* online indicator */
 
-.card .onlinestat {
-    position: absolute;
-    top: 8%;
-    left: 3.5%;
-    padding: 5px 12px 5px 22px;
-    border-radius: 5px;
-    text-transform: lowercase;
-    color: #fff;
-    background-color: #00000080;
-    font-size: .6rem;
-    box-shadow: 0 0 2px 1px rgba(240, 102, 60, 0.2);
-    user-select: none;
-    z-index: 1;
-}
 
-.card .onlinestat::before,
-.cardscontainer .title::after {
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
 
 
 /* Image on the card */
