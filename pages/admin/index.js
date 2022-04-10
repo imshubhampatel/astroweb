@@ -36,6 +36,7 @@ const Home = withAdminAuth(() => {
   const [commission, setCommission] = useState(0);
   const [banners, setBanners] = useState([]);
   const [adminWalletBalance, setadminWalletBalance] = useState(0);
+  const [totalMeetings, setTotalMeetings] = useState(0);
 
   async function getBanners() {
     const astros = collection(db, "banners");
@@ -73,6 +74,13 @@ const Home = withAdminAuth(() => {
     if (querySnapshot.exists()) {
       setCommission(querySnapshot.data().commission);
       setadminWalletBalance(querySnapshot.data().adminBalance);
+    } else {
+      // console.log("no")
+    }
+    querySnapshot = await getDoc(doc(astros, "astrologerDetails"));
+    if (querySnapshot.exists()) {
+      setTotalMeetings(querySnapshot.data().totalMeetings);
+      console.log(querySnapshot.data())
     } else {
       // console.log("no")
     }
@@ -173,7 +181,8 @@ const Home = withAdminAuth(() => {
             Total Astrologers :{totalAstrologers} <br />
             Total Orders :{totalOrders} <br />
             Current Commission for Astrologers :{100 - commission} <br />
-            Wallet Balance : {adminWalletBalance}
+            Wallet Balance : {adminWalletBalance}<br />
+            Total Meetings : {totalMeetings}
           </p>
           </div>
           </div>
