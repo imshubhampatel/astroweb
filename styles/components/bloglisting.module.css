@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
 
-.astrologerlist {
+.bloglist {
     --body-bg-color: rgba(255, 243, 221, 1);
     --tag-bg-color: rgba(255, 255, 190, 1);
     --primary-color: rgba(245, 133, 0, 1);
@@ -25,14 +25,44 @@
     vertical-align: middle;
     background-color: var(--body-bg-color);
 }
+
+.blogcontainer {
+    display: flex;
+    /*align-items: center;*/
+    justify-content: center;
+}
+
+.container {
+    float: right; 
+    right: 0;
+    width: 953px;
+    height: 247px;
+}
+.imagecontainer {
+    flex: 6;
+    background-color: red;
+}
+
+.textcontainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
+    flex-direction: column;
+    flex: 6;
+}
+
+
 .card {
-    position: relative;
     width: 953px;
     height: 247px;
     border-radius: 20px;
     border: 3px var(--card-border-color);
     offset: 0px 4px;
     background-color: #F4850070;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .heading {
@@ -53,19 +83,9 @@
     line-height: 21.6px;
     align-content: left;
     vertical-align: top;
+    margin-top: 10px;
    }
-   .imagecnt {
-    border-radius: 5px;
-    border-color: #F48500;  
-   }
-
-   .image {
-    height: 203px;
-    width: 333px;
-    border-radius: 5px;
-    border-color: #F48500;  
-   }
-
+   
    .counter {
     color: #000000;
     font-family: Lato;
@@ -74,6 +94,7 @@
     line-height: 13.2px;
     align-content: left;
     vertical-align: top;
+    margin-top: 10px;
    }
 
   .authorname {
@@ -94,14 +115,9 @@
     line-height: 14.4px;
     align-content: left;
     vertical-align: top;
+    margin-left: 10px;
    }
  
-
-.paginateContainer{
-    display: inline-block;
-    width: 100%;
-   
-}
 
 
 /* Works on Chrome, Edge, and Safari */
@@ -117,26 +133,6 @@
     height: 75px;
     margin-bottom: 2%;
 }
-.paginationContainer {
-    /* border: dotted green ; */
-    margin-top: auto;
-    align-items: center;
-    margin-bottom: 5px;
-    padding-left: 16px;
-    padding-right: 16px;
-    border-radius: 150px;
-    /* margin-top: auto; */
-  }
-  
-  
-  .centerDivFlex{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3px;
-  }
-
-
 
 .pgtoolstitle {
     position: absolute;
@@ -162,9 +158,7 @@
     width: 24%;
 }
 
-#sortBy[open] {
-    z-index: 2;
-}
+
 
 .dropdown summary{
     padding: 18.5px;
@@ -309,14 +303,9 @@
 
 /* Filter Container */
 .filtercontainer {
-    position: relative;
-    display: inline-block;
-    min-width: 120px;
-    width: 20%;
-    height: auto;
-    vertical-align: top;
-    overflow: auto;
-    /* background-color: #ccc; */
+    display:flex;
+    flex: 3px;
+    flex-direction: column;
 }
 
 .filtercontainer>.title {
@@ -393,22 +382,8 @@
 }
 
 /* cards container */
-.cardscontainer {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    width: 76%;
-    height: auto;
-    float: right;
-}
+/*  */
 
-.cardscontainer>.title {
-    position: relative;
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: small;
-    font-family: Lato;
-}
 
 /* Card */
 .cards {
@@ -461,157 +436,9 @@
     border-radius: 50%;
 }
 
-.cardscontainer .title::after {
-    top: 6px;
-    right: -20px;
-}
-
-.card .onlinestat::before {
-    left: 5px;
-    top: 5px;
-}
-
-.card .onlinestat[data-status="online"]::before,
-.cardscontainer .title[data-status="online"]::after {
-    background-color: var(--online-indicator-color);
-    box-shadow: 0 0 3px 1px var(--online-indicator-color);
-}
-.card .onlinestat[data-status="offline"]::before,
-.cardscontainer .title[data-status="offline"]::after {
-    background-color: var(--offline-indicator-color);
-}
-.card .onlinestat[data-status="busy"]::before,
-.cardscontainer .title[data-status="busy"]::after {
-    background-color: var(--busy-indicator-color);
-}
 
 /* Image on the card */
-.card .astrologerimg {
-    position: relative;
-    width: 40%;
-    height: 100%;
-    display: inline-block;
-}
 
-/* text content and buttons on the card */
-.card .infocontent {
-    position: absolute;
-    display: inline-block;
-    top: 0;
-    left: 40%;
-    width: 60%;
-    height: 100%;
-    padding: 5%;
-    user-select: none;
-    /* background-color: #c5c5c5; */
-}
-
-.card .infocontent>* {
-    position: relative;
-    display: block;
-}
-
-.card .name {
-    margin: 0;
-    margin-bottom: 4%;
-    line-height: .8;
-    user-select: text;
-    font-size: 1.2rem;
-    color: var(--primary-color);
-    font-family: Poppins;
-    font-weight: 500;
-}
-
-.card .starrating {
-    color: #575757;
-    font-size: xx-small;
-    margin-bottom: 2%;
-}
-
-.card .starrating i,
-.card .lang i{
-    color: var(--primary-color);
-    margin-right: 3px;
-}
-
-.card .starrating>b {
-    color: initial;
-    vertical-align: top;
-}
-
-.card .lang {
-    font-size: xx-small;
-    font-weight: bold;
-    margin-bottom: 4%;
-}
-
-.card .tags {
-    width: 85%;
-    vertical-align: middle;
-    height: 31%;
-    overflow: hidden;
-    margin-bottom: 4%;
-    /* background-color: antiquewhite; */
-}
-
-.card .tags .title {
-    font-size: .9rem;
-    margin-bottom: 5px;
-}
-
-.card .tags .tagcontainer {
-    width: 100%;
-    /* background-color: #575757; */
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.card .tags .tag {
-    font-size: .6rem;
-    color: var(--primary-color);
-    background-color: var(--tag-bg-color);
-    width: 30%;
-    height: 20px;
-    padding: 3px;
-    text-align: center;
-    vertical-align: bottom;
-    border-radius: 5px;
-    margin-bottom: 3%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.card .priceratetag {
-    float: left;
-    font-size: large;
-}
-
-.card .priceratetag small {
-    
-    font-size: x-small;
-    vertical-align: middle;
-}
-
-.card .contactbutton {
-    float: right;
-    right: 5%;
-    padding: 2.5% 7.5%;
-    border: 2px solid var(--secondary-color);
-    border-radius: 5px;
-    color: #fff;
-    background-color: var(--secondary-color);
-    font-size: x-small;
-    outline: none;
-    cursor: pointer;
-}
-
-.card .contactbutton:hover {
-    color: var(--secondary-color);
-    background-color: #fff;
-}
 
 .imagecontainer {
     position: absolute;
@@ -641,16 +468,7 @@
     display: none;
 }
 
-#sortBy{
-    /* position: fixed; */
-    right: 0;
-    bottom: 10px;
-    width: 49%;
-}
 
-#sortBy[open] {
-    z-index: 2;
-}
 
 .dropdown summary{
     padding: 18.5px;
@@ -665,28 +483,6 @@
     display: none;
 }
 
-#sortBy[open] summary:before {
-    content: '';
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    background: transparent;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
-#sortBy summary:after {
-    content: '❮';
-    color: rgb(250, 146, 9);
-    display: inline-block;
-    float: right;
-    transition: transform ease-in-out 100ms
-}
-
-#sortBy[open] summary:after {
-    transform: rotate(-90deg);
-}
 
 .dropdown nav {
     position: absolute;
@@ -727,42 +523,6 @@
     border-bottom: none;
 }
 
-/* FAKE SELECT */
-
-#sortBy summary.radios {
-    counter-reset: radios;
-}
-
-#sortBy input[type=radio]:first-child {
-    pointer-events: none;
-}
-
-#sortBy input[type=radio] {
-    counter-increment: radios;
-    appearance: none;
-    display: none;
-}
-
-#sortBy input[type=radio]:checked {
-    display: inline;
-}
-
-#sortBy input[type=radio]:after {
-    content: attr(title);
-    display: inline;
-    font-size: medium;
-    color: #5f5f5f;
-}
-
-#sortBy ul.list {
-    counter-reset: labels;
-}
-
-#sortBy label {
-    width: 100%;
-    display: block;
-    cursor: pointer;
-}
 
 /* Search */
 #search {
@@ -865,9 +625,6 @@
         width: 100%;
     }
     
-    /* .cardscontainer>.title {
-        display: block;
-    } */
     
     /* Card */
     .cards {

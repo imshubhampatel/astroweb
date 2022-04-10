@@ -19,19 +19,26 @@ export default function BlogCard({ props ,remove}) {
         <a target="_blank">
           {/* Main content  */}
           <div className={styles.card}>
-            <div className={styles.heading}>{props.title}</div>
-            <div className={styles.imagecnt}>
-              <Image height={103} width={203} src={Logo}  />
+            <div style={{'display':'flex', 'alignItems':'center', 'justifyContent':'center', 'width':'30%', 'height':'100%'}} >
+                <div style={{'border':'3px solid #F4D65D'}}>
+                  <Image height={170} width={170} src={Logo}  />
+                </div>
             </div>
-            <div className={styles.mainText}>
-              <p> {props.description.slice(0, 100)}...</p>
-            </div>
-            <div className={styles.counter}>{props.counter} Reads
-            </div>
-            <div className={styles.authorname}>{props.authorTitle} 
-            </div>
-            <div className={styles.time}>{props.time.toDate().toDateString()}
-            </div>
+            <div className={styles.textcontainer}>
+              <div className={styles.heading}>{props.title}</div>
+                
+                <div className={styles.mainText}>
+                    <p> {props.description.slice(0, 100)}...</p>
+                  </div>
+                  <div className={styles.counter}>{props.counter} Reads
+                  </div>
+                  <div style={{'display':'flex', 'alignItems':'center', 'justifyContent':'center', 'margin-top':'10px' }}>
+                    <div className={styles.authorname}>{props.authorTitle} 
+                    </div>
+                    <div className={styles.time}>{props.time.toDate().toDateString()}
+                    </div>
+                  </div>
+                </div>
             </div>
         </a>
       </Link>
