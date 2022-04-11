@@ -34,17 +34,17 @@
     overflow: hidden;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
     .blogcontainer {
         flex-direction: column;
     }
 }
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     .imagecontainer {
         flex-direction: column;
     }
 }
-    
+     */
 
 
 .container {
@@ -448,7 +448,7 @@
 @media only screen and (max-width: 768px) {
 
 .pgtoolstitle {
-    display: none;
+    /* display: none; */
 }
 
 

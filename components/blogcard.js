@@ -12,7 +12,7 @@ export default function BlogCard({ props ,remove}) {
     <div className={styles.container}>
       <Link
         href={{
-          pathname: `/bloglisting/${props.id}`,    // check
+          pathname: `/`,    // check
           query: { pid: props.id },
         }}
       >
