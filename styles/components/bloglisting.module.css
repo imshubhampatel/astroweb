@@ -2,18 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
 
 .bloglist {
-    --body-bg-color: rgba(255, 243, 221, 1);
-    --tag-bg-color: rgba(255, 255, 190, 1);
-    --primary-color: rgba(245, 133, 0, 1);
-    --secondary-color: rgba(245, 140, 7, 1);
-    --card-border-color: rgba(244, 133, 0, 0.44);
-    --online-indicator-color: rgb(62, 219, 0);
-    --offline-indicator-color: rgb(252, 75, 31);
-    --busy-indicator-color: rgb(246, 250, 32);
-    
-
-    --scroll-bar-color: #c5c5c5;
-
     position: absolute;   
     width: 100%;
     height: max-content;
@@ -23,7 +11,7 @@
     padding-bottom: 0;
     box-sizing: border-box;
     vertical-align: middle;
-    background-color: var(--body-bg-color);
+    background-color: rgba(255, 243, 221, 1);
 }
 
 .blogcontainer {
@@ -39,12 +27,6 @@
         flex-direction: column;
     }
 }
-/* @media screen and (max-width: 768px) {
-    .imagecontainer {
-        flex-direction: column;
-    }
-}
-     */
 
 
 .container {
@@ -69,16 +51,12 @@
 
 
 .card {
-    /* width: 953px; */
     height: 247px;
     border-radius: 20px;
-    /* border: 3px var(--card-border-color); */
     offset: 0px 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-
 }
 
 .heading {
@@ -111,6 +89,7 @@
     align-content: left;
     vertical-align: top;
     margin-top: 10px;
+    margin-bottom: 10px;
    }
 
   .authorname {
@@ -133,15 +112,18 @@
     vertical-align: top;
     margin-left: 10px;
    }
+
+   .article {
+    color: #FFC700;
+    font-family: Lato;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    align-content: left;
+    vertical-align: top;
+    margin-left: 10px;
+   }
  
-
-
-/* Works on Chrome, Edge, and Safari */
-.astrologerlist::-webkit-scrollbar {
-    display: none;
-}
-
-/* page tools container */
 .pgtoolscontainer {
     position: relative;
     margin-top: 10px;
@@ -157,8 +139,6 @@
     font-size: 1.2rem;
 }
 
-
-/* Sort by container */
 #search,
 .dropdown {
     position: absolute;
@@ -174,8 +154,6 @@
     width: 24%;
 }
 
-
-
 .dropdown summary{
     padding: 18.5px;
     cursor: pointer;
@@ -189,28 +167,6 @@
     display: none;
 }
 
-#sortBy[open] summary:before {
-    content: '';
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    background: transparent;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
-#sortBy summary:after {
-    content: '❮';
-    color: rgb(250, 146, 9);
-    display: inline-block;
-    float: right;
-    transition: transform ease-in-out 100ms
-}
-
-#sortBy[open] summary:after {
-    transform: rotate(-90deg);
-}
 
 .dropdown nav {
     position: absolute;
@@ -251,44 +207,6 @@
     border-bottom: none;
 }
 
-/* FAKE SELECT */
-
-#sortBy summary.radios {
-    counter-reset: radios;
-}
-
-#sortBy input[type=radio]:first-child {
-    pointer-events: none;
-}
-
-#sortBy input[type=radio] {
-    counter-increment: radios;
-    appearance: none;
-    display: none;
-}
-
-#sortBy input[type=radio]:checked {
-    display: inline;
-}
-
-#sortBy input[type=radio]:after {
-    content: attr(title);
-    display: inline;
-    font-size: medium;
-    color: #5f5f5f;
-}
-
-#sortBy ul.list {
-    counter-reset: labels;
-}
-
-#sortBy label {
-    width: 100%;
-    display: block;
-    cursor: pointer;
-}
-
-/* Search */
 #search {
     right: 0;
 }
@@ -306,14 +224,13 @@
 }
 
 #search>svg{
-    /* display: none; */
     position: absolute;
     width: 15%;
     height: 100%;
     right: 0;
     padding: 1rem;
     border-radius: 0 10px 10px 0;
-    color: var(--secondary-color);
+    color: rgba(245, 140, 7, 1);
     background-color: #fff;
 }
 
@@ -360,53 +277,14 @@
     box-shadow: 1px 3px 8px 1px rgba(102, 102, 102, 0.363);
 }
 
-.filtercontainer .dropdown label {
-    position: relative;
-    user-select: none;
-    padding-left: 20px;
-}
-
-.dropdown input[type=checkbox] {
-    display: none;
-}
-
-.dropdown input[type=checkbox]+label::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 0;
-    height: 14px;
-    width: 14px;
-    border-radius: 3px;
-    border: 1px solid var(--secondary-color);
-    background-color: #fff;
-}
-
-.dropdown input[type=checkbox]:checked+label::before{
-    background-color: var(--secondary-color);
-}
-
-
-.dropdown input[type=checkbox]:checked+label::after {
-    position: absolute;
-    left: 2px;
-    top: 5px;
-    content: "\2713";
-    font-size: 14px;
-    color: #ffffff;
-    text-align: center;
-    line-height: 15px;
-}
-
-
 .card {
     position: relative;
-    width: 96%;
-    margin-bottom: 40px;
+    width: 100%;
+    margin-bottom: 25px;
     display: flex;
     height: 195px;
     border-radius: 25px;
-    border: 4px solid var(--card-border-color);
+    border: 4px solid rgba(244, 133, 0, 0.44);
     background-color: rgb(255, 255, 255);
     align-items: center;
     justify-content: center;
@@ -414,96 +292,35 @@
     font-family: Lato;
     box-shadow: 1px 3px 10px 1px rgba(126, 126, 126, 0.2);
 } 
-
-/* online indicator */
-
-
-
-
-/* Image on the card */
-
-
-.imagecontainer {
-    position: absolute;
-    top: -130%;
-    left: 50%;
-    transform: translate(-50%,50%);
-    border-radius: 50%;
-    border: 5px solid red;
-    overflow: hidden;
-    background-color: blue;
+.tagcontainer {
+    width: 100%;
+    padding: 2px;
 }
 
-.imagebg {
-    width: 150px;
-    height: 150px;
-   
+.tag {
+    background-color: #FFF2C0;
+    height: 23px;
+    width: 78px;
+    border-radius: 4px;
+    fill: solid;
+    color: #F48500;
+    font-family: Lato;
+    font-size: 12px;
+    line-height: 10.8px;
+    font-weight: 400;
+    align-content: left;
+    vertical-align: top;
+    margin: 10px;
+    padding: 5px;
 }
 
-/* ////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////// */
+
 
 
 @media only screen and (max-width: 768px) {
 
 .pgtoolstitle {
-    /* display: none; */
-}
-
-
-
-.dropdown summary{
-    padding: 18.5px;
-    cursor: pointer;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-    list-style: none;
-    outline: none;
-}
-
-.dropdown summary::-webkit-details-marker{
-    display: none;
-}
-
-
-.dropdown nav {
-    position: absolute;
-    top: calc(100% + .5rem);
-    left: 0;
-    width: 100%;
-    height: max-content;
-    padding: 15px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    background: rgb(255, 255, 255);
-}
-
-.dropdown ul {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    background: none;
-    list-style: none;
-}
-
-.dropdown ul::-webkit-scrollbar {
-    display: none;
-}
-
-.dropdown li {
-    margin: 0;
-    padding: 1rem 0;
-    border-bottom: 1px solid #ccc;
-}
-
-.dropdown li:first-child {
-    padding-top: 0;
-}
-
-.dropdown li:last-child {
-    padding-bottom: 0;
-    border-bottom: none;
+    display: grid;
 }
 
 
@@ -514,171 +331,11 @@
     width: 100%;
 }
 
-#search>input {
-    
-}
-
-/* Filter Container */
-.filtercontainer {
-    position: relative;
-    display: inline-block;
-    width: 20%;
-    height: auto;
-    vertical-align: top;
-    overflow: auto;
-    /* background-color: #ccc; */
-}
-
-.filtercontainer>.title {
-    position: relative;
-    font-family: Lato;
-    font-size: small;
-    text-transform: uppercase;
-    color: rgb(41, 41, 41);
-}
-
-.filtercontainer .dropdown {
-    position: relative;
-    margin-bottom: 15px;
-    width: 90%;
-    box-shadow: none;
-    user-select: none;
-}
-
-.filtercontainer .dropdown:first-of-type{
-    margin-top: 10%;
-}
-
-.filtercontainer .dropdown summary {
-    padding: 5% 7%;
-    font-family: Poppins;
-    font-weight: 500;
-    text-align: center;
-    box-shadow: 1px 3px 10px 1px rgba(102, 102, 102, 0.2);
-}
-
-.filtercontainer .dropdown nav {
-    position: relative;
-    margin-top: 5px;
-    box-shadow: 1px 3px 8px 1px rgba(102, 102, 102, 0.363);
-}
-
-.filtercontainer .dropdown label {
-    position: relative;
-    user-select: none;
-    padding-left: 20px;
-}
-
-
-
-.dropdown input[type=checkbox] {
-    display: none;
-}
-
-.dropdown input[type=checkbox]+label::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 0;
-    height: 14px;
-    width: 14px;
-    border-radius: 3px;
-    border: 1px solid var(--secondary-color);
-    background-color: #fff;
-}
-
-.dropdown input[type=checkbox]:checked+label::before{
-    background-color: var(--secondary-color);
-}
-
-
-.dropdown input[type=checkbox]:checked+label::after {
-    position: absolute;
-    left: 2px;
-    top: 5px;
-    content: "\2713";
-    font-size: 14px;
-    color: #ffffff;
-    text-align: center;
-    line-height: 15px;
-}
-
-    .cardscontainer {
-        display: block;
-        width: 100%;
-    }
-    
-    
-    /* Card */
-    .cards {
-        padding: 0;
-    }
-
     .card {
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         /* height: 195px; */
         border-radius: 15px;
     }
     
-    /* online indicator */
-    
-    .card .onlinestat {
-        padding: 2px 5px 2px 12px;
-        border-radius: 3px;
-        font-size: .4rem;
-    }
-
-    .card .onlinestat::before {
-        width: 5px;
-        height: 5px;
-    }
-    
-    .card .name {
-        font-size: 1rem;
-    }
-    
-    .card .starrating {
-        font-size: .5rem;
-    }
-    
-    .card .lang {
-        font-size: .5rem;
-    }
-    
-    .card .tags {
-        width: 100%;
-    }
-    
-    .card .tags .title {
-        font-size: .65rem;
-    }
-    
-    .card .tags .tagcontainer {
-        width: 100%;
-    }
-    
-    .card .tags .tag {
-        font-size: .6rem;
-        width: 28%;
-        height: 15px;
-        border-radius: 3px;
-    }
-    
-    .card .priceratetag {
-        float: left;
-        font-size: 1.2rem;
-    }
-    
-    .card .priceratetag small {
-        font-size: .8rem;
-        vertical-align: middle;
-    }
-    
-    .card .contactbutton {
-        float: right;
-        right: 5%;
-        padding: 2% 4%;
-        font-size: .6rem;
-    }
 }
