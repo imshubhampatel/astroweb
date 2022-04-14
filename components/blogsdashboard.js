@@ -1,5 +1,6 @@
 import React from 'react'
 import BlogCard from './blogcard'
+import BlogCardMobile from './blogcardmobile'
 
 function BlogsDashboard(props) {
     return (
@@ -7,6 +8,9 @@ function BlogsDashboard(props) {
       <div>
       <div className='d-flex flex-column gap-2'>
         {" "}
+        {props.data.map((e) => {
+          return <BlogCardMobile key={e.id} props={e}></BlogCardMobile>;
+        })}
         {props.data.map((e) => {
           return <BlogCard key={e.id} props={e}></BlogCard>;
         })}

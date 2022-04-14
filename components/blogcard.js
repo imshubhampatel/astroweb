@@ -19,7 +19,7 @@ export default function BlogCard({ props ,remove}) {
         <a target="_blank">
           {/* Main content  */}
           <div className={styles.card}>
-            <div style={{'display':'flex', 'alignItems':'center', 'justifyContent':'center', 'width':'30%', 'height':'100%'}} >
+            <div className={styles.imgbox} >
                 <div style={{'border':'3px solid #F4D65D'}} >
                   {/* <Image height={170} width={200} src={props.photos.length > 0? props.photos[0] : Logo}  /> */}
                   <Image height={200} width={200} src={Logo}  />

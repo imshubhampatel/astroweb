@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Filter from '../components/blogfilter';
 import  {SearchBar} from '../components/blogsearch';
 import styles from '../styles/components/bloglisting.module.css';
+import styles1 from '../styles/components/bloglistingmobile.module.css';
 import BlogsDashboard from "../components/blogsdashboard";
 import {
   collection,
