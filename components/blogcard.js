@@ -21,8 +21,8 @@ export default function BlogCard({ props ,remove}) {
           <div className={styles.card}>
             <div className={styles.imgbox} >
                 <div style={{'border':'3px solid #F4D65D'}} >
-                  {/* <Image height={170} width={200} src={props.photos.length > 0? props.photos[0] : Logo}  /> */}
-                  <Image height={200} width={200} src={Logo}  />
+                  <Image height={200} width={200} src={props.photos.length > 0? props.photos[0] : Logo}  />
+                  {/* <Image height={200} width={200} src={Logo}  /> */}
                 </div>
             </div>
             <div className={styles.textcontainer}>
@@ -40,7 +40,6 @@ export default function BlogCard({ props ,remove}) {
                     </div>
                     <div className={styles.tagcontainer}>
                       <span  className={styles.tag}>Relationship</span>
-                      <span  className={styles.tag}>VEDIC</span>
                       <span  className={styles.tag}>VEDIC</span>
                     </div>
                     <div className={styles.article}>Read Full Article

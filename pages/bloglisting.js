@@ -26,6 +26,7 @@ function BlogListing() {
     const [activeState, setActiveState] = useState(0);
     const [searchText , setSearchText] = useState("");
     const [blogs, setBlogs] = useState([]);
+    const [displayedBlogs, setDisplayedBlogs] = useState([]);
     const [lastBlog, setLastBlog] = useState(null);
     const numItems = 10;
   
@@ -41,6 +42,7 @@ function BlogListing() {
         return { ...doc.data(), id: doc.id };
       });
       setBlogs(data);
+      setDisplayedBlogs(data);
       setLastBlog(querySnapshot.docs[querySnapshot.docs.length - 1]);
     }
     async function getAfterBlog() {
@@ -53,20 +55,23 @@ function BlogListing() {
       });
       if (data.length > 0) {
         setBlogs([...blogs, ...data]);
+        setDisplayedBlogs([...blogs, ...data]);
         setLastBlog(querySnapshot.docs[querySnapshot.docs.length - 1]);
       }
     }
   
     async function searchHandler(search) {
       if (search != "") {
-          const astros = collection(db, "blog");
-          // searching broadcast
-          let querySnapshot = await getDocs(
-            query(astros, where("author", "==", String(search)))
-          );
-          let data = new Set();
-          querySnapshot.docs.map((doc) => data.add(doc.data()));
-          setBlogs(Array.from(data));
+        setDisplayedBlogs(
+          blogs.filter((e) => {
+            if (
+              e?.title?.toLowerCase().includes(search) ||
+              e?.description?.toLowerCase().includes(search) 
+            )
+              return true;
+            else return false;
+          })
+        );
       }
     }
   
@@ -81,12 +86,12 @@ function BlogListing() {
                           <div className={styles.filtercontainer}>
                               <span className={styles.title}>Categories</span>
                               <Filter cssmodule={styles} filterHandler={styles} heading='Vastu' />
-                              <Filter cssmodule={styles} heading='Relationships' />
+                              {/* <Filter cssmodule={styles} heading='Relationships' />
                               <Filter cssmodule={styles} heading='Numerology' />
-                              <Filter cssmodule={styles} heading='Horoscope' />
+                              <Filter cssmodule={styles} heading='Horoscope' /> */}
                           </div>
                           <BlogsDashboard
-                              data={blogs}
+                              data={displayedBlogs}
                               getAfterBlog={getAfterBlog} 
                           />
                         </div>

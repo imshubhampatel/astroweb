@@ -4,7 +4,7 @@ function SearchBar(props) {
     let styles = props.cssmodule;
     return (
         <div id={styles.search}>
-            <input type="text" placeholder="Let's find a blog for you" onChange={props.searchHandler} />
+            <input type="text" placeholder="Let's find a blog for you" onChange={(e)=>props.searchHandler(e.target.value)} />
             {/* <BsGrid3X3GapFill /> */}
             <BsSearch size="20"  />
         </div>

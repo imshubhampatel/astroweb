@@ -6,7 +6,7 @@ function BlogsDashboard(props) {
     return (
       <>
       <div>
-      <div className='d-flex flex-column gap-2'>
+      <div className='d-flex flex-column gap-1'>
         {" "}
         {props.data.map((e) => {
           return <BlogCardMobile key={e.id} props={e}></BlogCardMobile>;
@@ -18,7 +18,7 @@ function BlogsDashboard(props) {
 
       <div>
           {props.isSearchActive ? null :  
-          <button  onClick={() => props.getAfterBlog()}> View More</button>}
+          <button  className="btn btn-warning" onClick={() => props.getAfterBlog()}> View More</button>}
       </div>
       </div>
         </>
