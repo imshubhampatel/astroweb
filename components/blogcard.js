@@ -3,6 +3,8 @@ import React, { useState,useEffect}from "react";
 import Image from "next/image";
 import Logo from "../public/images/blogcard.jpeg";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+
 export default function BlogCard({ props ,remove}) {
   const [visible, setvisible] = useState(true);
   useEffect(() => {
@@ -29,7 +31,8 @@ export default function BlogCard({ props ,remove}) {
               <div className={styles.heading}>{props.title}</div>
                 
                 <div className={styles.mainText}>
-                    <p> {props.description.slice(0, 100)}...</p>
+                  <p>  <ReactMarkdown>{props.description.slice(0, 100)}</ReactMarkdown>...</p>
+
                   </div>
                   <div className={styles.counter}>{props.counter} Reads
                   </div>
