@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
 
 .bloglist {
-    position: absolute;   
+    /* position: relative;    */
     width: 100%;
     height: max-content;
     left: 0;
@@ -26,6 +26,7 @@
     float: right; 
     right: 0;
     /* width: 1--; */
+    
     padding: 2px;
     height: 247px;
 }
