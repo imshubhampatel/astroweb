@@ -36,7 +36,6 @@ export default function BlogCard({ props ,remove}) {
                     <div className={styles.tagcontainer}>
                         <span  className={styles.tag}>Relationship</span>
                         <span  className={styles.tag}>VEDIC</span>
-                        <span  className={styles.tag}>VEDIC</span>
                     </div>
                     <div>
                       <p className={styles.article}>Read Full Article
