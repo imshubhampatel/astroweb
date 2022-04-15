@@ -31,7 +31,7 @@ export default function BlogCard({ props ,remove}) {
               <div className={styles.heading}>{props.title}</div>
                 
                 <div className={styles.mainText}>
-                  <p>  <ReactMarkdown>{props.description.slice(0, 100) + "..."}</ReactMarkdown></p>
+                  <p>  <ReactMarkdown>{props.description.slice(0, 60) + "..."}</ReactMarkdown></p>
 
                   </div>
                   <div className={styles.counter}>{props.counter} Reads
