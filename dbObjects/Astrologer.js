@@ -23,6 +23,7 @@ class Astrologer {
     this.priceChat = data.priceChat ?  parseInt(data.priceChat)  : 0
     this.priceVideo = data.priceVideo ?  parseInt(data.priceVideo):0
     this.priceVoice = data.priceVoice?  parseInt(data.priceVoice): 0
+    this.liveChatPrice = data.liveChatPrice?  parseInt(data.liveChatPrice): 0
     this.currentDiscount = data.currentDiscount?  parseInt(data.currentDiscount): 0
     
     // // Meeting History
@@ -84,6 +85,7 @@ const astrologerConverter = {
       priceChat: data.priceChat,
       priceVideo: data.priceVideo,
       priceVoice: data.priceVoice,
+      liveChatPrice: data.liveChatPrice,
       currentDiscount: data.currentDiscount,
 
       // Meeting History

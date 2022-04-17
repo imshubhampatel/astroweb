@@ -13,6 +13,7 @@ class AstrologerPrivateData {
       : "";
     this.certificationUrl = data.certificationUrl ? data.certificationUrl : "";
     this.pancardNumber = data.pancardNumber;
+    this.cancelledCheque = data.cancelledCheque ?data.cancelledCheque : "" ;
     this.walletBalance = data.walletBalance ? data.walletBalance : 0;
     this.earnings = data.earnings ? data.earnings : 0;
     this.pancardLink = data.pancardLink;
@@ -42,6 +43,7 @@ const astrologerPrivateDataConverter = {
       razorpayId: data.razorpayId,
       walletBalance: data.walletBalance,
       earnings: data.earnings,
+      cancelledCheque: data.cancelledCheque,
     };
   },
   fromFirestore: (snapshot, options) => {

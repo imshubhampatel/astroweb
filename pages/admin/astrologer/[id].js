@@ -621,7 +621,9 @@ const astrologer = withAdminAuth(() => {
                   " voice : " +
                   e.priceVoice +
                   " Video : " +
-                  e.priceVideo}
+                  e.priceVideo+
+                  " Live : " +
+                  e.liveChatPrice}
               </option>
             ))}
           </select>

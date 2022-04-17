@@ -204,6 +204,7 @@ const astrologermanagement = withAdminAuth(() => {
       priceChat:  parseInt(e.target.priceChat.value),
       priceVideo: parseInt(e.target.priceVideo.value),
       priceVoice: parseInt(e.target.priceVoice.value),
+      liveChatPrice: parseInt(e.target.liveChatPrice.value),
       currentDiscount : parseInt(e.target.currentDiscount.value),
       lastUpdateTimestamp : new Date(),
     });
@@ -259,6 +260,13 @@ const astrologermanagement = withAdminAuth(() => {
                   id="priceVideo"
                   placeholder="enter priceVideo"
                 ></input>
+                  <label htmlFor="name">Price Live Chat</label>
+                <input
+                  type="number"
+                  name="liveChatPrice"
+                  id="liveChatPrice"
+                  placeholder="enter liveChatPrice"
+                ></input>
                   <label htmlFor="name">Current Discount</label>
                 <input
                   type="number"
@@ -289,7 +297,7 @@ const astrologermanagement = withAdminAuth(() => {
                   defaultValue={selectedPricingCategory}
                 >
                   {pricingList.map((e) => (
-                    <option key={ e.name}value={e.name}> {e.name +  " chat :"+ e.priceChat+" voice : "+e.priceVoice  +" Video : " + e.priceVideo + " Discount : " + e?.currentDiscount}</option>
+                    <option key={ e.name}value={e.name}> {e.name +  " chat :"+ e.priceChat+" voice : "+e.priceVoice  +" Video : " + e.priceVideo + " Discount : " + e?.currentDiscount +  " live: " + e?.liveChatPrice}</option>
                   ))}
                 </select>
                 <br />
@@ -300,7 +308,7 @@ const astrologermanagement = withAdminAuth(() => {
                   name="priceChat"
                   id="priceChat"
                   placeholder="enter priceChat"
-                  value={selectedPricingCategory.priceChat}
+                  defaultValue={selectedPricingCategory.priceChat}
                 ></input>{" "}
                 <br />
                 <label htmlFor="name">Price Voice</label>
@@ -317,6 +325,13 @@ const astrologermanagement = withAdminAuth(() => {
                   name="priceVoice"
                   id="priceVoice"
                   placeholder="enter priceVoice"
+                ></input>
+                 <label htmlFor="name">Price Live Chat</label>
+                <input
+                  type="number"
+                  name="liveChatPrice"
+                  id="liveChatPrice"
+                  placeholder="enter liveChatPrice"
                 ></input>
                   <label htmlFor="name">Current Discount</label>
                 <input
