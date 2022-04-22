@@ -74,7 +74,7 @@ export default function MeetingCard({ data, type }) {
 
         <div className={`row  ${styles.orderDetailText}`}>
           <div className={`col`}>Duration</div>
-          <div className={`col text-end`}>{data?.lastActualDuration} minutes</div>
+          <div className={`col text-end`}>{ data?.totalDuration - (data?.lastDuration - data?.lastActualDuration ) } minutes</div>
         </div>
 
         <div className={`row  ${styles.orderDetailText}`}>
