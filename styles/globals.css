@@ -6,11 +6,100 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a{
+a {
   color: inherit !important;
   text-decoration: none !important;
 }
 
 * {
   box-sizing: border-box;
+}
+.callingForm {
+  border: 1px solid blue;
+}
+
+.parentDivCalling {
+  /* background-color: rgba(255, 243, 221, 1); */
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  border-radius: 0.25rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.parentDivCalling label {
+  display: block;
+  margin: 5px 20px;
+  font-weight: 400px;
+  color: #212529;
+}
+
+.parentDivCalling input {
+  border-radius: 0.25rem;
+  display: inline-block;
+  color: #212529;
+  width: 400px;
+  outline: 0px;
+  border: 1px solid #aaa;
+  height: 40px;
+  margin: 0px 20px;
+}
+.parentDivCalling textarea {
+  border-radius: 0.25rem;
+  display: inline-block;
+  color: #212529;
+  width: 400px;
+  outline: 0px;
+  border: 1px solid #aaa;
+  height: 40px;
+  margin: 0px 20px;
+}
+
+.parentDivCalling form input:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+
+.parentDivCalling img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.parentDivCalling form {
+  width: 900px;
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.parentDivCalling textarea {
+  width: 400px;
+  height: 70px;
+}
+
+.main_calling_div {
+  padding: 10px 200px;
+  background: rgba(255, 243, 221, 1);
+}
+
+.main_calling_div button {
+  background-color: rgba(245, 140, 7, 1);
+  color: #fff;
+  padding: 5px 10px;
+  width: 200px;
+  outline: 0px;
+  border: 1px solid #aaa;
+  border-radius: 0.25rem;
+  display: block;
+  text-align: center;
+  margin: 5px auto;
 }
