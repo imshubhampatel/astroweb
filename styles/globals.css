@@ -103,3 +103,31 @@ a {
   text-align: center;
   margin: 5px auto;
 }
+
+@media (max-width: 376px) {
+  .main_calling_div {
+    padding: 10px;
+  }
+  .parentDivCalling {
+    margin: 0px;
+  }
+  .parentDivCalling img {
+    display: none;
+  }
+  .parentDivCalling form {
+    width: 305px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  .parentDivCalling input {
+    margin-left: 0px;
+    width: 300px;
+  }
+  .parentDivCalling textarea {
+    margin-left: 0px;
+    width: 300px;
+  }
+  .parentDivCalling label {
+    margin-left: 2px;
+  }
+}
