@@ -12,6 +12,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { firebase } from "../../config";
+import { initiateCall } from "../../utilities/astrologer/InitiateCall";
 export default function InitiateCall() {
   const [astrologer, setAstrologer] = useState("");
 
@@ -37,7 +38,7 @@ export default function InitiateCall() {
   const [userDetails, SetuserDetails] = useState({
     username: "",
     password: "",
-    first_name: "",
+    firstName: "",
     last_name: "",
     email: "",
     company_name: "",
@@ -49,7 +50,15 @@ export default function InitiateCall() {
 
   const onChangeInput = (name) => (e) => {};
 
-  async function onSubmitHandler(e) {}
+  async function onSubmitHandler(e) {
+    e.preventDefault();
+    // try {
+    //   let result = await initiateCall();
+    //   console.log("result", result);
+    // } catch (error) {
+    //   console.log(error.response.data || error.response || error);
+    // }
+  }
 
   return (
     <div className="main_calling_div">
@@ -72,7 +81,7 @@ export default function InitiateCall() {
                 id="first-name"
                 autoComplete="given-name"
                 value={userDetails.first_Name}
-                onChange={onChangeInput("first_name")}
+                onChange={onChangeInput("firstName")}
               />
             </div>
 
@@ -150,7 +159,9 @@ export default function InitiateCall() {
               />
             </div>
           </form>
-          <button type="submit">Call now</button>
+          <button type="submit" onClick={(e) => onSubmitHandler(e)}>
+            Call now
+          </button>
         </div>
       </div>
     </div>

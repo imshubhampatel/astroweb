@@ -103,8 +103,29 @@ a {
   text-align: center;
   margin: 5px auto;
 }
+@media (min-width: 1000px) and (max-width: 1370px) {
+  .main_calling_div {
+    padding: 10px 40px;
+  }
+  .parentDivCalling {
+    padding: 0px 40px;
+  }
+}
+@media (min-width: 501px) and (max-width: 1000px) {
+  .main_calling_div {
+    padding: 10px 40px;
+  }
+  .parentDivCalling {
+    padding: 0px 40px;
+  }
+  .parentDivCalling form {
+    flex-direction: column;
+    width:auto;
+    
+  }
+}
 
-@media (max-width: 376px) {
+@media (max-width: 500px) {
   .main_calling_div {
     padding: 10px;
   }
