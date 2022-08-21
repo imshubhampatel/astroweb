@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import {
   collection,
   query,
@@ -12,22 +13,80 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { firebase } from "../../config";
-import { initiateCall } from "../../utilities/astrologer/InitiateCall";
+import { adminfirebase } from "../../AdminConfig";
 export default function InitiateCall() {
-  const [astrologer, setAstrologer] = useState("");
 
-  let db = getFirestore(firebase);
+  // admin and auth and top of variables
+  const auth = getAuth(firebase);
+  const adminAuth = getAuth(adminfirebase);
   const router = useRouter();
   let id = router.query.id;
 
+  // useState ? 
+  const [astrologer, setAstrologer] = useState("");
+  const [user, setUser] = useState(null);
+  const [userDetails, setUserDetails] = useState({
+    firstName: "",
+    lastName: "",
+    placeOfBirth: "",
+    timeOfBirth: "",
+    dateOfBirth: "",
+    query: "",
+    customerNumber: "",
+    language: "",
+    astrologerUid: "",
+    userUid: "",
+    language: "",
+  });
+
+  // useEffect ?? 
+
+  // useState for getting the astrolger data from server  ?
   useEffect(() => {
-    getAstrologer(id);
+    if(!id) return;
+      getAstrologer(id);
   }, [id]);
 
+
+  // useEffect for user authentication and uid
+
+  useEffect(() => {
+    onAuthStateChanged(adminAuth, (Authuser) => {
+      if (Authuser) {
+        setUser(Authuser);
+        console.log("user", Authuser.uid);
+      } 
+      else {
+        onAuthStateChanged(auth, (User) => {
+          setUser(User);
+        });
+      }
+    })
+  }, []);
+
+  // useEffect for logging changes in state ?
+  useEffect(() => {
+    console.table(userDetails);
+  }, [userDetails]);
+  
+  // useEffect for logging changes in state ?
+  useEffect(() => {
+    if(!user) return;
+      setUserDetails({...userDetails,userUid:user.uid})
+  }, [user]);
+
+  // useEffect for setting astrolger uid
+  useEffect(() => {
+    if(!astrologer) return;
+      setUserDetails({ ...userDetails, astrologerUid: astrologer?.id });
+  }, [astrologer]);
+
+  // functions ?
+  
   async function getAstrologer(uid) {
+    let db = getFirestore(firebase);
     const astros = query(collection(db, "astrologer"), where("id", "==", uid));
     const querySnapshot = await getDocs(astros);
-    console.log(querySnapshot.docs);
     let data = querySnapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
     });
@@ -35,21 +94,14 @@ export default function InitiateCall() {
     setAstrologer(data[0]);
   }
 
-  const [userDetails, SetuserDetails] = useState({
-    username: "",
-    password: "",
-    firstName: "",
-    last_name: "",
-    email: "",
-    company_name: "",
-    profile_pic: "",
-    formData: "",
-  });
+
 
   let redirectHandler = () => {};
 
-  const onChangeInput = (name) => (e) => {};
 
+  const onChangeInput = (name) => (e) => {
+    setUserDetails({ ...userDetails, [name]: e.target.value });
+  };
   async function onSubmitHandler(e) {
     e.preventDefault();
     // try {
@@ -80,7 +132,7 @@ export default function InitiateCall() {
                 name="first-name"
                 id="first-name"
                 autoComplete="given-name"
-                value={userDetails.first_Name}
+                value={userDetails.firstName}
                 onChange={onChangeInput("firstName")}
               />
             </div>
@@ -93,8 +145,8 @@ export default function InitiateCall() {
                 name="last-name"
                 id="last-name"
                 autoComplete="family-name"
-                value={userDetails.last_name}
-                onChange={onChangeInput("last_name")}
+                value={userDetails.lastName}
+                onChange={onChangeInput("lastName")}
               />
             </div>
 
@@ -106,8 +158,8 @@ export default function InitiateCall() {
                 name="email-address"
                 id="email-address"
                 autoComplete="username"
-                value={userDetails.username}
-                onChange={onChangeInput("username")}
+                value={userDetails.customerNumber}
+                onChange={onChangeInput("customerNumber")}
                 className="text-input"
               />
             </div>
@@ -120,8 +172,8 @@ export default function InitiateCall() {
                 name="email-address"
                 id="email-address"
                 autoComplete="email"
-                value={userDetails.email}
-                onChange={onChangeInput("email")}
+                value={userDetails.dateOfBirth}
+                onChange={onChangeInput("dateOfBirth")}
               />
             </div>
 
@@ -133,8 +185,8 @@ export default function InitiateCall() {
                 name="email-address"
                 id="email-address"
                 autoComplete="username"
-                value={userDetails.company_name}
-                onChange={onChangeInput("company_name")}
+                value={userDetails.placeOfBirth}
+                onChange={onChangeInput("placeOfBirth")}
               />
             </div>
             <div>
@@ -145,8 +197,8 @@ export default function InitiateCall() {
                 name="email-address"
                 id="email-address"
                 autoComplete="username"
-                value={userDetails.company_name}
-                onChange={onChangeInput("company_name")}
+                value={userDetails.timeOfBirth}
+                onChange={onChangeInput("timeOfBirth")}
               />
             </div>
 
@@ -154,8 +206,8 @@ export default function InitiateCall() {
               <label htmlFor="email-address">Enter your Query</label>
               <textarea
                 required
-                value={userDetails.password}
-                onChange={onChangeInput("password")}
+                value={userDetails.query}
+                onChange={onChangeInput("query")}
               />
             </div>
           </form>
