@@ -1,4 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import styles from "../../styles/pages/index.module.css";
+import Logo from "../../public/images/logo_transparent.png";
+import Link from "next/link";
+import CloseIcon from "@mui/icons-material/Close";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/dist/client/router";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import {
@@ -17,6 +24,7 @@ import { adminfirebase } from "../../AdminConfig";
 import { initiateCall } from "../../utilities/astrologer/InitiateCall";
 export default function InitiateCall() {
   // admin and auth and top of variables
+  const MySwal = withReactContent(Swal);
   const auth = getAuth(firebase);
   const adminAuth = getAuth(adminfirebase);
   const router = useRouter();
@@ -83,7 +91,44 @@ export default function InitiateCall() {
     setUserDetails({ ...userDetails, astrologerUid: astrologer?.id });
   }, [astrologer]);
 
+  useEffect(() => {}, []);
+
   // functions ?
+
+  const openingAlertView = () => {
+    MySwal.fire({
+      showConfirmButton: false,
+      customClass: {
+        htmlContainer: styles.maincontainer,
+      },
+      html: (
+        <div>
+          <div className={styles.close}>
+            <CloseIcon
+              style={{ marginLeft: "auto" }}
+              onClick={() => {
+                Swal.clickConfirm();
+              }}
+            />
+          </div>
+
+          <div>
+            <Image height={140} width={140} src={Logo} />
+            <h2 className={styles.heading}>Call Placed Successfully </h2>
+          </div>
+          <hr />
+          <h4 className={styles.subheading}>
+            Get in instant touch with Astrologers
+          </h4>
+          <hr />
+
+          <h6 className={styles.subpartheading}>
+            DRESHKAN- A PRODUCT OF ASTROCHRCHA{" "}
+          </h6>
+        </div>
+      ),
+    });
+  };
 
   async function getAstrologer(uid) {
     let db = getFirestore(firebase);
@@ -107,6 +152,9 @@ export default function InitiateCall() {
     try {
       let result = await initiateCall(userDetails);
       console.log("result", result);
+      if (result) {
+        openingAlertView();
+      }
     } catch (error) {
       console.log(error.response.data || error.response || error);
     }
