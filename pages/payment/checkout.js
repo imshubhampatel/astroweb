@@ -150,16 +150,63 @@ export default function InitiateCall() {
   };
   async function onSubmitHandler(e) {
     e.preventDefault();
-
-    try {
-      let result = await initiateCall(userDetails);
-      console.log("result", result);
-      if (result) {
-        openingAlertView();
+    console.log("submitted");
+    let res = await initializeRazorpay();
+    let data = await fetch(
+      "https://us-central1-astrochrchafirebase.cloudfunctions.net/webApi/api/intiatetransaction_razorypay",
+      {
+        method: "POST",
       }
-    } catch (error) {
-      console.log(error.response.data || error.response || error);
+    ).then((data) => data.json());
+
+    console.log(data);
+
+    if (!res) {
+      alert("eroor");
+      return;
     }
+    console.log(data);
+    var options = {
+      key: "rzp_test_FuZPDTFdRxeNou", // Enter the Key ID generated from the Dashboard
+      name: "bt-contrivers",
+      currency: data.currency,
+      amount: data.amount,
+      order_id: data.id,
+      handler: async function (response) {
+        // Validate payment at server - using webhooks is a better idea.
+        try {
+        let paymentStatus = await fetch(
+          `https://us-central1-astrochrchafirebase.cloudfunctions.net/webApi/api/razor_capture/${response.razorpay_payment_id}`,
+          {
+            method: "POST",
+          }
+        ).then((data) => data.json());
+          console.log(response);
+          console.log("paymentStatus",paymentStatus);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      prefill: {
+        name: "Shubham Patel",
+        email: "shubhampatel2024@gmail.com",
+        contact: "+919389112183",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+
+    // try {
+
+    //   let result = await initiateCall(userDetails);
+    //   console.log("result", result);
+    //   if (result) {
+    //     openingAlertView();
+    //   }
+    // } catch (error) {
+    //   console.log(error.response.data || error.response || error);
+    // }
   }
 
   return (
@@ -205,9 +252,9 @@ export default function InitiateCall() {
               <input
                 required
                 type="text"
-                name="number"
-                id="number"
-                autoComplete="number"
+                name="email-address"
+                id="email-address"
+                autoComplete="username"
                 value={userDetails.customerNumber}
                 onChange={onChangeInput("customerNumber")}
                 className="text-input"
@@ -219,9 +266,9 @@ export default function InitiateCall() {
               <input
                 required
                 type="email"
-                name="date"
-                id="date"
-                autoComplete="date"
+                name="email-address"
+                id="email-address"
+                autoComplete="email"
                 value={userDetails.dateOfBirth}
                 onChange={onChangeInput("dateOfBirth")}
               />
@@ -232,9 +279,9 @@ export default function InitiateCall() {
               <input
                 required
                 type="text"
-                name="place"
-                id="place"
-                autoComplete="place"
+                name="email-address"
+                id="email-address"
+                autoComplete="username"
                 value={userDetails.placeOfBirth}
                 onChange={onChangeInput("placeOfBirth")}
               />
@@ -246,7 +293,7 @@ export default function InitiateCall() {
                 type="text"
                 name="email-address"
                 id="email-address"
-                autoComplete="date"
+                autoComplete="username"
                 value={userDetails.timeOfBirth}
                 onChange={onChangeInput("timeOfBirth")}
               />
@@ -258,7 +305,7 @@ export default function InitiateCall() {
                 type="text"
                 name="email-address"
                 id="email-address"
-                autoComplete="language"
+                autoComplete="username"
                 value={userDetails.language}
                 onChange={onChangeInput("language")}
               />
