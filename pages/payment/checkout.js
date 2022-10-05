@@ -33,67 +33,11 @@ export default function InitiateCall() {
   let id = router.query.id;
 
   // useState ?
-  const [astrologer, setAstrologer] = useState("");
-  const [user, setUser] = useState(null);
-  const [userDetails, setUserDetails] = useState({
-    firstName: "",
-    lastName: "",
-    placeOfBirth: "",
-    timeOfBirth: "",
-    dateOfBirth: "",
-    query: "",
-    customerNumber: "",
-    language: "",
-    astrologerUid: "",
-    userUid: "",
-    language: "",
-  });
+  const [amount, setAmount] = useState(0);
 
   // useEffect ??
 
   // useState for getting the astrolger data from server  ?
-  useEffect(() => {
-    if (!id) return;
-    getAstrologer(id);
-  }, [id]);
-
-  // useEffect for user authentication and uid
-
-  useEffect(() => {
-    console.log("called");
-    onAuthStateChanged(adminAuth, (Authuser) => {
-      if (Authuser) {
-        setUser(Authuser);
-        console.log("user", Authuser.uid);
-      } else {
-        onAuthStateChanged(auth, (User) => {
-          console.log("User", User);
-          router.push({
-            pathname: "/signin",
-          });
-        });
-      }
-    });
-  }, []);
-
-  // useEffect for logging changes in state ?
-  useEffect(() => {
-    console.table(userDetails);
-  }, [userDetails]);
-
-  // useEffect for logging changes in state ?
-  useEffect(() => {
-    if (!user) return;
-    setUserDetails({ ...userDetails, userUid: user.uid });
-  }, [user]);
-
-  // useEffect for setting astrolger uid
-  useEffect(() => {
-    if (!astrologer) return;
-    setUserDetails({ ...userDetails, astrologerUid: astrologer?.id });
-  }, [astrologer]);
-
-  useEffect(() => {}, []);
 
   // functions ?
 
@@ -116,7 +60,7 @@ export default function InitiateCall() {
 
           <div>
             <Image height={140} width={140} src={Logo} />
-            <h2 className={styles.heading}>Call Placed Successfully </h2>
+            <h2 className={styles.heading}>Your Payment was successfull </h2>
           </div>
           <hr />
           <h4 className={styles.subheading}>
@@ -132,17 +76,6 @@ export default function InitiateCall() {
     });
   };
 
-  async function getAstrologer(uid) {
-    let db = getFirestore(firebase);
-    const astros = query(collection(db, "astrologer"), where("id", "==", uid));
-    const querySnapshot = await getDocs(astros);
-    let data = querySnapshot.docs.map((doc) => {
-      return { id: doc.id, ...doc.data() };
-    });
-    console.log(data);
-    setAstrologer(data[0]);
-  }
-
   let redirectHandler = () => {};
 
   const onChangeInput = (name) => (e) => {
@@ -153,9 +86,18 @@ export default function InitiateCall() {
     console.log("submitted");
     let res = await initializeRazorpay();
     let data = await fetch(
+      // "http://localhost:5001/astrochrchafirebase/us-central1/webApi/api/intiatetransaction_razorypay",
       "https://us-central1-astrochrchafirebase.cloudfunctions.net/webApi/api/intiatetransaction_razorypay",
       {
         method: "POST",
+        body: JSON.stringify({
+          userUid: "DLG8MaqdaigV5fwMcm4I8Oa66EA3",
+          amount: amount,
+        }),
+
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
       }
     ).then((data) => data.json());
 
@@ -175,14 +117,23 @@ export default function InitiateCall() {
       handler: async function (response) {
         // Validate payment at server - using webhooks is a better idea.
         try {
-        let paymentStatus = await fetch(
-          `https://us-central1-astrochrchafirebase.cloudfunctions.net/webApi/api/razor_capture/${response.razorpay_payment_id}`,
-          {
-            method: "POST",
-          }
-        ).then((data) => data.json());
+          let paymentStatus = await fetch(
+            // `http://localhost:5001/astrochrchafirebase/us-central1/webApi/api/razor_capture/${response.razorpay_payment_id}`,
+            `https://us-central1-astrochrchafirebase.cloudfunctions.net/webApi/api/razor_capture/${response.razorpay_payment_id}`,
+            {
+              method: "POST",
+              body: JSON.stringify({
+                userUid: "DLG8MaqdaigV5fwMcm4I8Oa66EA3",
+                amount: data.amount,
+              }),
+
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+            }
+          ).then((data) => data.json());
           console.log(response);
-          console.log("paymentStatus",paymentStatus);
+          console.log("paymentStatus", paymentStatus);
         } catch (error) {
           console.log(error);
         }
@@ -196,135 +147,52 @@ export default function InitiateCall() {
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
-
-    // try {
-
-    //   let result = await initiateCall(userDetails);
-    //   console.log("result", result);
-    //   if (result) {
-    //     openingAlertView();
-    //   }
-    // } catch (error) {
-    //   console.log(error.response.data || error.response || error);
-    // }
   }
 
   return (
-    <div className="main_calling_div">
-      <div className="parentDivCalling">
-        <div className="astrologer_info">
-          <div className="astrologersImage">
-            <img src={astrologer?.profilePicLink} />
-          </div>
-          <div className="astrologersContent"></div>
+    <div className="user_payment">
+      <h3>Recharge Wallet</h3>
+      <form>
+        <div>
+          <label htmlFor="email-address">Amount</label>
+          <input
+            required
+            type="number"
+            name="number"
+            id="number"
+            autoComplete="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            className="text-input"
+          />
         </div>
-        <div className="user_info">
-          <h3>Please fill the Details</h3>
-          <form>
-            <div>
-              <label htmlFor="first-name">First name</label>
-              <input
-                required
-                type="text"
-                name="first-name"
-                id="first-name"
-                autoComplete="given-name"
-                value={userDetails.firstName}
-                onChange={onChangeInput("firstName")}
-              />
-            </div>
+      </form>
 
-            <div>
-              <label htmlFor="last-name">Last name</label>
-              <input
-                required
-                type="text"
-                name="last-name"
-                id="last-name"
-                autoComplete="family-name"
-                value={userDetails.lastName}
-                onChange={onChangeInput("lastName")}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email-address">Contact Number</label>
-              <input
-                required
-                type="text"
-                name="email-address"
-                id="email-address"
-                autoComplete="username"
-                value={userDetails.customerNumber}
-                onChange={onChangeInput("customerNumber")}
-                className="text-input"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email-address">Date of Birth</label>
-              <input
-                required
-                type="email"
-                name="email-address"
-                id="email-address"
-                autoComplete="email"
-                value={userDetails.dateOfBirth}
-                onChange={onChangeInput("dateOfBirth")}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email-address">Place Of Birth</label>
-              <input
-                required
-                type="text"
-                name="email-address"
-                id="email-address"
-                autoComplete="username"
-                value={userDetails.placeOfBirth}
-                onChange={onChangeInput("placeOfBirth")}
-              />
-            </div>
-            <div>
-              <label htmlFor="email-address">Time of Birth</label>
-              <input
-                required
-                type="text"
-                name="email-address"
-                id="email-address"
-                autoComplete="username"
-                value={userDetails.timeOfBirth}
-                onChange={onChangeInput("timeOfBirth")}
-              />
-            </div>
-            <div>
-              <label htmlFor="email-address">Language</label>
-              <input
-                required
-                type="text"
-                name="email-address"
-                id="email-address"
-                autoComplete="username"
-                value={userDetails.language}
-                onChange={onChangeInput("language")}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email-address">Enter your Query</label>
-              <textarea
-                required
-                value={userDetails.query}
-                onChange={onChangeInput("query")}
-              />
-            </div>
-          </form>
-          <button type="submit" onClick={(e) => onSubmitHandler(e)}>
-            Call now
-          </button>
-        </div>
+      <div className="payment_cards">
+        <ul>
+          <li value={10} onClick={() => setAmount(10)}>
+            <span>10 </span>
+          </li>
+          <li value={50} onClick={() => setAmount(50)}>
+            <span>50 </span>
+          </li>
+          <li value={100} onClick={() => setAmount(100)}>
+            <span>100 </span>
+          </li>
+          <li value={200} onClick={() => setAmount(200)}>
+            <span>200 </span>
+          </li>
+          <li value={500} onClick={() => setAmount(500)}>
+            <span>500 </span>
+          </li>
+          <li value={1000} onClick={() => setAmount(1000)}>
+            <span>1000 </span>
+          </li>
+        </ul>
       </div>
+      <button type="submit" onClick={(e) => onSubmitHandler(e)}>
+        Pay now
+      </button>
     </div>
   );
 }

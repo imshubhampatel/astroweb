@@ -14,6 +14,17 @@ a {
 * {
   box-sizing: border-box;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 .callingForm {
   border: 1px solid blue;
 }
@@ -103,6 +114,69 @@ a {
   text-align: center;
   margin: 5px auto;
 }
+
+.user_payment {
+  border: 1px solid black;
+  width: 400px;
+  height: 500px;
+  margin: 20px auto;
+  padding: 10px;
+
+}
+
+.user_payment h3 {
+  margin: 10px 0px 20px 0px;
+  text-align: center;
+}
+
+.user_payment form div {
+  border: 1px solid #aaa;
+  padding: 10px;
+  margin: 10px;
+}
+
+.user_payment form div input {
+  margin: 10px;
+}
+.user_payment button {
+  width:50%;
+  border:1px solid blue;
+  display:block;
+  margin:0 auto;
+  background-color: rgba(245, 140, 7, 1);
+  color: #fff;
+  padding: 5px 10px;
+  width: 200px;
+  outline: 0px;
+  border: 1px solid #aaa;
+  border-radius: 0.25rem;
+  display: block;
+  text-align: center;
+  margin: 5px auto;
+
+}
+
+.payment_cards ul li{
+  border:1px solid red;
+  width:90px;
+  height:40px;
+  list-style-type:none;
+  display:inline-block;
+  margin:10px;
+  
+
+}
+.payment_cards ul li:hover{
+  cursor:pointer;
+}
+
+.payment_cards ul li span{
+  display:flex;
+  width:100%;
+  height:100%;
+  justify-content:center;
+  align-items:center;
+}
 @media (min-width: 1000px) and (max-width: 1370px) {
   .main_calling_div {
     padding: 10px 40px;
@@ -120,8 +194,7 @@ a {
   }
   .parentDivCalling form {
     flex-direction: column;
-    width:auto;
-    
+    width: auto;
   }
 }
 
