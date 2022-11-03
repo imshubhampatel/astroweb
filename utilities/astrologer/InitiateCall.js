@@ -8,10 +8,10 @@ export function initiateCall(contactValues) {
     var config = {
       method: "post",
       url: "https://us-central1-astrochrchafirebase.cloudfunctions.net/webApi/api/make-call",
-      headers: {
-        "x-api-key": '"6m9Ux0on1k1opZ1qyEZMr4cl29UfAPqK2rryZCZR"',
-        Authorization: '"2209623c-769e-4c1d-9f16-e0736c4e964e"',
-        "Content-Type": "x-www-form-urlencoded",
+      // url: "http://localhost:5001/astrochrchafirebase/us-central1/webApi/api/make-call",
+      headers:{
+        "content-type":"application/json"
+
       },
       data: data,
     };

@@ -4,10 +4,25 @@ import Link from "next/link";
 import Swal from "sweetalert2";
 import GooglePlayBadge from "../public/images/google-play-badge.png";
 import Image from "next/image";
-import router from "next/router";
+import { useRouter } from "next/router";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  orderBy,
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore";
+import { firebase } from "../config";
+import { adminfirebase } from "../AdminConfig";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
+const db = getFirestore(firebase);
 
 const Toast = MySwal.mixin({
   toast: true,
@@ -20,13 +35,61 @@ const Toast = MySwal.mixin({
     toast.addEventListener("mouseleave", Swal.resumeTimer);
   },
 });
+
 function UserRegistrationForm(props) {
-  const [user,setUser] = useState(props.userProfile);
+  const auth = getAuth(firebase);
+  const adminAuth = getAuth(adminfirebase);
+  const [user, setUser] = useState(props.userProfile);
   let isRegistered = props.isRegistered;
   const [date, setDate] = useState(getDate());
   const [currentTab, setCurrentTab] = useState(0);
   const [rejectedPage, sethardRegister] = useState(true);
+  const [userId, setUserId] = useState("");
+  const [walletBalance, setWalletBalance] = useState("0000");
+
+  useEffect(() => {
+    console.log("one");
+    console.log("called");
+    onAuthStateChanged(adminAuth, (Authuser) => {
+      if (Authuser) {
+        setUser(Authuser);
+        console.log("user", Authuser.uid);
+        setUserId(Authuser.uid);
+      } else {
+        onAuthStateChanged(auth, (User) => {
+          console.log("User", User);
+          router.push({
+            pathname: "/signin",
+          });
+        });
+      }
+    });
+  }, []);
+
   // console.log(user)
+  useEffect(() => {
+    if (!userId == "") {
+      getUserWalletBalance();
+    }
+  }, [userId]);
+  async function getUserWalletBalance() {
+    const que = query(collection(db, "user"), where("uid", "==", `${userId}`));
+    const querySnapshot = await getDocs(que);
+    let data = querySnapshot.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
+    let userData = data[0];
+    console.log(userData);
+    setWalletBalance(userData.walletBalance);
+  }
+
+  const router = useRouter();
+  const paymentClickHandler = () => {
+    router.push({
+      pathname: "/payment/checkout",
+      query: { user: userId },
+    });
+  };
 
   const firetoast = (name) => {
     Toast.fire({
@@ -35,7 +98,7 @@ function UserRegistrationForm(props) {
     });
   };
   useEffect(() => {
-    setUser(props.userProfile)
+    setUser(props.userProfile);
   }, [props.userProfile]);
 
   function getDate() {
@@ -68,9 +131,35 @@ function UserRegistrationForm(props) {
               <div className="col-sm-8 my-4  ">
                 <div className="row mt-10">
                   <div className="col">
-                  <button className="btn btn-success" onClick={()=>setCurrentTab(1)}>Profile</button>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => setCurrentTab(1)}
+                    >
+                      Profile
+                    </button>
                   </div>
                   <div className="col">
+                    <div className="main-wallet-container">
+                      <h4>Account Credits</h4>
+                      <div className="wallet-container">
+                        <div className="wallet-box">
+                          <span>₹</span>
+                        </div>
+                        <div className="user-wallet">
+                          <div className="wallet-balance">
+                            {walletBalance && (
+                              <p>{walletBalance && walletBalance}</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        className="btn btn-wallet"
+                        onClick={() => paymentClickHandler()}
+                      >
+                        Recharge Now
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <br></br>
@@ -103,7 +192,7 @@ function UserRegistrationForm(props) {
           </div>
         </div>
       );
-    else if(currentTab == 1) {
+    else if (currentTab == 1) {
       return (
         <div className={`${styles.baseContainer}`}>
           <div className="container-fluid bg-white">
@@ -115,7 +204,12 @@ function UserRegistrationForm(props) {
               <div className="col-sm-8 my-4  ">
                 <div className="row mt-10">
                   <div className="col">
-                  <button className="btn btn-success" onClick={()=>setCurrentTab(0)}>Back</button>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => setCurrentTab(0)}
+                    >
+                      Back
+                    </button>
                   </div>
                   <div className="col"></div>
                 </div>
@@ -123,33 +217,62 @@ function UserRegistrationForm(props) {
                 <br></br>
                 <div className="row">
                   <center>
-                  <h3> Profile</h3>
+                    <h3> Profile</h3>
 
-                  <div className={"card text-black border-warning mb-3 m-3 "+`${styles.profileCard}`} >
-                    <div className="card-body border-warning">
-                    <Image src={user?.profilePhotoLink ? user?.profilePhotoLink : "/images/logo_transparent.png"} width="200" height="200" />
+                    <div
+                      className={
+                        "card text-black border-warning mb-3 m-3 " +
+                        `${styles.profileCard}`
+                      }
+                    >
+                      <div className="card-body border-warning">
+                        <Image
+                          src={
+                            user?.profilePhotoLink
+                              ? user?.profilePhotoLink
+                              : "/images/logo_transparent.png"
+                          }
+                          width="200"
+                          height="200"
+                        />
+                      </div>
+                      <div className="card-body">
+                        <h5 className="card-title">
+                          {user.firstName + " " + user.lastName}
+                        </h5>
+                        <p className="card-text">
+                          <b>Place of Birth : </b>
+                          {user.placeOfBirth}
+                          <br />
+                          <b> DOB : </b>
+                          {user?.dob?.toDate()?.toDateString()}
+                        </p>
+                      </div>
+                      <ul className="list-group border-warning list-group-flush">
+                        <li className="list-group-item border-warning">
+                          {" "}
+                          Email : {user?.email}
+                        </li>
+                        <li className="list-group-item border-warning">
+                          Phone number :{" "}
+                          {user?.phoneNumber
+                            ? user?.phoneNumber
+                            : "Please fill this !"}
+                        </li>
+                      </ul>
+                      <div className="card-body bg-warning">
+                        <Link href="https://play.google.com/store/apps/details?id=com.dreshkan">
+                          <a>Download our app now on Playstore !</a>
+                        </Link>
+                      </div>
                     </div>
-                  <div className="card-body">
-                    <h5 className="card-title">{user.firstName + " " + user.lastName}</h5>
-                    <p className="card-text"><b>Place of Birth : </b>{user.placeOfBirth}<br/><b> DOB : </b>{user?.dob?.toDate()?.toDateString()}</p>
-                  </div>
-                  <ul className="list-group border-warning list-group-flush">
-                    <li className="list-group-item border-warning"> Email : {user?.email}</li>
-                    <li className="list-group-item border-warning">Phone number : {user?.phoneNumber ? user?.phoneNumber : "Please fill this !"}</li>
-                  </ul>
-                  <div className="card-body bg-warning">
-                    <Link href="https://play.google.com/store/apps/details?id=com.dreshkan"><a>
-                    Download our app now on Playstore !
-                  </a></Link>
-                  </div>
-                </div>
                   </center>
                 </div>
               </div>
             </div>
           </div>
-        </div>);
-
+        </div>
+      );
     }
   } else {
     return (

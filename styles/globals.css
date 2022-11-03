@@ -22,7 +22,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 .callingForm {
@@ -121,7 +121,6 @@ input[type=number] {
   height: 500px;
   margin: 20px auto;
   padding: 10px;
-
 }
 
 .user_payment h3 {
@@ -139,10 +138,10 @@ input[type=number] {
   margin: 10px;
 }
 .user_payment button {
-  width:50%;
-  border:1px solid blue;
-  display:block;
-  margin:0 auto;
+  width: 50%;
+  border: 1px solid blue;
+  display: block;
+  margin: 0 auto;
   background-color: rgba(245, 140, 7, 1);
   color: #fff;
   padding: 5px 10px;
@@ -153,29 +152,75 @@ input[type=number] {
   display: block;
   text-align: center;
   margin: 5px auto;
-
 }
 
-.payment_cards ul li{
-  border:1px solid red;
-  width:90px;
-  height:40px;
-  list-style-type:none;
-  display:inline-block;
-  margin:10px;
-  
-
+.payment_cards ul li {
+  border: 1px solid red;
+  width: 90px;
+  height: 40px;
+  list-style-type: none;
+  display: inline-block;
+  margin: 10px;
 }
-.payment_cards ul li:hover{
-  cursor:pointer;
+.payment_cards ul li:hover {
+  cursor: pointer;
 }
 
-.payment_cards ul li span{
-  display:flex;
-  width:100%;
-  height:100%;
-  justify-content:center;
-  align-items:center;
+.payment_cards ul li span {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.wallet-container {
+  margin: 0em;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.wallet-container .wallet-box {
+  margin-top: 2px;
+}
+.wallet-container .wallet-box img {
+  width: 24.9px;
+  height: 31.5px;
+  margin: 10px 10px 10px 10px;
+}
+.wallet-container .user-wallet {
+  width: auto;
+  background-color: #fff;
+  padding: 7px;
+  text-align: center;
+  border-radius: 5em;
+  height: 35px;
+}
+
+button.btn-wallet {
+  margin: 10px 0px;
+  border: 2px solid orange;
+  color: #fff;
+}
+
+.main-wallet-container {
+  border: 1px solid black;
+  background: #ffb800f7;
+  padding: 10px 5px;
+  max-width: 500px;
+  text-align: center;
+  height: 73px;
+  display: flex;
+  min-width: 430px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wallet-container .user-wallet .wallet-balance {
+  width: max-content;
+  font-weight: bold;
+  object-fit: contain;
+  padding: 0 0.6em 0 0.6em;
 }
 @media (min-width: 1000px) and (max-width: 1370px) {
   .main_calling_div {

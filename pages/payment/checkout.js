@@ -23,14 +23,13 @@ import {
 } from "firebase/firestore";
 import { firebase } from "../../config";
 import { adminfirebase } from "../../AdminConfig";
-import { initiateCall } from "../../utilities/astrologer/InitiateCall";
-export default function InitiateCall() {
+export default function Checkout() {
   // admin and auth and top of variables
   const MySwal = withReactContent(Swal);
   const auth = getAuth(firebase);
   const adminAuth = getAuth(adminfirebase);
   const router = useRouter();
-  let id = router.query.id;
+  let id = router.query.user;
 
   // useState ?
   const [amount, setAmount] = useState(0);
@@ -91,7 +90,7 @@ export default function InitiateCall() {
       {
         method: "POST",
         body: JSON.stringify({
-          userUid: "DLG8MaqdaigV5fwMcm4I8Oa66EA3",
+          userUid: id,
           amount: amount,
         }),
 
@@ -123,7 +122,7 @@ export default function InitiateCall() {
             {
               method: "POST",
               body: JSON.stringify({
-                userUid: "DLG8MaqdaigV5fwMcm4I8Oa66EA3",
+                userUid: id,
                 amount: data.amount,
               }),
 
@@ -134,12 +133,35 @@ export default function InitiateCall() {
           ).then((data) => data.json());
           console.log(response);
           console.log("paymentStatus", paymentStatus);
+          console.log("hey callling");
+          let makePayment = await fetch(
+            // `http://localhost:5001/astrochrchafirebase/us-central1/webApi/api/updatetransaction_razorpay`,
+            `https://us-central1-astrochrchafirebase.cloudfunctions.net/webApi/api/updatetransaction_razorpay`,
+            {
+              method: "POST",
+              body: JSON.stringify({
+                USER: id,
+                ORDERID: data.receipt,
+                TXNAMOUNT: data.amount / 100,
+                STATUS: "TXN_SUCCESS",
+                TXNID: response.razorpay_payment_id,
+                CASHBACK_ID: "",
+              }),
+
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+            }
+          );
+
+          console.log("makePayment", makePayment);
+          router.push({pathname:"/user"})
         } catch (error) {
           console.log(error);
         }
       },
       prefill: {
-        name: "Shubham Patel",
+        name: "AstroChrcha",
         email: "shubhampatel2024@gmail.com",
         contact: "+919389112183",
       },

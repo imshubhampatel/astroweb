@@ -97,7 +97,7 @@ export default function InitiateCall() {
 
   // functions ?
 
-  const openingAlertView = () => {
+  const openingAlertView = (content) => {
     MySwal.fire({
       showConfirmButton: false,
       customClass: {
@@ -116,7 +116,7 @@ export default function InitiateCall() {
 
           <div>
             <Image height={140} width={140} src={Logo} />
-            <h2 className={styles.heading}>Call Placed Successfully </h2>
+            <h2 className={styles.heading}>{content.message} </h2>
           </div>
           <hr />
           <h4 className={styles.subheading}>
@@ -153,12 +153,15 @@ export default function InitiateCall() {
 
     try {
       let result = await initiateCall(userDetails);
-      console.log("result", result);
+      console.log("hey");
+      console.log("result is here", result);
       if (result) {
         openingAlertView();
       }
     } catch (error) {
       console.log(error.response.data || error.response || error);
+      openingAlertView(error.response.data || error.response || error);
+
     }
   }
 
