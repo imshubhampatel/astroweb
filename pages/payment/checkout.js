@@ -153,15 +153,15 @@ export default function Checkout() {
               },
             }
           );
-
+          openingAlertView();
           console.log("makePayment", makePayment);
-          router.push({pathname:"/user"})
+          router.push({ pathname: "/user" });
         } catch (error) {
           console.log(error);
         }
       },
       prefill: {
-        name: "AstroChrcha",
+        name: "Shubham Patel",
         email: "shubhampatel2024@gmail.com",
         contact: "+919389112183",
       },

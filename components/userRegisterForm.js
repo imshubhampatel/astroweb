@@ -72,6 +72,11 @@ function UserRegistrationForm(props) {
       getUserWalletBalance();
     }
   }, [userId]);
+  useEffect(() => {
+    if (!userId == "") {
+      getUserWalletBalance();
+    }
+  },[]);
   async function getUserWalletBalance() {
     const que = query(collection(db, "user"), where("uid", "==", `${userId}`));
     const querySnapshot = await getDocs(que);
@@ -148,7 +153,9 @@ function UserRegistrationForm(props) {
                         <div className="user-wallet">
                           <div className="wallet-balance">
                             {walletBalance && (
-                              <p>{walletBalance && walletBalance}</p>
+                              <p>
+                                {walletBalance && Math.floor(walletBalance)}
+                              </p>
                             )}
                           </div>
                         </div>
