@@ -152,8 +152,20 @@ export default function InitiateCall() {
   };
   async function onSubmitHandler(e) {
     e.preventDefault();
+    if (
+      userDetails.firstName == "" ||
+      userDetails.lastName == "" ||
+      userDetails.customerNumber == "" ||
+      userDetails.dateOfBirth == "" ||
+      userDetails.placeOfBirth == "" ||
+      userDetails.timeOfBirth == "" ||
+      userDetails.language == "" ||
+      userDetails.query == ""
+    ) {
+      openingAlertView({ message: "Please fill all fields" });
+      return;
+    }
     setDisableBtn(true);
-
     try {
       let result = await initiateCall(userDetails);
       console.log("hey");
