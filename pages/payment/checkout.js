@@ -108,8 +108,8 @@ export default function Checkout() {
     }
     console.log(data);
     var options = {
-      key: "rzp_test_FuZPDTFdRxeNou", // Enter the Key ID generated from the Dashboard
-      name: "bt-contrivers",
+      key: "rzp_live_qQu2IyydGrZJfS", // Enter the Key ID generated from the Dashboard
+      name: "ASTROCHRCHA",
       currency: data.currency,
       amount: data.amount,
       order_id: data.id,
@@ -161,8 +161,8 @@ export default function Checkout() {
         }
       },
       prefill: {
-        name: "Shubham Patel",
-        email: "shubhampatel2024@gmail.com",
+        name: "Astrochrcha",
+        email: "astrochrchatech@gmail.com ",
         contact: "+919389112183",
       },
     };
