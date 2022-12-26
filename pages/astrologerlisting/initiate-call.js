@@ -35,6 +35,7 @@ export default function InitiateCall() {
   // useState ?
   const [astrologer, setAstrologer] = useState("");
   const [user, setUser] = useState(null);
+  const [disableBtn, setDisableBtn] = useState(false);
   const [userDetails, setUserDetails] = useState({
     firstName: "",
     lastName: "",
@@ -98,6 +99,7 @@ export default function InitiateCall() {
   // functions ?
 
   const openingAlertView = (content) => {
+    console.log("content", content);
     MySwal.fire({
       showConfirmButton: false,
       customClass: {
@@ -150,18 +152,22 @@ export default function InitiateCall() {
   };
   async function onSubmitHandler(e) {
     e.preventDefault();
+    setDisableBtn(true);
 
     try {
       let result = await initiateCall(userDetails);
       console.log("hey");
       console.log("result is here", result);
+      let message = result.message;
       if (result) {
-        openingAlertView();
+        openingAlertView(result);
+        setTimeout(() => {
+          router.push({ pathname: "/" });
+        }, 2000);
       }
     } catch (error) {
       console.log(error.response.data || error.response || error);
       openingAlertView(error.response.data || error.response || error);
-
     }
   }
 
@@ -207,7 +213,7 @@ export default function InitiateCall() {
               <label htmlFor="email-address">Contact Number</label>
               <input
                 required
-                type="text"
+                type="number"
                 name="number"
                 id="number"
                 autoComplete="number"
@@ -221,7 +227,7 @@ export default function InitiateCall() {
               <label htmlFor="email-address">Date of Birth</label>
               <input
                 required
-                type="email"
+                type="date"
                 name="date"
                 id="date"
                 autoComplete="date"
@@ -276,9 +282,19 @@ export default function InitiateCall() {
               />
             </div>
           </form>
-          <button type="submit" onClick={(e) => onSubmitHandler(e)}>
-            Call now
-          </button>
+          {!disableBtn ? (
+            <button type="submit" onClick={(e) => onSubmitHandler(e)}>
+              Call now
+            </button>
+          ) : (
+            <button
+              type="submit"
+              onClick={(e) => onSubmitHandler(e)}
+              disable={disableBtn}
+            >
+              Calling...
+            </button>
+          )}
         </div>
       </div>
     </div>
