@@ -269,4 +269,9 @@ button.btn-wallet {
   .parentDivCalling label {
     margin-left: 2px;
   }
+
+  .main-wallet-container {
+    min-width: 303px;
+    margin: 15px 0px;
+  }
 }
