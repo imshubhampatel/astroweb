@@ -108,8 +108,8 @@ export default function Checkout() {
     }
     console.log(data);
     var options = {
-      key: "rzp_live_qQu2IyydGrZJfS", // Enter the Key ID generated from the Dashboard
-      name: "ASTROCHRCHA",
+      key: "rzp_live_fvNd8rPpoSUOuB", // Enter the Key ID generated from the Dashboard
+      name: "Dreshkan",
       currency: data.currency,
       amount: data.amount,
       order_id: data.id,
@@ -159,11 +159,6 @@ export default function Checkout() {
         } catch (error) {
           console.log(error);
         }
-      },
-      prefill: {
-        name: "Astrochrcha",
-        email: "astrochrchatech@gmail.com ",
-        contact: "+919389112183",
       },
     };
 
