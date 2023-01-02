@@ -108,7 +108,7 @@ export default function Checkout() {
     }
     console.log(data);
     var options = {
-      key: "rzp_live_fvNd8rPpoSUOuB", // Enter the Key ID generated from the Dashboard
+      key: "rzp_live_HtSXOjPKXdc4zr", // Enter the Key ID generated from the Dashboard
       name: "Dreshkan",
       currency: data.currency,
       amount: data.amount,
